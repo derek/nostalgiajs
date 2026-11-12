@@ -216,6 +216,42 @@
         "Peter-Paul Koch's 2004 article on inline event handlers is known to me only through Simon Willison's quotation of it, and Apple pointing to QuirksMode for JavaScript documentation is Koch's own account.",
         "That links moved to Twitter, Reddit and Hacker News, that code moved from blog entries to GitHub, and the comparison of a patched blog entry to a pull request are my own readings."
       ]
+    },
+    {
+      "slug": "crockford-jslint-and-the-good-parts",
+      "title": "JSLint and The Good Parts: the subset that became the language",
+      "description": "Douglas Crockford's linter and thin book told developers which parts of JavaScript to stop using, which started a fork and a fight over a semicolon and ended up inside the language as strict mode.",
+      "topic": "people",
+      "era": [
+        2001,
+        null
+      ],
+      "published": "2026-11-12T23:16:56+00:00",
+      "unverified": [
+        "I could not open the book itself or O'Reilly's page for it, so the publication month, the back cover text and the page numbers come from Crockford's own site and an Open Library record, and the one passage I quote from chapter 1 comes from Wikiquote.",
+        "Sources disagree on when JSLint first appeared: the Wirfs-Brock and Eich history cites its web page as 2001, while the JSHint project's history and the copyright line say 2002, and I have not seen a dated release.",
+        "The older JSLint documentation I quote is an undated copy on a university course site, and Crockford's 2001 essay is quoted from the page as it stands now, which has been revised since, so I can't say which year any particular wording dates from.",
+        "Anton Kovalyov's 2011 post is quoted from a copy in a Disqus repository because the original address no longer loads, and its quotations of Douglas Crockford and Brendan Eich are Kovalyov's attributions, which I could not trace to their origins.",
+        "That strict mode is JSLint's subset moved into the language is my own argument: the Wirfs-Brock and Eich history traces it to Crockford's recommendations to the committee and does not mention the tool. That ESLint's rule names descend from JSLint's option names, and that a frozen standard is why the subset caught on, are also my readings."
+      ]
+    },
+    {
+      "slug": "yslow-and-front-end-performance",
+      "title": "YSlow: the letter grade that made front-end performance a job",
+      "description": "How a Yahoo research chart, thirteen rules and a Firebug add-on that graded pages from A to F turned page speed from a server problem into a front-end discipline.",
+      "topic": "libraries",
+      "era": [
+        2006,
+        null
+      ],
+      "published": "2026-11-12T23:16:57+00:00",
+      "unverified": [
+        "I could not open the Internet Archive from where I was working, so I never saw the 2007 versions of Yahoo's YSlow page, its rules page or the Yahoo Developer Network release announcement; the rule text and Apache lines I quote come from the rules page as it stands now, which has been edited since.",
+        "I read the YUI Blog research articles in an archived copy hosted at derek.io, not on the original site. That copy bylines Part 1 to Tenni Theurer and Part 2 to \"YUI Team\"; a September 2007 YUI Blog post calls Theurer the author of the whole series.",
+        "I did not open Yahoo's own release announcement. The July 25, 2007 date comes from posts stamped that day and may be July 24 Pacific time, the OSCON link rests on two bloggers that week, and the early scores and rule weights from Simone Chiaretta are quoted from Jeff Atwood's post, not from Chiaretta's own pages.",
+        "The grading code I show is from the later open-source release, not the 2007 extension. That the E grade was added after 2007 is my inference from scores in the fifties being reported as F that summer.",
+        "I found no statement of when YSlow was last released or how long the Firefox add-on kept working; that its Firefox version ended with Firebug in 2017 is my inference, and so is the claim that these rules did more than any framework to make a build step normal."
+      ]
     }
   ]
 }
