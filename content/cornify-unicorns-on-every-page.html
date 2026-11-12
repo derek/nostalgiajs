@@ -64,7 +64,7 @@ img.setAttribute('src',cornify_url+'getacorn.php?r=' + submitTime + '&amp;url='+
 
 <p>On February 4, 2009, four days after launch, Bruce Sterling's Wired blog ran a post titled <a href="https://www.wired.com/2009/02/proof-why-the-c/">"Proof why the Cornify button is a great Internet invention"</a>. The whole post is a Flickr link, the line "A comprehensive map of all possible human futures," and an instruction: "Now Cornify! See how great that is? Wow!"</p>
 
-<p>The same day, Paul Irish published <a href="https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">eleven lines of jQuery</a> that changed where Cornify could live. The snippet listened for the Konami code, the old Nintendo cheat sequence of up, up, down, down, left, right, left, right, B, A, and only then fetched <code>cornify.js</code> with <a href="../jquery-and-the-dollar-sign/"><code>$.getScript</code></a>. After that, Irish wrote, "every other keystroke will add happiness to the world." A site could now carry unicorns that no visitor would see unless they knew to ask. At some point that year Cornify built the same trigger into its own script, in an object called <code>cornami</code> whose comment says it was adapted from a small library called Konami-JS, so any site with the button had the secret knock too.</p>
+<p>The same day, Paul Irish published <a href="https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">a jQuery snippet</a> that hid Cornify behind the Konami code, the old Nintendo cheat sequence. I'll come back to it, because it changed where the unicorns could live.</p>
 
 <p>On April 1, Stack Overflow joined in openly. The <a href="https://stackoverflow.blog/2010/03/31/reminder-its-april-1st">company's blog</a> recalled a year later that its 2009 April Fools' joke "added a cornify button to every post."</p>
 
@@ -72,13 +72,33 @@ img.setAttribute('src',cornify_url+'getacorn.php?r=' + submitTime + '&amp;url='+
 
 <p>On March 14, 2010, ten days after <a href="../the-ie6-funeral/">the IE6 funeral</a>, the SXSW Interactive Web Awards gave Cornify the People's Choice Award. The <a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">official results</a> say more than 12,000 people signed up to vote. The Amusement category, which a <a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">student reviewer at Texas State</a> had been sure Cornify would take, went to Atlas Obscura.</p>
 
-<h2>The Facebook question</h2>
+<h2>The include and its wrappers</h2>
 
-<p>If your memory of Cornify runs through Facebook, the record I could open doesn't back it up, and I'd sooner say so than fill the gap. I looked for a Cornify Facebook application and found no page that describes one: not in the press coverage, not in Know Your Meme's list of Cornify's products (a bookmarklet, an embeddable button, a photo cornifier, a desktop application), and not on Cornify's own About page, whose list of proud moments runs from Wired to ESPN to Stack Overflow.</p>
+<p>For site owners, the product was one line, given here as the project's README has it:</p>
 
-<p>What I can document is thinner. Cornify has a Facebook page. In April 2010 the Cornify account <a href="https://news.ycombinator.com/item?id=1293462">wrote on Hacker News</a> about "updating cornify.com to the new social plug-ins" and complained that "using an older Facebook Connect library at the same time breaks everything," so the site had some Facebook integration by then. Facebook also turns up twice at the edges. A commenter in the launch thread warned: "It's all fun and games until you execute this on facebook and the Unicorns steal your cookie and hijack your account. Yes, bookmarklets can do that." And when <a href="https://www.thecrimson.com/flyby/article/2009/5/9/unicorns-overrun-espncom/">the Harvard Crimson</a> wrote up the ESPN prank, it added that Facebook had been found to answer the Konami code as well: "No unicorns this time, but...sunspots?"</p>
+<pre tabindex="0"><code>&lt;script type="text/javascript" src="https://www.cornify.com/js/cornify.js"&gt;&lt;/script&gt;</code></pre>
 
-<p>A Facebook app may well have existed. But everything I can cite says the joke travelled the older way: a forum thread, a few well-read blogs, a script tag, and developers with commit access.</p>
+<p>After that, anything on the page could call <code>cornify_add()</code>. People in the launch thread did so within hours: "I just cornified my blog," "Put it on my site," and, from tlrobinson, "I just added it to my personal website (down at the bottom)."</p>
+
+<p>The include was a building block, and the first thing built on it was Irish's snippet:</p>
+
+<pre tabindex="0"><code>var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
+$(document).keydown(function(e) {
+  kkeys.push( e.keyCode );
+  if ( kkeys.toString().indexOf( konami ) &gt;= 0 ){
+    $(document).unbind('keydown',arguments.callee);
+    $.getScript('http://www.cornify.com/js/cornify.js',function(){
+      cornify_add();
+      $(document).keydown(cornify_add);
+    });
+  }
+});</code></pre>
+
+<p>It records key codes until the list contains up, up, down, down, left, right, left, right, B, A, and only then fetches the script, with <a href="../jquery-and-the-dollar-sign/"><code>$.getScript</code></a>. After that, Irish wrote, "every other keystroke will add happiness to the world." A visitor who doesn't know the code never downloads a unicorn. At some point in 2009 Cornify put the same trigger into <code>cornify.js</code> itself, in an object called <code>cornami</code> whose comment says it was adapted from a library called Konami-JS, so any site with the plain include had the secret knock too.</p>
+
+<p>The wrappers kept coming. In May 2010 John Hobbs posted <a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a> to <a href="https://news.ycombinator.com/item?id=1386864">Hacker News</a>: fifty unicorns on the Konami code, with no dependencies, "so people can just drop it right in." Its page credits Eric Ryan Harrison with a jQuery version. The Cornify account turned up to say it looked "very, very inspired by Cornify" and to ask for the artwork. Hobbs said the unicorns came from a MySpace glitter-graphics page. "You have great taste in unicorns," Cornify replied. In the same thread a developer admitted to hiding a Konami picture of Chuck Norris on their company's "professional" site and waiting to be told to remove it: "Nope."</p>
+
+<p>That is most of the documented plugin history. I found snippets and one-file libraries, passed around in blog posts and comment threads, and no official jQuery plugin. Irish's own later note on his post is modest: "this feature kinda triggered a meme."</p>
 
 <h2>Why a joke travelled</h2>
 
@@ -134,11 +154,11 @@ img.setAttribute('src',cornify_url+'getacorn.php?r=' + submitTime + '&amp;url='+
     <li><a href="https://stackoverflow.blog/2010/03/31/reminder-its-april-1st">Reminder: It's April 1st</a>, Stack Overflow Blog, 2010</li>
     <li><a href="https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">The Konami Code Makes ESPN.com Magical!</a>, Michael McWhertor, Kotaku, 2009</li>
     <li><a href="https://abcnews.com/Technology/PCWorld/story?id=7444224">ESPN.com, the Konami Code, and a Whole Lotta' Ponies</a>, David Murphy, PCWorld via ABC News, 2009</li>
-    <li><a href="https://www.thecrimson.com/flyby/article/2009/5/9/unicorns-overrun-espncom/">Unicorns Overrun ESPN.com</a>, Liyun Jin, The Harvard Crimson, 2009</li>
     <li><a href="https://news.ycombinator.com/item?id=556164">Ask HN: Review my webapp: hapylink.com</a>, Hacker News thread, 2009</li>
     <li><a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">Cornify: SXSW Web Awards Finalist</a>, Hillary Till, SXTXState, 2010</li>
+    <li><a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a>, John Hobbs, 2010</li>
+    <li><a href="https://news.ycombinator.com/item?id=1386864">Konami Code for any website - Unicorn Blitz</a>, Hacker News thread, 2010</li>
     <li><a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">SXSW Interactive 2010 Web Awards Announces Winners</a>, SXSW, 2010</li>
-    <li><a href="https://news.ycombinator.com/item?id=1293462">Comment on Facebook's social plug-ins</a>, Cornify, Hacker News, 2010</li>
     <li><a href="https://github.blog/news-insights/product-news/content-security-policy/">Content Security Policy</a>, Joshua Peek, The GitHub Blog, 2013</li>
     <li><a href="https://www.w3.org/TR/CSP3/">Content Security Policy Level 3</a>, W3C Working Draft</li>
     <li><a href="https://chromewebstore.google.com/detail/cornify-unicorn-and-rainb/ghdnfbmfflgelndafnlgabneckbmfpla">Cornify - Unicorn and rainbow happiness!!!</a>, Chrome Web Store</li>
