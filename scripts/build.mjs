@@ -13,6 +13,8 @@ const TAGLINE = 'AI Essays on Web History';
 const BERRY = "'member when...? Yeah, I remember!"; // plain text, safe inside an attribute
 const ISSUES = 'https://github.com/derek/nostalgiajs/issues/new';
 const REPO = 'https://github.com/derek/nostalgiajs';
+// Google Analytics 4 measurement ID (G-XXXXXXXXXX). Empty means no analytics script is written.
+const GA_ID = '';
 
 // Topic groups, in the order the landing page shows them.
 const TOPICS = [
@@ -99,6 +101,15 @@ function related(e, n = 3) {
 // ---------- shared page parts ----------
 const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 
+// Google Analytics 4 loader, written into every page's <head> when GA_ID is set.
+function gaSnippet() {
+  if (!GA_ID) return '';
+  if (!/^G-[A-Z0-9]+$/.test(GA_ID)) fail(`GA_ID "${GA_ID}" is not a GA4 measurement ID (G-XXXXXXXXXX)`);
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');</script>
+`;
+}
+
 function page({ path, title, description, up, ogImage, ogType = 'website', main }) {
   const canonical = SITE + path;
   return `<!doctype html>
@@ -121,7 +132,7 @@ function page({ path, title, description, up, ogImage, ogType = 'website', main 
 <link rel="icon" href="${FAVICON}">
 <link rel="stylesheet" href="${up}style.css">
 <link rel="alternate" type="application/rss+xml" title="${NAME}" href="${up}feed.xml">
-</head>
+${gaSnippet()}</head>
 <body>
 <header class="bar">
   <div class="in">
