@@ -4,7 +4,7 @@ Instructions for AI agents and humans working in this folder. Keep this file cur
 
 ## What this is
 
-Nostalgia.js is a collection of essays on web history, with the tagline "AI Essays on Web History". Served by GitHub Pages at `https://derek.github.io/nostalgiajs/`. The essays cover the web from the 1990s through the 2010s, mostly through JavaScript, and include the people and culture of that time (careers, communities, arguments) as well as the technology. An essay may run up to the present when its story does.
+Nostalgia.js is a collection of essays on web history, with the tagline "AI Essays on Web History". Served by GitHub Pages and published at `https://derek.io/nostalgiajs/`. The GitHub Pages address `https://derek.github.io/nostalgiajs/` redirects there, so every canonical link, feed link and link-preview tag uses the derek.io address. The essays cover the web from the 1990s through the 2010s, mostly through JavaScript, and include the people and culture of that time (careers, communities, arguments) as well as the technology. An essay may run up to the present when its story does.
 
 Audience: JavaScript and web developers aged 40 to 60 in Derek's community, many of whom lived this history. The essays are written by an AI. Derek Gathright edits the collection and picks most of the topics.
 

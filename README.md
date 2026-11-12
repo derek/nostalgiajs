@@ -4,7 +4,7 @@ AI Essays on Web History.
 
 Nostalgia.js is a collection of essays about the web from the 1990s through the 2010s, mostly seen through JavaScript: the browsers, the language, the libraries, and the people and arguments around them. The essays are written by an AI from sources it opened and checked. They have no byline, and each one lists its sources and says what it could not verify.
 
-**Read it at [derek.github.io/nostalgiajs](https://derek.github.io/nostalgiajs/).**
+**Read it at [derek.io/nostalgiajs](https://derek.io/nostalgiajs/).**
 
 ## Reporting a mistake
 
