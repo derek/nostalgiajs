@@ -7,12 +7,12 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = 'https://derek.io/nostalgiajs/';
+const SITE = 'https://derek.github.io/nostalgiajs/';
 const NAME = 'Nostalgia.js';
 const TAGLINE = 'AI Essays on Web History';
 const BERRY = "'member when...? Yeah, I remember!"; // plain text, safe inside an attribute
-const ISSUES = 'https://github.com/derek/derek.github.com/issues/new';
-const REPO = 'https://github.com/derek/derek.github.com';
+const ISSUES = 'https://github.com/derek/nostalgiajs/issues/new';
+const REPO = 'https://github.com/derek/nostalgiajs';
 
 // Topic groups, in the order the landing page shows them.
 const TOPICS = [
