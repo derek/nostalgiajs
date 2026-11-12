@@ -6,7 +6,493 @@
   <atom:link href="https://derek.github.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>AI Essays on Web History</description>
   <language>en</language>
-  <lastBuildDate>Thu, 12 Nov 2026 21:28:30 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 23:17:33 GMT</lastBuildDate>
+  <item>
+    <title>JSLint and The Good Parts: the subset that became the language</title>
+    <link>https://derek.github.io/nostalgiajs/crockford-jslint-and-the-good-parts/</link>
+    <guid isPermaLink="true">https://derek.github.io/nostalgiajs/crockford-jslint-and-the-good-parts/</guid>
+    <pubDate>Thu, 12 Nov 2026 23:17:33 GMT</pubDate>
+    <description>Douglas Crockford's linter and thin book told developers which parts of JavaScript to stop using, which started a fork and a fight over a semicolon and left much of its advice inside the language.</description>
+    <content:encoded><![CDATA[<p class="lede">One of the most argued-over tools in JavaScript's history was a program that told you which parts of the language to stop using, and it came with a warning label.</p>
+
+<blockquote>
+<p>Warning! JSLint will hurt your feelings.</p>
+</blockquote>
+
+<p>That notice sat at the top of the JSLint documentation, directly under the line "©2002 Douglas Crockford", in <a href="https://people.cs.nycu.edu.tw/~tsaiwn/oop/05_Tools/JSLint/lint.html">an older copy of the page</a> that survives on a university course site. It was a comment in the program's source in <a href="https://raw.githubusercontent.com/jslint-org/jslint/v2013.3.13/jslint.js">the edition of March 2013</a>, and it is in <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/jslint.mjs">the current one</a>. The <a href="https://www.jslint.com/help.html">help page at jslint.com</a> still carries it, now with a list of symptoms: "Side effects may include headache, irritability, dizziness, snarkiness, stomach pain, defensiveness, dry mouth, cleaner code, and a reduced error rate."</p>
+
+<p>It is a joke, and it was accurate. You pasted your script into a text box, pressed a button, and a program written by one person told you that code which ran in every browser was unacceptable. Some six years later the same person published the argument as a thin book, <em>JavaScript: The Good Parts</em>. Between them they changed what professional JavaScript looked like. They also started a fork, a fight about a semicolon and a licensing problem that took other people nine years to clean up.</p>
+
+<h2>Before: a language with a reputation</h2>
+
+<p>In 2001 Douglas Crockford put an essay on a personal website under the title <a href="https://www.crockford.com/javascript/javascript.html">"JavaScript: The World's Most Misunderstood Programming Language"</a>. The page has been revised since, and I quote it as it stands now. It is a list of reasons for the bad reputation, and most of them are not the language's fault. The name suggests a cut-down Java. The syntax hides what is underneath, which the essay calls "Lisp in C's Clothing." The early implementations were buggy, the standard was hard to read, and the books were worse: "Nearly all of the books about JavaScript are quite awful."</p>
+
+<p>Crockford was not a web designer who had drifted into scripting. The <a href="https://www.crockford.com/about.html">biography on the same site</a> lists eight years as Director of Technology at Lucasfilm and, in 2001 and 2002, a startup called State Software, building "an application framework for highly-interactive web applications." This was an experienced programmer who came to JavaScript late and had expected little. A companion piece, <a href="https://www.crockford.com/javascript/survey.html">"A Survey of the JavaScript Programming Language"</a>, admits as much: "When JavaScript was first introduced, I dismissed it as being not worth my attention. Much later, I took another look at it and discovered that hidden in the browser was an excellent programming language."</p>
+
+<p>The 2001 essay does have a section called "Design Errors," and it is short. The <code>+</code> operator both adds and concatenates. The <code>with</code> statement is error-prone. "Semicolon insertion was a huge mistake". Then comes the sentence that the next ten years grew out of: "Fortunately, many of these problems can be mitigated with a good lint program."</p>
+
+<p>It helps to recall what checked your JavaScript at the time. Nothing did. There was no compiler, so a misspelled variable name was not an error. It was a new global variable. You learned the language by <a href="https://derek.github.io/nostalgiajs/view-source-was-the-school/">reading other people's pages</a> and you found your mistakes with <a href="https://derek.github.io/nostalgiajs/firebug-and-the-inside-of-the-page/"><code>alert()</code></a>, after the browser had already run them.</p>
+
+<h2>A minifier, a lint and a hundred pages</h2>
+
+<p>The tools came first. Crockford's site dates <a href="https://www.crockford.com/jsmin.html">JSMin</a> to 2001, and <a href="https://www.crockford.com/minify.html">a later note</a> says the name was the origin of the word as we use it: "I called the operation <em>minification</em>, and I named the first minifier program JSMin." JSMin comes back into the story eleven years later.</p>
+
+<p>JSLint followed. The sources disagree by a year about when. Allen Wirfs-Brock and Brendan Eich, in <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>, cite its web page as 2001 and call it "the first widely used linter utility for JavaScript." The JSHint project's <a href="https://jshint.com/relicensing-2020/">own history</a> says it "was first made publicly available in 2002," which matches the copyright line. Either way, it was written in JavaScript and it ran in the page: "Your script is not sent over the network."</p>
+
+<p>The documentation was clear that this was more than a syntax checker. "JSLint defines a professional subset of JavaScript, a stricter language than that defined by" the standard, it said, and then: "JavaScript is a sloppy language, but inside it there is an elegant, better language. JSLint helps you to program in that better language and to avoid most of the slop."</p>
+
+<p>The subset was specific. Every variable had to be declared, because "JavaScript's biggest problem is its dependence on global variables, particularly implied global variables." Every <code>if</code> and <code>while</code> needed braces. <code>with</code> was out. <code>===</code> was preferred to <code>==</code>, and an option could forbid <code>==</code> altogether. Another option banned <code>++</code> and <code>--</code>, on the grounds that they "have been known to contribute to bad code by encouraging excessive trickiness." You chose your options with checkboxes on the page, or with a comment at the top of the file. This is the documentation's own example:</p>
+
+<pre tabindex="0"><code>/*jslint nomen: true, debug: true,
+    evil: false, onevar: true */</code></pre>
+
+<p>The option that controls whether <code>eval</code> is tolerated is named <code>evil</code>. The page also had a single button that set every checkbox to what the documentation called "the ideal settings." The button was labelled "Good Parts."</p>
+
+<p>The rest arrived quickly. In December 2002, by the history paper's timeline, Crockford set up json.org and gave a name to a data format made from JavaScript's object and array literals. That is another story, though it is why the X in <a href="https://derek.github.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/">Ajax</a> aged so badly. In 2005 Crockford joined Yahoo as a "Distinguished Architect," and by July 2006 was representing Yahoo at meetings of the ECMAScript committee. A month earlier came a short page called <a href="https://www.crockford.com/javascript/prototypal.html">"Prototypal Inheritance in JavaScript"</a>, with a five-line function on it:</p>
+
+<pre tabindex="0"><code>function object(o) {
+    function F() {}
+    F.prototype = o;
+    return new F();
+}</code></pre>
+
+<p>It makes a new object that inherits from an old one, with no constructor and no pretend classes.</p>
+
+<p>Then the book. O'Reilly published <em>JavaScript: The Good Parts</em> in May 2008. The back cover copy, as <a href="https://openlibrary.org/books/OL10781042M">Open Library records it</a>, says the book "scrapes away these bad features to reveal a JavaScript subset that's more reliable, readable, and maintainable than the language as a whole." By the table of contents on the same record, the ten chapters on the good parts end before page 101. Then come Appendix A, "Awful Parts," Appendix B, "Bad Parts," and Appendix C, "JSLint." A language book whose main text fits in a hundred pages was a statement in itself.</p>
+
+<p>The thesis is in the first chapter, in a passage <a href="https://en.wikiquote.org/wiki/Douglas_Crockford">Wikiquote</a> preserves: "JavaScript is built on some very good ideas and a few very bad ones. The very good ideas include functions, loose typing, dynamic objects, and an expressive object literal notation. The bad ideas include a programming model based on global variables." Two months before the book, Crockford had published <a href="https://www.crockford.com/javascript/popular.html">a sequel to the 2001 essay</a> that puts the whole project in one line: "When you peel away the cruft, there is an expressive and powerful programming language there."</p>
+
+<h2>Why a list of prohibitions caught on</h2>
+
+<p><strong>Ajax brought in programmers who expected a compiler.</strong> After 2005, people who had spent careers in Java and C# were told to write the browser half of the application. Crockford's 2008 essay puts it this way: "Ajax gave JavaScript a second chance." They were used to a compiler that objected before anyone ran the code, and the browser offered nothing of the kind. By 2013 JSLint's documentation said so directly: it "will reject programs that browsers will accept because JSLint is concerned with the quality of your code and browsers are not."</p>
+
+<p><strong>The language itself was frozen.</strong> The third edition of the standard is dated December 1999 and the fifth is dated December 2009. There is no fourth. In 2007 Crockford wrote, in <a href="https://www.crockford.com/javascript/recommend.html">a set of recommendations to the committee</a>, that the language "hasn't changed in seven years," and meant it as praise: "This is what allowed Ajax to happen." If nothing can be added and nothing can be fixed, the only way left to improve a language is to agree not to use parts of it. I'd argue that is why the subset landed when it did. It was the one kind of language design that needed nobody's permission.</p>
+
+<p><strong>There was a platform behind it.</strong> A linter on a personal website is a curiosity. The same linter, recommended by a Distinguished Architect at Yahoo who also gave the lectures, sat on the standards committee and had named JSON, was something a tech lead could cite. Wirfs-Brock and Eich, describing the evangelists of that period, call Crockford "one of the most influential."</p>
+
+<p><strong>And the rules were not all the same kind of rule.</strong> An undeclared variable silently becoming a global is a bug. Preferring <code>i += 1</code> to <code>i++</code> is a taste. JSLint presented both in the same voice. Today's help page owns up to it in a section headed "Perfectly fine," which begins: "JSLint was designed to reject code that some would consider to be perfectly fine." Whether that was discipline or one person's preferences is what the argument was about.</p>
+
+<h2>The fork and the semicolon</h2>
+
+<p>For years the way to cope was the options. If you disagreed with a rule, there was usually a checkbox to tolerate what you were doing, and you wrote the result into a <code>/*jslint */</code> comment. Then the tool got stricter. On February 20, 2011, Anton Kovalyov published a post called "Why I forked JSLint to JSHint." The original address no longer answers, but the text survives in <a href="https://raw.githubusercontent.com/disqus/disqus.github.com/master/_posts/2011-02-20-antonkovalyov-why-i-forked-jslint-to-jshint.html">a copy in a Disqus repository</a>. JSLint, Kovalyov wrote, "has gotten uncomfortably opinionated and hostile towards your code. It is quickly transforming from a tool that helps developers to prevent bugs to a tool that makes sure you write your code like Douglas Crockford."</p>
+
+<p>The evidence was a function from <a href="https://derek.github.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery</a> 1.4.2, which is still on jQuery's CDN:</p>
+
+<pre tabindex="0"><code>	isEmptyObject: function( obj ) {
+		for ( var name in obj ) {
+			return false;
+		}
+		return true;
+	},</code></pre>
+
+<p>"Can't see anything wrong with this snippet? Me neither. But JSLint refuses to proceed further, failing with an error that tells you to 'move "var" declarations to the top of the function'. What is even worse, there is no way to turn this behavior off." In the 2013 source the message is there, word for word, and the code that raises it calls a function named <code>stop</code>. JSHint had gone out two days before the post, and its pitch was a promise about governance: "it will always be a community-driven tool. Simply because a community of programmers working together is better than a single person working alone." The post opens with an epigraph attributed to Crockford: "Your sadly pathetic bleatings are harshing my mellow." A footnote quotes the language's creator, Brendan Eich, as having said, "JSLint can suck it."</p>
+
+<p>A fork inherits everything, including the licence. JSLint's was the MIT licence with one sentence added: "The Software shall be used for Good, not Evil." The Free Software Foundation's <a href="https://www.gnu.org/licenses/license-list.html">licence list</a> takes the sentence seriously: "The restriction might be unenforcible, but we cannot presume that. Thus, the license is nonfree." JSHint's maintainers spent years getting out from under it. Their account describes collecting contributor agreements and having six patches rewritten from scratch, three of them by volunteers who had never seen the code they were replacing. They finished in August 2020.</p>
+
+<p>The loudest episode involved the minifier. On April 13, 2012, a user opened <a href="https://github.com/twbs/bootstrap/issues/3057">issue 3057</a> on Twitter's Bootstrap, reporting that <code>bootstrap-dropdown.js</code> broke after going through JSMin. Bootstrap's JavaScript was written without semicolons, and <a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.2/js/bootstrap-dropdown.js">version 2.0.2</a> contained these two lines:</p>
+
+<pre tabindex="0"><code>      clearMenus()
+      !isActive &amp;&amp; $parent.toggleClass('open')</code></pre>
+
+<p>As written, the line break ends the first statement. JSMin's documentation lists the characters before which it will keep a line break, because "JavaScript sometimes treats linefeeds as semicolons," and <code>!</code> is not on the list. Remove the break and the two lines become one expression that does not parse. The maintainer who goes by fat replied that this was "a bug in jsmin" and suggested telling Crockford. Crockford turned up in the thread: "That is insanely stupid code. I am not going to dumb down JSMin for this case." And then: "Learn to use semicolons properly. ! is not intended to be a statement separator. ; is."</p>
+
+<p>The thread drew a crowd, and on April 15 Eich wrote the referee's report, <a href="https://brendaneich.com/2012/04/the-infernal-semicolon/">"The infernal semicolon."</a> It declines to give either side the win. Eich agreed "with Doug's canonically grumpy tone if not his substance," said the <code>&amp;&amp;</code> line was poor style, and corrected Crockford's claim that the code would break in a future edition. The moral was aimed at everyone: "ASI is (formally speaking) a syntactic error correction procedure. If you start to code as if it were a universal significant-newline rule, you will get into trouble." Bootstrap 2.0.3 has an <code>if</code> statement there instead.</p>
+
+<p>The next step was to remove the opinions from the tool altogether. In July 2013 Nicholas C. Zakas <a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">introduced ESLint</a> with a short history of the field: "A long time ago, JSLint was the state of the art in JavaScript linting technology. Then JSHint came along as a fork and took over due to increased flexibility." But JSHint had "no easy way to add additional rules," so the new tool would be one "where all rules are pluggable."</p>
+
+<h2>What it left behind</h2>
+
+<p><strong>The subset became a mode of the language.</strong> The <code>"use strict"</code> directive in the fifth edition is, I'd argue, JSLint's idea moved into the engine. The history paper traces it to Crockford's recommendations to the committee, not to the tool: "ES5 strict mode is the direct end product of Douglas Crockford's goal of 'correcting mistakes and inconveniences' in JavaScript's design." The paper calls it "subtractive": "It does not add new features to ECMAScript; instead it removes problematic features." In strict mode <code>with</code> is a syntax error and assigning to an undeclared name throws, which settles two of JSLint's oldest complaints. Then it stopped being optional. <a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">The current specification</a> says "Module code is always strict mode code" and that all parts of a class are too. So every file with an <code>import</code> in it runs in a dialect that, on my reading, began as a set of checkboxes on a web page.</p>
+
+<p><strong>The five-line function is a built-in.</strong> The prototypal inheritance page has a dated addendum from April 7, 2008. Crockford had decided a global function called <code>object</code> was a bad idea, and now preferred to write the same body as <code>Object.create</code>, guarded by <code>if (typeof Object.create !== 'function')</code>. That is twenty months before the fifth edition was published with an <code>Object.create</code> in it. Wirfs-Brock and Eich write that the standard function "was essentially the beget function with a property map added as an optional second parameter," <code>beget</code> being another of Crockford's names for it. The same edition added <code>JSON.parse</code> and <code>JSON.stringify</code>, and Crockford's <a href="https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js"><code>json2.js</code></a> still describes itself in those terms: "This file provides the ES5 JSON capability to ES3 systems."</p>
+
+<p><strong>Your lint configuration is written in JSLint's vocabulary.</strong> The old options table has a column of short names: <code>eqeqeq</code>, <code>newcap</code>, <code>plusplus</code>, <code>bitwise</code>, <code>onevar</code>. JSHint kept several of them as they were. ESLint, the clean break, has rules called <a href="https://eslint.org/docs/latest/rules/eqeqeq"><code>eqeqeq</code></a>, <code>new-cap</code>, <code>no-plusplus</code>, <code>no-bitwise</code> and <code>one-var</code>. I can't prove the descent rule by rule, but nobody arrives at "eqeqeq" twice by accident. It began as the name of a JSLint checkbox, and it is in a great many repositories today.</p>
+
+<p><strong>The fix for the opinions brought the opinions back.</strong> JSLint had one author, and its switches were that author's to add or remove. The remedy was a fork with more switches, and then a tool that was all switches. That moved the argument out of the tool and into every team's configuration file, where it could be held again for each project. The reaction to that is a tool like <a href="https://standardjs.com/">JavaScript Standard Style</a>, whose front page promises "No configuration" and "No decisions to make." That is JSLint's position, and I'd argue it is the part JSLint had right all along: most of the value of a house style is that the argument is over. This particular heir settled the old argument the other way. Its documentation lists a sibling package, <code>semistandard</code>, described as "standard, with semicolons (if you must)."</p>
+
+<p><strong>Not everything was adopted.</strong> The history paper notes that automatic semicolon insertion was on Crockford's list for strict mode and stayed in the language, because "many developers preferred to code without explicit semicolons." And the language went on to add the <code>class</code> keyword that the prototypal essay had argued it did not need. JSLint itself is still published, now by a GitHub organisation and under the Unlicense, with no clause about evil. Its help page says "Some of ES6's features are good, so JSLint will recognize the good parts of ES6," and <code>class</code> is not in the list that follows. Among the options is one described as "Allow <code>this</code>."</p>
+
+<h2>The takeaway</h2>
+
+<p>JSLint and <em>The Good Parts</em> made one argument twice: JavaScript contained a good small language, and you could have it immediately by refusing to use the rest. In a decade when the standard did not move, that was the only improvement on offer, and it worked. It gave developers a reason to take the language seriously and gave their teams something to point at in code review. The delivery was one person's taste presented as law. The fork, the semicolon thread and the pluggable linter were all reactions to that.</p>
+
+<p>What lasted is the subset more than the tool. The rules that were about bugs went into the language as strict mode, and strict mode is now compulsory for modules and classes. The helper functions became <code>Object.create</code> and <code>JSON.parse</code>. I doubt many people paste code into jslint.com any more, and nearly everyone writes something close to the dialect it defined. The rules it insisted on that did not win, such as mandatory semicolons and no <code>++</code>, are still being argued about, usually by people who have never had their feelings hurt by the original.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.crockford.com/javascript/javascript.html">JavaScript: The World's Most Misunderstood Programming Language</a>, Douglas Crockford, 2001</li>
+    <li><a href="https://www.crockford.com/javascript/survey.html">A Survey of the JavaScript Programming Language</a>, Douglas Crockford, 2002</li>
+    <li><a href="https://www.crockford.com/javascript/prototypal.html">Prototypal Inheritance in JavaScript</a>, Douglas Crockford, 2006, with addenda to 2008</li>
+    <li><a href="https://www.crockford.com/javascript/recommend.html">Recommendations for Modifications to the ECMAScript Language Specification</a>, Douglas Crockford, 2007</li>
+    <li><a href="https://www.crockford.com/javascript/popular.html">The World's Most Misunderstood Programming Language Has Become the World's Most Popular Programming Language</a>, Douglas Crockford, 2008</li>
+    <li><a href="https://www.crockford.com/jsmin.html">JSMin</a> and <a href="https://www.crockford.com/minify.html">Minify</a>, Douglas Crockford, 2019 <a class="archived" href="https://web.archive.org/web/20261021134751/https://www.crockford.com/jsmin.html">(archived)</a></li>
+    <li><a href="https://www.crockford.com/about.html">About Douglas Crockford</a>, crockford.com</li>
+    <li><em>JavaScript: The Good Parts</em>, Douglas Crockford, O'Reilly, 2008. <a href="https://openlibrary.org/books/OL10781042M">Open Library record</a>, with the table of contents and back cover copy</li>
+    <li><a href="https://en.wikiquote.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikiquote, for the passage from chapter 1 of the book</li>
+    <li><a href="https://www.jslint.com/help.html">JSLint: Help</a>, jslint.com, read November 12, 2026</li>
+    <li><a href="https://people.cs.nycu.edu.tw/~tsaiwn/oop/05_Tools/JSLint/lint.html">JSLint: The JavaScript Code Quality Tool</a>, Douglas Crockford, an older copy of the documentation kept on a course site at National Yang Ming Chiao Tung University</li>
+    <li><a href="https://raw.githubusercontent.com/jslint-org/jslint/v2013.3.13/jslint.js">jslint.js, edition of 2013-03-13</a>, and the current <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/jslint.mjs">jslint.mjs</a>, <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/LICENSE">LICENSE</a> and <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/CHANGELOG.md">CHANGELOG</a>, the jslint-org/jslint repository</li>
+    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
+    <li><a href="https://raw.githubusercontent.com/disqus/disqus.github.com/master/_posts/2011-02-20-antonkovalyov-why-i-forked-jslint-to-jshint.html">Why I forked JSLint to JSHint</a>, Anton Kovalyov, 2011, as mirrored in a Disqus repository</li>
+    <li><a href="https://jshint.com/relicensing-2020/">2020 Relicensing</a>, <a href="https://jshint.com/about/">About JSHint</a> and <a href="https://jshint.com/docs/options/">JSHint Options</a>, the JSHint project</li>
+    <li><a href="https://www.json.org/license.html">The JSON License</a>, json.org, 2002</li>
+    <li><a href="https://www.gnu.org/licenses/license-list.html">Various Licenses and Comments about Them</a>, Free Software Foundation</li>
+    <li><a href="https://github.com/twbs/bootstrap/issues/3057">bootstrap-dropdown.js clearMenus() needs ; at the end</a>, issue 3057, twbs/bootstrap, 2012</li>
+    <li><a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.2/js/bootstrap-dropdown.js">bootstrap-dropdown.js, version 2.0.2</a> and <a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.3/js/bootstrap-dropdown.js">version 2.0.3</a>, Twitter Bootstrap, 2012</li>
+    <li><a href="https://brendaneich.com/2012/04/the-infernal-semicolon/">The infernal semicolon</a>, Brendan Eich, 2012</li>
+    <li><a href="https://code.jquery.com/jquery-1.4.2.js">jQuery 1.4.2</a>, 2010</li>
+    <li><a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">Introducing ESLint</a>, Nicholas C. Zakas, 2013</li>
+    <li><a href="https://eslint.org/docs/latest/about/">About</a>, <a href="https://eslint.org/docs/latest/rules/eqeqeq">eqeqeq</a> and <a href="https://eslint.org/docs/latest/rules/no-plusplus">no-plusplus</a>, ESLint documentation</li>
+    <li><a href="https://standardjs.com/">JavaScript Standard Style</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">ECMAScript Language: Source Text</a>, Ecma TC39, current draft, for strict mode code</li>
+    <li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-262/">ECMA-262</a>, Ecma International, for the dates of each edition</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">Strict mode</a>, MDN</li>
+    <li><a href="https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js">json2.js</a>, Douglas Crockford</li>
+    <li><a href="https://en.wikipedia.org/wiki/JSLint">JSLint</a>, <a href="https://en.wikipedia.org/wiki/JSHint">JSHint</a> and <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikipedia</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
+  <item>
+    <title>YSlow: the letter grade that made front-end performance a job</title>
+    <link>https://derek.github.io/nostalgiajs/yslow-and-front-end-performance/</link>
+    <guid isPermaLink="true">https://derek.github.io/nostalgiajs/yslow-and-front-end-performance/</guid>
+    <pubDate>Thu, 12 Nov 2026 23:17:32 GMT</pubDate>
+    <description>How a Yahoo research chart, thirteen rules and a Firebug add-on that graded pages from A to F turned page speed from a server problem into a front-end discipline.</description>
+    <content:encoded><![CDATA[<p class="lede">In July 2007 a small team at Yahoo released a browser add-on that gave any web page a letter grade for speed, and inside three years the checklist behind it had a conference, an industry acronym and a place in Google's search ranking.</p>
+
+<pre tabindex="0"><code>Google:         A (99)
+Apple:          D (61)
+A List Apart:   F (58)
+Coding Horror:  F (52)</code></pre>
+
+<p>Those are four lines from a longer list of YSlow scores that Simone Chiaretta collected in August 2007 and Jeff Atwood reprinted in <a href="https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">a post on Coding Horror</a>. The spacing is mine. The last line is Atwood's own site. The one above it is the magazine that published the article on CSS sprites that Yahoo's first rule links to.</p>
+
+<p>Hardly anything YSlow checked for was new. Gzip encoding and the <code>Expires</code> header are both in the HTTP/1.0 specification of 1996. Dave Shea's <a href="https://alistapart.com/article/sprites/">sprites article</a> dated from March 2004. What was new was a measurement that said where the time went, an argument about whose job that made it, and a tool that boiled both down to a letter you could show your boss.</p>
+
+<h2>Before: speed was a server problem</h2>
+
+<p>In the mid-2000s, a slow site was a matter for the people who owned the servers. You profiled the database, added caching in front of the application and bought hardware. The first of Yahoo's published research articles, in November 2006, described the habit in one sentence: "Most performance optimization today are made on the parts that generate the HTML document (apache, C++, databases, etc.), but those parts only contribute to about 20% of the user's response time."</p>
+
+<p>There was a reason for the habit, and Mark Nottingham gave it years later in a comment on <a href="https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">Steve Souders's blog</a>. A slow back end limits how many people you can serve, so "you can't not know you have a problem." The browser side is quieter: "Front-end is more subtle; the work is on the browser, and to many engineers, if it's not happening on their CPU, they don't care."</p>
+
+<p>Front-end checking did exist, as a hobby. Jeffrey Friedl, <a href="https://regex.info/blog/2007-09-26/584">reviewing Souders's book in 2007</a>, recalled building "Jeffrey's Page Checker" at Yahoo "in my spare time" from 1997, a tool that "reported various metrics about its fluff (wasted whitespace, image overhead, etc.)." Friedl added that the position Souders now held was one Friedl had "informally created and held in the early days of Yahoo." The same company had the same idea twice, ten years apart. The second time it came with a job title, Chief Performance Yahoo!, and a team, called Exceptional Performance.</p>
+
+<p>Seeing what a browser did on the wire took separate software. The <a href="https://yslow.org/faq/">YSlow FAQ</a> lists the packet sniffers of the day, Ethereal and IBM Page Detailer among them. A panel that timed every request from inside the browser arrived with <a href="https://derek.github.io/nostalgiajs/firebug-and-the-inside-of-the-page/">Firebug 1.0</a>, around the turn of 2007. And Souders, who <a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">later wrote</a> of having started "evangelizing high performance web sites back in 2004," summed up those first years this way: "I felt like a lone voice in the woods."</p>
+
+<h2>Eight months, from a chart to a grade</h2>
+
+<p>The public story starts on the YUI Blog on November 28, 2006, with <a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">"Performance Research, Part 1: What the 80/20 Rule Tells Us about Reducing HTTP Requests,"</a> by Tenni Theurer. The method was a packet sniffer and an empty cache. Loading yahoo.com, "only 10% of the time is spent here for the browser to request the HTML page." The other 90% went on images, scripts and stylesheets. Across eight popular sites the HTML document's share ranged from 5% (MSN, eBay) to 38% (Amazon).</p>
+
+<p><a href="https://derek.io/yuiblog/2007/01/04/performance-research-part-2/">Part 2</a>, on January 4, 2007, took away the obvious objection, which was that the cache would fix all that. The team served an image that browsers had to re-request on every view and counted the 200 and 304 responses in the logs. The result: "40-60% of Yahoo!'s users have an empty cache experience and ~20% of all page views are done with an empty cache."</p>
+
+<p>Souders turned the chart into a slogan. In a 2012 post the slide is quoted in full: "80-90% of the end-user response time is spent on the frontend. Start there." Souders called it the Performance Golden Rule. The definition matters, and Souders was open about it: "backend" meant the time to get the first byte of the HTML document, and "frontend" was "everything else," network time for every other file included.</p>
+
+<p>The rest happened fast. By <a href="https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">Souders's own account</a>, Souders's first blog post on the subject, "The Importance of Front-End Performance," went up on the Yahoo Developer Network in March 2007. In April, Souders and Theurer gave a three-hour workshop at Web 2.0 Expo, scheduled for 9:30 on a Sunday morning. They expected twenty people, and "nearly 300 people flowed into the room." In May the list of rules was already being passed around; Atwood first saw it referenced on Rich Skrenta's blog that month, and noted in August that the list seemed to have started with fourteen rules and now had thirteen.</p>
+
+<p>On July 25, 2007, with an announcement at O'Reilly's OSCON conference, the tool went public. <a href="https://www.phpied.com/yslow-performance-extension-for-firebug/">Stefanov's write-up that day</a>, which also reached <a href="https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">Slashdot</a>, is the best short description there is: "It's an extension to Firebug (yes, correct, Firebug, not Firefox) that helps with performance optimization efforts. It scores your page on the scale A to F," according to Yahoo's rules. It had been "used internally at Yahoo and is now released to the world." Stefanov, a member of the team who later rewrote the tool, has since mentioned that Souders's "original very first version" was a bookmarklet. Friedl spelled out the pun for anyone who had missed it: "Why Slow?"</p>
+
+<p>The book followed in September: <em>High Performance Web Sites</em>, from O'Reilly, with fourteen rules and the subtitle "Essential Knowledge for Front-End Engineers."</p>
+
+<h2>What the tool looked at</h2>
+
+<p>YSlow was a new tab in the Firebug panel with four views. Performance was the report card: thirteen rules, each with its own grade and a link to the documentation. Stats compared the page's weight with an empty cache and a full one, which was the Part 2 research turned into a feature. Components listed every file with its size, its expiry date, whether it was gzipped and its ETag. Tools ran your scripts through JSLint.</p>
+
+<p>The <a href="https://yslow.org/faq/">FAQ</a> explains the mechanism. YSlow crawled the DOM to find the page's components, and where it had no other way to see a file's response headers it requested the file again with <code>XMLHttpRequest</code>. Each rule took points off for each offender, and the overall grade was a weighted average. The first weights were not the order of the rules. Chiaretta dug them out, and Atwood's post reproduces them: Expires, gzip and ETags counted for 11 each, a CDN for 10, and avoiding CSS expressions for 2.</p>
+
+<p>Several of the rules were a line of server configuration, and <a href="https://developer.yahoo.com/performance/rules.html">Yahoo's rules page</a> supplied the lines. For Apache (with mod_expires switched on), the caching rule and the ETag rule came to this:</p>
+
+<pre tabindex="0"><code>ExpiresDefault "access plus 10 years"
+FileETag none</code></pre>
+
+<p>The first line had a cost that the same paragraph admitted. If a file may be cached for ten years, you can never change it, so "you have to change the component's filename whenever the component changes." Yahoo's example was <code>yahoo_2.0.6.js</code>, and its rule on duplicate scripts shows the tag you ended up writing:</p>
+
+<pre tabindex="0"><code>&lt;script type="text/javascript" src="menu_1.0.17.js"&gt;&lt;/script&gt;</code></pre>
+
+<p>Other rules were about how the browsers of the day behaved. Stylesheets went at the top because browsers, Internet Explorer among them, showed a blank page until the stylesheets had arrived. Scripts went at the bottom because a script stopped the browser starting any other download. And rule 7 told you to avoid a feature <a href="https://derek.github.io/nostalgiajs/the-ie6-funeral/">only Internet Explorer had</a>, which let a stylesheet run JavaScript:</p>
+
+<pre tabindex="0"><code>background-color: expression( (new Date()).getHours()%2 ? "#B8D4FF" : "#F08A00" );</code></pre>
+
+<p>The trouble, the page explains, was how often that ran: "Moving the mouse around the page can easily generate more than 10,000 evaluations."</p>
+
+<p>The source was eventually released under a BSD licence, and the <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/util.js">grading function</a> in that later code is as plain as you'd hope. This is the middle of <code>prettyScore</code>:</p>
+
+<pre tabindex="0"><code>if (score &gt;= 90) {
+    letter = 'A';
+} else if (score &gt;= 80) {
+    letter = 'B';
+} else if (score &gt;= 70) {
+    letter = 'C';
+} else if (score &gt;= 60) {
+    letter = 'D';
+} else if (score &gt;= 50) {
+    letter = 'E';
+}</code></pre>
+
+<p>The variable starts life as <code>'F'</code>. The E is a later kindness. In the 2007 lists a 58 and a 52 were both an F, and Dries Buytaert's table from release day gives TYPO3 "56 (F)."</p>
+
+<h2>Why a grade worked</h2>
+
+<p>The rules had been on a web page since the spring. Here are the forces I'd credit for what happened after July.</p>
+
+<p><strong>The measurement moved the problem to a different desk.</strong> If 80 to 90 percent of the wait happens after the HTML arrives, the people who can shorten it are the ones who write the markup, the CSS and the scripts. The Golden Rule handed them the largest share of a number the business cared about.</p>
+
+<p><strong>It was a score.</strong> Atwood, who spent much of that post arguing with its weights, put it best: "And best of all, the tool rates the page with a score – a <em>score!</em>" A checklist gets read. A grade gets compared. <a href="https://dri.es/yslow">Buytaert's post</a> on the day of release was a league table: drupal.org 74 (C), wordpress.org 78 (C), joomla.org 53 (F).</p>
+
+<p><strong>It sat where the work was.</strong> Front-end developers already had Firebug open. YSlow was one more tab in it, next to the Net panel, and from version 0.9 that December it read the Net panel's data directly.</p>
+
+<p><strong>The fixes were cheap.</strong> Buytaert's reading of that table was that "Apache configuration issues, and not CMS implementation issues, are the main source of low YSlow scores." Turning on gzip and setting an expiry date were small changes, and they were among the most heavily weighted rules.</p>
+
+<p><strong>Yahoo gave it all away, in public.</strong> The research went on the YUI Blog, the rules on the developer network, the tool on Mozilla's add-ons site and the long version to O'Reilly. This was the period when <a href="https://derek.github.io/nostalgiajs/the-blogs-and-the-feed-reader/">technical ideas travelled by blog</a>, and a rule with a number and a URL travels well.</p>
+
+<p><strong>Then the money arrived.</strong> Souders moved to Google in early 2008 and co-chaired the first Velocity conference that June, which sold out. The theme chosen for 2009 was "the impact of performance on the bottom line," and Souders's later summary lists what came out of it: at Bing, a page two seconds slower meant a 4.3% drop in revenue per user; at Google, 400 milliseconds cost 0.59% of searches per user; Shopzilla took five seconds off and saw conversions rise 7 to 12%.</p>
+
+<h2>Arguing with the grade</h2>
+
+<p>The pushback came within three weeks, and it was mostly fair. Atwood's title was the argument: "YSlow: Yahoo's Problems Are Not Your Problems." A lot of the advice "only makes sense if you run a website that gets millions of unique users per day." On rule 2: "If you have to ask how much a formal Content Delivery Network will cost, you can't afford it." And looking at that list of scores: "either the web is full of terribly inefficient web pages, or there's something wrong with its scoring."</p>
+
+<p>The CDN rule was the sore spot, because of how it was tested. The FAQ is disarmingly honest about it: "Unfortunately, the list of 'known CDNs' are the ones used by Yahoo!." To pass, you typed your own hostnames into a preference called <code>extensions.yslow.cdnHostnames</code> in <code>about:config</code>. Stefanov's launch-day post had already said where the weights lived: an array named <code>lintweights</code>.</p>
+
+<p>The tool also kept marking itself down. Version 0.9, in December 2007, began counting what the DOM crawler had missed, including <a href="https://derek.github.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/">Ajax requests</a> and image beacons. <a href="https://www.phpied.com/yslow-er/">Stefanov ran both versions</a> against yahoo.com after clicking around the page: 0.8 saw 92 components and gave a B (88), and 0.9 saw 141 and gave a D (63).</p>
+
+<p>Yahoo's answer to "not your problems" was a rewrite. <a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">Stefanov's account</a> of YSlow 2.0 says the team was hearing "meh, these are Yahoo's problems/rules, not yours," so rules became small objects you could combine into rulesets. It shipped with three: the new one, the classic thirteen, and "Small Site or Blog." The list of practices grew to 34, of which 23 could be tested by machine.</p>
+
+<p>Meanwhile teams did the work. They concatenated scripts in a build step, drew sprite sheets, revved filenames, and spread images over extra hostnames. Internet Explorer and Firefox still followed the HTTP/1.1 specification's line that a client "SHOULD NOT maintain more than 2 connections with any server or proxy," and the rules page's guideline was to split components "across at least two but no more than four hostnames."</p>
+
+<p>And the idea spread to other vendors. In June 2009 Google <a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">open-sourced Page Speed</a>, a tool it had been using internally: "it's a Firefox Add-on integrated with Firebug." In April 2010 Google announced that site speed was a signal in search ranking. A month later Souders gave the field a name, WPO, for Web Performance Optimization, and described its origin without ceremony: "What started as a list of performance tips coded up in a browser plug-in."</p>
+
+<h2>What it left behind</h2>
+
+<p><strong>The grade outlived the tool, and changed what it graded.</strong> Chrome's Lighthouse gives a page a performance score out of 100, with 90 and up shown in green. But <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">its documentation</a> says that "only metrics contribute to your Lighthouse Performance score, not the results of Opportunities or Diagnostics." YSlow graded whether you had followed the rules. Lighthouse grades how long things took, and offers the rules as hints. Until <a href="https://developer.chrome.com/blog/lighthouse-13-0">Lighthouse 13</a> folded them into newer "insights" in 2025, several of those hints were old acquaintances, such as "Enable text compression" and "<a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>." Atwood's complaint was that the score rewarded following Yahoo's rules whether or not they suited your site. I'd argue the scoring eventually came round to that view.</p>
+
+<p><strong>The hash in your bundle's filename is rule 3.</strong> A file with a name like <code>app.3f9a1c.js</code>, served with <code>Cache-Control: max-age=31536000, immutable</code>, is <code>yahoo_2.0.6.js</code> with a ten-year <code>Expires</code> header, with a machine doing the renaming. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">MDN's page on the header</a> describes the same bargain: with "a cache-busting pattern" and a long <code>max-age</code>, add <code>immutable</code>. Combining, minifying and revving files are all things nobody does by hand twice, and Yahoo's page says of renaming that "we often make this step part of the build process." My best guess is that these rules did more than any framework to make a build step normal for front-end work.</p>
+
+<p><strong>The fix became the next problem.</strong> Rule 1 and the sharding advice were workarounds for a protocol that allowed two connections per host. HTTP/2 removed the constraint, and Ilya Grigorik's <a href="https://hpbn.co/optimizing-application-delivery/"><em>High Performance Browser Networking</em></a> turned the old virtues into chores: "undo and unlearn the bad habits of domain sharding, concatenation, and image spriting." The revised HTTP/1.1 specification of 2014 dropped the number as well, saying a fixed ceiling "was found to be impractical for many applications." Developers had learned the rules as facts about the web. They were facts about HTTP/1.1 and the browsers of 2007.</p>
+
+<p><strong>Browsers absorbed the rest.</strong> Souders was asking for "fast by default" by the end of 2008, and it largely happened. In 2008 Firefox 3 and the IE8 beta raised the connection limit from two to six. The rules page notes that "Firefox doesn't support the DEFER attribute"; it does now, and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">MDN says</a> of module scripts that "they defer by default." Putting scripts at the bottom of the page became an attribute, and then a default.</p>
+
+<p><strong>The empty cache got emptier.</strong> In 2008 Souders praised Google's hosted copies of jQuery and the other libraries for "cross-site caching": fetch the file on one site and have it ready on the next. Chrome <a href="https://developer.chrome.com/blog/http-cache-partitioning">partitioned its HTTP cache</a> by site from version 86, for security and privacy, which ended that in Chrome. The 2007 finding that around half of a site's users hit it with nothing cached is, I'd argue, the most durable result of the research, and the platform has since made it more true.</p>
+
+<p><strong>"Front end" changed meaning under the rule.</strong> By Souders's definition the front end's 80 to 90 percent was mostly network time, and many of the original fixes were server configuration. Souders reran the numbers in 2012 and got 76% for the top ten sites, 92% for ten sites ranked around 10,000 and 87% across the 50,000 sites in the HTTP Archive. But by December 2008 Souders was already filing YSlow's checks under "old school" and asking for tools that showed "the impact of JavaScript and CSS as the page loads." The discipline was founded on HTTP hygiene and has spent the years since on the cost of running script. The name stayed the same while its contents changed.</p>
+
+<h2>The takeaway</h2>
+
+<p>YSlow did not discover gzip, caching headers, sprites or the cost of a blocking script. Its makers measured where a page's load time went, found that most of it came after the HTML arrived, said so in one sentence, and shipped a tool that turned thirteen pieces of advice into a letter between A and F. The measurement gave the work an owner and the grade gave it urgency. Before 2007, speed belonged to the people who ran the servers. Afterwards a front-end engineer could walk into a meeting with a number, and within three years there was a conference, a name for the trade and a search engine paying attention to it.</p>
+
+<p>The specific rules aged the way workarounds do. HTTP/2 reversed some and browsers swallowed others. The parts that lasted were the method and the form. You still measure from the user's side with an empty cache, you still start with the biggest slice, and the result still comes back as a colour-coded score. YSlow later ran in Chrome, as a bookmarklet and from the command line, but the Firefox original needed Firebug to run, and <a href="https://derek.github.io/nostalgiajs/firebug-and-the-inside-of-the-page/">Firebug's story</a> ended in 2017. Every performance tab in every browser is still asking its question.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a>, Yahoo Exceptional Performance team, Yahoo Developer Network, first published 2007 and since extended to 35 practices</li>
+    <li><a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">Performance Research, Part 1: What the 80/20 Rule Tells Us about Reducing HTTP Requests</a>, Tenni Theurer, YUI Blog, 2006 (archived copy at derek.io)</li>
+    <li><a href="https://derek.io/yuiblog/2007/01/04/performance-research-part-2/">Performance Research, Part 2: Browser Cache Usage - Exposed!</a>, Tenni Theurer (bylined "YUI Team" in the archive), YUI Blog, 2007 (archived copy at derek.io)</li>
+    <li><a href="https://derek.io/yuiblog/2007/09/04/video-souders/">YUI Theater — Steve Souders: "High Performance Web Sites: 14 Rules For Faster Pages"</a>, YUI Blog, 2007 (archived copy at derek.io)</li>
+    <li><a href="https://www.phpied.com/yslow-performance-extension-for-firebug/">YSlow performance extension for Firebug</a>, Stoyan Stefanov, July 25, 2007</li>
+    <li><a href="https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">Yahoo's YSlow Plug-in Tells You Why Your Site is Slow</a>, Slashdot, July 25, 2007</li>
+    <li><a href="https://dri.es/yslow">YSlow</a>, Dries Buytaert, July 25, 2007</li>
+    <li><a href="https://simonwillison.net/tags/yslow/">Posts tagged "yslow"</a>, Simon Willison's Weblog, 2007</li>
+    <li><a href="https://third-bit.com/2007/07/30/yslow-and-the-browser-as-ide/">YSlow and the Browser as IDE</a>, Greg Wilson, 2007, for the OSCON announcement</li>
+    <li><a href="https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">YSlow: Yahoo's Problems Are Not Your Problems</a>, Jeff Atwood, Coding Horror, August 15, 2007, with scores and rule weights collected by Simone Chiaretta</li>
+    <li><a href="https://regex.info/blog/2007-09-26/584">High Performance Web Sites</a>, a review by Jeffrey Friedl, September 26, 2007</li>
+    <li><em>High Performance Web Sites: Essential Knowledge for Front-End Engineers</em>, Steve Souders, O'Reilly, 2007; publication details from <a href="https://openlibrary.org/isbn/9780596529307">Open Library</a></li>
+    <li><a href="https://www.phpied.com/yslow-er/">YSlow-er?</a>, Stoyan Stefanov, December 5, 2007, on version 0.9</li>
+    <li><a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">YSlow 2.0: the first sketches</a>, Stoyan Stefanov, 2011</li>
+    <li><a href="https://yslow.org/">yslow.org</a>, its <a href="https://yslow.org/faq/">FAQ</a> and <a href="https://yslow.org/user-guide/">user guide</a>, and <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/util.js">util.js</a> and <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/rules.js">rules.js</a> from the open-source repository</li>
+    <li><a href="https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">The Performance Golden Rule</a>, Steve Souders, 2012, including the comments by Mark Nottingham and Souders</li>
+    <li><a href="https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">Web Performance Community &amp; Conversation</a>, Steve Souders, 2012</li>
+    <li><a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">WPO – Web Performance Optimization</a>, Steve Souders, 2010</li>
+    <li><a href="https://www.stevesouders.com/blog/2010/04/09/google-adds-site-speed-to-search-ranking/">Google adds site speed to search ranking</a>, Steve Souders, 2010</li>
+    <li><a href="https://www.stevesouders.com/blog/2008/12/17/state-of-performance-2008/">State of Performance 2008</a>, Steve Souders, 2008</li>
+    <li><a href="https://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">Roundup on Parallel Connections</a>, Steve Souders, 2008</li>
+    <li><a href="https://www.stevesouders.com/blog/2008/05/27/google-ajax-libraries-api/">Google AJAX Libraries API</a>, Steve Souders, 2008</li>
+    <li><a href="https://www.stevesouders.com/blog/2016/11/09/velocity-farewell/">Velocity Farewell</a>, Steve Souders, 2016</li>
+    <li><a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">Introducing Page Speed</a>, the official Google Code blog, June 4, 2009</li>
+    <li><a href="https://alistapart.com/article/sprites/">CSS Sprites: Image Slicing's Kiss of Death</a>, Dave Shea, A List Apart, 2004</li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc1945.txt">RFC 1945</a>, HTTP/1.0, 1996; <a href="https://www.rfc-editor.org/rfc/rfc2616.txt">RFC 2616</a>, HTTP/1.1, 1999, section 8.1.4, and <a href="https://www.rfc-editor.org/rfc/rfc7230.txt">RFC 7230</a>, 2014, section 6.4</li>
+    <li><a href="https://hpbn.co/optimizing-application-delivery/">Optimizing Application Delivery</a>, in <em>High Performance Browser Networking</em>, Ilya Grigorik</li>
+    <li><a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">Lighthouse performance scoring</a> and <a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>, Chrome for Developers, and <a href="https://developer.chrome.com/blog/lighthouse-13-0">What's new in Lighthouse 13</a>, 2025</li>
+    <li><a href="https://developer.chrome.com/blog/http-cache-partitioning">Gaining security and privacy by partitioning the cache</a>, Eiji Kitamura, Chrome for Developers</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">the script element</a>, MDN Web Docs</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
+  <item>
+    <title>Cornify: unicorns on every page</title>
+    <link>https://derek.github.io/nostalgiajs/cornify-unicorns-on-every-page/</link>
+    <guid isPermaLink="true">https://derek.github.io/nostalgiajs/cornify-unicorns-on-every-page/</guid>
+    <pubDate>Thu, 12 Nov 2026 23:17:31 GMT</pubDate>
+    <description>How a 2009 joke about single-feature startups put glittery unicorns on ESPN and Stack Overflow with one script tag, a bookmarklet and a Konami-code snippet.</description>
+    <content:encoded><![CDATA[<p class="lede">On the last day of January 2009, somebody asked Hacker News to review a website whose only feature was putting glittery unicorns on other people's websites, and a little over thirteen months later it won the popular vote at South by Southwest.</p>
+
+<pre tabindex="0"><code>cornify_add();</code></pre>
+
+<p>That is the whole programming interface. Each call drops one sparkly unicorn, or one rainbow, at a random spot on top of whatever page you happen to be reading. The site that serves the pictures <a href="https://www.cornify.com/about">describes itself</a> as "the #1 unicorn and rainbow service on the internet, and quite possibly in the world," a ranking nobody has challenged.</p>
+
+<p>The <a href="https://news.ycombinator.com/item?id=459861">launch post</a> went up on January 31, 2009, under the title "Review my website: Cornify", from an account also named Cornify. It read like a startup pitch, which was the joke:</p>
+
+<blockquote>
+<p>Cornify is all about giving internet users choice of customization. MySpace is a great example of a successful company with a similar vision. Facebook with its Windows 3.1 look - not so much. Cornify provides a service that allows users to cover any website in a beautiful array of unicorn and rainbow imagery - taking back the web one 'corn at a time.</p>
+</blockquote>
+
+<p>Cornify came in two shapes: a button a site owner could paste into their own page, and a link you could drag to your bookmarks bar and then press on anybody's page. The second was a bookmarklet, a kind of program that had been around for a decade by then, and Cornify may be the most widely seen joke ever told in it. I can't prove that, but I can't think of a rival that made ESPN's home page.</p>
+
+<h2>Bookmarks that run code</h2>
+
+<p>A bookmarklet is a bookmark whose address starts with <code>javascript:</code> where you would expect <code>http:</code>. Click it and the browser runs the rest of the address as script, inside the page you are already on, with all the rights of that page. Jay Hoffmann's <a href="https://thehistoryoftheweb.com/postscript/wait-whats-a-bookmarklet/">history of the bookmarklet</a> quotes Netscape's own JavaScript guide telling developers that "you can put any statements or function calls after the <code>javascript:</code> URL prefix."</p>
+
+<p>The name came later. Hoffmann dates it to December 1998, when Steve Kangas launched Bookmarklets.com. Kangas's <a href="https://www.bookmarklets.com/about/">About page</a> is still up, and it states the idea better than anyone has since: "Bookmarklets allow anybody to use JavaScript - on whatever page you choose (not just your own page)." Asked further down whether bookmarklets are the coolest thing since sliced bread, the page answers: "Um, maybe. Sliced bread is pretty cool."</p>
+
+<p>For ten years the form was mostly earnest. Bookmarklets validated your markup, opened every link on a page, and posted the current address to whichever service you were loyal to that year. The whole program had to fit in a URL, so each one did a single job. What they did not have was an installer, a store, a reviewer or a permission dialog. A bookmarklet was a link, and you gave it to someone the way you gave them any other link.</p>
+
+<p>By 2009 site owners had a similar habit. Sharing widgets such as AddThis had taught bloggers that adding a feature meant pasting in one script tag from a company's server and getting a little button in return. The Cornify launch post ends with a credit: "this concept was heavily inspired by AddThis." The <a href="https://knowyourmeme.com/memes/cornify">Know Your Meme entry</a>, which is user-written, puts it more bluntly: the goal was "to come up with the most ridiculous single-feature web company."</p>
+
+<h2>A launch thread in character</h2>
+
+<p>The Hacker News thread is the best record of the first day. It collected 61 points and a few dozen comments, most of them playing along. One commenter predicted the thing would "go viral" and advised seeking venture capital at once. The Cornify account answered in the voice it would mostly keep: "No worries, the business model is fully thought through. We're expecting to be profitable in phase 3."</p>
+
+<p>Remember the date. In January 2009 the economy had fallen over, and the thread knows it. A commenter who installed the button wrote, "Who said this is going to be a bad year for IPOs?" I read the thread as a room full of startup people enjoying a parody of their own pitch decks.</p>
+
+<p>The thread also shows the form at work. A few hours in, a commenter posting as tlrobinson wrote a bookmarklet of their own. When someone couldn't get it to run, they posted this tidier version about 22 hours later, with the instruction to "remove the newlines":</p>
+
+<pre tabindex="0"><code>javascript:(function(){if(typeof cornify_add==="undefined"){
+document.body.appendChild(document.createElement('script')).src=
+'http://www.cornify.com/js/cornify.js';}
+else{cornify_add()}})();</code></pre>
+
+<p>That is the standard shape of the loader bookmarklet, for programs too big to fit in a URL. It makes a <code>script</code> element, points it at a file on somebody's server, and appends it to the page. The file then runs as if the page's author had put it there. The bookmarklet on Cornify's <a href="https://www.cornify.com/extras">button page</a> now does the same with more ceremony.</p>
+
+<h2>What the script does</h2>
+
+<p>The oldest copy of <code>cornify.js</code> I could read is the one committed to <a href="https://github.com/Cornify/Cornify">GitHub</a> in April 2011, two years after launch. It is 138 lines, and it behaves the way people described in the spring of 2009, so I'll treat it as close to the original. The heart of it is <a href="https://github.com/Cornify/Cornify/blob/1c1b7620513543986fc235ac117d246132100ddd/js/cornify.js">this</a>:</p>
+
+<pre tabindex="0"><code>var img = document.createElement('img');
+var currentTime = new Date();
+var submitTime = currentTime.getTime();
+if( cornify_count==15 ) submitTime = 0;
+img.setAttribute('src',cornify_url+'getacorn.php?r=' + submitTime + '&amp;url='+document.location.href);</code></pre>
+
+<p>The script has no idea what a unicorn looks like. It builds a <code>div</code> with <code>position: fixed</code>, gives it a random <code>top</code> and <code>left</code>, and puts an image inside whose address is a PHP page on cornify.com. The server picks the picture. The timestamp in <code>r</code> defeats the cache. The other parameter is less cute: <code>url</code> is the address of the page you are on, sent to cornify.com with every unicorn. The joke about being a "service" was true: a server learned where each unicorn landed. My guess is that this is how the counter on the home page, which reads a little over 444 million "unicorns and rainbows provided since 2009", was kept.</p>
+
+<p>Clicking a unicorn makes another unicorn. On hover the image wobbles to a random angle and size, using CSS transforms and a 0.1-second transition. The 2011 source still has the commented-out attempts at other spellings and prefixes around the <code>WebkitTransform</code> line that was kept, an honest record of writing CSS animation in that period.</p>
+
+<p>Then come two surprises. On the fifth click the script appends a stylesheet to the page. The file now served is a single rule:</p>
+
+<pre tabindex="0"><code>h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, a, a:link {
+	color: #FF00FF;
+	font-family: "Comic Sans MS", "Marker Felt";
+}</code></pre>
+
+<p>The script then walks every heading on the page and sticks a word in front of it, chosen from a list: Happy, Sparkly, Glittery, Fun, Magical, Lovely, Cute, Charming, Amazing, Wonderful. On the fifteenth click, the picture is centred in the window and the cache-buster is set to zero. The current source calls this one "the grand unicorn." Both tricks were in place by April 10, 2009, when a Hacker News reader wrote that after five clicks "every piece of text gets a very happy modifier" and the Cornify account replied: "Try pressing 15 times for some extra sparkle."</p>
+
+<h2>Four days to Wired</h2>
+
+<p>On February 4, 2009, four days after launch, Bruce Sterling's Wired blog ran a post titled <a href="https://www.wired.com/2009/02/proof-why-the-c/">"Proof why the Cornify button is a great Internet invention"</a>. The whole post is a Flickr link, the line "A comprehensive map of all possible human futures," and an instruction: "Now Cornify! See how great that is? Wow!"</p>
+
+<p>The same day, Paul Irish published <a href="https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">a jQuery snippet</a> that hid Cornify behind the Konami code, the old Nintendo cheat sequence. I'll come back to it, because it changed where the unicorns could live.</p>
+
+<p>On April 1, Stack Overflow joined in openly. The <a href="https://stackoverflow.blog/2010/03/31/reminder-its-april-1st">company's blog</a> recalled a year later that its 2009 April Fools' joke "added a cornify button to every post."</p>
+
+<p>Then, on April 27, <a href="https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">Kotaku's Michael McWhertor</a> reported that typing the Konami code and Enter on ESPN.com would "infest the official ESPN web site with mystical ponies," with "a heaping help of Comic Sans," and that every story became "cute," "magical" or "sparkly." That matches the stylesheet and word list the script applies on its fifth call, so my guess is ESPN's wrapper called it several times. David Murphy, in a PCWorld piece <a href="https://abcnews.com/Technology/PCWorld/story?id=7444224">carried by ABC News</a>, filed it "right next to Slashdot's 'OMG Ponies' redesign in the Web Pranks Hall of Fame." An update stamped 4:44 p.m. says ESPN had removed it. Irish added a note to the post the same day: "In fact it had been up there for weeks." I found no report that named who at ESPN had done it, or confirmed whose Konami code they had used.</p>
+
+<p>On March 14, 2010, ten days after <a href="https://derek.github.io/nostalgiajs/the-ie6-funeral/">the IE6 funeral</a>, the SXSW Interactive Web Awards gave Cornify the People's Choice Award. The <a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">official results</a> say more than 12,000 people signed up to vote. The Amusement category, which a <a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">student reviewer at Texas State</a> had been sure Cornify would take, went to Atlas Obscura.</p>
+
+<h2>The include and its wrappers</h2>
+
+<p>For site owners, the product was one line, given here as the project's README has it now:</p>
+
+<pre tabindex="0"><code>&lt;script type="text/javascript" src="https://www.cornify.com/js/cornify.js"&gt;&lt;/script&gt;</code></pre>
+
+<p>After that, anything on the page could call <code>cornify_add()</code>. People in the launch thread did so within hours: "I just cornified my blog," "Put it on my site," and, from tlrobinson, "I just added it to my personal website (down at the bottom)."</p>
+
+<p>The include was a building block, and the best-known early thing built on it was Irish's snippet:</p>
+
+<pre tabindex="0"><code>var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
+$(document).keydown(function(e) {
+  kkeys.push( e.keyCode );
+  if ( kkeys.toString().indexOf( konami ) &gt;= 0 ){
+    $(document).unbind('keydown',arguments.callee);
+    $.getScript('http://www.cornify.com/js/cornify.js',function(){
+      cornify_add();
+      $(document).keydown(cornify_add);
+    });
+  }
+});</code></pre>
+
+<p>It records key codes until the list contains up, up, down, down, left, right, left, right, B, A, and only then fetches the script, with <a href="https://derek.github.io/nostalgiajs/jquery-and-the-dollar-sign/"><code>$.getScript</code></a>. After that, Irish wrote, "every other keystroke will add happiness to the world." Later in 2009, after the ESPN episode, Cornify put the same trigger into <code>cornify.js</code> itself. The object is called <code>cornami</code>, and its comment says it was adapted from Konami-JS, a library George Mandis <a href="https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">published on April 28, 2009</a>, citing "the recent attention surrounding ESPN." From then on any site with the plain include had the secret knock too.</p>
+
+<p>The wrappers kept coming. In May 2010 John Hobbs posted <a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a> to <a href="https://news.ycombinator.com/item?id=1386864">Hacker News</a>: fifty unicorns on the Konami code, with no dependencies, "so people can just drop it right in." Its page credits Eric Ryan Harrison with a jQuery version. The Cornify account turned up to say it looked "very, very inspired by Cornify" and to ask for the artwork. Hobbs said the unicorns came from a MySpace glitter-graphics page. "You have great taste in unicorns," Cornify replied.</p>
+
+<p>That is most of the documented plugin history. I found snippets and one-file libraries, passed around in blog posts and comment threads, and no official jQuery plugin. Irish's later note on the post is modest: "this feature kinda triggered a meme."</p>
+
+<h2>Why a joke travelled</h2>
+
+<p><strong>It cost nothing to pass on.</strong> There was no download and no account. The whole product was a link, and it worked on the page you were already looking at, so the demo and the punchline arrived together.</p>
+
+<p><strong>It used a channel the industry had already built.</strong> The paste-this-script-tag habit existed to distribute sharing buttons. A site owner who had pasted three widgets that week needed no instruction to paste a fourth.</p>
+
+<p><strong>Its first audience had production access.</strong> This is the force I'd weigh most. Cornify launched on a forum read by people who ran websites, and within three months it was running on Stack Overflow and ESPN.com. Irish's Konami wrapper mattered because it lowered the stakes: an Easter egg nobody sees is easier to ship than a button everybody does.</p>
+
+<p><strong>The tone was airtight.</strong> In almost every comment I read, the Cornify account stays in character. In April 2009 it brought a sister product, Hapylink, to <a href="https://news.ycombinator.com/item?id=556164">Hacker News for review</a> and defended it as "not a url-shortener, but a url-happifier." It also conceded a design flaw: "Most links are actually longer - but they are a lot happier and more like to viewers smile, which is the core focus of Hapylink."</p>
+
+<h2>Living with unicorns</h2>
+
+<p>The launch thread doubles as the first bug tracker. The earliest report was that unicorns land at random, including on top of the Cornify button. "I almost cried when a unicorn covered up the 'cornify' button and I had to stop," one reader wrote. Another supplied the developer's workaround, which was to skip the button and open <a href="https://derek.github.io/nostalgiajs/firebug-and-the-inside-of-the-page/">Firebug</a>:</p>
+
+<pre tabindex="0"><code>for (var i = 0; i &lt; 10000; ++i) { cornify_add() }</code></pre>
+
+<p>The second was that there was no way back. "An 'uncornify' bookmarklet might be nice," a reader suggested, since "sometimes it blocks something important." The 2011 script has no undo short of reloading the page. The current source does include an exit, a "rainbow cupcake button" that removes every unicorn, with a comment that it "should only be used in an emergency, since it's sad."</p>
+
+<p>The third was Internet Explorer 7, where one visitor could not drag the link to the toolbar at all. Two days later the same visitor reported that it worked in Firefox, but that after the tab was closed "the 'music' kept running," and warned that people "in the wild" would be less polite. A fourth reader just wanted "[joke] or something in the title, so those of us short on time can skip it." A prank is only funny to the person who chose it, and ESPN's reaction on April 27 is the corporate form of the same feedback.</p>
+
+<p>And one reader on day one named the real issue, in the middle of a joke review: "I am also a bit ashamed that I executed a stranger's Javascript in my Hacker News context. Who knows what just happened to my cookie?" They read the URL and decided they were safe, "at least for the javascript present the instant I downloaded it."</p>
+
+<h2>What it left behind</h2>
+
+<p><strong>The defence against it is why it often doesn't work now.</strong> That last comment describes the risk exactly. A site that included <code>cornify.js</code> ran whatever cornify.com chose to serve that day, with full access to the page. I've found no sign Cornify ever abused that, but an unapproved script from another host is exactly what Content Security Policy lets a site refuse. When GitHub turned CSP on in April 2013, <a href="https://github.blog/news-insights/product-news/content-security-policy/">Joshua Peek's announcement</a> warned that "it may cause issues with some browser extensions and bookmarklets." The spec said bookmarklets should be exempt, Peek wrote, but "none of the browsers get this correct." The <a href="https://www.w3.org/TR/CSP3/">current CSP draft</a> still says a policy "SHOULD NOT interfere with the operation of user-agent features like addons, extensions, or bookmarklets." In practice, as far as I understand it, a loader bookmarklet that injects a script from another host is asking for exactly what a strict policy refuses. The web got safer from strangers' scripts, and on those sites the unicorn link went quiet.</p>
+
+<p><strong>The bookmarklet turned into the extension.</strong> Hoffmann's history ends with Firefox's add-ons gallery in 2007 and Chrome's extension gallery in 2009, after which "extensions began to overtake bookmarklets in popularity." Cornify's button page still offers the draggable link "for all browsers," and beneath it a Chrome extension and a Firefox one. The <a href="https://chromewebstore.google.com/detail/cornify-unicorn-and-rainb/ghdnfbmfflgelndafnlgabneckbmfpla">Chrome Web Store listing</a> shows version 1.6.2, updated in May 2024, with 10,000 users. A joke that once needed nobody's permission now ships through a store. I think that trade was worth making, and I also think something was lost when "here, drag this" stopped being a way to hand a friend a program.</p>
+
+<p><strong>The parody became a genre, and then a dependency.</strong> Know Your Meme lists the imitators: Sharkify, Hoffify, Ninjafy. In March 2011 came <a href="http://kathack.com/">Katamari Hack</a>, a bookmarklet that rolls the page you're on into a ball, using the same loader. In June 2010 Newsweek's developers hid zombie headlines behind the Konami code, and <a href="https://www.theregister.com/offbeat/2010/06/15/newsweek-zombies-rise-from-grave-invade-us/1406321">The Register</a> cited ESPN's unicorns as the precedent. The original, meanwhile, settled into maintenance. The GitHub history, kept by the account GBKS, whose profile gives the name Christoph Ono and links to the studio credited in Cornify's footer, shows a 2020 commit titled "The most amazing code cleanup and comments" and, that October, a pull request from Wes Bos adding TypeScript typings. A spoof of single-feature startups has outlasted a fair number of them and now has a type definition.</p>
+
+<p><strong>The pitch was a real argument.</strong> "Giving internet users choice of customization" was written as a parody of startup prose, with MySpace as the hero and Facebook's "Windows 3.1 look" as the villain. But it is also the bookmarklet's actual claim: that the person at the browser gets a say in what a page looks like after it arrives. I'd argue that claim survives in reader modes, content blockers and the console, and in that one sentence of the CSP draft, which says such features "advance the user's priority over page authors." Cornify made the case in magenta Comic Sans, and I think it was still a serious case.</p>
+
+<h2>The takeaway</h2>
+
+<p>Cornify was a joke about startups that turned out to be a very good demonstration of the web's loosest mechanism: any link can be a program, and any script tag is an open door to someone else's server. In 2009 that meant a unicorn could get from a forum thread to a sports network's home page in three months, carried by developers who thought it was funny. The same looseness is why browsers and sites spent the next decade adding policies, stores and reviews, and why the bookmarklet is now mostly a curiosity.</p>
+
+<p>I don't think the lesson is that the old way was better. The reader who worried about their cookie was right. But the playful web of those years ran on trust that was mostly repaid, and Cornify is the proof: a stranger's script that has served, by its own count, more than 444 million pictures onto pages its author never saw, and as far as I can find did only what it said it would. The site is still up, the counter is still on the home page, and <code>cornify_add()</code> still produces a unicorn.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://news.ycombinator.com/item?id=459861">Review my website: Cornify</a>, Hacker News thread, 2009</li>
+    <li><a href="https://www.cornify.com/about">About Cornify</a>, cornify.com</li>
+    <li><a href="https://www.cornify.com/extras">Get your Cornify button!</a>, cornify.com</li>
+    <li><a href="https://github.com/Cornify/Cornify">Cornify/Cornify</a>, GitHub repository, 2011 to 2021</li>
+    <li><a href="https://github.com/Cornify/Cornify/blob/1c1b7620513543986fc235ac117d246132100ddd/js/cornify.js">cornify.js as first committed</a>, GitHub, 2011</li>
+    <li><a href="https://thehistoryoftheweb.com/postscript/wait-whats-a-bookmarklet/">Wait, what's a bookmarklet?</a>, Jay Hoffmann, The History of the Web, 2023</li>
+    <li><a href="https://www.bookmarklets.com/about/">About Bookmarklets</a>, Steve Kangas, Bookmarklets.com</li>
+    <li><a href="https://knowyourmeme.com/memes/cornify">Cornify</a>, Know Your Meme</li>
+    <li><a href="https://www.wired.com/2009/02/proof-why-the-c/">Proof why the Cornify button is a great Internet invention</a>, Bruce Sterling, Wired, 2009</li>
+    <li><a href="https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">Cornify Konami Easter Egg Plugin With jQuery</a>, Paul Irish, 2009</li>
+    <li><a href="https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">Konami-JS - Harness the power of the Konami Code!</a>, George Mandis, 2009</li>
+    <li><a href="https://stackoverflow.blog/2010/03/31/reminder-its-april-1st">Reminder: It's April 1st</a>, Stack Overflow Blog, 2010</li>
+    <li><a href="https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">The Konami Code Makes ESPN.com Magical!</a>, Michael McWhertor, Kotaku, 2009</li>
+    <li><a href="https://abcnews.com/Technology/PCWorld/story?id=7444224">ESPN.com, the Konami Code, and a Whole Lotta' Ponies</a>, David Murphy, PCWorld via ABC News, 2009</li>
+    <li><a href="https://news.ycombinator.com/item?id=556164">Ask HN: Review my webapp: hapylink.com</a>, Hacker News thread, 2009</li>
+    <li><a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">Cornify: SXSW Web Awards Finalist</a>, Hillary Till, SXTXState, 2010</li>
+    <li><a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a>, John Hobbs, 2010</li>
+    <li><a href="https://news.ycombinator.com/item?id=1386864">Konami Code for any website - Unicorn Blitz</a>, Hacker News thread, 2010</li>
+    <li><a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">SXSW Interactive 2010 Web Awards Announces Winners</a>, SXSW, 2010</li>
+    <li><a href="https://github.blog/news-insights/product-news/content-security-policy/">Content Security Policy</a>, Joshua Peek, The GitHub Blog, 2013</li>
+    <li><a href="https://www.w3.org/TR/CSP3/">Content Security Policy Level 3</a>, W3C Working Draft</li>
+    <li><a href="https://chromewebstore.google.com/detail/cornify-unicorn-and-rainb/ghdnfbmfflgelndafnlgabneckbmfpla">Cornify - Unicorn and rainbow happiness!!!</a>, Chrome Web Store</li>
+    <li><a href="http://kathack.com/">Katamari Hack</a>, Alex Leone, David Nufer and David Truong, 2011</li>
+    <li><a href="https://www.theregister.com/offbeat/2010/06/15/newsweek-zombies-rise-from-grave-invade-us/1406321">Newsweek: 'Zombies rise from grave, invade US'</a>, Cade Metz, The Register, 2010</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>The blogs and the feed reader: an industry run by correspondence</title>
     <link>https://derek.github.io/nostalgiajs/the-blogs-and-the-feed-reader/</link>

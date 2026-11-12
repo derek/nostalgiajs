@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YSlow: the letter grade that made front-end performance a job · Nostalgia.js</title>
+<meta name="description" content="How a Yahoo research chart, thirteen rules and a Firebug add-on that graded pages from A to F turned page speed from a server problem into a front-end discipline.">
+<link rel="canonical" href="https://derek.github.io/nostalgiajs/yslow-and-front-end-performance/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YSlow: the letter grade that made front-end performance a job">
+<meta property="og:description" content="How a Yahoo research chart, thirteen rules and a Firebug add-on that graded pages from A to F turned page speed from a server problem into a front-end discipline.">
+<meta property="og:url" content="https://derek.github.io/nostalgiajs/yslow-and-front-end-performance/">
+<meta property="og:image" content="https://derek.github.io/nostalgiajs/og/yslow-and-front-end-performance.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../feed.xml">
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../">Nostalgia.js<span>AI Essays on Web History</span></a>
+    <picture>
+      <source srcset="../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../">Essays</a>
+    <a href="../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">Libraries and tools · 2006 to today · 14 min read</p>
+      <div class="title">
+        <img src="../icons/yslow-and-front-end-performance.svg" width="64" height="64" alt="">
+        <h1>YSlow: the letter grade that made front-end performance a job</h1>
+      </div>
+
+<p class="lede">In July 2007 a small team at Yahoo released a browser add-on that gave any web page a letter grade for speed, and inside three years the checklist behind it had a conference, an industry acronym and a place in Google's search ranking.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#before-speed-was-a-server-problem">Before: speed was a server problem</a></li>
+          <li><a href="#eight-months-from-a-chart-to-a-grade">Eight months, from a chart to a grade</a></li>
+          <li><a href="#what-the-tool-looked-at">What the tool looked at</a></li>
+          <li><a href="#why-a-grade-worked">Why a grade worked</a></li>
+          <li><a href="#arguing-with-the-grade">Arguing with the grade</a></li>
+          <li><a href="#what-it-left-behind">What it left behind</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<pre tabindex="0"><code>Google:         A (99)
+Apple:          D (61)
+A List Apart:   F (58)
+Coding Horror:  F (52)</code></pre>
+
+<p>Those are four lines from a longer list of YSlow scores that Simone Chiaretta collected in August 2007 and Jeff Atwood reprinted in <a href="https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">a post on Coding Horror</a>. The spacing is mine. The last line is Atwood's own site. The one above it is the magazine that published the article on CSS sprites that Yahoo's first rule links to.</p>
+
+<p>Hardly anything YSlow checked for was new. Gzip encoding and the <code>Expires</code> header are both in the HTTP/1.0 specification of 1996. Dave Shea's <a href="https://alistapart.com/article/sprites/">sprites article</a> dated from March 2004. What was new was a measurement that said where the time went, an argument about whose job that made it, and a tool that boiled both down to a letter you could show your boss.</p>
+
+<h2 id="before-speed-was-a-server-problem">Before: speed was a server problem</h2>
+
+<p>In the mid-2000s, a slow site was a matter for the people who owned the servers. You profiled the database, added caching in front of the application and bought hardware. The first of Yahoo's published research articles, in November 2006, described the habit in one sentence: "Most performance optimization today are made on the parts that generate the HTML document (apache, C++, databases, etc.), but those parts only contribute to about 20% of the user's response time."</p>
+
+<p>There was a reason for the habit, and Mark Nottingham gave it years later in a comment on <a href="https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">Steve Souders's blog</a>. A slow back end limits how many people you can serve, so "you can't not know you have a problem." The browser side is quieter: "Front-end is more subtle; the work is on the browser, and to many engineers, if it's not happening on their CPU, they don't care."</p>
+
+<p>Front-end checking did exist, as a hobby. Jeffrey Friedl, <a href="https://regex.info/blog/2007-09-26/584">reviewing Souders's book in 2007</a>, recalled building "Jeffrey's Page Checker" at Yahoo "in my spare time" from 1997, a tool that "reported various metrics about its fluff (wasted whitespace, image overhead, etc.)." Friedl added that the position Souders now held was one Friedl had "informally created and held in the early days of Yahoo." The same company had the same idea twice, ten years apart. The second time it came with a job title, Chief Performance Yahoo!, and a team, called Exceptional Performance.</p>
+
+<p>Seeing what a browser did on the wire took separate software. The <a href="https://yslow.org/faq/">YSlow FAQ</a> lists the packet sniffers of the day, Ethereal and IBM Page Detailer among them. A panel that timed every request from inside the browser arrived with <a href="../firebug-and-the-inside-of-the-page/">Firebug 1.0</a>, around the turn of 2007. And Souders, who <a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">later wrote</a> of having started "evangelizing high performance web sites back in 2004," summed up those first years this way: "I felt like a lone voice in the woods."</p>
+
+<h2 id="eight-months-from-a-chart-to-a-grade">Eight months, from a chart to a grade</h2>
+
+<p>The public story starts on the YUI Blog on November 28, 2006, with <a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">"Performance Research, Part 1: What the 80/20 Rule Tells Us about Reducing HTTP Requests,"</a> by Tenni Theurer. The method was a packet sniffer and an empty cache. Loading yahoo.com, "only 10% of the time is spent here for the browser to request the HTML page." The other 90% went on images, scripts and stylesheets. Across eight popular sites the HTML document's share ranged from 5% (MSN, eBay) to 38% (Amazon).</p>
+
+<p><a href="https://derek.io/yuiblog/2007/01/04/performance-research-part-2/">Part 2</a>, on January 4, 2007, took away the obvious objection, which was that the cache would fix all that. The team served an image that browsers had to re-request on every view and counted the 200 and 304 responses in the logs. The result: "40-60% of Yahoo!'s users have an empty cache experience and ~20% of all page views are done with an empty cache."</p>
+
+<p>Souders turned the chart into a slogan. In a 2012 post the slide is quoted in full: "80-90% of the end-user response time is spent on the frontend. Start there." Souders called it the Performance Golden Rule. The definition matters, and Souders was open about it: "backend" meant the time to get the first byte of the HTML document, and "frontend" was "everything else," network time for every other file included.</p>
+
+<p>The rest happened fast. By <a href="https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">Souders's own account</a>, Souders's first blog post on the subject, "The Importance of Front-End Performance," went up on the Yahoo Developer Network in March 2007. In April, Souders and Theurer gave a three-hour workshop at Web 2.0 Expo, scheduled for 9:30 on a Sunday morning. They expected twenty people, and "nearly 300 people flowed into the room." In May the list of rules was already being passed around; Atwood first saw it referenced on Rich Skrenta's blog that month, and noted in August that the list seemed to have started with fourteen rules and now had thirteen.</p>
+
+<p>On July 25, 2007, with an announcement at O'Reilly's OSCON conference, the tool went public. <a href="https://www.phpied.com/yslow-performance-extension-for-firebug/">Stefanov's write-up that day</a>, which also reached <a href="https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">Slashdot</a>, is the best short description there is: "It's an extension to Firebug (yes, correct, Firebug, not Firefox) that helps with performance optimization efforts. It scores your page on the scale A to F," according to Yahoo's rules. It had been "used internally at Yahoo and is now released to the world." Stefanov, a member of the team who later rewrote the tool, has since mentioned that Souders's "original very first version" was a bookmarklet. Friedl spelled out the pun for anyone who had missed it: "Why Slow?"</p>
+
+<p>The book followed in September: <em>High Performance Web Sites</em>, from O'Reilly, with fourteen rules and the subtitle "Essential Knowledge for Front-End Engineers."</p>
+
+<h2 id="what-the-tool-looked-at">What the tool looked at</h2>
+
+<p>YSlow was a new tab in the Firebug panel with four views. Performance was the report card: thirteen rules, each with its own grade and a link to the documentation. Stats compared the page's weight with an empty cache and a full one, which was the Part 2 research turned into a feature. Components listed every file with its size, its expiry date, whether it was gzipped and its ETag. Tools ran your scripts through JSLint.</p>
+
+<p>The <a href="https://yslow.org/faq/">FAQ</a> explains the mechanism. YSlow crawled the DOM to find the page's components, and where it had no other way to see a file's response headers it requested the file again with <code>XMLHttpRequest</code>. Each rule took points off for each offender, and the overall grade was a weighted average. The first weights were not the order of the rules. Chiaretta dug them out, and Atwood's post reproduces them: Expires, gzip and ETags counted for 11 each, a CDN for 10, and avoiding CSS expressions for 2.</p>
+
+<p>Several of the rules were a line of server configuration, and <a href="https://developer.yahoo.com/performance/rules.html">Yahoo's rules page</a> supplied the lines. For Apache (with mod_expires switched on), the caching rule and the ETag rule came to this:</p>
+
+<pre tabindex="0"><code>ExpiresDefault "access plus 10 years"
+FileETag none</code></pre>
+
+<p>The first line had a cost that the same paragraph admitted. If a file may be cached for ten years, you can never change it, so "you have to change the component's filename whenever the component changes." Yahoo's example was <code>yahoo_2.0.6.js</code>, and its rule on duplicate scripts shows the tag you ended up writing:</p>
+
+<pre tabindex="0"><code>&lt;script type="text/javascript" src="menu_1.0.17.js"&gt;&lt;/script&gt;</code></pre>
+
+<p>Other rules were about how the browsers of the day behaved. Stylesheets went at the top because browsers, Internet Explorer among them, showed a blank page until the stylesheets had arrived. Scripts went at the bottom because a script stopped the browser starting any other download. And rule 7 told you to avoid a feature <a href="../the-ie6-funeral/">only Internet Explorer had</a>, which let a stylesheet run JavaScript:</p>
+
+<pre tabindex="0"><code>background-color: expression( (new Date()).getHours()%2 ? "#B8D4FF" : "#F08A00" );</code></pre>
+
+<p>The trouble, the page explains, was how often that ran: "Moving the mouse around the page can easily generate more than 10,000 evaluations."</p>
+
+<p>The source was eventually released under a BSD licence, and the <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/util.js">grading function</a> in that later code is as plain as you'd hope. This is the middle of <code>prettyScore</code>:</p>
+
+<pre tabindex="0"><code>if (score &gt;= 90) {
+    letter = 'A';
+} else if (score &gt;= 80) {
+    letter = 'B';
+} else if (score &gt;= 70) {
+    letter = 'C';
+} else if (score &gt;= 60) {
+    letter = 'D';
+} else if (score &gt;= 50) {
+    letter = 'E';
+}</code></pre>
+
+<p>The variable starts life as <code>'F'</code>. The E is a later kindness. In the 2007 lists a 58 and a 52 were both an F, and Dries Buytaert's table from release day gives TYPO3 "56 (F)."</p>
+
+<h2 id="why-a-grade-worked">Why a grade worked</h2>
+
+<p>The rules had been on a web page since the spring. Here are the forces I'd credit for what happened after July.</p>
+
+<p><strong>The measurement moved the problem to a different desk.</strong> If 80 to 90 percent of the wait happens after the HTML arrives, the people who can shorten it are the ones who write the markup, the CSS and the scripts. The Golden Rule handed them the largest share of a number the business cared about.</p>
+
+<p><strong>It was a score.</strong> Atwood, who spent much of that post arguing with its weights, put it best: "And best of all, the tool rates the page with a score – a <em>score!</em>" A checklist gets read. A grade gets compared. <a href="https://dri.es/yslow">Buytaert's post</a> on the day of release was a league table: drupal.org 74 (C), wordpress.org 78 (C), joomla.org 53 (F).</p>
+
+<p><strong>It sat where the work was.</strong> Front-end developers already had Firebug open. YSlow was one more tab in it, next to the Net panel, and from version 0.9 that December it read the Net panel's data directly.</p>
+
+<p><strong>The fixes were cheap.</strong> Buytaert's reading of that table was that "Apache configuration issues, and not CMS implementation issues, are the main source of low YSlow scores." Turning on gzip and setting an expiry date were small changes, and they were among the most heavily weighted rules.</p>
+
+<p><strong>Yahoo gave it all away, in public.</strong> The research went on the YUI Blog, the rules on the developer network, the tool on Mozilla's add-ons site and the long version to O'Reilly. This was the period when <a href="../the-blogs-and-the-feed-reader/">technical ideas travelled by blog</a>, and a rule with a number and a URL travels well.</p>
+
+<p><strong>Then the money arrived.</strong> Souders moved to Google in early 2008 and co-chaired the first Velocity conference that June, which sold out. The theme chosen for 2009 was "the impact of performance on the bottom line," and Souders's later summary lists what came out of it: at Bing, a page two seconds slower meant a 4.3% drop in revenue per user; at Google, 400 milliseconds cost 0.59% of searches per user; Shopzilla took five seconds off and saw conversions rise 7 to 12%.</p>
+
+<h2 id="arguing-with-the-grade">Arguing with the grade</h2>
+
+<p>The pushback came within three weeks, and it was mostly fair. Atwood's title was the argument: "YSlow: Yahoo's Problems Are Not Your Problems." A lot of the advice "only makes sense if you run a website that gets millions of unique users per day." On rule 2: "If you have to ask how much a formal Content Delivery Network will cost, you can't afford it." And looking at that list of scores: "either the web is full of terribly inefficient web pages, or there's something wrong with its scoring."</p>
+
+<p>The CDN rule was the sore spot, because of how it was tested. The FAQ is disarmingly honest about it: "Unfortunately, the list of 'known CDNs' are the ones used by Yahoo!." To pass, you typed your own hostnames into a preference called <code>extensions.yslow.cdnHostnames</code> in <code>about:config</code>. Stefanov's launch-day post had already said where the weights lived: an array named <code>lintweights</code>.</p>
+
+<p>The tool also kept marking itself down. Version 0.9, in December 2007, began counting what the DOM crawler had missed, including <a href="../xmlhttprequest-and-the-name-ajax/">Ajax requests</a> and image beacons. <a href="https://www.phpied.com/yslow-er/">Stefanov ran both versions</a> against yahoo.com after clicking around the page: 0.8 saw 92 components and gave a B (88), and 0.9 saw 141 and gave a D (63).</p>
+
+<p>Yahoo's answer to "not your problems" was a rewrite. <a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">Stefanov's account</a> of YSlow 2.0 says the team was hearing "meh, these are Yahoo's problems/rules, not yours," so rules became small objects you could combine into rulesets. It shipped with three: the new one, the classic thirteen, and "Small Site or Blog." The list of practices grew to 34, of which 23 could be tested by machine.</p>
+
+<p>Meanwhile teams did the work. They concatenated scripts in a build step, drew sprite sheets, revved filenames, and spread images over extra hostnames. Internet Explorer and Firefox still followed the HTTP/1.1 specification's line that a client "SHOULD NOT maintain more than 2 connections with any server or proxy," and the rules page's guideline was to split components "across at least two but no more than four hostnames."</p>
+
+<p>And the idea spread to other vendors. In June 2009 Google <a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">open-sourced Page Speed</a>, a tool it had been using internally: "it's a Firefox Add-on integrated with Firebug." In April 2010 Google announced that site speed was a signal in search ranking. A month later Souders gave the field a name, WPO, for Web Performance Optimization, and described its origin without ceremony: "What started as a list of performance tips coded up in a browser plug-in."</p>
+
+<h2 id="what-it-left-behind">What it left behind</h2>
+
+<p><strong>The grade outlived the tool, and changed what it graded.</strong> Chrome's Lighthouse gives a page a performance score out of 100, with 90 and up shown in green. But <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">its documentation</a> says that "only metrics contribute to your Lighthouse Performance score, not the results of Opportunities or Diagnostics." YSlow graded whether you had followed the rules. Lighthouse grades how long things took, and offers the rules as hints. Until <a href="https://developer.chrome.com/blog/lighthouse-13-0">Lighthouse 13</a> folded them into newer "insights" in 2025, several of those hints were old acquaintances, such as "Enable text compression" and "<a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>." Atwood's complaint was that the score rewarded following Yahoo's rules whether or not they suited your site. I'd argue the scoring eventually came round to that view.</p>
+
+<p><strong>The hash in your bundle's filename is rule 3.</strong> A file with a name like <code>app.3f9a1c.js</code>, served with <code>Cache-Control: max-age=31536000, immutable</code>, is <code>yahoo_2.0.6.js</code> with a ten-year <code>Expires</code> header, with a machine doing the renaming. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">MDN's page on the header</a> describes the same bargain: with "a cache-busting pattern" and a long <code>max-age</code>, add <code>immutable</code>. Combining, minifying and revving files are all things nobody does by hand twice, and Yahoo's page says of renaming that "we often make this step part of the build process." My best guess is that these rules did more than any framework to make a build step normal for front-end work.</p>
+
+<p><strong>The fix became the next problem.</strong> Rule 1 and the sharding advice were workarounds for a protocol that allowed two connections per host. HTTP/2 removed the constraint, and Ilya Grigorik's <a href="https://hpbn.co/optimizing-application-delivery/"><em>High Performance Browser Networking</em></a> turned the old virtues into chores: "undo and unlearn the bad habits of domain sharding, concatenation, and image spriting." The revised HTTP/1.1 specification of 2014 dropped the number as well, saying a fixed ceiling "was found to be impractical for many applications." Developers had learned the rules as facts about the web. They were facts about HTTP/1.1 and the browsers of 2007.</p>
+
+<p><strong>Browsers absorbed the rest.</strong> Souders was asking for "fast by default" by the end of 2008, and it largely happened. In 2008 Firefox 3 and the IE8 beta raised the connection limit from two to six. The rules page notes that "Firefox doesn't support the DEFER attribute"; it does now, and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">MDN says</a> of module scripts that "they defer by default." Putting scripts at the bottom of the page became an attribute, and then a default.</p>
+
+<p><strong>The empty cache got emptier.</strong> In 2008 Souders praised Google's hosted copies of jQuery and the other libraries for "cross-site caching": fetch the file on one site and have it ready on the next. Chrome <a href="https://developer.chrome.com/blog/http-cache-partitioning">partitioned its HTTP cache</a> by site from version 86, for security and privacy, which ended that in Chrome. The 2007 finding that around half of a site's users hit it with nothing cached is, I'd argue, the most durable result of the research, and the platform has since made it more true.</p>
+
+<p><strong>"Front end" changed meaning under the rule.</strong> By Souders's definition the front end's 80 to 90 percent was mostly network time, and many of the original fixes were server configuration. Souders reran the numbers in 2012 and got 76% for the top ten sites, 92% for ten sites ranked around 10,000 and 87% across the 50,000 sites in the HTTP Archive. But by December 2008 Souders was already filing YSlow's checks under "old school" and asking for tools that showed "the impact of JavaScript and CSS as the page loads." The discipline was founded on HTTP hygiene and has spent the years since on the cost of running script. The name stayed the same while its contents changed.</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>YSlow did not discover gzip, caching headers, sprites or the cost of a blocking script. Its makers measured where a page's load time went, found that most of it came after the HTML arrived, said so in one sentence, and shipped a tool that turned thirteen pieces of advice into a letter between A and F. The measurement gave the work an owner and the grade gave it urgency. Before 2007, speed belonged to the people who ran the servers. Afterwards a front-end engineer could walk into a meeting with a number, and within three years there was a conference, a name for the trade and a search engine paying attention to it.</p>
+
+<p>The specific rules aged the way workarounds do. HTTP/2 reversed some and browsers swallowed others. The parts that lasted were the method and the form. You still measure from the user's side with an empty cache, you still start with the biggest slice, and the result still comes back as a colour-coded score. YSlow later ran in Chrome, as a bookmarklet and from the command line, but the Firefox original needed Firebug to run, and <a href="../firebug-and-the-inside-of-the-page/">Firebug's story</a> ended in 2017. Every performance tab in every browser is still asking its question.</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>I could not open the Internet Archive from where I was working, so I never saw the 2007 versions of Yahoo's YSlow page, its rules page or the Yahoo Developer Network release announcement; the rule text and Apache lines I quote come from the rules page as it stands now, which has been edited since.</li>
+    <li>I read the YUI Blog research articles in an archived copy hosted at derek.io, not on the original site. That copy bylines Part 1 to Tenni Theurer and Part 2 to &quot;YUI Team&quot;; a September 2007 YUI Blog post calls Theurer the author of the whole series.</li>
+    <li>I did not open Yahoo's own release announcement. The July 25, 2007 date comes from posts stamped that day and may be July 24 Pacific time, the OSCON link rests on two bloggers that week, and the early scores and rule weights from Simone Chiaretta are quoted from Jeff Atwood's post, not from Chiaretta's own pages.</li>
+    <li>The grading code I show is from the later open-source release, not the 2007 extension. That the E grade was added after 2007 is my inference from scores in the fifties being reported as F that summer.</li>
+    <li>I found no statement of when YSlow was last released or how long the Firefox add-on kept working; that its Firefox version ended with Firebug in 2017 is my inference, and so is the claim that these rules did more than any framework to make a build step normal.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a>, Yahoo Exceptional Performance team, Yahoo Developer Network, first published 2007 and since extended to 35 practices</li>
+    <li><a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">Performance Research, Part 1: What the 80/20 Rule Tells Us about Reducing HTTP Requests</a>, Tenni Theurer, YUI Blog, 2006 (archived copy at derek.io)</li>
+    <li><a href="https://derek.io/yuiblog/2007/01/04/performance-research-part-2/">Performance Research, Part 2: Browser Cache Usage - Exposed!</a>, Tenni Theurer (bylined "YUI Team" in the archive), YUI Blog, 2007 (archived copy at derek.io)</li>
+    <li><a href="https://derek.io/yuiblog/2007/09/04/video-souders/">YUI Theater — Steve Souders: "High Performance Web Sites: 14 Rules For Faster Pages"</a>, YUI Blog, 2007 (archived copy at derek.io)</li>
+    <li><a href="https://www.phpied.com/yslow-performance-extension-for-firebug/">YSlow performance extension for Firebug</a>, Stoyan Stefanov, July 25, 2007</li>
+    <li><a href="https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">Yahoo's YSlow Plug-in Tells You Why Your Site is Slow</a>, Slashdot, July 25, 2007</li>
+    <li><a href="https://dri.es/yslow">YSlow</a>, Dries Buytaert, July 25, 2007</li>
+    <li><a href="https://simonwillison.net/tags/yslow/">Posts tagged "yslow"</a>, Simon Willison's Weblog, 2007</li>
+    <li><a href="https://third-bit.com/2007/07/30/yslow-and-the-browser-as-ide/">YSlow and the Browser as IDE</a>, Greg Wilson, 2007, for the OSCON announcement</li>
+    <li><a href="https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">YSlow: Yahoo's Problems Are Not Your Problems</a>, Jeff Atwood, Coding Horror, August 15, 2007, with scores and rule weights collected by Simone Chiaretta</li>
+    <li><a href="https://regex.info/blog/2007-09-26/584">High Performance Web Sites</a>, a review by Jeffrey Friedl, September 26, 2007</li>
+    <li><em>High Performance Web Sites: Essential Knowledge for Front-End Engineers</em>, Steve Souders, O'Reilly, 2007; publication details from <a href="https://openlibrary.org/isbn/9780596529307">Open Library</a></li>
+    <li><a href="https://www.phpied.com/yslow-er/">YSlow-er?</a>, Stoyan Stefanov, December 5, 2007, on version 0.9</li>
+    <li><a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">YSlow 2.0: the first sketches</a>, Stoyan Stefanov, 2011</li>
+    <li><a href="https://yslow.org/">yslow.org</a>, its <a href="https://yslow.org/faq/">FAQ</a> and <a href="https://yslow.org/user-guide/">user guide</a>, and <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/util.js">util.js</a> and <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/rules.js">rules.js</a> from the open-source repository</li>
+    <li><a href="https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">The Performance Golden Rule</a>, Steve Souders, 2012, including the comments by Mark Nottingham and Souders</li>
+    <li><a href="https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">Web Performance Community &amp; Conversation</a>, Steve Souders, 2012</li>
+    <li><a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">WPO – Web Performance Optimization</a>, Steve Souders, 2010</li>
+    <li><a href="https://www.stevesouders.com/blog/2010/04/09/google-adds-site-speed-to-search-ranking/">Google adds site speed to search ranking</a>, Steve Souders, 2010</li>
+    <li><a href="https://www.stevesouders.com/blog/2008/12/17/state-of-performance-2008/">State of Performance 2008</a>, Steve Souders, 2008</li>
+    <li><a href="https://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">Roundup on Parallel Connections</a>, Steve Souders, 2008</li>
+    <li><a href="https://www.stevesouders.com/blog/2008/05/27/google-ajax-libraries-api/">Google AJAX Libraries API</a>, Steve Souders, 2008</li>
+    <li><a href="https://www.stevesouders.com/blog/2016/11/09/velocity-farewell/">Velocity Farewell</a>, Steve Souders, 2016</li>
+    <li><a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">Introducing Page Speed</a>, the official Google Code blog, June 4, 2009</li>
+    <li><a href="https://alistapart.com/article/sprites/">CSS Sprites: Image Slicing's Kiss of Death</a>, Dave Shea, A List Apart, 2004</li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc1945.txt">RFC 1945</a>, HTTP/1.0, 1996; <a href="https://www.rfc-editor.org/rfc/rfc2616.txt">RFC 2616</a>, HTTP/1.1, 1999, section 8.1.4, and <a href="https://www.rfc-editor.org/rfc/rfc7230.txt">RFC 7230</a>, 2014, section 6.4</li>
+    <li><a href="https://hpbn.co/optimizing-application-delivery/">Optimizing Application Delivery</a>, in <em>High Performance Browser Networking</em>, Ilya Grigorik</li>
+    <li><a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">Lighthouse performance scoring</a> and <a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>, Chrome for Developers, and <a href="https://developer.chrome.com/blog/lighthouse-13-0">What's new in Lighthouse 13</a>, 2025</li>
+    <li><a href="https://developer.chrome.com/blog/http-cache-partitioning">Gaining security and privacy by partitioning the cache</a>, Eiji Kitamura, Chrome for Developers</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">the script element</a>, MDN Web Docs</li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+YSlow%3A+the+letter+grade+that+made+front-end+performance+a+job&amp;body=Essay%3A+https%3A%2F%2Fderek.github.io%2Fnostalgiajs%2Fyslow-and-front-end-performance%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/yslow-and-front-end-performance.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/yslow-and-front-end-performance.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../firebug-and-the-inside-of-the-page/">Firebug: the first look inside the page</a> <span>Libraries and tools · 2006 to 2017</span></li>
+        <li><a href="../jquery-and-the-dollar-sign/">jQuery 1.0: what $ really replaced</a> <span>Libraries and tools · 2005 to today</span></li>
+        <li><a href="../where-did-the-old-web-developers-go/">Where did all the old web developers go?</a> <span>People and culture · 2007 to today</span></li>
+      </ul>
+      <p><a href="../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../"><img src="../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · AI Essays on Web History · <a href="../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>
