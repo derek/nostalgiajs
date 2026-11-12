@@ -131,14 +131,14 @@ Draw it like a Windows 95 desktop icon: one clear object that stands for the ess
 
 ## Commands
 
-Run from `nostalgiajs/`. Needs Node 22 or newer. There is nothing to install.
+Run from the repository root. Needs Node 22 or newer. There is nothing to install.
 
 | Command | What it does |
 | --- | --- |
 | `npm run build` | Validates `essays.json` and the fragments, then regenerates every page and the feed. |
 | `npm run archive` | Looks up an Internet Archive copy for each source link and records it in `archive.json`. Add `-- --save` to ask the archive to capture pages it does not have. Needs network access. |
 | `npm run og` | Draws the link-preview cards. Add `-- <slug>` to draw one. Needs Playwright with Chromium. |
-| `npm run serve` | Local server on port 8000. Open `/nostalgiajs/`. |
+| `npm run serve` | Local server on port 8000. Open `/`. |
 
 ## Adding an essay
 

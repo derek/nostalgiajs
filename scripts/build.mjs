@@ -1,7 +1,7 @@
-// Nostalgia.js build. No dependencies: `node scripts/build.mjs` from nostalgiajs/.
+// Nostalgia.js build. No dependencies: `node scripts/build.mjs` from the repository root.
 // Reads essays.json, archive.json and content/*.html, then writes every page,
 // the landing page and the feed. Generated files are committed, because
-// GitHub Pages serves this folder as it is.
+// GitHub Pages serves this repository as it is.
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -136,6 +136,7 @@ function page({ path, title, description, up, ogImage, ogType = 'website', main 
   <div class="in">
     <a href="${up || './'}">Essays</a>
     <a href="${up}about/">About</a>
+    <a href="${REPO}">GitHub</a>
     <a class="rss" href="${up}feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
   </div>
 </nav>
