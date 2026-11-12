@@ -261,7 +261,7 @@ ${e.corrections.map((c) => `          <li>${esc(c.date)}: ${esc(c.note)}</li>`).
 ${withUnverified(withContents(withArchiveLinks(e.body)), e)}
 ${corrections}
       <p class="mistake">Spot a mistake? <a href="${esc(issueLink(e))}">Open an issue</a> and it will be checked and corrected.<br>
-      <a href="${REPO}/blob/master/nostalgiajs/content/${e.slug}.html">View source</a> · <a href="${REPO}/commits/master/nostalgiajs/content/${e.slug}.html">Edit history</a></p>
+      <a href="${REPO}/blob/main/content/${e.slug}.html">View source</a> · <a href="${REPO}/commits/main/content/${e.slug}.html">Edit history</a></p>
     </article>
 
     <nav class="related" aria-labelledby="related-h">
