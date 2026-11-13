@@ -4,13 +4,13 @@
   <title>Nostalgia.js</title>
   <link>https://derek.io/nostalgiajs/</link>
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>AI Essays on Web History</description>
+  <description>Essays on the Early Web</description>
   <language>en</language>
   <lastBuildDate>Fri, 13 Nov 2026 02:33:00 GMT</lastBuildDate>
   <item>
     <title>Annex B: the features the web kept</title>
-    <link>https://derek.io/nostalgiajs/annex-b-the-features-the-web-kept/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/annex-b-the-features-the-web-kept/</guid>
+    <link>https://derek.io/nostalgiajs/essays/annex-b/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/annex-b/</guid>
     <pubDate>Fri, 13 Nov 2026 02:33:00 GMT</pubDate>
     <description>The JavaScript standard keeps escape(), substr, &quot;text&quot;.blink() and HTML comments in an appendix of things it would delete if it could, and that appendix went from optional advice in 1999 to a requirement for every browser.</description>
     <content:encoded><![CDATA[<p class="lede">The JavaScript standard has an appendix for the features it would delete if it could, and every browser is required to ship all of it.</p>
@@ -20,7 +20,7 @@
 
 <p>I ran that line in Node 22 and it printed exactly that string. The <code>&lt;blink&gt;</code> element is gone from modern browsers, by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/blink">MDN's account</a>, but the method that builds the tag is specified, tested and mandatory. Its definition is clause B.2.2.4 of the ECMAScript specification, in <a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">Annex B, "Additional ECMAScript Features for Web Browsers"</a>, and it is two steps long.</p>
 
-<p>The annex is frank about its contents. Everything in it has "one or more undesirable characteristics and in the absence of legacy usage would be removed from this specification." The neighbours of <code>blink()</code> include <code>escape()</code>, <code>substr()</code>, a comment syntax made of HTML, and a method that lets you swap the pattern inside a live regular expression. Two residents already have essays of their own in this collection: <a href="https://derek.io/nostalgiajs/getyear-and-the-year-19100/"><code>getYear()</code></a>, and <a href="https://derek.io/nostalgiajs/if-document-layers/"><code>document.all</code></a>, the object that claims to be undefined. This essay is about the rest, and about why a standards committee keeps a careful, normative description of things it tells you not to use.</p>
+<p>The annex is frank about its contents. Everything in it has "one or more undesirable characteristics and in the absence of legacy usage would be removed from this specification." The neighbours of <code>blink()</code> include <code>escape()</code>, <code>substr()</code>, a comment syntax made of HTML, and a method that lets you swap the pattern inside a live regular expression. Two residents already have essays of their own in this collection: <a href="https://derek.io/nostalgiajs/essays/getyear/"><code>getYear()</code></a>, and <a href="https://derek.io/nostalgiajs/essays/document-layers/"><code>document.all</code></a>, the object that claims to be undefined. This essay is about the rest, and about why a standards committee keeps a careful, normative description of things it tells you not to use.</p>
 
 <h2>A language that shipped first</h2>
 
@@ -32,7 +32,7 @@ document.write("&lt;P&gt;" + worldString.bold())</code></pre>
 
 <p>The <a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_d-e.htm">same reference</a> has <code>escape</code>, also from Navigator 2.0: "Returns the ASCII encoding of an argument in the ISO Latin-1 character set." You used it to put a form value into a URL or a cookie. The example given is <code>escape("Hello, World")</code>, which returns <code>"Hello%2C%20World"</code>, and still does.</p>
 
-<p>Navigator 2 also had to live beside browsers that had never heard of scripts. Allen Wirfs-Brock and Brendan Eich tell the story in <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>. Netscape 1 and Mosaic, meeting a <code>&lt;script&gt;</code> element, displayed its contents as text. The way to stop them was to wrap the script in an HTML comment, but then the comment markers were a syntax error in JavaScript. So, the authors write, "Brendan Eich made JavaScript 1.0 accept &lt;!-- as the start of a single line comment, equivalent to //." You closed the block with <code>// --&gt;</code>, and that wrapper was there to be copied by anyone <a href="https://derek.io/nostalgiajs/view-source-was-the-school/">reading other people's pages</a>.</p>
+<p>Navigator 2 also had to live beside browsers that had never heard of scripts. Allen Wirfs-Brock and Brendan Eich tell the story in <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>. Netscape 1 and Mosaic, meeting a <code>&lt;script&gt;</code> element, displayed its contents as text. The way to stop them was to wrap the script in an HTML comment, but then the comment markers were a syntax error in JavaScript. So, the authors write, "Brendan Eich made JavaScript 1.0 accept &lt;!-- as the start of a single line comment, equivalent to //." You closed the block with <code>// --&gt;</code>, and that wrapper was there to be copied by anyone <a href="https://derek.io/nostalgiajs/essays/view-source/">reading other people's pages</a>.</p>
 
 <p>JavaScript 1.2, in 1997, added a second layer. The history paper's list of new features includes regular expressions, a batch of string methods, and the "<code>__proto__</code> pseudo property of all objects", which let a program read and replace an object's prototype. Of the string methods it says that <code>match</code>, <code>replace</code> and <code>substr</code> "came from Perl." The language already had <code>substring</code>, and the same release brought <code>slice</code> from Python. That made three ways to cut a string, each with its own opinion about what the second argument means.</p>
 
@@ -49,7 +49,7 @@ escape("ć")              <span class="c">// "%u0107"</span>
 encodeURIComponent("ä")  <span class="c">// "%C3%A4"</span>
 escape("a+b c")          <span class="c">// "a+b%20c"</span></code></pre>
 
-<p>The first answer is Latin-1, the second is an invention, and the third is UTF-8, which is what servers came to expect. The fourth is the quiet one. <code>escape</code> leaves <code>+</code> alone, and a server decoding a form submission reads <code>+</code> as a space. A "C++" typed into a search box built this way would arrive as "C" followed by two blanks. The <a href="https://derek.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/">hidden-iframe request</a> shown elsewhere in this collection builds its URL with <code>escape(name)</code>.</p>
+<p>The first answer is Latin-1, the second is an invention, and the third is UTF-8, which is what servers came to expect. The fourth is the quiet one. <code>escape</code> leaves <code>+</code> alone, and a server decoding a form submission reads <code>+</code> as a space. A "C++" typed into a search box built this way would arrive as "C" followed by two blanks. The <a href="https://derek.io/nostalgiajs/essays/xmlhttprequest/">hidden-iframe request</a> shown elsewhere in this collection builds its URL with <code>escape(name)</code>.</p>
 
 <p><code>substr</code> took the opposite route. The annex was its way in, on probation (the history paper says "moved", but the first two editions never mention it). The trouble with it was never that it was broken. Here are the three side by side:</p>
 
@@ -59,7 +59,7 @@ escape("a+b c")          <span class="c">// "a+b%20c"</span></code></pre>
 
 <p><code>substr</code> takes a start and a length. The other two take a start and an end. A language needs at most one of these conventions, and JavaScript had standardised the other one first.</p>
 
-<p>The committee's hope in 1999, as the history paper tells it and as the <a href="https://derek.io/nostalgiajs/getyear-and-the-year-19100/"><code>getYear()</code> essay</a> quotes at more length, was that listing a feature in a non-normative annex would mark it as deprecated and free implementations to drop it. The authors call that expectation naïve. Browsers kept all of it.</p>
+<p>The committee's hope in 1999, as the history paper tells it and as the <a href="https://derek.io/nostalgiajs/essays/getyear/"><code>getYear()</code> essay</a> quotes at more length, was that listing a feature in a non-normative annex would mark it as deprecated and free implementations to drop it. The authors call that expectation naïve. Browsers kept all of it.</p>
 
 <h2>Why nothing ever leaves</h2>
 
@@ -100,13 +100,13 @@ f(false)  <span class="c">// "undefined"</span></code></pre>
 
 <h2>Living with it: lint, aliases and smoosh</h2>
 
-<p>Developers coped the way <a href="https://derek.io/nostalgiajs/crockford-jslint-and-the-good-parts/">JSLint had taught them to</a>: agree not to use the bad parts, and have a tool enforce the agreement. Strict mode, from the fifth edition, made part of that official. Legacy octal literals are a syntax error in strict code, which you can check by evaluating <code>"use strict"; 010</code>. Documentation did the rest. MDN marks <code>escape</code>, <code>substr</code> and every HTML method as deprecated. It is also honest about how far that gets you. Its <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">page for <code>substr</code></a> admits "there is no trivial way to migrate" old calls to <code>slice</code> or <code>substring</code> "without essentially writing a polyfill," because the three disagree on negative arguments.</p>
+<p>Developers coped the way <a href="https://derek.io/nostalgiajs/essays/jslint/">JSLint had taught them to</a>: agree not to use the bad parts, and have a tool enforce the agreement. Strict mode, from the fifth edition, made part of that official. Legacy octal literals are a syntax error in strict code, which you can check by evaluating <code>"use strict"; 010</code>. Documentation did the rest. MDN marks <code>escape</code>, <code>substr</code> and every HTML method as deprecated. It is also honest about how far that gets you. Its <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">page for <code>substr</code></a> admits "there is no trivial way to migrate" old calls to <code>slice</code> or <code>substring</code> "without essentially writing a polyfill," because the three disagree on negative arguments.</p>
 
 <p>The committee, for its part, learned to add a new name beside the old one. When string trimming was tidied up, the <a href="https://github.com/tc39/proposal-string-left-right-trim">proposal</a> noted that all major engines already shipped <code>trimLeft</code> and <code>trimRight</code> "without any standard specification." The standard names became <code>trimStart</code> and <code>trimEnd</code>, to match <code>padStart</code>, and the old names went into Annex B as aliases "required for web compatibility." In a current engine <code>"".trimLeft === "".trimStart</code> is true. They are one function with two property names, and its <code>name</code> is <code>"trimStart"</code>.</p>
 
 <p>The same force acts on features that do not exist yet, and the best-known case is from 2018. A proposal added <code>Array.prototype.flatten</code>. Firefox Nightly shipped it and a popular site broke. Mathias Bynens's <a href="https://developer.chrome.com/blog/smooshgate">"SmooshGate FAQ"</a> explains the mechanism, which is a small masterpiece of bad luck. The MooTools library defines its own <code>Array.prototype.flatten</code> and then copies its array methods onto another prototype with a <code>for</code>-<code>in</code> loop. Assigning over a built-in method does not make it enumerable. So once browsers had a native <code>flatten</code>, MooTools's replacement was skipped by its own loop, and code depending on the copy failed. The proposal's author jokingly suggested the name <code>smoosh</code> instead, the joke "was not clear to everyone," and some people took the new name as settled.</p>
 
-<p>The FAQ's answer to "why not just break the Web?" is the Annex B argument in two sentences: "Sure, in retrospect MooTools did the wrong thing — but breaking the web doesn't punish them, it punishes users. These users do not know what a moo tool is." In May 2018 Michael Ficarra brought the rename to the committee, and <a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">the meeting notes</a> record the outcome in three words: "We choose <code>flat</code>." There is a <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery-era</a> moral in there about libraries that extend built-in prototypes, and it is why the method you call is an adjective.</p>
+<p>The FAQ's answer to "why not just break the Web?" is the Annex B argument in two sentences: "Sure, in retrospect MooTools did the wrong thing — but breaking the web doesn't punish them, it punishes users. These users do not know what a moo tool is." In May 2018 Michael Ficarra brought the rename to the committee, and <a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">the meeting notes</a> record the outcome in three words: "We choose <code>flat</code>." There is a <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery-era</a> moral in there about libraries that extend built-in prototypes, and it is why the method you call is an adjective.</p>
 
 <h2>What it left behind</h2>
 
@@ -164,8 +164,8 @@ function decode_utf8(s) {
   </item>
   <item>
     <title>JSLint and The Good Parts: the subset that became the language</title>
-    <link>https://derek.io/nostalgiajs/crockford-jslint-and-the-good-parts/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/crockford-jslint-and-the-good-parts/</guid>
+    <link>https://derek.io/nostalgiajs/essays/jslint/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/jslint/</guid>
     <pubDate>Thu, 12 Nov 2026 23:17:33 GMT</pubDate>
     <description>Douglas Crockford's linter and thin book told developers which parts of JavaScript to stop using, which started a fork and a fight over a semicolon and left much of its advice inside the language.</description>
     <content:encoded><![CDATA[<p class="lede">One of the most argued-over tools in JavaScript's history was a program that told you which parts of the language to stop using, and it came with a warning label.</p>
@@ -186,7 +186,7 @@ function decode_utf8(s) {
 
 <p>The 2001 essay does have a section called "Design Errors," and it is short. The <code>+</code> operator both adds and concatenates. The <code>with</code> statement is error-prone. "Semicolon insertion was a huge mistake". Then comes the sentence that the next ten years grew out of: "Fortunately, many of these problems can be mitigated with a good lint program."</p>
 
-<p>It helps to recall what checked your JavaScript at the time. Nothing did. There was no compiler, so a misspelled variable name was not an error. It was a new global variable. You learned the language by <a href="https://derek.io/nostalgiajs/view-source-was-the-school/">reading other people's pages</a> and you found your mistakes with <a href="https://derek.io/nostalgiajs/firebug-and-the-inside-of-the-page/"><code>alert()</code></a>, after the browser had already run them.</p>
+<p>It helps to recall what checked your JavaScript at the time. Nothing did. There was no compiler, so a misspelled variable name was not an error. It was a new global variable. You learned the language by <a href="https://derek.io/nostalgiajs/essays/view-source/">reading other people's pages</a> and you found your mistakes with <a href="https://derek.io/nostalgiajs/essays/firebug/"><code>alert()</code></a>, after the browser had already run them.</p>
 
 <h2>A minifier, a lint and a hundred pages</h2>
 
@@ -203,7 +203,7 @@ function decode_utf8(s) {
 
 <p>The option that controls whether <code>eval</code> is tolerated is named <code>evil</code>. The page also had a single button that set every checkbox to what the documentation called "the ideal settings." The button was labelled "Good Parts."</p>
 
-<p>The rest arrived quickly. In December 2002, by the history paper's timeline, Crockford set up json.org and gave a name to a data format made from JavaScript's object and array literals. That is another story, though it is why the X in <a href="https://derek.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/">Ajax</a> aged so badly. In 2005 Crockford joined Yahoo as a "Distinguished Architect," and by July 2006 was representing Yahoo at meetings of the ECMAScript committee. A month earlier came a short page called <a href="https://www.crockford.com/javascript/prototypal.html">"Prototypal Inheritance in JavaScript"</a>, with a five-line function on it:</p>
+<p>The rest arrived quickly. In December 2002, by the history paper's timeline, Crockford set up json.org and gave a name to a data format made from JavaScript's object and array literals. That is another story, though it is why the X in <a href="https://derek.io/nostalgiajs/essays/xmlhttprequest/">Ajax</a> aged so badly. In 2005 Crockford joined Yahoo as a "Distinguished Architect," and by July 2006 was representing Yahoo at meetings of the ECMAScript committee. A month earlier came a short page called <a href="https://www.crockford.com/javascript/prototypal.html">"Prototypal Inheritance in JavaScript"</a>, with a five-line function on it:</p>
 
 <pre tabindex="0"><code>function object(o) {
     function F() {}
@@ -231,7 +231,7 @@ function decode_utf8(s) {
 
 <p>For years the way to cope was the options. If you disagreed with a rule, there was usually a checkbox to tolerate what you were doing, and you wrote the result into a <code>/*jslint */</code> comment. Then the tool got stricter. On February 20, 2011, Anton Kovalyov published a post called "Why I forked JSLint to JSHint." The original address no longer answers, but the text survives in <a href="https://raw.githubusercontent.com/disqus/disqus.github.com/master/_posts/2011-02-20-antonkovalyov-why-i-forked-jslint-to-jshint.html">a copy in a Disqus repository</a>. JSLint, Kovalyov wrote, "has gotten uncomfortably opinionated and hostile towards your code. It is quickly transforming from a tool that helps developers to prevent bugs to a tool that makes sure you write your code like Douglas Crockford."</p>
 
-<p>The evidence was a function from <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery</a> 1.4.2, which is still on jQuery's CDN:</p>
+<p>The evidence was a function from <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery</a> 1.4.2, which is still on jQuery's CDN:</p>
 
 <pre tabindex="0"><code>	isEmptyObject: function( obj ) {
 		for ( var name in obj ) {
@@ -310,8 +310,8 @@ function decode_utf8(s) {
   </item>
   <item>
     <title>YSlow: the letter grade that made front-end performance a job</title>
-    <link>https://derek.io/nostalgiajs/yslow-and-front-end-performance/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/yslow-and-front-end-performance/</guid>
+    <link>https://derek.io/nostalgiajs/essays/yslow/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/yslow/</guid>
     <pubDate>Thu, 12 Nov 2026 23:17:32 GMT</pubDate>
     <description>How a Yahoo research chart, thirteen rules and a Firebug add-on that graded pages from A to F turned page speed from a server problem into a front-end discipline.</description>
     <content:encoded><![CDATA[<p class="lede">In July 2007 a small team at Yahoo released a browser add-on that gave any web page a letter grade for speed, and inside three years the checklist behind it had a conference, an industry acronym and a place in Google's search ranking.</p>
@@ -333,7 +333,7 @@ Coding Horror:  F (52)</code></pre>
 
 <p>Front-end checking did exist, as a hobby. Jeffrey Friedl, <a href="https://regex.info/blog/2007-09-26/584">reviewing Souders's book in 2007</a>, recalled building "Jeffrey's Page Checker" at Yahoo "in my spare time" from 1997, a tool that "reported various metrics about its fluff (wasted whitespace, image overhead, etc.)." Friedl added that the position Souders now held was one Friedl had "informally created and held in the early days of Yahoo." The same company had the same idea twice, ten years apart. The second time it came with a job title, Chief Performance Yahoo!, and a team, called Exceptional Performance.</p>
 
-<p>Seeing what a browser did on the wire took separate software. The <a href="https://yslow.org/faq/">YSlow FAQ</a> lists the packet sniffers of the day, Ethereal and IBM Page Detailer among them. A panel that timed every request from inside the browser arrived with <a href="https://derek.io/nostalgiajs/firebug-and-the-inside-of-the-page/">Firebug 1.0</a>, around the turn of 2007. And Souders, who <a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">later wrote</a> of having started "evangelizing high performance web sites back in 2004," summed up those first years this way: "I felt like a lone voice in the woods."</p>
+<p>Seeing what a browser did on the wire took separate software. The <a href="https://yslow.org/faq/">YSlow FAQ</a> lists the packet sniffers of the day, Ethereal and IBM Page Detailer among them. A panel that timed every request from inside the browser arrived with <a href="https://derek.io/nostalgiajs/essays/firebug/">Firebug 1.0</a>, around the turn of 2007. And Souders, who <a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">later wrote</a> of having started "evangelizing high performance web sites back in 2004," summed up those first years this way: "I felt like a lone voice in the woods."</p>
 
 <h2>Eight months, from a chart to a grade</h2>
 
@@ -364,7 +364,7 @@ FileETag none</code></pre>
 
 <pre tabindex="0"><code>&lt;script type="text/javascript" src="menu_1.0.17.js"&gt;&lt;/script&gt;</code></pre>
 
-<p>Other rules were about how the browsers of the day behaved. Stylesheets went at the top because browsers, Internet Explorer among them, showed a blank page until the stylesheets had arrived. Scripts went at the bottom because a script stopped the browser starting any other download. And rule 7 told you to avoid a feature <a href="https://derek.io/nostalgiajs/the-ie6-funeral/">only Internet Explorer had</a>, which let a stylesheet run JavaScript:</p>
+<p>Other rules were about how the browsers of the day behaved. Stylesheets went at the top because browsers, Internet Explorer among them, showed a blank page until the stylesheets had arrived. Scripts went at the bottom because a script stopped the browser starting any other download. And rule 7 told you to avoid a feature <a href="https://derek.io/nostalgiajs/essays/ie6-funeral/">only Internet Explorer had</a>, which let a stylesheet run JavaScript:</p>
 
 <pre tabindex="0"><code>background-color: expression( (new Date()).getHours()%2 ? "#B8D4FF" : "#F08A00" );</code></pre>
 
@@ -398,7 +398,7 @@ FileETag none</code></pre>
 
 <p><strong>The fixes were cheap.</strong> Buytaert's reading of that table was that "Apache configuration issues, and not CMS implementation issues, are the main source of low YSlow scores." Turning on gzip and setting an expiry date were small changes, and they were among the most heavily weighted rules.</p>
 
-<p><strong>Yahoo gave it all away, in public.</strong> The research went on the YUI Blog, the rules on the developer network, the tool on Mozilla's add-ons site and the long version to O'Reilly. This was the period when <a href="https://derek.io/nostalgiajs/the-blogs-and-the-feed-reader/">technical ideas travelled by blog</a>, and a rule with a number and a URL travels well.</p>
+<p><strong>Yahoo gave it all away, in public.</strong> The research went on the YUI Blog, the rules on the developer network, the tool on Mozilla's add-ons site and the long version to O'Reilly. This was the period when <a href="https://derek.io/nostalgiajs/essays/feed-reader/">technical ideas travelled by blog</a>, and a rule with a number and a URL travels well.</p>
 
 <p><strong>Then the money arrived.</strong> Souders moved to Google in early 2008 and co-chaired the first Velocity conference that June, which sold out. The theme chosen for 2009 was "the impact of performance on the bottom line," and Souders's later summary lists what came out of it: at Bing, a page two seconds slower meant a 4.3% drop in revenue per user; at Google, 400 milliseconds cost 0.59% of searches per user; Shopzilla took five seconds off and saw conversions rise 7 to 12%.</p>
 
@@ -408,7 +408,7 @@ FileETag none</code></pre>
 
 <p>The CDN rule was the sore spot, because of how it was tested. The FAQ is disarmingly honest about it: "Unfortunately, the list of 'known CDNs' are the ones used by Yahoo!." To pass, you typed your own hostnames into a preference called <code>extensions.yslow.cdnHostnames</code> in <code>about:config</code>. Stefanov's launch-day post had already said where the weights lived: an array named <code>lintweights</code>.</p>
 
-<p>The tool also kept marking itself down. Version 0.9, in December 2007, began counting what the DOM crawler had missed, including <a href="https://derek.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/">Ajax requests</a> and image beacons. <a href="https://www.phpied.com/yslow-er/">Stefanov ran both versions</a> against yahoo.com after clicking around the page: 0.8 saw 92 components and gave a B (88), and 0.9 saw 141 and gave a D (63).</p>
+<p>The tool also kept marking itself down. Version 0.9, in December 2007, began counting what the DOM crawler had missed, including <a href="https://derek.io/nostalgiajs/essays/xmlhttprequest/">Ajax requests</a> and image beacons. <a href="https://www.phpied.com/yslow-er/">Stefanov ran both versions</a> against yahoo.com after clicking around the page: 0.8 saw 92 components and gave a B (88), and 0.9 saw 141 and gave a D (63).</p>
 
 <p>Yahoo's answer to "not your problems" was a rewrite. <a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">Stefanov's account</a> of YSlow 2.0 says the team was hearing "meh, these are Yahoo's problems/rules, not yours," so rules became small objects you could combine into rulesets. It shipped with three: the new one, the classic thirteen, and "Small Site or Blog." The list of practices grew to 34, of which 23 could be tested by machine.</p>
 
@@ -434,7 +434,7 @@ FileETag none</code></pre>
 
 <p>YSlow did not discover gzip, caching headers, sprites or the cost of a blocking script. Its makers measured where a page's load time went, found that most of it came after the HTML arrived, said so in one sentence, and shipped a tool that turned thirteen pieces of advice into a letter between A and F. The measurement gave the work an owner and the grade gave it urgency. Before 2007, speed belonged to the people who ran the servers. Afterwards a front-end engineer could walk into a meeting with a number, and within three years there was a conference, a name for the trade and a search engine paying attention to it.</p>
 
-<p>The specific rules aged the way workarounds do. HTTP/2 reversed some and browsers swallowed others. The parts that lasted were the method and the form. You still measure from the user's side with an empty cache, you still start with the biggest slice, and the result still comes back as a colour-coded score. YSlow later ran in Chrome, as a bookmarklet and from the command line, but the Firefox original needed Firebug to run, and <a href="https://derek.io/nostalgiajs/firebug-and-the-inside-of-the-page/">Firebug's story</a> ended in 2017. Every performance tab in every browser is still asking its question.</p>
+<p>The specific rules aged the way workarounds do. HTTP/2 reversed some and browsers swallowed others. The parts that lasted were the method and the form. You still measure from the user's side with an empty cache, you still start with the biggest slice, and the result still comes back as a colour-coded score. YSlow later ran in Chrome, as a bookmarklet and from the command line, but the Firefox original needed Firebug to run, and <a href="https://derek.io/nostalgiajs/essays/firebug/">Firebug's story</a> ended in 2017. Every performance tab in every browser is still asking its question.</p>
 
 <section class="sources" aria-labelledby="sources-h">
   <h2 id="sources-h">Sources and further reading</h2>
@@ -474,8 +474,8 @@ FileETag none</code></pre>
   </item>
   <item>
     <title>Cornify: unicorns on every page</title>
-    <link>https://derek.io/nostalgiajs/cornify-unicorns-on-every-page/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/cornify-unicorns-on-every-page/</guid>
+    <link>https://derek.io/nostalgiajs/essays/cornify/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/cornify/</guid>
     <pubDate>Thu, 12 Nov 2026 23:17:31 GMT</pubDate>
     <description>How a 2009 joke about single-feature startups put glittery unicorns on ESPN and Stack Overflow with one script tag, a bookmarklet and a Konami-code snippet.</description>
     <content:encoded><![CDATA[<p class="lede">On the last day of January 2009, somebody asked Hacker News to review a website whose only feature was putting glittery unicorns on other people's websites, and a little over thirteen months later it won the popular vote at South by Southwest.</p>
@@ -550,7 +550,7 @@ img.setAttribute('src',cornify_url+'getacorn.php?r=' + submitTime + '&amp;url='+
 
 <p>Then, on April 27, <a href="https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">Kotaku's Michael McWhertor</a> reported that typing the Konami code and Enter on ESPN.com would "infest the official ESPN web site with mystical ponies," with "a heaping help of Comic Sans," and that every story became "cute," "magical" or "sparkly." That matches the stylesheet and word list the script applies on its fifth call, so my guess is ESPN's wrapper called it several times. David Murphy, in a PCWorld piece <a href="https://abcnews.com/Technology/PCWorld/story?id=7444224">carried by ABC News</a>, filed it "right next to Slashdot's 'OMG Ponies' redesign in the Web Pranks Hall of Fame." An update stamped 4:44 p.m. says ESPN had removed it. Irish added a note to the post the same day: "In fact it had been up there for weeks." I found no report that named who at ESPN had done it, or confirmed whose Konami code they had used.</p>
 
-<p>On March 14, 2010, ten days after <a href="https://derek.io/nostalgiajs/the-ie6-funeral/">the IE6 funeral</a>, the SXSW Interactive Web Awards gave Cornify the People's Choice Award. The <a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">official results</a> say more than 12,000 people signed up to vote. The Amusement category, which a <a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">student reviewer at Texas State</a> had been sure Cornify would take, went to Atlas Obscura.</p>
+<p>On March 14, 2010, ten days after <a href="https://derek.io/nostalgiajs/essays/ie6-funeral/">the IE6 funeral</a>, the SXSW Interactive Web Awards gave Cornify the People's Choice Award. The <a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">official results</a> say more than 12,000 people signed up to vote. The Amusement category, which a <a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">student reviewer at Texas State</a> had been sure Cornify would take, went to Atlas Obscura.</p>
 
 <h2>The include and its wrappers</h2>
 
@@ -574,7 +574,7 @@ $(document).keydown(function(e) {
   }
 });</code></pre>
 
-<p>It records key codes until the list contains up, up, down, down, left, right, left, right, B, A, and only then fetches the script, with <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/"><code>$.getScript</code></a>. After that, Irish wrote, "every other keystroke will add happiness to the world." Later in 2009, after the ESPN episode, Cornify put the same trigger into <code>cornify.js</code> itself. The object is called <code>cornami</code>, and its comment says it was adapted from Konami-JS, a library George Mandis <a href="https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">published on April 28, 2009</a>, citing "the recent attention surrounding ESPN." From then on any site with the plain include had the secret knock too.</p>
+<p>It records key codes until the list contains up, up, down, down, left, right, left, right, B, A, and only then fetches the script, with <a href="https://derek.io/nostalgiajs/essays/jquery/"><code>$.getScript</code></a>. After that, Irish wrote, "every other keystroke will add happiness to the world." Later in 2009, after the ESPN episode, Cornify put the same trigger into <code>cornify.js</code> itself. The object is called <code>cornami</code>, and its comment says it was adapted from Konami-JS, a library George Mandis <a href="https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">published on April 28, 2009</a>, citing "the recent attention surrounding ESPN." From then on any site with the plain include had the secret knock too.</p>
 
 <p>The wrappers kept coming. In May 2010 John Hobbs posted <a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a> to <a href="https://news.ycombinator.com/item?id=1386864">Hacker News</a>: fifty unicorns on the Konami code, with no dependencies, "so people can just drop it right in." Its page credits Eric Ryan Harrison with a jQuery version. The Cornify account turned up to say it looked "very, very inspired by Cornify" and to ask for the artwork. Hobbs said the unicorns came from a MySpace glitter-graphics page. "You have great taste in unicorns," Cornify replied.</p>
 
@@ -592,7 +592,7 @@ $(document).keydown(function(e) {
 
 <h2>Living with unicorns</h2>
 
-<p>The launch thread doubles as the first bug tracker. The earliest report was that unicorns land at random, including on top of the Cornify button. "I almost cried when a unicorn covered up the 'cornify' button and I had to stop," one reader wrote. Another supplied the developer's workaround, which was to skip the button and open <a href="https://derek.io/nostalgiajs/firebug-and-the-inside-of-the-page/">Firebug</a>:</p>
+<p>The launch thread doubles as the first bug tracker. The earliest report was that unicorns land at random, including on top of the Cornify button. "I almost cried when a unicorn covered up the 'cornify' button and I had to stop," one reader wrote. Another supplied the developer's workaround, which was to skip the button and open <a href="https://derek.io/nostalgiajs/essays/firebug/">Firebug</a>:</p>
 
 <pre tabindex="0"><code>for (var i = 0; i &lt; 10000; ++i) { cornify_add() }</code></pre>
 
@@ -650,8 +650,8 @@ $(document).keydown(function(e) {
   </item>
   <item>
     <title>The blogs and the feed reader: an industry run by correspondence</title>
-    <link>https://derek.io/nostalgiajs/the-blogs-and-the-feed-reader/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/the-blogs-and-the-feed-reader/</guid>
+    <link>https://derek.io/nostalgiajs/essays/feed-reader/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/feed-reader/</guid>
     <pubDate>Thu, 12 Nov 2026 21:28:30 GMT</pubDate>
     <description>From about 2004 to 2013, front-end development argued, reviewed and patched itself across a few personal websites, and Google Reader delivered the whole exchange until Google switched it off.</description>
     <content:encoded><![CDATA[<p class="lede">For about nine years the working knowledge of front-end development lived on a few dozen personal websites, and one tag in the <code>&lt;head&gt;</code> was how it reached you.</p>
@@ -704,7 +704,7 @@ $(document).keydown(function(e) {
 
 <p>Now look at the listing as a piece of publishing. It names its browser test matrix in prose. It asks for bug reports. And at the bottom of the page is a note dated May 28, 2006: a reader named Billy Pan had found that the code threw a runtime error in IE 7, his fix was the <code>if (oldonload)</code> line, and Willison had "rolled this fix in to the code shown above." A bug report came in, a patch was accepted and the release was updated, two years after publication, on a personal weblog. This is a pull request, carried out with the tools available.</p>
 
-<p>The next year the same circle made the process explicit. In August 2005 Koch published an entry titled "addEvent() considered harmful," and on September 8 he <a href="https://www.quirksmode.org/blog/archives/2005/09/addevent_recodi.html">opened a contest</a> to rewrite the function. Entries were submitted as comments. The judges were Koch, Scott Andrew LePera and Dean Edwards. The prize, in the entry's words, "will consist of eternal and undying fame." On October 18 they <a href="https://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html">named the winner</a>, a 15-line entry from John Resig, and then listed three bugs in it, because that was the house style. What Resig did with the fame is the subject of <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">the jQuery essay</a>.</p>
+<p>The next year the same circle made the process explicit. In August 2005 Koch published an entry titled "addEvent() considered harmful," and on September 8 he <a href="https://www.quirksmode.org/blog/archives/2005/09/addevent_recodi.html">opened a contest</a> to rewrite the function. Entries were submitted as comments. The judges were Koch, Scott Andrew LePera and Dean Edwards. The prize, in the entry's words, "will consist of eternal and undying fame." On October 18 they <a href="https://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html">named the winner</a>, a 15-line entry from John Resig, and then listed three bugs in it, because that was the house style. What Resig did with the fame is the subject of <a href="https://derek.io/nostalgiajs/essays/jquery/">the jQuery essay</a>.</p>
 
 <h2>Ajaxian: the front page</h2>
 
@@ -800,8 +800,8 @@ $(document).keydown(function(e) {
   </item>
   <item>
     <title>JSConf 2009: the community that didn't know it existed</title>
-    <link>https://derek.io/nostalgiajs/the-first-jsconf/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/the-first-jsconf/</guid>
+    <link>https://derek.io/nostalgiajs/essays/jsconf/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/jsconf/</guid>
     <pubDate>Thu, 12 Nov 2026 20:06:20 GMT</pubDate>
     <description>In April 2009 about 130 people met in a hotel outside Washington for a conference about JavaScript itself. It nearly didn't happen, and its format, its side room and its name spread around the world.</description>
     <content:encoded><![CDATA[<p class="lede">The conference that gave JavaScript developers a community was nearly cancelled for lack of interest, and by the end of its second day it had been promised to another continent.</p>
@@ -818,7 +818,7 @@ $(document).keydown(function(e) {
 
 <p>It is not that web developers had nowhere to go before 2009. There was The Ajax Experience, with Ajaxian's Ben Galbraith and Dojo's Alex Russell on the bill, first in <a href="https://nofluffjuststuff.com/archive/142">San Francisco on May 10 to 12, 2006</a> and then in <a href="https://nofluffjuststuff.com/archive/143">Boston that October</a>. The libraries had their own gatherings. In September 2007 <a href="https://blog.jquery.com/2007/09/06/jquerycamp-07-boston/">John Resig announced</a> "the first all-day jQuery mini-conference" for October 27 in Boston, and <a href="https://blog.jquery.com/2008/06/26/jquery-camp-2008-announced/">the next year's announcement</a> reported that "over 100 jQuery developers" had turned up. That second jQuery Camp was scheduled for "the day before The Ajax Experience," which tells you where the centre of gravity was.</p>
 
-<p>So you could attend a conference about a technique, or one about <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">a library</a>. The language underneath them belonged to nobody in particular. Jan Lehnardt, a CouchDB developer who was at the first JSConf, <a href="https://jan.prima.de/~jan/plok/archives/172-JSConf-2009-A-Communitys-First-Gathering.html">wrote in early May</a>: "Prior to JSConf, there was no conference dedicated to JavaScript developers, heck, even the idea of a JavaScript community was hazy at best." The reason Lehnardt gave was that people wrote JavaScript part-time, "in addition to say, Python, PHP or Ruby."</p>
+<p>So you could attend a conference about a technique, or one about <a href="https://derek.io/nostalgiajs/essays/jquery/">a library</a>. The language underneath them belonged to nobody in particular. Jan Lehnardt, a CouchDB developer who was at the first JSConf, <a href="https://jan.prima.de/~jan/plok/archives/172-JSConf-2009-A-Communitys-First-Gathering.html">wrote in early May</a>: "Prior to JSConf, there was no conference dedicated to JavaScript developers, heck, even the idea of a JavaScript community was hazy at best." The reason Lehnardt gave was that people wrote JavaScript part-time, "in addition to say, Python, PHP or Ruby."</p>
 
 <p>Kevin Dangoor of Mozilla, <a href="https://www.blueskyonmars.com/2009/04/27/jsconf-2009-the-best-conference-you-couldnt-attend/">writing on the plane home</a>, was more careful about the claim, and I'd go with that version: "It was possibly even the first conference to feature JavaScript as a general scripting language in the same vein as Python or Ruby." Python and Ruby both had conferences run by their own communities. JavaScript ran in every browser and had no meeting of its own, and my best guess at the reason is Lehnardt's: most of the people writing it did not think of it as their language.</p>
 
@@ -941,8 +941,8 @@ exports.increment = function(val) {
   </item>
   <item>
     <title>The webmaster: a mailbox that became a job</title>
-    <link>https://derek.io/nostalgiajs/the-webmaster-and-the-mailto-link/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/the-webmaster-and-the-mailto-link/</guid>
+    <link>https://derek.io/nostalgiajs/essays/webmaster/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/webmaster/</guid>
     <pubDate>Thu, 12 Nov 2026 20:05:05 GMT</pubDate>
     <description>&quot;Webmaster&quot; was coined as a mail alias on a style page, grew into the title for whoever ran the whole site, and faded, while the address in the footer link outlived the job.</description>
     <content:encoded><![CDATA[<p class="lede">For about a decade, a website had one person behind it and one address at the bottom of the page where you could reach them. The address has lasted far longer than the job.</p>
@@ -1052,7 +1052,7 @@ document.write('&lt;a href="mai' +
 
 <p>Wikipedia's article on <a href="https://en.wikipedia.org/wiki/Address_munging">address munging</a> records the trick and its limit: newer harvesting programs can often run the script themselves.</p>
 
-<p>The second was to replace the link with a form. The standard tool was FormMail, a Perl script from Matt's Script Archive that turned any HTML form into an email. <a href="https://www.scriptarchive.com/formmail.html">Its page</a> calls it "quite possibily the most used CGI program on the internet, having been downloaded over 2,000,000 times since 1997." <a href="https://derek.io/nostalgiajs/view-source-was-the-school/">View the source</a> of that page and you find a notice, now commented out, dated April 19, 2002: "Several important spam-related security holes have been fixed". The script installed to keep the webmaster out of spammers' lists had spam problems of its own.</p>
+<p>The second was to replace the link with a form. The standard tool was FormMail, a Perl script from Matt's Script Archive that turned any HTML form into an email. <a href="https://www.scriptarchive.com/formmail.html">Its page</a> calls it "quite possibily the most used CGI program on the internet, having been downloaded over 2,000,000 times since 1997." <a href="https://derek.io/nostalgiajs/essays/view-source/">View the source</a> of that page and you find a notice, now commented out, dated April 19, 2002: "Several important spam-related security holes have been fixed". The script installed to keep the webmaster out of spammers' lists had spam problems of its own.</p>
 
 <h2>Why the title wore out</h2>
 
@@ -1113,8 +1113,8 @@ document.write('&lt;a href="mai' +
   </item>
   <item>
     <title>The IE6 funeral: campaigning to kill a browser</title>
-    <link>https://derek.io/nostalgiajs/the-ie6-funeral/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/the-ie6-funeral/</guid>
+    <link>https://derek.io/nostalgiajs/essays/ie6-funeral/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/ie6-funeral/</guid>
     <pubDate>Thu, 12 Nov 2026 20:05:01 GMT</pubDate>
     <description>In March 2010 a Denver web shop buried Internet Explorer 6 in a pine coffin and Microsoft sent flowers. The browser had a fifth of the market that night, and what finally ended it was not persuasion.</description>
     <content:encoded><![CDATA[<p class="lede">In March 2010 a web design shop in Denver held a funeral for a browser that about a fifth of the web was still using, and the company that made the browser sent flowers.</p>
@@ -1136,7 +1136,7 @@ document.write('&lt;a href="mai' +
 
 <h2>A browser that outlived its war</h2>
 
-<p>Internet Explorer 6 debuted in August 2001 and went out with Windows XP. By then <a href="https://derek.io/nostalgiajs/if-document-layers/">the first browser war</a> was over and Microsoft had won it, so there was no hurry about a sequel. Internet Explorer 7 was not released until October 2006. For five years IE6 was the newest version of the browser nearly everybody had, and a great deal got built to fit it, on the public web and behind company firewalls.</p>
+<p>Internet Explorer 6 debuted in August 2001 and went out with Windows XP. By then <a href="https://derek.io/nostalgiajs/essays/document-layers/">the first browser war</a> was over and Microsoft had won it, so there was no hurry about a sequel. Internet Explorer 7 was not released until October 2006. For five years IE6 was the newest version of the browser nearly everybody had, and a great deal got built to fit it, on the public web and behind company firewalls.</p>
 
 <p>By 2008 the picture had changed everywhere except on those machines. Firefox and Safari were real, IE7 was two years old, and the same page now had to work in all of them and in IE6 as well. Justin Toupin, Aten's founder, described the cost to Computerworld in the mildest terms available: "It does involve, toward the end of a project especially, considerable work adjusting things like CSS and JavaScript to make sure they work." Every reader of this collection can supply their own less mild version.</p>
 
@@ -1220,7 +1220,7 @@ document.write('&lt;a href="mai' +
 
 <p>That is Microsoft's own compatibility header, borrowed to ask for somebody else's browser. It still needed the plug-in installed, which on a locked-down office PC was the original problem again.</p>
 
-<p>Libraries absorbed the rest, quietly and for years. <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery</a> carried IE6 in every release until <a href="https://blog.jquery.com/2013/04/18/jquery-2-0-released/">version 2.0</a> in April 2013, and even then kept a 1.x branch "which does run on IE 6/7/8." A lot of developers stopped thinking about IE6 well before they stopped supporting it, because a dependency was doing the thinking.</p>
+<p>Libraries absorbed the rest, quietly and for years. <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery</a> carried IE6 in every release until <a href="https://blog.jquery.com/2013/04/18/jquery-2-0-released/">version 2.0</a> in April 2013, and even then kept a 1.x branch "which does run on IE 6/7/8." A lot of developers stopped thinking about IE6 well before they stopped supporting it, because a dependency was doing the thinking.</p>
 
 <h2>The winter it turned</h2>
 
@@ -1304,8 +1304,8 @@ document.write('&lt;a href="mai' +
   </item>
   <item>
     <title>XMLHttpRequest: six years waiting for a name</title>
-    <link>https://derek.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/xmlhttprequest-and-the-name-ajax/</guid>
+    <link>https://derek.io/nostalgiajs/essays/xmlhttprequest/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/xmlhttprequest/</guid>
     <pubDate>Thu, 12 Nov 2026 20:03:14 GMT</pubDate>
     <description>Microsoft shipped the object behind every web application in 1999, under a name its author calls an excuse. Almost nobody used it until a designer's 2005 essay called the technique Ajax.</description>
     <content:encoded><![CDATA[<p class="lede">The most important line of JavaScript of the 2000s shipped in 1999 with a name its own author calls an excuse, and then sat largely ignored for six years until somebody gave the technique around it a better one.</p>
@@ -1321,7 +1321,7 @@ document.write('&lt;a href="mai' +
 
 <p>The web's original contract was simple. You clicked, the browser threw away the page, the server built a new one, and you waited. Jesse James Garrett, in the essay this story ends with, put the cost in one line: "While the server is doing its thing, what's the user doing? That's right, waiting."</p>
 
-<p>Dynamic HTML, which arrived in 1997 and which <a href="https://derek.io/nostalgiajs/if-document-layers/">split the web in two for a while</a>, let a page change itself after it loaded. It did not let a page fetch anything new. Script could rearrange what the server had already sent, and that was all. If you wanted to check whether a username was taken, you submitted the form.</p>
+<p>Dynamic HTML, which arrived in 1997 and which <a href="https://derek.io/nostalgiajs/essays/document-layers/">split the web in two for a while</a>, let a page change itself after it loaded. It did not let a page fetch anything new. Script could rearrange what the server had already sent, and that was all. If you wanted to check whether a username was taken, you submitted the form.</p>
 
 <p>People found ways around this, and they were all smuggling operations. Anything with a <code>src</code> could carry a message to the server, so the standard trick was a frame the visitor couldn't see:</p>
 
@@ -1387,7 +1387,7 @@ req.send(null);</code></pre>
 
 <p><strong>The timing was terrible.</strong> The object shipped in 1999 and the dot-com crash followed. Swartz's history has a bleak phrase for the period: "Shortly thereafter the bubble burst and web development crashed." The teams that might have spent 2001 building ambitious browser applications were mostly not employed to do so. Hopmann, explaining why the idea hadn't caught on even earlier, grants the slow connections and slow machines of the late 1990s ("typical machines were 200mhz") and then names what he thinks mattered most: developers don't make sweeping shifts quickly, and "these things take 3-5 years".</p>
 
-<p><strong>Nobody could see the examples.</strong> Outlook Web Access was the first big application built this way, and it lived behind corporate logins. Oddpost, a webmail service that opened in 2002 and behaved like a desktop mail client, charged a subscription, and Swartz reckons that is why it "didn't receive as much attention". Gmail launched on April 1, 2004, two and a half years after work on it began. Paul Buchheit <a href="http://paulbuchheit.blogspot.com/2009/01/overnight-success-takes-long-time.html">recalls</a> that along the way quite a few colleagues wanted it killed, or rebuilt with native client software, "not this crazy Javascript stuff". It was free, but its script was hard to follow. The breakthrough was the small one. Google Suggest <a href="https://googleblog.blogspot.com/2004/12/ive-got-suggestion.html">appeared in December 2004</a>, a search box that completed your query as you typed, and Hopmann notes that people "looked at the source code of that page to figure out how it worked". <a href="https://derek.io/nostalgiajs/view-source-was-the-school/">View Source was the school</a>, and for once the lesson was short enough to read. Google Maps <a href="https://googleblog.blogspot.com/2005/02/mapping-your-way.html">followed on February 8, 2005</a>.</p>
+<p><strong>Nobody could see the examples.</strong> Outlook Web Access was the first big application built this way, and it lived behind corporate logins. Oddpost, a webmail service that opened in 2002 and behaved like a desktop mail client, charged a subscription, and Swartz reckons that is why it "didn't receive as much attention". Gmail launched on April 1, 2004, two and a half years after work on it began. Paul Buchheit <a href="http://paulbuchheit.blogspot.com/2009/01/overnight-success-takes-long-time.html">recalls</a> that along the way quite a few colleagues wanted it killed, or rebuilt with native client software, "not this crazy Javascript stuff". It was free, but its script was hard to follow. The breakthrough was the small one. Google Suggest <a href="https://googleblog.blogspot.com/2004/12/ive-got-suggestion.html">appeared in December 2004</a>, a search box that completed your query as you typed, and Hopmann notes that people "looked at the source code of that page to figure out how it worked". <a href="https://derek.io/nostalgiajs/essays/view-source/">View Source was the school</a>, and for once the lesson was short enough to read. Google Maps <a href="https://googleblog.blogspot.com/2005/02/mapping-your-way.html">followed on February 8, 2005</a>.</p>
 
 <p><strong>It had no name.</strong> Developers called it XMLHTTP, or remote scripting, or described it by pointing at Gmail. None of those fits on a slide. I think this reason is underrated, and the next section is my argument for it.</p>
 
@@ -1436,7 +1436,7 @@ else
   onFailure: function() { alert('Something went wrong...'); }
 });</code></pre>
 
-<p>No <code>readyState</code>, no magic 4, no ActiveX. <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery</a> later did the same with <code>$.ajax</code>, and I'd guess a large share of working developers went a decade without typing <code>XMLHttpRequest</code> at all. The word in the method name was Garrett's.</p>
+<p>No <code>readyState</code>, no magic 4, no ActiveX. <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery</a> later did the same with <code>$.ajax</code>, and I'd guess a large share of working developers went a decade without typing <code>XMLHttpRequest</code> at all. The word in the method name was Garrett's.</p>
 
 <p>The X went quietly. Garrett's own Q&amp;A had already conceded that you didn't need XML, and could use "a technology like JavaScript Object Notation". Parsing a <code>responseXML</code> document with DOM calls was miserable next to getting an object you could use directly, and by December 2006 Crockford could tell an XML conference, to its face, that "JSON has become the X in Ajax".</p>
 
@@ -1485,8 +1485,8 @@ else
   </item>
   <item>
     <title>Firebug: the first look inside the page</title>
-    <link>https://derek.io/nostalgiajs/firebug-and-the-inside-of-the-page/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/firebug-and-the-inside-of-the-page/</guid>
+    <link>https://derek.io/nostalgiajs/essays/firebug/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/firebug/</guid>
     <pubDate>Thu, 12 Nov 2026 19:15:40 GMT</pubDate>
     <description>In January 2006 one developer uploaded a few days of code as a Firefox add-on, and within a few years every browser had copied its panels, its F12 key and its console.log.</description>
     <content:encoded><![CDATA[<p class="lede">The tool that showed every browser what developer tools should be was an add-on, uploaded when it was a few days old, and nearly sold for the price of a paperback.</p>
@@ -1503,7 +1503,7 @@ else
 
 <p>The standard debugging technique of the early 2000s was <code>alert()</code>. The people who built the replacements say so themselves. The WebKit team's <a href="https://webkit.org/blog/5718/10-years-of-web-inspector/">ten-year retrospective</a> calls the period "the wild west of web development, when your best debugging aid was <code>alert()</code>." John J. Barton, who later led Firebug from inside IBM, remembered enterprise web apps starting to grow "without much more than 'window.alert()' debugging." You put a dialog box where you wanted a breakpoint and clicked OK until the loop ran out.</p>
 
-<p>Tools did exist. They just lived apart. <a href="https://derek.io/nostalgiajs/view-source-was-the-school/">View Source</a> showed the HTML the server had sent, which was less and less like the page in front of you once scripts started rewriting it. Mozilla shipped a DOM Inspector that showed the live tree. Mozilla also had Venkman, a real JavaScript debugger with breakpoints, stepping, a call stack and a profiler. A commenter under the Mozilla farewell, Alvaro G. Vicario, summed up its reputation kindly: "It was surely great, but I could never figure out how to use it." And there was the browser's JavaScript Console, a list of errors, improved by an extension called Console2.</p>
+<p>Tools did exist. They just lived apart. <a href="https://derek.io/nostalgiajs/essays/view-source/">View Source</a> showed the HTML the server had sent, which was less and less like the page in front of you once scripts started rewriting it. Mozilla shipped a DOM Inspector that showed the live tree. Mozilla also had Venkman, a real JavaScript debugger with breakpoints, stepping, a call stack and a profiler. A commenter under the Mozilla farewell, Alvaro G. Vicario, summed up its reputation kindly: "It was surely great, but I could never figure out how to use it." And there was the browser's JavaScript Console, a list of errors, improved by an extension called Console2.</p>
 
 <p>Mike Ratcliffe's <a href="https://flailingmonkey.com/the-history-of-firebug/">history of Firebug</a>, written in 2013 and drawing on Hewitt's own account, names the tools that Firebug's features were inspired by: Venkman for the debugger, Console2 for error reporting, an extension called View Source Chart for the HTML tree, the Aardvark extension for pointing at an element with the mouse, and the interactive interpreter that came with the MochiKit library for the command line. So every part of Firebug existed in 2005, spread across five separate projects.</p>
 
@@ -1584,7 +1584,7 @@ else
 
 <h2>What it left behind</h2>
 
-<p><strong>A standard nobody designed.</strong> There is now a <a href="https://console.spec.whatwg.org/">WHATWG Console Standard</a>. Fourteen of the sixteen names in <code>firebugx.js</code> are in it, every one except <code>profile</code> and <code>profileEnd</code>, along with the <code>%o</code> and <code>%s</code> format specifiers. The standard is frank about being written after the fact. A note says that "for historical reasons, <code>console</code> is lowercased," the namespace object gets a special rule "for historical web-compatibility reasons," and the part that puts text on the screen is left "implementation-defined." Its status section still calls it "an early work in progress" and "the editors' first specification." I ran the sixteen names through a current Chromium while writing this, and all sixteen are still functions, the two unstandardized ones included. So the most-typed debugging API on the web began in a 0.4 release of a browser add-on and was written down by a standards body years later. It is the route <a href="https://derek.io/nostalgiajs/if-document-layers/">Microsoft's <code>innerHTML</code></a> took, ship first and specify later, except that this time the proprietary vendor was one person.</p>
+<p><strong>A standard nobody designed.</strong> There is now a <a href="https://console.spec.whatwg.org/">WHATWG Console Standard</a>. Fourteen of the sixteen names in <code>firebugx.js</code> are in it, every one except <code>profile</code> and <code>profileEnd</code>, along with the <code>%o</code> and <code>%s</code> format specifiers. The standard is frank about being written after the fact. A note says that "for historical reasons, <code>console</code> is lowercased," the namespace object gets a special rule "for historical web-compatibility reasons," and the part that puts text on the screen is left "implementation-defined." Its status section still calls it "an early work in progress" and "the editors' first specification." I ran the sixteen names through a current Chromium while writing this, and all sixteen are still functions, the two unstandardized ones included. So the most-typed debugging API on the web began in a 0.4 release of a browser add-on and was written down by a standards body years later. It is the route <a href="https://derek.io/nostalgiajs/essays/document-layers/">Microsoft's <code>innerHTML</code></a> took, ship first and specify later, except that this time the proprietary vendor was one person.</p>
 
 <p><strong>The dollar sign in your console changed sides.</strong> Type <code>$('nav')</code> into a console today and you get the page's first <code>nav</code> element back, with no library loaded. That is Firebug's Command Line API, still in service. Here is how it looked in <a href="https://www.askapache.com/s/s.askapache.net/javascript/firebug/content/firebug/commandLineAPI.js">the 1.1 source</a>:</p>
 
@@ -1599,7 +1599,7 @@ this.$$ = function(selector)
     return FBL.getElementsBySelector(baseWindow.document, selector);
 };</code></pre>
 
-<p>In Firebug, <code>$</code> took an ID. That was Prototype's meaning of the dollar sign, the one <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery had to step around</a>. <a href="https://developer.chrome.com/docs/devtools/console/utilities">Chrome's Console Utilities</a> now document <code>$(selector)</code> as "a shortcut for the <code>document.querySelector()</code> function," which is jQuery's meaning. The console quietly followed the library that won. The rest of the list barely moved. The 1.1 file defines nineteen commands, among them <code>$$</code>, <code>$x</code>, <code>inspect</code>, <code>keys</code>, <code>values</code>, <code>copy</code>, <code>monitor</code> and <code>monitorEvents</code>, and Chrome's page documents every one of them except <code>cd</code>.</p>
+<p>In Firebug, <code>$</code> took an ID. That was Prototype's meaning of the dollar sign, the one <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery had to step around</a>. <a href="https://developer.chrome.com/docs/devtools/console/utilities">Chrome's Console Utilities</a> now document <code>$(selector)</code> as "a shortcut for the <code>document.querySelector()</code> function," which is jQuery's meaning. The console quietly followed the library that won. The rest of the list barely moved. The 1.1 file defines nineteen commands, among them <code>$$</code>, <code>$x</code>, <code>inspect</code>, <code>keys</code>, <code>values</code>, <code>copy</code>, <code>monitor</code> and <code>monitorEvents</code>, and Chrome's page documents every one of them except <code>cd</code>.</p>
 
 <p><strong>The file you send to support.</strong> The Firebug team wanted a way to export what Odvarko's Net panel had captured. Steve Souders, in the Firebug Working Group, <a href="https://www.stevesouders.com/blog/2009/10/19/http-archive-specification-firebug-and-httpwatch/">suggested in 2009</a> that "rather than create yet another proprietary format, Firebug team up with HttpWatch to develop a common format." By Souders's own account, the name was Souders's contribution: HAR. <a href="https://developer.chrome.com/docs/devtools/network/reference">Chrome's Network panel</a> documents an "Export HAR" button today, and every support desk that asks you to "attach a HAR file" is asking for a format first shipped in HttpWatch and in a Firebug add-on called NetExport.</p>
 
@@ -1647,8 +1647,8 @@ this.$$ = function(selector)
   </item>
   <item>
     <title>View Source was the school</title>
-    <link>https://derek.io/nostalgiajs/view-source-was-the-school/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/view-source-was-the-school/</guid>
+    <link>https://derek.io/nostalgiajs/essays/view-source/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/view-source/</guid>
     <pubDate>Thu, 12 Nov 2026 09:58:53 GMT</pubDate>
     <description>For about fifteen years the web trained its own workforce through one menu item that showed how any page was made, and then the pages stopped being readable.</description>
     <content:encoded><![CDATA[<p class="lede">The web's training programme was a menu item that nobody was required to ship. It taught a generation of developers, and then the lessons got harder to read.</p>
@@ -1805,8 +1805,8 @@ window.onmousedown=right;
   </item>
   <item>
     <title>jQuery 1.0: what $ really replaced</title>
-    <link>https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/</guid>
+    <link>https://derek.io/nostalgiajs/essays/jquery/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/jquery/</guid>
     <pubDate>Thu, 12 Nov 2026 04:41:10 GMT</pubDate>
     <description>jQuery 1.0 shipped in August 2006 with a dollar sign borrowed from another library, and replaced a folder of copy-pasted fixes that its own author had been winning contests with.</description>
     <content:encoded><![CDATA[<p class="lede">The dollar sign was second-hand, the best ideas were credited to other people, and the browsers spent the next decade copying it anyway.</p>
@@ -2008,8 +2008,8 @@ return oldSizzle(query, context, extra, seed);</code></pre>
   </item>
   <item>
     <title>getYear() and the year 19100</title>
-    <link>https://derek.io/nostalgiajs/getyear-and-the-year-19100/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/getyear-and-the-year-19100/</guid>
+    <link>https://derek.io/nostalgiajs/essays/getyear/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/getyear/</guid>
     <pubDate>Thu, 12 Nov 2026 03:15:17 GMT</pubDate>
     <description>One small Date method returned 100, 2000 or 100 again for the year 2000 depending on the browser, got fixed three different ways, and is still in every browser today.</description>
     <content:encoded><![CDATA[<p class="lede">A method that was right, got fixed, got fixed back, and is still shipping in the browser you are reading this in.</p>
@@ -2143,8 +2143,8 @@ datedisplay.setAttribute("value", dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"
   </item>
   <item>
     <title>Where did all the old web developers go?</title>
-    <link>https://derek.io/nostalgiajs/where-did-the-old-web-developers-go/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/where-did-the-old-web-developers-go/</guid>
+    <link>https://derek.io/nostalgiajs/essays/old-developers/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/old-developers/</guid>
     <pubDate>Thu, 12 Nov 2026 02:37:49 GMT</pubDate>
     <description>Around 2008 nobody writing JavaScript seemed to be over 40, and the industry spent a decade arguing about why. The answer was arithmetic, and the same arithmetic is running again.</description>
     <content:encoded><![CDATA[<p class="lede">Around 2008, nobody in the room was over 40. It took the industry about ten years to work out why.</p>
@@ -2207,7 +2207,7 @@ year - jsBorn;  <span class="c">// 13</span></code></pre>
 
 <p><strong>Zuckerberg's argument was about labor, and it aged the way labor arguments do.</strong> "Simpler lives" meant cheaper and more available. People with fifteen years of experience mostly did not lose the ability to do the work. They stopped agreeing to do it at midnight. An employer can call that a decline, but it's a negotiation, and negotiations move when the supply does.</p>
 
-<p><strong>"Keep up or die" confused two kinds of knowledge.</strong> The half-life of a framework is short. Nobody's résumé leans on Prototype.js anymore. But the developers who lasted were mostly the ones who had learned the layer underneath: the DOM, HTTP, caching, how a browser actually spends its time. That layer barely moved. The <a href="https://derek.io/nostalgiajs/if-document-layers/">browser-forking mess of 1997</a> taught feature detection, and you still write feature detection. Treadmill knowledge expires and platform knowledge compounds, and the fear of 40 was mostly a fear that all of it was the first kind.</p>
+<p><strong>"Keep up or die" confused two kinds of knowledge.</strong> The half-life of a framework is short. Nobody's résumé leans on Prototype.js anymore. But the developers who lasted were mostly the ones who had learned the layer underneath: the DOM, HTTP, caching, how a browser actually spends its time. That layer barely moved. The <a href="https://derek.io/nostalgiajs/essays/document-layers/">browser-forking mess of 1997</a> taught feature detection, and you still write feature detection. Treadmill knowledge expires and platform knowledge compounds, and the fear of 40 was mostly a fear that all of it was the first kind.</p>
 
 <p><strong>The field needed to get old before anyone could be old in it.</strong> Someone who started with the web in the mid-1990s is in their fifties now. Pave's compensation data, <a href="https://pave.com/blog-posts/artificial-intelligence-isnt-killing-the-software-engineer-yet">published this year</a>, shows the average age of engineers rising across every major job family. The old web developer turned out to be a person who needed time to exist.</p>
 
@@ -2257,8 +2257,8 @@ year - jsBorn;  <span class="c">// 13</span></code></pre>
   </item>
   <item>
     <title>if (document.layers): the web forks in two</title>
-    <link>https://derek.io/nostalgiajs/if-document-layers/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/if-document-layers/</guid>
+    <link>https://derek.io/nostalgiajs/essays/document-layers/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/document-layers/</guid>
     <pubDate>Thu, 12 Nov 2026 00:53:51 GMT</pubDate>
     <description>In 1997 Netscape and Microsoft each invented their own model of a web page. Everyone wrote every effect twice, and the way it ended explains a lot about how the web still works.</description>
     <content:encoded><![CDATA[<p class="lede">Two lines of code you typed more often than your own phone number, and the fork in the web they stood for.</p>
@@ -2403,7 +2403,7 @@ function show(id) {
 
 <p><strong>The winner wrote the standard.</strong> Remember <code>innerHTML</code>? It was a Microsoft invention in Internet Explorer 4. It was in no part of DOM Level 1, 2 or 3. It became part of a web standard only in the HTML5 era, when the specs finally wrote down what every browser already did, by which point it was how half the web updated itself. <code>XMLHttpRequest</code> took the same road, starting life as an Internet Explorer 5 ActiveX object. The lesson I take from both is that standards are often a record of what survived, and the fight over who gets to be the thing that survives happens in the wild, in production, on your client's site.</p>
 
-<p><strong>The wrapper is the seed of the library.</strong> Look back at <code>getObj</code>. By 2005 Prototype's <code>$()</code> was <code>getElementById</code> in a shorter coat, and a year later <a href="https://derek.io/nostalgiajs/jquery-and-the-dollar-sign/">jQuery generalized the idea</a> into a whole way of working. The pattern keeps recurring: when the platform diverges, somebody writes the adapter once, everyone borrows it, and the divergence quietly moves from your code into a dependency. That isn't a bad outcome, but it explains why the pain of this era produced the tools of the next one.</p>
+<p><strong>The wrapper is the seed of the library.</strong> Look back at <code>getObj</code>. By 2005 Prototype's <code>$()</code> was <code>getElementById</code> in a shorter coat, and a year later <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery generalized the idea</a> into a whole way of working. The pattern keeps recurring: when the platform diverges, somebody writes the adapter once, everyone borrows it, and the divergence quietly moves from your code into a dependency. That isn't a bad outcome, but it explains why the pain of this era produced the tools of the next one.</p>
 
 <p><strong>It repeats.</strong> Vendor prefixes, <code>-webkit-</code> and <code>-moz-</code> and <code>-ms-</code>, were the same fork in CSS about a decade later. Mobile sites that worked only in WebKit were the same fork again. Each time it looks like a failure of the process. I'd argue it is the process: someone ships first, developers build on it, and the standard catches up to whatever turned out to matter. The only thing you control is how much of your code depends on the guess.</p>
 

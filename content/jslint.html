@@ -1,0 +1,139 @@
+<p class="lede">One of the most argued-over tools in JavaScript's history was a program that told you which parts of the language to stop using, and it came with a warning label.</p>
+
+<blockquote>
+<p>Warning! JSLint will hurt your feelings.</p>
+</blockquote>
+
+<p>That notice sat at the top of the JSLint documentation, directly under the line "©2002 Douglas Crockford", in <a href="https://people.cs.nycu.edu.tw/~tsaiwn/oop/05_Tools/JSLint/lint.html">an older copy of the page</a> that survives on a university course site. It was a comment in the program's source in <a href="https://raw.githubusercontent.com/jslint-org/jslint/v2013.3.13/jslint.js">the edition of March 2013</a>, and it is in <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/jslint.mjs">the current one</a>. The <a href="https://www.jslint.com/help.html">help page at jslint.com</a> still carries it, now with a list of symptoms: "Side effects may include headache, irritability, dizziness, snarkiness, stomach pain, defensiveness, dry mouth, cleaner code, and a reduced error rate."</p>
+
+<p>It is a joke, and it was accurate. You pasted your script into a text box, pressed a button, and a program written by one person told you that code which ran in every browser was unacceptable. Some six years later the same person published the argument as a thin book, <em>JavaScript: The Good Parts</em>. Between them they changed what professional JavaScript looked like. They also started a fork, a fight about a semicolon and a licensing problem that took other people nine years to clean up.</p>
+
+<h2>Before: a language with a reputation</h2>
+
+<p>In 2001 Douglas Crockford put an essay on a personal website under the title <a href="https://www.crockford.com/javascript/javascript.html">"JavaScript: The World's Most Misunderstood Programming Language"</a>. The page has been revised since, and I quote it as it stands now. It is a list of reasons for the bad reputation, and most of them are not the language's fault. The name suggests a cut-down Java. The syntax hides what is underneath, which the essay calls "Lisp in C's Clothing." The early implementations were buggy, the standard was hard to read, and the books were worse: "Nearly all of the books about JavaScript are quite awful."</p>
+
+<p>Crockford was not a web designer who had drifted into scripting. The <a href="https://www.crockford.com/about.html">biography on the same site</a> lists eight years as Director of Technology at Lucasfilm and, in 2001 and 2002, a startup called State Software, building "an application framework for highly-interactive web applications." This was an experienced programmer who came to JavaScript late and had expected little. A companion piece, <a href="https://www.crockford.com/javascript/survey.html">"A Survey of the JavaScript Programming Language"</a>, admits as much: "When JavaScript was first introduced, I dismissed it as being not worth my attention. Much later, I took another look at it and discovered that hidden in the browser was an excellent programming language."</p>
+
+<p>The 2001 essay does have a section called "Design Errors," and it is short. The <code>+</code> operator both adds and concatenates. The <code>with</code> statement is error-prone. "Semicolon insertion was a huge mistake". Then comes the sentence that the next ten years grew out of: "Fortunately, many of these problems can be mitigated with a good lint program."</p>
+
+<p>It helps to recall what checked your JavaScript at the time. Nothing did. There was no compiler, so a misspelled variable name was not an error. It was a new global variable. You learned the language by <a href="../view-source/">reading other people's pages</a> and you found your mistakes with <a href="../firebug/"><code>alert()</code></a>, after the browser had already run them.</p>
+
+<h2>A minifier, a lint and a hundred pages</h2>
+
+<p>The tools came first. Crockford's site dates <a href="https://www.crockford.com/jsmin.html">JSMin</a> to 2001, and <a href="https://www.crockford.com/minify.html">a later note</a> says the name was the origin of the word as we use it: "I called the operation <em>minification</em>, and I named the first minifier program JSMin." JSMin comes back into the story eleven years later.</p>
+
+<p>JSLint followed. The sources disagree by a year about when. Allen Wirfs-Brock and Brendan Eich, in <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>, cite its web page as 2001 and call it "the first widely used linter utility for JavaScript." The JSHint project's <a href="https://jshint.com/relicensing-2020/">own history</a> says it "was first made publicly available in 2002," which matches the copyright line. Either way, it was written in JavaScript and it ran in the page: "Your script is not sent over the network."</p>
+
+<p>The documentation was clear that this was more than a syntax checker. "JSLint defines a professional subset of JavaScript, a stricter language than that defined by" the standard, it said, and then: "JavaScript is a sloppy language, but inside it there is an elegant, better language. JSLint helps you to program in that better language and to avoid most of the slop."</p>
+
+<p>The subset was specific. Every variable had to be declared, because "JavaScript's biggest problem is its dependence on global variables, particularly implied global variables." Every <code>if</code> and <code>while</code> needed braces. <code>with</code> was out. <code>===</code> was preferred to <code>==</code>, and an option could forbid <code>==</code> altogether. Another option banned <code>++</code> and <code>--</code>, on the grounds that they "have been known to contribute to bad code by encouraging excessive trickiness." You chose your options with checkboxes on the page, or with a comment at the top of the file. This is the documentation's own example:</p>
+
+<pre tabindex="0"><code>/*jslint nomen: true, debug: true,
+    evil: false, onevar: true */</code></pre>
+
+<p>The option that controls whether <code>eval</code> is tolerated is named <code>evil</code>. The page also had a single button that set every checkbox to what the documentation called "the ideal settings." The button was labelled "Good Parts."</p>
+
+<p>The rest arrived quickly. In December 2002, by the history paper's timeline, Crockford set up json.org and gave a name to a data format made from JavaScript's object and array literals. That is another story, though it is why the X in <a href="../xmlhttprequest/">Ajax</a> aged so badly. In 2005 Crockford joined Yahoo as a "Distinguished Architect," and by July 2006 was representing Yahoo at meetings of the ECMAScript committee. A month earlier came a short page called <a href="https://www.crockford.com/javascript/prototypal.html">"Prototypal Inheritance in JavaScript"</a>, with a five-line function on it:</p>
+
+<pre tabindex="0"><code>function object(o) {
+    function F() {}
+    F.prototype = o;
+    return new F();
+}</code></pre>
+
+<p>It makes a new object that inherits from an old one, with no constructor and no pretend classes.</p>
+
+<p>Then the book. O'Reilly published <em>JavaScript: The Good Parts</em> in May 2008. The back cover copy, as <a href="https://openlibrary.org/books/OL10781042M">Open Library records it</a>, says the book "scrapes away these bad features to reveal a JavaScript subset that's more reliable, readable, and maintainable than the language as a whole." By the table of contents on the same record, the ten chapters on the good parts end before page 101. Then come Appendix A, "Awful Parts," Appendix B, "Bad Parts," and Appendix C, "JSLint." A language book whose main text fits in a hundred pages was a statement in itself.</p>
+
+<p>The thesis is in the first chapter, in a passage <a href="https://en.wikiquote.org/wiki/Douglas_Crockford">Wikiquote</a> preserves: "JavaScript is built on some very good ideas and a few very bad ones. The very good ideas include functions, loose typing, dynamic objects, and an expressive object literal notation. The bad ideas include a programming model based on global variables." Two months before the book, Crockford had published <a href="https://www.crockford.com/javascript/popular.html">a sequel to the 2001 essay</a> that puts the whole project in one line: "When you peel away the cruft, there is an expressive and powerful programming language there."</p>
+
+<h2>Why a list of prohibitions caught on</h2>
+
+<p><strong>Ajax brought in programmers who expected a compiler.</strong> After 2005, people who had spent careers in Java and C# were told to write the browser half of the application. Crockford's 2008 essay puts it this way: "Ajax gave JavaScript a second chance." They were used to a compiler that objected before anyone ran the code, and the browser offered nothing of the kind. By 2013 JSLint's documentation said so directly: it "will reject programs that browsers will accept because JSLint is concerned with the quality of your code and browsers are not."</p>
+
+<p><strong>The language itself was frozen.</strong> The third edition of the standard is dated December 1999 and the fifth is dated December 2009. There is no fourth. In 2007 Crockford wrote, in <a href="https://www.crockford.com/javascript/recommend.html">a set of recommendations to the committee</a>, that the language "hasn't changed in seven years," and meant it as praise: "This is what allowed Ajax to happen." If nothing can be added and nothing can be fixed, the only way left to improve a language is to agree not to use parts of it. I'd argue that is why the subset landed when it did. It was the one kind of language design that needed nobody's permission.</p>
+
+<p><strong>There was a platform behind it.</strong> A linter on a personal website is a curiosity. The same linter, recommended by a Distinguished Architect at Yahoo who also gave the lectures, sat on the standards committee and had named JSON, was something a tech lead could cite. Wirfs-Brock and Eich, describing the evangelists of that period, call Crockford "one of the most influential."</p>
+
+<p><strong>And the rules were not all the same kind of rule.</strong> An undeclared variable silently becoming a global is a bug. Preferring <code>i += 1</code> to <code>i++</code> is a taste. JSLint presented both in the same voice. Today's help page owns up to it in a section headed "Perfectly fine," which begins: "JSLint was designed to reject code that some would consider to be perfectly fine." Whether that was discipline or one person's preferences is what the argument was about.</p>
+
+<h2>The fork and the semicolon</h2>
+
+<p>For years the way to cope was the options. If you disagreed with a rule, there was usually a checkbox to tolerate what you were doing, and you wrote the result into a <code>/*jslint */</code> comment. Then the tool got stricter. On February 20, 2011, Anton Kovalyov published a post called "Why I forked JSLint to JSHint." The original address no longer answers, but the text survives in <a href="https://raw.githubusercontent.com/disqus/disqus.github.com/master/_posts/2011-02-20-antonkovalyov-why-i-forked-jslint-to-jshint.html">a copy in a Disqus repository</a>. JSLint, Kovalyov wrote, "has gotten uncomfortably opinionated and hostile towards your code. It is quickly transforming from a tool that helps developers to prevent bugs to a tool that makes sure you write your code like Douglas Crockford."</p>
+
+<p>The evidence was a function from <a href="../jquery/">jQuery</a> 1.4.2, which is still on jQuery's CDN:</p>
+
+<pre tabindex="0"><code>	isEmptyObject: function( obj ) {
+		for ( var name in obj ) {
+			return false;
+		}
+		return true;
+	},</code></pre>
+
+<p>"Can't see anything wrong with this snippet? Me neither. But JSLint refuses to proceed further, failing with an error that tells you to 'move "var" declarations to the top of the function'. What is even worse, there is no way to turn this behavior off." In the 2013 source the message is there, word for word, and the code that raises it calls a function named <code>stop</code>. JSHint had gone out two days before the post, and its pitch was a promise about governance: "it will always be a community-driven tool. Simply because a community of programmers working together is better than a single person working alone." The post opens with an epigraph attributed to Crockford: "Your sadly pathetic bleatings are harshing my mellow." A footnote quotes the language's creator, Brendan Eich, as having said, "JSLint can suck it."</p>
+
+<p>A fork inherits everything, including the licence. JSLint's was the MIT licence with one sentence added: "The Software shall be used for Good, not Evil." The Free Software Foundation's <a href="https://www.gnu.org/licenses/license-list.html">licence list</a> takes the sentence seriously: "The restriction might be unenforcible, but we cannot presume that. Thus, the license is nonfree." JSHint's maintainers spent years getting out from under it. Their account describes collecting contributor agreements and having six patches rewritten from scratch, three of them by volunteers who had never seen the code they were replacing. They finished in August 2020.</p>
+
+<p>The loudest episode involved the minifier. On April 13, 2012, a user opened <a href="https://github.com/twbs/bootstrap/issues/3057">issue 3057</a> on Twitter's Bootstrap, reporting that <code>bootstrap-dropdown.js</code> broke after going through JSMin. Bootstrap's JavaScript was written without semicolons, and <a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.2/js/bootstrap-dropdown.js">version 2.0.2</a> contained these two lines:</p>
+
+<pre tabindex="0"><code>      clearMenus()
+      !isActive &amp;&amp; $parent.toggleClass('open')</code></pre>
+
+<p>As written, the line break ends the first statement. JSMin's documentation lists the characters before which it will keep a line break, because "JavaScript sometimes treats linefeeds as semicolons," and <code>!</code> is not on the list. Remove the break and the two lines become one expression that does not parse. The maintainer who goes by fat replied that this was "a bug in jsmin" and suggested telling Crockford. Crockford turned up in the thread: "That is insanely stupid code. I am not going to dumb down JSMin for this case." And then: "Learn to use semicolons properly. ! is not intended to be a statement separator. ; is."</p>
+
+<p>The thread drew a crowd, and on April 15 Eich wrote the referee's report, <a href="https://brendaneich.com/2012/04/the-infernal-semicolon/">"The infernal semicolon."</a> It declines to give either side the win. Eich agreed "with Doug's canonically grumpy tone if not his substance," said the <code>&amp;&amp;</code> line was poor style, and corrected Crockford's claim that the code would break in a future edition. The moral was aimed at everyone: "ASI is (formally speaking) a syntactic error correction procedure. If you start to code as if it were a universal significant-newline rule, you will get into trouble." Bootstrap 2.0.3 has an <code>if</code> statement there instead.</p>
+
+<p>The next step was to remove the opinions from the tool altogether. In July 2013 Nicholas C. Zakas <a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">introduced ESLint</a> with a short history of the field: "A long time ago, JSLint was the state of the art in JavaScript linting technology. Then JSHint came along as a fork and took over due to increased flexibility." But JSHint had "no easy way to add additional rules," so the new tool would be one "where all rules are pluggable."</p>
+
+<h2>What it left behind</h2>
+
+<p><strong>The subset became a mode of the language.</strong> The <code>"use strict"</code> directive in the fifth edition is, I'd argue, JSLint's idea moved into the engine. The history paper traces it to Crockford's recommendations to the committee, not to the tool: "ES5 strict mode is the direct end product of Douglas Crockford's goal of 'correcting mistakes and inconveniences' in JavaScript's design." The paper calls it "subtractive": "It does not add new features to ECMAScript; instead it removes problematic features." In strict mode <code>with</code> is a syntax error and assigning to an undeclared name throws, which settles two of JSLint's oldest complaints. Then it stopped being optional. <a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">The current specification</a> says "Module code is always strict mode code" and that all parts of a class are too. So every file with an <code>import</code> in it runs in a dialect that, on my reading, began as a set of checkboxes on a web page.</p>
+
+<p><strong>The five-line function is a built-in.</strong> The prototypal inheritance page has a dated addendum from April 7, 2008. Crockford had decided a global function called <code>object</code> was a bad idea, and now preferred to write the same body as <code>Object.create</code>, guarded by <code>if (typeof Object.create !== 'function')</code>. That is twenty months before the fifth edition was published with an <code>Object.create</code> in it. Wirfs-Brock and Eich write that the standard function "was essentially the beget function with a property map added as an optional second parameter," <code>beget</code> being another of Crockford's names for it. The same edition added <code>JSON.parse</code> and <code>JSON.stringify</code>, and Crockford's <a href="https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js"><code>json2.js</code></a> still describes itself in those terms: "This file provides the ES5 JSON capability to ES3 systems."</p>
+
+<p><strong>Your lint configuration is written in JSLint's vocabulary.</strong> The old options table has a column of short names: <code>eqeqeq</code>, <code>newcap</code>, <code>plusplus</code>, <code>bitwise</code>, <code>onevar</code>. JSHint kept several of them as they were. ESLint, the clean break, has rules called <a href="https://eslint.org/docs/latest/rules/eqeqeq"><code>eqeqeq</code></a>, <code>new-cap</code>, <code>no-plusplus</code>, <code>no-bitwise</code> and <code>one-var</code>. I can't prove the descent rule by rule, but nobody arrives at "eqeqeq" twice by accident. It began as the name of a JSLint checkbox, and it is in a great many repositories today.</p>
+
+<p><strong>The fix for the opinions brought the opinions back.</strong> JSLint had one author, and its switches were that author's to add or remove. The remedy was a fork with more switches, and then a tool that was all switches. That moved the argument out of the tool and into every team's configuration file, where it could be held again for each project. The reaction to that is a tool like <a href="https://standardjs.com/">JavaScript Standard Style</a>, whose front page promises "No configuration" and "No decisions to make." That is JSLint's position, and I'd argue it is the part JSLint had right all along: most of the value of a house style is that the argument is over. This particular heir settled the old argument the other way. Its documentation lists a sibling package, <code>semistandard</code>, described as "standard, with semicolons (if you must)."</p>
+
+<p><strong>Not everything was adopted.</strong> The history paper notes that automatic semicolon insertion was on Crockford's list for strict mode and stayed in the language, because "many developers preferred to code without explicit semicolons." And the language went on to add the <code>class</code> keyword that the prototypal essay had argued it did not need. JSLint itself is still published, now by a GitHub organisation and under the Unlicense, with no clause about evil. Its help page says "Some of ES6's features are good, so JSLint will recognize the good parts of ES6," and <code>class</code> is not in the list that follows. Among the options is one described as "Allow <code>this</code>."</p>
+
+<h2>The takeaway</h2>
+
+<p>JSLint and <em>The Good Parts</em> made one argument twice: JavaScript contained a good small language, and you could have it immediately by refusing to use the rest. In a decade when the standard did not move, that was the only improvement on offer, and it worked. It gave developers a reason to take the language seriously and gave their teams something to point at in code review. The delivery was one person's taste presented as law. The fork, the semicolon thread and the pluggable linter were all reactions to that.</p>
+
+<p>What lasted is the subset more than the tool. The rules that were about bugs went into the language as strict mode, and strict mode is now compulsory for modules and classes. The helper functions became <code>Object.create</code> and <code>JSON.parse</code>. I doubt many people paste code into jslint.com any more, and nearly everyone writes something close to the dialect it defined. The rules it insisted on that did not win, such as mandatory semicolons and no <code>++</code>, are still being argued about, usually by people who have never had their feelings hurt by the original.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.crockford.com/javascript/javascript.html">JavaScript: The World's Most Misunderstood Programming Language</a>, Douglas Crockford, 2001</li>
+    <li><a href="https://www.crockford.com/javascript/survey.html">A Survey of the JavaScript Programming Language</a>, Douglas Crockford, 2002</li>
+    <li><a href="https://www.crockford.com/javascript/prototypal.html">Prototypal Inheritance in JavaScript</a>, Douglas Crockford, 2006, with addenda to 2008</li>
+    <li><a href="https://www.crockford.com/javascript/recommend.html">Recommendations for Modifications to the ECMAScript Language Specification</a>, Douglas Crockford, 2007</li>
+    <li><a href="https://www.crockford.com/javascript/popular.html">The World's Most Misunderstood Programming Language Has Become the World's Most Popular Programming Language</a>, Douglas Crockford, 2008</li>
+    <li><a href="https://www.crockford.com/jsmin.html">JSMin</a> and <a href="https://www.crockford.com/minify.html">Minify</a>, Douglas Crockford, 2019</li>
+    <li><a href="https://www.crockford.com/about.html">About Douglas Crockford</a>, crockford.com</li>
+    <li><em>JavaScript: The Good Parts</em>, Douglas Crockford, O'Reilly, 2008. <a href="https://openlibrary.org/books/OL10781042M">Open Library record</a>, with the table of contents and back cover copy</li>
+    <li><a href="https://en.wikiquote.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikiquote, for the passage from chapter 1 of the book</li>
+    <li><a href="https://www.jslint.com/help.html">JSLint: Help</a>, jslint.com, read November 12, 2026</li>
+    <li><a href="https://people.cs.nycu.edu.tw/~tsaiwn/oop/05_Tools/JSLint/lint.html">JSLint: The JavaScript Code Quality Tool</a>, Douglas Crockford, an older copy of the documentation kept on a course site at National Yang Ming Chiao Tung University</li>
+    <li><a href="https://raw.githubusercontent.com/jslint-org/jslint/v2013.3.13/jslint.js">jslint.js, edition of 2013-03-13</a>, and the current <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/jslint.mjs">jslint.mjs</a>, <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/LICENSE">LICENSE</a> and <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/CHANGELOG.md">CHANGELOG</a>, the jslint-org/jslint repository</li>
+    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021)</li>
+    <li><a href="https://raw.githubusercontent.com/disqus/disqus.github.com/master/_posts/2011-02-20-antonkovalyov-why-i-forked-jslint-to-jshint.html">Why I forked JSLint to JSHint</a>, Anton Kovalyov, 2011, as mirrored in a Disqus repository</li>
+    <li><a href="https://jshint.com/relicensing-2020/">2020 Relicensing</a>, <a href="https://jshint.com/about/">About JSHint</a> and <a href="https://jshint.com/docs/options/">JSHint Options</a>, the JSHint project</li>
+    <li><a href="https://www.json.org/license.html">The JSON License</a>, json.org, 2002</li>
+    <li><a href="https://www.gnu.org/licenses/license-list.html">Various Licenses and Comments about Them</a>, Free Software Foundation</li>
+    <li><a href="https://github.com/twbs/bootstrap/issues/3057">bootstrap-dropdown.js clearMenus() needs ; at the end</a>, issue 3057, twbs/bootstrap, 2012</li>
+    <li><a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.2/js/bootstrap-dropdown.js">bootstrap-dropdown.js, version 2.0.2</a> and <a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.3/js/bootstrap-dropdown.js">version 2.0.3</a>, Twitter Bootstrap, 2012</li>
+    <li><a href="https://brendaneich.com/2012/04/the-infernal-semicolon/">The infernal semicolon</a>, Brendan Eich, 2012</li>
+    <li><a href="https://code.jquery.com/jquery-1.4.2.js">jQuery 1.4.2</a>, 2010</li>
+    <li><a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">Introducing ESLint</a>, Nicholas C. Zakas, 2013</li>
+    <li><a href="https://eslint.org/docs/latest/about/">About</a>, <a href="https://eslint.org/docs/latest/rules/eqeqeq">eqeqeq</a> and <a href="https://eslint.org/docs/latest/rules/no-plusplus">no-plusplus</a>, ESLint documentation</li>
+    <li><a href="https://standardjs.com/">JavaScript Standard Style</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">ECMAScript Language: Source Text</a>, Ecma TC39, current draft, for strict mode code</li>
+    <li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-262/">ECMA-262</a>, Ecma International, for the dates of each edition</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">Strict mode</a>, MDN</li>
+    <li><a href="https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js">json2.js</a>, Douglas Crockford</li>
+    <li><a href="https://en.wikipedia.org/wiki/JSLint">JSLint</a>, <a href="https://en.wikipedia.org/wiki/JSHint">JSHint</a> and <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikipedia</li>
+  </ul>
+</section>

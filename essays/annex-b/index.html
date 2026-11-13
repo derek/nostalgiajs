@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Annex B: the features the web kept · Nostalgia.js</title>
+<meta name="description" content="The JavaScript standard keeps escape(), substr, &quot;text&quot;.blink() and HTML comments in an appendix of things it would delete if it could, and that appendix went from optional advice in 1999 to a requirement for every browser.">
+<link rel="canonical" href="https://derek.io/nostalgiajs/essays/annex-b/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Annex B: the features the web kept">
+<meta property="og:description" content="The JavaScript standard keeps escape(), substr, &quot;text&quot;.blink() and HTML comments in an appendix of things it would delete if it could, and that appendix went from optional advice in 1999 to a requirement for every browser.">
+<meta property="og:url" content="https://derek.io/nostalgiajs/essays/annex-b/">
+<meta property="og:image" content="https://derek.io/nostalgiajs/og/annex-b.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../../feed.xml">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WX44MXWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../../">Nostalgia.js<span>Essays on the Early Web</span></a>
+    <picture>
+      <source srcset="../../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../../">Essays</a>
+    <a href="../../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">The language · 1995 to today · 14 min read</p>
+      <div class="title">
+        <img src="../../icons/annex-b.svg" width="64" height="64" alt="">
+        <h1>Annex B: the features the web kept</h1>
+      </div>
+
+<p class="lede">The JavaScript standard has an appendix for the features it would delete if it could, and every browser is required to ship all of it.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#a-language-that-shipped-first">A language that shipped first</a></li>
+          <li><a href="#1999-an-annex-called-compatibility">1999: an annex called Compatibility</a></li>
+          <li><a href="#why-nothing-ever-leaves">Why nothing ever leaves</a></li>
+          <li><a href="#2015-the-annex-becomes-law">2015: the annex becomes law</a></li>
+          <li><a href="#living-with-it-lint-aliases-and-smoosh">Living with it: lint, aliases and smoosh</a></li>
+          <li><a href="#what-it-left-behind">What it left behind</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<pre tabindex="0"><code>"Hello, world".blink()
+<span class="c">// "&lt;blink&gt;Hello, world&lt;/blink&gt;"</span></code></pre>
+
+<p>I ran that line in Node 22 and it printed exactly that string. The <code>&lt;blink&gt;</code> element is gone from modern browsers, by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/blink">MDN's account</a>, but the method that builds the tag is specified, tested and mandatory. Its definition is clause B.2.2.4 of the ECMAScript specification, in <a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">Annex B, "Additional ECMAScript Features for Web Browsers"</a>, and it is two steps long.</p>
+
+<p>The annex is frank about its contents. Everything in it has "one or more undesirable characteristics and in the absence of legacy usage would be removed from this specification." The neighbours of <code>blink()</code> include <code>escape()</code>, <code>substr()</code>, a comment syntax made of HTML, and a method that lets you swap the pattern inside a live regular expression. Two residents already have essays of their own in this collection: <a href="../getyear/"><code>getYear()</code></a>, and <a href="../document-layers/"><code>document.all</code></a>, the object that claims to be undefined. This essay is about the rest, and about why a standards committee keeps a careful, normative description of things it tells you not to use.</p>
+
+<h2 id="a-language-that-shipped-first">A language that shipped first</h2>
+
+<p>JavaScript went out in Netscape Navigator 2 before anyone had written a standard for it, and its first job was to write HTML. There was no DOM to speak of. You produced page content by calling <code>document.write()</code> with a string of markup, so the language came with helpers for building that string. A <a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_a-c.htm">mirrored copy of Netscape's JavaScript reference</a> from the Navigator 3 era lists <code>anchor</code>, <code>big</code>, <code>blink</code>, <code>bold</code> and the others, each marked "Implemented in Navigator 2.0." The entry for <code>blink</code> reads: "Causes a string to blink as if it were in a &lt;BLINK&gt; tag." Its example is the opening snippet of this essay with period furniture:</p>
+
+<pre tabindex="0"><code>var worldString="Hello, world"
+document.write(worldString.blink())
+document.write("&lt;P&gt;" + worldString.bold())</code></pre>
+
+<p>The <a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_d-e.htm">same reference</a> has <code>escape</code>, also from Navigator 2.0: "Returns the ASCII encoding of an argument in the ISO Latin-1 character set." You used it to put a form value into a URL or a cookie. The example given is <code>escape("Hello, World")</code>, which returns <code>"Hello%2C%20World"</code>, and still does.</p>
+
+<p>Navigator 2 also had to live beside browsers that had never heard of scripts. Allen Wirfs-Brock and Brendan Eich tell the story in <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>. Netscape 1 and Mosaic, meeting a <code>&lt;script&gt;</code> element, displayed its contents as text. The way to stop them was to wrap the script in an HTML comment, but then the comment markers were a syntax error in JavaScript. So, the authors write, "Brendan Eich made JavaScript 1.0 accept &lt;!-- as the start of a single line comment, equivalent to //." You closed the block with <code>// --&gt;</code>, and that wrapper was there to be copied by anyone <a href="../view-source/">reading other people's pages</a>.</p>
+
+<p>JavaScript 1.2, in 1997, added a second layer. The history paper's list of new features includes regular expressions, a batch of string methods, and the "<code>__proto__</code> pseudo property of all objects", which let a program read and replace an object's prototype. Of the string methods it says that <code>match</code>, <code>replace</code> and <code>substr</code> "came from Perl." The language already had <code>substring</code>, and the same release brought <code>slice</code> from Python. That made three ways to cut a string, each with its own opinion about what the second argument means.</p>
+
+<h2 id="1999-an-annex-called-compatibility">1999: an annex called Compatibility</h2>
+
+<p>The <a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">first edition of ECMA-262</a>, from June 1997, simply wrote some of this down. <code>escape</code> and <code>unescape</code> are in its main text, as sections 15.1.2.4 and 15.1.2.5. So are octal literals: a number written with a leading zero, like <code>010</code>, is eight. The HTML methods, the HTML comments and <code>substr</code> are not mentioned. Browsers implemented them anyway.</p>
+
+<p>Annex B first appears in the <a href="https://ecma-international.org/wp-content/uploads/ECMA-262_3rd_edition_december_1999.pdf">third edition</a>, adopted in December 1999. Its title then was one word, "Compatibility", and it is marked "(informative)", meaning nobody has to follow it. It runs to a few pages. Section B.1 holds octal literals and octal string escapes, which "have been removed from this edition of ECMAScript." Section B.2 holds six properties: <code>escape</code>, <code>unescape</code>, <code>substr</code>, <code>getYear</code>, <code>setYear</code> and <code>toGMTString</code>. The introduction to B.2 is a piece of committee prose I admire: the annex "suggests uniform semantics for such properties without making the properties or their semantics part of this standard." It is a standard's description of things that are not in the standard.</p>
+
+<p>For <code>escape</code> this was a demotion with a replacement attached. The third edition is where <code>encodeURIComponent</code> and its three siblings arrive. The edition gives no reason. My reading is that it is in the algorithm, which has barely changed since 1997. <code>escape</code> works one 16-bit code unit at a time. A value under 256 becomes <code>%XX</code> and anything larger becomes <code>%uXXXX</code>. The annex itself says the encoding is only "partly based on" RFC 1738, the URL RFC of the day. Run it now:</p>
+
+<pre tabindex="0"><code>escape("ä")              <span class="c">// "%E4"</span>
+escape("ć")              <span class="c">// "%u0107"</span>
+encodeURIComponent("ä")  <span class="c">// "%C3%A4"</span>
+escape("a+b c")          <span class="c">// "a+b%20c"</span></code></pre>
+
+<p>The first answer is Latin-1, the second is an invention, and the third is UTF-8, which is what servers came to expect. The fourth is the quiet one. <code>escape</code> leaves <code>+</code> alone, and a server decoding a form submission reads <code>+</code> as a space. A "C++" typed into a search box built this way would arrive as "C" followed by two blanks. The <a href="../xmlhttprequest/">hidden-iframe request</a> shown elsewhere in this collection builds its URL with <code>escape(name)</code>.</p>
+
+<p><code>substr</code> took the opposite route. The annex was its way in, on probation (the history paper says "moved", but the first two editions never mention it). The trouble with it was never that it was broken. Here are the three side by side:</p>
+
+<pre tabindex="0"><code>"Mozilla".substr(1, 2)     <span class="c">// "oz"</span>
+"Mozilla".substring(1, 2)  <span class="c">// "o"</span>
+"Mozilla".slice(1, 2)      <span class="c">// "o"</span></code></pre>
+
+<p><code>substr</code> takes a start and a length. The other two take a start and an end. A language needs at most one of these conventions, and JavaScript had standardised the other one first.</p>
+
+<p>The committee's hope in 1999, as the history paper tells it and as the <a href="../getyear/"><code>getYear()</code> essay</a> quotes at more length, was that listing a feature in a non-normative annex would mark it as deprecated and free implementations to drop it. The authors call that expectation naïve. Browsers kept all of it.</p>
+
+<h2 id="why-nothing-ever-leaves">Why nothing ever leaves</h2>
+
+<p><strong>The author of the page is not the person who gets hurt.</strong> The history paper puts the constraint as a slogan, "Don't break the Web!", and then explains it. Pages are stored as source and reinterpreted on every visit, and many "are unmaintained by their original creators but still actively used." Change what <code>substr</code> returns and the people who notice are readers of a page whose author left in 2003. They cannot fix it. They can only decide your browser is the broken one.</p>
+
+<p><strong>No vendor can afford to go first.</strong> The paper credits Eich with the name "Browser Game Theory" for this. Two of the rules it lists: "Breaking-changes (even bug fixes) can drive away users," and "New browsers must conform to what is already there." A browser that removed <code>escape()</code> on principle would lose the pages that call it and gain nothing a user could see. So every engine kept every feature, and each new engine had to copy them, bugs and all, from the ones before.</p>
+
+<p><strong>An unspecified feature is worse than an ugly one.</strong> This is the argument that eventually changed the annex. If the major engines must all support functions declared inside <code>if</code> blocks, and the standard refuses to say what those mean, then each engine guesses. The history paper says the third edition "had intentionally excluded" such declarations, that implementations "allowed such declarations" regardless, and that "each major-browser implementation gave them different semantics." Silence made the feature non-portable, and left it in place.</p>
+
+<p><strong>The committee ruled out a clean break.</strong> A new version of the language could have opted out of the old rubbish with a mode switch. The paper describes how that idea lost: in 2012 the committee agreed to try "One JavaScript", in which programmers should be able to think "without thinking about modes, versions, or dialects." If there is one language and old pages must keep running, the old features are part of that language whether you like them or not.</p>
+
+<h2 id="2015-the-annex-becomes-law">2015: the annex becomes law</h2>
+
+<p>The <a href="https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf">sixth edition</a>, ECMAScript 2015, is where the annex gets its present name and its teeth. The <a href="https://ecma-international.org/wp-content/uploads/ECMA-262_5.1_edition_june_2011.pdf">5.1 edition of 2011</a> still calls it "Compatibility" and still marks it informative. Four years later it is "Additional ECMAScript Features for Web Browsers", marked "(normative)", and it opens by saying its contents "are required when the ECMAScript host is a web browser." It also grew. In came <code>__proto__</code>, <code>RegExp.prototype.compile</code>, the thirteen HTML methods, the comment syntax, a looser regular expression grammar, and several pages on functions in blocks.</p>
+
+<p>The comments are the neatest case. Eich's accommodation for Netscape 1 had never been documented as part of the language. The history paper's verdict: "It took twenty years, but in 2015 they were added to the ECMAScript standard—eventually Web Reality always wins." The standardised version recognises <code>--&gt;</code> at the start of a line as a comment too, so this is a complete, legal script, and evaluating it gives 2:</p>
+
+<pre tabindex="0"><code>var x = 1;
+&lt;!-- hello, Netscape 1
+x = x + 1;
+--&gt; goodbye
+x</code></pre>
+
+<p>The HTML methods got an actual design decision on the way in. All thirteen go through one helper, <code>CreateHTML</code>, which emits lowercase tags and replaces any double quote in an attribute value with <code>&amp;quot;</code>. So <code>'x'.anchor('a"b')</code> gives <code>&lt;a name="a&amp;quot;b"&gt;x&lt;/a&gt;</code>. The text between the tags is not escaped at all. Call it half of a 2015 security review bolted onto a 1995 function.</p>
+
+<p>Functions in blocks got the full treatment. The annex lists the specific patterns that happened to work the same in every browser, and then defines extra rules for sloppy-mode code so that those patterns keep working alongside the new block scoping. In practice:</p>
+
+<pre tabindex="0"><code>function f(b) {
+  if (b) { function g() {} }
+  return typeof g;
+}
+f(true)   <span class="c">// "function"</span>
+f(false)  <span class="c">// "undefined"</span></code></pre>
+
+<p>The function <code>g</code> is declared in the block, and when the block runs, its value is also copied out to a <code>var</code> in the enclosing function. Nobody would design that. It is the intersection of what the major engines did, written down so the next one can match it.</p>
+
+<p><code>RegExp.prototype.compile</code> came in the same way. It re-initialises an existing regular expression object in place, so <code>var r = /a/g; r.compile("b", "i")</code> leaves <code>r</code> as <code>/b/i</code>. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">MDN's note</a> on it is as dry as the spec: it "causes the otherwise immutable regex source and flags to become mutable, which may break user expectations."</p>
+
+<h2 id="living-with-it-lint-aliases-and-smoosh">Living with it: lint, aliases and smoosh</h2>
+
+<p>Developers coped the way <a href="../jslint/">JSLint had taught them to</a>: agree not to use the bad parts, and have a tool enforce the agreement. Strict mode, from the fifth edition, made part of that official. Legacy octal literals are a syntax error in strict code, which you can check by evaluating <code>"use strict"; 010</code>. Documentation did the rest. MDN marks <code>escape</code>, <code>substr</code> and every HTML method as deprecated. It is also honest about how far that gets you. Its <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">page for <code>substr</code></a> admits "there is no trivial way to migrate" old calls to <code>slice</code> or <code>substring</code> "without essentially writing a polyfill," because the three disagree on negative arguments.</p>
+
+<p>The committee, for its part, learned to add a new name beside the old one. When string trimming was tidied up, the <a href="https://github.com/tc39/proposal-string-left-right-trim">proposal</a> noted that all major engines already shipped <code>trimLeft</code> and <code>trimRight</code> "without any standard specification." The standard names became <code>trimStart</code> and <code>trimEnd</code>, to match <code>padStart</code>, and the old names went into Annex B as aliases "required for web compatibility." In a current engine <code>"".trimLeft === "".trimStart</code> is true. They are one function with two property names, and its <code>name</code> is <code>"trimStart"</code>.</p>
+
+<p>The same force acts on features that do not exist yet, and the best-known case is from 2018. A proposal added <code>Array.prototype.flatten</code>. Firefox Nightly shipped it and a popular site broke. Mathias Bynens's <a href="https://developer.chrome.com/blog/smooshgate">"SmooshGate FAQ"</a> explains the mechanism, which is a small masterpiece of bad luck. The MooTools library defines its own <code>Array.prototype.flatten</code> and then copies its array methods onto another prototype with a <code>for</code>-<code>in</code> loop. Assigning over a built-in method does not make it enumerable. So once browsers had a native <code>flatten</code>, MooTools's replacement was skipped by its own loop, and code depending on the copy failed. The proposal's author jokingly suggested the name <code>smoosh</code> instead, the joke "was not clear to everyone," and some people took the new name as settled.</p>
+
+<p>The FAQ's answer to "why not just break the Web?" is the Annex B argument in two sentences: "Sure, in retrospect MooTools did the wrong thing — but breaking the web doesn't punish them, it punishes users. These users do not know what a moo tool is." In May 2018 Michael Ficarra brought the rename to the committee, and <a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">the meeting notes</a> record the outcome in three words: "We choose <code>flat</code>." There is a <a href="../jquery/">jQuery-era</a> moral in there about libraries that extend built-in prototypes, and it is why the method you call is an adjective.</p>
+
+<h2 id="what-it-left-behind">What it left behind</h2>
+
+<p><strong>The annex is shrinking, because its contents are being promoted.</strong> If you open today's Annex B looking for <code>__proto__</code> or octal literals, they are gone. Two pull requests merged in the summer of 2021 moved them into the main body: <a href="https://github.com/tc39/ecma262/pull/2125">one for <code>__proto__</code></a> and <a href="https://github.com/tc39/ecma262/pull/1867">one for the octal syntax</a>. <code>Object.prototype.__proto__</code> is now clause 20.1.3.8 of <a href="https://tc39.es/ecma262/multipage/fundamental-objects.html">the chapter on fundamental objects</a>, followed by <code>__defineGetter__</code> and its three friends, both clauses under a coloured box that says "Normative Optional, Legacy". The <a href="https://tc39.es/ecma262/multipage/conformance.html">conformance clause</a> defines the label: legacy features have undesirable characteristics, but "their continued usage in existing applications prevents their removal from this specification." A summary on the <code>__proto__</code> pull request sorts the pieces into required or optional, and "icky" or not. The object-literal syntax came out as required and not icky. The accessor came out optional and icky. In 1999 these things were outside the standard, in 2015 they were a required appendix, and now they are scattered through the main text with a warning label. The annex's own introduction says so: some of its features are now "specified in the main body of this document."</p>
+
+<p><strong><code>escape()</code> survived by being wrong in a useful way.</strong> Because <code>unescape</code> turns each <code>%XX</code> into one character with that byte's value, and <code>encodeURIComponent</code> produces UTF-8 bytes as <code>%XX</code>, chaining them gives you UTF-8 encoding for free. Johan Sundström <a href="https://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.html">posted the trick in July 2006</a>:</p>
+
+<pre tabindex="0"><code>function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
+}
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
+}</code></pre>
+
+<p>It works today: <code>encode_utf8("é")</code> is a two-character string holding the bytes C3 and A9. As far as I can tell it became a familiar way to get non-ASCII text through <code>btoa()</code>, which throws on any character above 255. So a function sidelined in 1999, and poor at Unicode, picked up a second career as a Unicode converter. As far as I can tell that usage is one more reason it can't be removed, and I'd guess a fair share of the <code>escape</code> calls still on the web are this idiom and not a URL at all.</p>
+
+<p><strong>Some old features are not even in the annex.</strong> After a match, <code>RegExp.$1</code> holds the first captured group. Engines do this, and Node printed <code>a</code> for me after matching <code>/(a)(b)/</code> against <code>"ab"</code>. The specification does not mention it. A <a href="https://github.com/tc39/proposal-regexp-legacy-features">proposal to specify these static properties</a> in Annex B reached Stage 3 in May 2017. Its README says the draft "does not reflect what the implementations do, but what the editor thinks to be the least bad thing they ought to do in order to maintain web compatibility." At a status review in <a href="https://github.com/tc39/notes/blob/main/meetings/2026-01/january-21.md">January 2026</a> the notes first recall a 2023 finding that implementers "have lost interest in implementing this proposal", and then record that Firefox's engine had implemented it after all. <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/148">Firefox 148</a> shipped it a month later, and the review listed it among proposals that "may be ready to go to Stage 4 Soon". After nine years at Stage 3, <code>RegExp.$1</code> may finally get a clause. Meanwhile the annex still takes new residents. Its last clause today, B.3.9, arrived through <a href="https://github.com/tc39/ecma262/pull/3568">a pull request merged in July 2025</a>. It covers assignments like <code>f() = 1</code>, which web browsers must accept at parse time in sloppy code and reject only when the line runs. I checked: a function containing that line parses, and calling it throws a ReferenceError.</p>
+
+<p><strong>The real deprecation mechanism turned out to be new containers.</strong> Nothing was removed from old scripts. But the annex's comment syntax is "not allowed when parsing source text using the goal symbol <em>Module</em>", and when I gave Node a module containing <code>&lt;!--</code> it answered "HTML comments are not allowed in modules". Modules and class bodies are always strict, so they get no octal literals and none of the block-function compatibility rules either. The committee could not take anything away from the pages of 1998. It could decline to bring the syntax along into each new kind of code, and it did. If you write only modules, the HTML comments, the octal literals and the block-function rules are already gone for you, though <code>escape</code> and <code>substr</code> are still sitting on the globals.</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>Annex B is what a standard looks like after it accepts that it does not own its language. The committee tried ignoring these features, then listing them as optional, then requiring them in an appendix, and it is now folding them into the main text with a label. Each step made the document less tidy and the web more predictable, because the alternative to specifying <code>substr</code> was never a world without <code>substr</code>. It was several slightly different versions of it. A feature on the web is removed only when nobody's page calls it, and nobody can ever prove that.</p>
+
+<p>The practical consequence runs forward as well as back. Every name a popular library puts on a built-in prototype, and every quirk enough pages lean on, is a future constraint on the language, which is how an array method came to be called <code>flat</code>. So the annex is best read as a warning about anything you publish to a platform that never ships a breaking release. The string that blinks will outlast the tag, the browser that invented it, and quite possibly the rest of us.</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>I read Netscape's early JavaScript reference in a mirrored copy on a university server, because the Internet Archive would not open for me. The mirror carries no date, and I placed it in the Navigator 3 era from its &quot;Implemented in Navigator 3.0&quot; entries.</li>
+    <li>The &quot;icky&quot; classification of __proto__ and the remark that the committee agreed to move syntax items into the main body come from comments on two GitHub pull requests, which I read through an automated page summary and not line by line.</li>
+    <li>That the unescape(encodeURIComponent()) trick became a familiar way to feed btoa(), that it helps keep escape() from being removed, and that it accounts for a fair share of today's escape() calls are my own impressions. I have one 2006 blog post for the trick and no usage figures.</li>
+    <li>The third edition gives no reason for moving escape() to the annex. Tying it to the function's handling of Unicode is my reading, and the &quot;C++&quot; search-box example is my illustration, not a documented incident.</li>
+    <li>The history paper says substr was &quot;moved&quot; to Annex B in 1999. I found no mention of it in the first or second edition, so I say the annex was its way into the standard.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">ECMAScript Annex B: Additional ECMAScript Features for Web Browsers</a>, Ecma TC39, current draft <a class="archived" href="https://web.archive.org/web/20261105185938/https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">(archived)</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/conformance.html">ECMAScript, clause 2: Conformance</a>, Ecma TC39, current draft (defines "Normative Optional" and "Legacy")</li>
+    <li><a href="https://tc39.es/ecma262/multipage/fundamental-objects.html">ECMAScript, clause 20: Fundamental Objects</a>, Ecma TC39, current draft (see 20.1.3.8 and 20.1.3.9)</li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">ECMA-262, 1st edition</a>, Ecma, June 1997 (PDF; see 15.1.2.4 and 15.1.2.5) <a class="archived" href="https://web.archive.org/web/20261105185941/https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">(archived)</a></li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_3rd_edition_december_1999.pdf">ECMA-262, 3rd edition</a>, Ecma, December 1999 (PDF; see Annex B, "Compatibility")</li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_5.1_edition_june_2011.pdf">ECMA-262, edition 5.1</a>, Ecma, June 2011 (PDF)</li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf">ECMA-262, 6th edition (ECMAScript 2015)</a>, Ecma, June 2015 (PDF)</li>
+    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
+    <li><a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_a-c.htm">Navigator JavaScript reference, A to C</a> and <a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_d-e.htm">D to E</a>, Netscape, Navigator 3 era, mirrored copy</li>
+    <li><a href="https://developer.chrome.com/blog/smooshgate">SmooshGate FAQ</a>, Mathias Bynens, 2018</li>
+    <li><a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">TC39 meeting notes, May 22, 2018</a>, Ecma TC39 ("Array.prototype.flatten rename")</li>
+    <li><a href="https://github.com/tc39/ecma262/pull/2125">Normative: move __proto__ out of annex b</a>, pull request 2125, tc39/ecma262, 2020 to 2021</li>
+    <li><a href="https://github.com/tc39/ecma262/pull/1867">Normative: Make B.1.{1,2} normative</a>, pull request 1867, tc39/ecma262, 2020 to 2021</li>
+    <li><a href="https://github.com/tc39/proposal-string-left-right-trim">String.prototype.trimStart / String.prototype.trimEnd</a>, TC39 proposal</li>
+    <li><a href="https://github.com/tc39/proposal-regexp-legacy-features">Legacy RegExp features in JavaScript</a>, Claude Pache, TC39 proposal, Stage 3</li>
+    <li><a href="https://github.com/tc39/notes/blob/main/meetings/2026-01/january-21.md">TC39 meeting notes, January 21, 2026</a>, Ecma TC39</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/148">Firefox 148 release notes for developers</a>, MDN Web Docs, 2026</li>
+    <li><a href="https://github.com/tc39/ecma262/pull/3568">Normative: Add "Runtime Errors for Function Call Assignment Targets" to Annex B</a>, pull request 3568, tc39/ecma262, 2025</li>
+    <li><a href="https://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.html">Encoding / decoding UTF8 in javascript</a>, Johan Sundström, 2006</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">String.prototype.substr()</a>, MDN Web Docs</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/blink">String.prototype.blink()</a>, MDN Web Docs</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">RegExp.prototype.compile()</a>, MDN Web Docs</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape">escape()</a>, MDN Web Docs</li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+Annex+B%3A+the+features+the+web+kept&amp;body=Essay%3A+https%3A%2F%2Fderek.io%2Fnostalgiajs%2Fessays%2Fannex-b%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/annex-b.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/annex-b.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../getyear/">getYear() and the year 19100</a> <span>The language · 1995 to today</span></li>
+        <li><a href="../document-layers/">if (document.layers): the web forks in two</a> <span>Browsers and the platform · 1995 to 2001</span></li>
+        <li><a href="../webmaster/">The webmaster: a mailbox that became a job</a> <span>People and culture · 1993 to today</span></li>
+      </ul>
+      <p><a href="../../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../../"><img src="../../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · Essays on the Early Web · <a href="../../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>

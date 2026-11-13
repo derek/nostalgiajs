@@ -2,7 +2,7 @@
   "name": "nostalgiajs",
   "private": true,
   "type": "module",
-  "description": "Nostalgia.js: AI Essays on Web History. No dependencies.",
+  "description": "Nostalgia.js: Essays on the Early Web. No dependencies.",
   "scripts": {
     "build": "node scripts/build.mjs",
     "archive": "node scripts/archive.mjs",

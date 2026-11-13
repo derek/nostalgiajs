@@ -4,7 +4,7 @@ Instructions for AI agents and humans working in this folder. Keep this file cur
 
 ## What this is
 
-Nostalgia.js is a collection of essays on web history, with the tagline "AI Essays on Web History". Served by GitHub Pages and published at `https://derek.io/nostalgiajs/`. The GitHub Pages address `https://derek.github.io/nostalgiajs/` redirects there, so every canonical link, feed link and link-preview tag uses the derek.io address. The essays cover the web from the 1990s through the 2010s, mostly through JavaScript, and include the people and culture of that time (careers, communities, arguments) as well as the technology. An essay may run up to the present when its story does.
+Nostalgia.js is a collection of essays on web history, with the tagline "Essays on the Early Web". Served by GitHub Pages and published at `https://derek.io/nostalgiajs/`. The GitHub Pages address `https://derek.github.io/nostalgiajs/` redirects there, so every canonical link, feed link and link-preview tag uses the derek.io address. The essays cover the web from the 1990s through the 2010s, mostly through JavaScript, and include the people and culture of that time (careers, communities, arguments) as well as the technology. An essay may run up to the present when its story does.
 
 Audience: JavaScript and web developers aged 40 to 60 in Derek's community, many of whom lived this history. The essays are written by an AI. Derek Gathright edits the collection and picks most of the topics.
 
@@ -16,8 +16,8 @@ The site was first called Boomer.js and then, briefly, View Source. `../boomerjs
 
 1. **Stay in this folder.** Do not edit anything outside `nostalgiajs/`.
 2. **No dependencies.** One build script in plain Node, no npm packages, no frameworks, no CDN scripts, no web fonts. The published pages use no JavaScript, with one exception: the Google Tag Manager loader (`gtm.js` from `googletagmanager.com`) that the build writes into every page's `<head>` when `GTM_ID` is set in `scripts/build.mjs`. The only tracking allowed is what Derek configures in that GTM container, which is intended to be Google Analytics 4 only. Do not add any other script, tracker or pixel to the site or to the container.
-3. **Never edit generated files by hand.** A hand edit is silently lost at the next build. The landing page's intro sentence lives in `scripts/build.mjs`, and the About page's text lives in `content/_about.html`. `index.html`, `feed.xml`, `about/index.html` and every `<slug>/index.html` are written by `scripts/build.mjs`. Change the sources (`essays.json`, `content/`, `style.css`, the script) and rebuild. Commit the generated files with the change, because GitHub Pages serves this folder as it is.
-4. **No author name, and one quiet disclosure.** The essays have no byline and the author has no name. The tagline and the About page say the essays are written by AI. Do not add disclaimers, apologies or "as an AI" asides to an essay.
+3. **Never edit generated files by hand.** A hand edit is silently lost at the next build. The landing page's intro sentence lives in `scripts/build.mjs`, and the About page's text lives in `content/_about.html`. `index.html`, `feed.xml`, `about/index.html` and every `essays/<slug>/index.html` are written by `scripts/build.mjs`. Change the sources (`essays.json`, `content/`, `style.css`, the script) and rebuild. Commit the generated files with the change, because GitHub Pages serves this folder as it is.
+4. **No author name, and one quiet disclosure.** The essays have no byline and the author has no name. The tagline does not mention it, but the landing page's intro sentence and the About page say the essays are written by AI. Do not add disclaimers, apologies or "as an AI" asides to an essay.
 5. **Never invent facts.** No made-up quotes, statistics, version numbers, release dates, people or anecdotes. Open a real source for every date, version, quote and attribution before you write it. Quote people only in words you have seen on the page. If you cannot confirm a claim, drop it or state it less firmly ("around 2001", "by the early 2000s"). Label your own interpretations ("my best guess", "I'd argue"). Code samples must be real code from the period or code that runs as shown, not pseudo-code in disguise.
 6. **Never claim personal memories.** Do not write "I remember writing this" or invent a past. Do not dwell on the absence either: no "I wasn't there" or "the people who were there will know". Tell the story with the confidence of someone who did the reading. Use "you" for the developer's experience.
 7. **No punching down.** Gently roasting a technology is fine. Mocking the people who used it is not. Most of them shipped real products under real constraints.
@@ -42,7 +42,7 @@ Target 2,200 to 3,000 words of prose (about 10 to 13 minutes, plus code). Reader
 
 Section headings should describe the content of this essay. The list above is the order of ideas, not a set of headings to copy, apart from "The takeaway".
 
-**Link your sources.** When an essay mentions an essay, blog post, spec, book or project site, link it inline at the mention and list it again under "Sources and further reading" with author and year. Only link URLs you have opened and confirmed load and say what you claim. If you cannot open a source, name it without a link. Link to other Nostalgia.js essays as `../their-slug/` where they are relevant.
+**Link your sources.** When an essay mentions an essay, blog post, spec, book or project site, link it inline at the mention and list it again under "Sources and further reading" with author and year. Only link URLs you have opened and confirmed load and say what you claim. If you cannot open a source, name it without a link. Link to other Nostalgia.js essays as `../their-slug/` where they are relevant (essays are siblings under `essays/`, so the relative link works).
 
 ## Files
 
@@ -59,13 +59,13 @@ Section headings should describe the content of this essay. The list above is th
 | `buttons/*.png` | The three 88x31 footer buttons, drawn by `scripts/buttons.py` (needs Python with Pillow; run only to change them). |
 | `scripts/build.mjs` | Generates every page, the landing page and the feed. |
 | `TOPICS.md` | Essay ideas, with Derek's "Up next" queue at the top. |
-| `<slug>/index.html`, `index.html`, `about/index.html`, `feed.xml`, `icons/*.svg` | Generated. Do not edit. |
+| `essays/<slug>/index.html`, `index.html`, `about/index.html`, `feed.xml`, `icons/*.svg` | Generated. Do not edit. |
 
 ### An entry in `essays.json`
 
 ```json
 {
-  "slug": "jquery-and-the-dollar-sign",
+  "slug": "jquery",
   "title": "jQuery 1.0: what $ really replaced",
   "description": "One sentence, used on the landing page, in link previews and in the feed.",
   "topic": "libraries",
@@ -74,7 +74,7 @@ Section headings should describe the content of this essay. The list above is th
 }
 ```
 
-- `slug`: lowercase words joined by hyphens. It is the essay's address, so never change it after publishing. No dates in slugs.
+- `slug`: one to three lowercase words joined by hyphens, named for the subject (`jquery`, `ie6-funeral`, `xmlhttprequest`), not the title. It is the essay's address (`/essays/<slug>/`) and the name of its `content`, `icons` and `og` files, so never change it after publishing. No dates in slugs.
 - `topic`: one of `browsers` (Browsers and the platform), `language` (The language), `libraries` (Libraries and tools) or `people` (People and culture). The landing page groups essays by topic.
 - `era`: the years the story covers, `[start, end]`, or `[start, null]` when it runs to the present. Shown on the page as "1997 to 2001" or "2005 to today", and used to order essays within a topic.
 - `published`: the real UTC time the essay was first published, as an ISO date-time. It is used only inside the RSS feed. It is never shown on a page, and never changed afterwards.
