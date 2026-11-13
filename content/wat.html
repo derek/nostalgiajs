@@ -1,0 +1,150 @@
+<p class="lede">Probably the best-known four minutes ever spent on JavaScript are a comedy routine, and every punchline in it is behaviour the specification requires.</p>
+
+<pre tabindex="0"><code>[] + []   <span class="c">// ""</span>
+[] + {}   <span class="c">// "[object Object]"</span>
+{} + []   <span class="c">// 0</span>
+{} + {}   <span class="c">// NaN</span></code></pre>
+
+<p>Those four lines are the middle of <a href="https://www.destroyallsoftware.com/talks/wat">"Wat"</a>, a lightning talk Gary Bernhardt gave at the CodeMash conference in January 2012. I ran all four in Node 22 and got those four answers. The last two come with a condition, which the talk leaves out and which I'll get to: they are only true when the line is a statement on its own.</p>
+
+<p>The talk did not invent the genre. A site called wtfjs had been collecting this kind of result for two years, and the oddities themselves were as old as the language. But "Wat" is the version everybody saw, and it fixed the form: type something reasonable, show what comes back, wait for the room. This essay is about where the jokes came from, what each one is really doing, whether they were fair, and what the language did about them.</p>
+
+<h2>A blog with one kind of post</h2>
+
+<p>In February 2010 a site appeared at <a href="https://wtfjs.com/">wtfjs.com</a>. Its footer says it was "created by Brian LeRoux &amp; Andrew Lunny", and its <a href="https://wtfjs.com/about">about page</a> gives the mission: "JavaScript is a language we love despite it giving us so much to hate. This is a collection of those very special irregularities, inconsistencies and just plain painfully unintuitive moments for the language of the web."</p>
+
+<p>The oldest posts are dated February 12, 2010, and each is a few lines long. One reads, in full:</p>
+
+<pre tabindex="0"><code>typeof NaN // number, of course.</code></pre>
+
+<p>followed by "Now that makes sense." Another shows <code>typeof null // object</code>. A third shows <code>NaN === NaN // false</code> under the line "Some argue this makes sense. Some ppl also like to sniff glue." A fourth is <code>("foo" + + "bar") === "fooNaN"</code>, with the note "Proposal to rename this site: NaNwtf".</p>
+
+<p>The about page describes the plumbing. The first version "was a quick and dirty Tumblr thing". The second was a blog written from scratch in Node, then at version 0.1, and the <a href="https://github.com/brianleroux/wtfjs">repository</a> for it begins in May 2010 with a commit titled "happy birthday". After that a post was a Markdown file and a contribution was a pull request. LeRoux had given the PhoneGap talk at the <a href="../jsconf/">first JSConf</a> the year before, and treated the site as a group effort: the repository holds 123 posts from dozens of contributors, the last dated March 2016.</p>
+
+<p>Not all of them are about the language. There are Internet Explorer scoping bugs, a complaint that <a href="../firebug/">Firebug</a> won't let you declare a variable called <code>console</code>, and a 2014 entry on <a href="../document-layers/"><code>document.all</code></a>, the object whose <code>typeof</code> is "undefined". But the centre of gravity was always type conversion. In February 2011 a GitHub user named dorey published a companion piece, the <a href="https://dorey.github.io/JavaScript-Equality-Table/">JavaScript equality table</a>: a grid showing which pairs of values count as equal under <code>==</code>, with a second tab for <code>===</code>. Its caption is the argument from <a href="../jslint/">the JSLint essay</a> in one line: "Always use 3 equals unless you have a good reason to use 2."</p>
+
+<p>Allen Wirfs-Brock and Brendan Eich noticed all this. Their history of the language, <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>, has a short chapter on critics, which ends: "Articles that catalog JavaScript's quirks and websites such as wtfjs.com became a Web staple."</p>
+
+<h2>Four minutes in Sandusky</h2>
+
+<p>CodeMash is held in Sandusky, Ohio, at what Joey deVilla's <a href="https://www.globalnerdy.com/2012/01/28/wat-a-funny-look-at-ruby-and-javascript-oddities/">write-up of the talk</a> calls "Ohio's largest indoor waterpark". Bernhardt's slot there was a lightning talk, and the <a href="https://www.destroyallsoftware.com/captions/talks/wat.vtt">caption file</a> on the video ends at four minutes and seventeen seconds. I quote the talk from those captions.</p>
+
+<p>It starts with Ruby, which people forget. Refer to an undefined variable and you get a NameError. Assign one undefined variable to another and you get a NameError. Then:</p>
+
+<pre tabindex="0"><code>a = a   # =&gt; nil</code></pre>
+
+<p>I ran it in Ruby 3.3, and it still gives <code>nil</code>. A second Ruby bit uses <code>method_missing</code> to make bare words work as strings, and here Bernhardt is careful: "this is not deserving of wat. This is actually a result of how awesome Ruby is."</p>
+
+<p>Then: "Let's talk about JavaScript." The four lines arrive as a quiz. "What should array plus an array be?" Someone offers an empty array. "I would also accept type error." The answer is the empty string. Array plus object "should obviously be type error, because those are completely disparate types", and gives <code>[object Object]</code>. Then the best line in the talk: "because this is plus-- so you can flip the operands and the same thing comes out." The screen shows 0. Object plus object gives NaN, "so this one's actually right." Then: "Enough making fun of languages that suck. Let's talk about JavaScript."</p>
+
+<p>The closing run starts from <code>Array(16)</code>, joins it with the string "wat", and gets the one concession of the afternoon: "This is actually the only line in this entire presentation that's reasonable." Adding 1 to the string gives "wat1" fifteen times. Subtracting 1 gives this, which I ran:</p>
+
+<pre tabindex="0"><code>Array(16).join("wat" - 1) + " Batman!"
+<span class="c">// "NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!"</span></code></pre>
+
+<p>It looks improvised and was the opposite. In the <a href="https://news.ycombinator.com/item?id=3515845">Hacker News thread</a> about the video, Bernhardt explained that the terminal sessions were pre-recorded and cut up in Keynote: "There are 37 slides in that four-minute talk." A commenter there identified the console as <code>jsc</code>, the command-line shell of Safari's JavaScript engine.</p>
+
+<p>The video went up on Bernhardt's screencast site, Destroy All Software, and reached Hacker News by January 18. A second submission on January 26 passed 500 points. The next day somebody asked Stack Overflow to explain the results, and the day after that deVilla's post went up, with a note that it also ran on Shopify's technology blog. The page hosting the video carries a one-line disclaimer that most of the later argument ignored: "This talk does not represent anyone's actual opinion."</p>
+
+<h2>What the plus sign actually does</h2>
+
+<p>The addition operator's rule is one step of an operation the <a href="https://tc39.es/ecma262/multipage/ecmascript-language-expressions.html">current specification</a> calls ApplyStringOrNumericBinaryOperator. Convert both operands with ToPrimitive. Then: "If leftPrimitive is a String or rightPrimitive is a String", convert both to strings and return "the string-concatenation". Otherwise treat both as numbers. So <code>+</code> never looks at what you gave it, only at what your operands turn into.</p>
+
+<p><a href="https://tc39.es/ecma262/multipage/abstract-operations.html">ToPrimitive</a>, for an ordinary object and no stated preference, tries two methods in order: "valueOf", then "toString". An array's <code>valueOf</code> returns the array, which is still an object, so the engine moves on to <code>toString</code>. For an array that method calls <code>join</code>, and for a plain object it produces the famous tag:</p>
+
+<pre tabindex="0"><code>String([])        <span class="c">// ""</span>
+String({})        <span class="c">// "[object Object]"</span>
+[1, 2] + [3]      <span class="c">// "1,23"</span></code></pre>
+
+<p>That is the first two lines of the talk. An empty array joins to an empty string, and two empty strings concatenate to an empty string. An empty string plus <code>"[object Object]"</code> is <code>"[object Object]"</code>. The audience member who guessed "empty array" assumed <code>+</code> has an array meaning. It has two meanings, and an array reaches it only as a string.</p>
+
+<p>The Batman line is the same rule seen from the other side. <code>"wat" + 1</code> has a string operand, so it concatenates. Subtraction has no string meaning at all, so <code>"wat" - 1</code> converts both sides to numbers and yields <code>NaN</code>. Then <code>join</code> turns its separator into the string "NaN" and puts it between sixteen empty slots, which makes fifteen of them. The captions have Bernhardt saying the bare array prints as "16 commas"; it prints as fifteen, for the same reason.</p>
+
+<h2>The block nobody mentioned</h2>
+
+<p>The third and fourth lines are a different trick. The statement grammar has a note attached to <a href="https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html">expression statements</a>: one "cannot start with a U+007B (LEFT CURLY BRACKET) because that might make it ambiguous with a Block." So a line that begins with <code>{}</code> begins with an empty block, and what follows is a separate expression with a unary plus on the front. The specification's note on that operator is brief: it "converts its operand to Number type."</p>
+
+<pre tabindex="0"><code>{} + []               <span class="c">// 0</span>
++[]                   <span class="c">// 0</span>
+({} + [])             <span class="c">// "[object Object]"</span>
+var o = {} + []; o    <span class="c">// "[object Object]"</span>
+{} + {}               <span class="c">// NaN</span>
+({} + {})             <span class="c">// "[object Object][object Object]"</span></code></pre>
+
+<p>I ran each of those. The first and fifth give those answers only as whole statements, which is how <code>node -p</code> and <code>eval</code> treat them and, by the Hacker News thread's account, how <code>jsc</code> and Chrome's console treated a typed line in 2012. Wrap them in parentheses, assign them, or pass them to <code>console.log</code>, and <code>{}</code> is an object again. So <code>+</code> was never non-commutative. No object was added to anything in line three: the array became <code>""</code> and the empty string became 0. In line four the object became <code>"[object Object]"</code>, which is not a number, and Bernhardt's "this one's actually right" is funnier once you know the reason is wrong.</p>
+
+<p>Bernhardt knew. When a Hacker News commenter called the result a console bug, the reply was: "By wrapping in parenthesis, you're making it an expression. When you just say "{}+[]" in e.g. Chrome, the first {} is parsed as a block." And then: "I didn't mention any of this in the talk (it would've killed the flow ;)."</p>
+
+<h2>Why the language is like this</h2>
+
+<p><strong>The conversions were requested.</strong> The history paper is plain about it: "Automatic coercions were intended to lower the entry barrier for the initial adoption of JavaScript as a simple scripting language." Some were added after the first ten-day sprint because Netscape's own early users asked. They wanted an HTTP status of <code>"404"</code> to compare equal to the number 404, and they wanted "automatic coercion of empty strings to 0 in numeric contexts, providing a default value for empty fields of HTML forms." That second request is line three of the talk. <code>{} + []</code> is 0 because an empty form field was supposed to count as zero.</p>
+
+<p><strong>There was nothing else for <code>+</code> to do.</strong> The talk's preferred answer is a type error. JavaScript 1.0 could not give one in any way a script could handle: the history paper's table of features "not present in JavaScript 1.0" includes the <code>try</code> statement. My reading is that a scripting language with no way to catch an error had good reasons to return something, and a string was the something.</p>
+
+<p><strong>The fix was tried, and reverted.</strong> This is the part I think the jokes miss. The paper records that "Brendan Eich decided to fix == in JavaScript 1.2 by eliminating most of its automatic coercions", in 1997. It did not survive contact with the standard. Shon Katzenberger of Microsoft "successfully argued that it was too late to make such a change given the large number of existing Web pages it would break", and Eich "reverted to the original semantics" in JavaScript 1.3. The language was two years old and already could not take it back. What it got was a second operator: <code>===</code> appears in a Microsoft proposal from 1997 and in the third edition of the standard.</p>
+
+<p><strong>Some of it was never JavaScript's.</strong> <code>0.1 + 0.2</code> is <code>0.30000000000000004</code> in any language that uses binary floating point, and there is a whole website, <a href="https://0.30000000000000004.com/">0.30000000000000004.com</a>, that lists them, under the heading "Your language isn't broken, it's doing floating point math." <code>NaN</code> not equalling itself is the same standard's rule, and the specification's Number::equal starts "If x is NaN, return false." The history paper notes that for many beginners the browser is where they first meet these things, and they "typically assume that those problems are unique to JavaScript."</p>
+
+<p><strong>And some of it was an accident.</strong> <code>typeof null</code> is the honest example. Eich's recollection in the paper is that it leaked out of "the original Mocha implementation", where null carried the same internal tag as objects. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">MDN</a> records that "A fix was proposed for ECMAScript (via an opt-in), but was rejected."</p>
+
+<h2>Explaining the joke, and arguing about it</h2>
+
+<p>The first response to "Wat" was homework. The Stack Overflow question, <a href="https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the">"What is the explanation for these bizarre JavaScript behaviours mentioned in the 'Wat' talk for CodeMash 2012?"</a>, was posted on January 27, 2012 by someone who had tried the lines in a JSFiddle and got different answers. A user called Ventero replied within the hour, walking through each result by section number of the standard, block statement included. That answer has more than 1,500 votes. It set a pattern, and when Denys Dovhan started <a href="https://github.com/denysdovhan/wtfjs">a new wtfjs list</a> on GitHub in July 2017, crediting LeRoux for "the original idea", the entries came with explanations and, mostly, links to the clause responsible. One of them is the banana:</p>
+
+<pre tabindex="0"><code>"b" + "a" + +"a" + "a"  <span class="c">// "baNaNa"</span></code></pre>
+
+<p>Dovhan's list calls it "an old-school joke in JavaScript, but remastered", and gives the original as <code>"foo" + +"bar"</code>, which is the wtfjs post from February 2010.</p>
+
+<p>The second response was to say the jokes were unfair. Kyle Simpson's book <a href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/types%20%26%20grammar/ch4.md"><em>You Don't Know JS: Types &amp; Grammar</em></a> spends a long chapter on it. Of the equality algorithm, Simpson writes: "I think you'll be surprised at just how reasonable it is." Of the contrived examples: "Don't fall into the "my programming language should protect me from myself" fallacy." The chapter's position is that implicit conversion has good parts, and that "Potential abuses of a mechanism are not sufficient evidence to condemn the mechanism."</p>
+
+<p>I think both sides have a point and they are different points. Nobody ships <code>[] + {}</code>. It is very easy to ship a total that reads "10020" because one operand came out of a form field as text. The talk's examples are absurd, but they are a reduction of a real bug to its smallest form. Bernhardt's own answer, to a commenter who called the sleight of hand "tasteless", was shorter: "It's a joke. Relax."</p>
+
+<p>Day to day, people coped the way the <a href="../jslint/">linters</a> told them to. ESLint's <a href="https://eslint.org/docs/latest/rules/eqeqeq"><code>eqeqeq</code></a> rule explains that <code>==</code> follows "the rather obscure Abstract Equality Comparison Algorithm", and a second rule, <a href="https://eslint.org/docs/latest/rules/no-implicit-coercion"><code>no-implicit-coercion</code></a>, exists to "flag shorter notations for the type conversion".</p>
+
+<h2>What it left behind</h2>
+
+<p><strong>The consoles quietly rewrote the punchline.</strong> Type <code>{} + []</code> at the Node 22 prompt and you get <code>'[object Object]'</code>, not 0. The reason is in <a href="https://github.com/nodejs/node/blob/v22.x/lib/repl.js">the REPL's source</a>: if the input looks like an object literal, a comment says, "Add parentheses to make sure `code` is parsed as an expression". The Hacker News thread shows Node already disagreeing with <code>jsc</code> in January 2012. So the most quoted line of the talk depends on which prompt you use, and a newcomer who tries it in Node will conclude the talk was wrong. Nothing in the language changed. A tool decided that what people meant mattered more than what the grammar said.</p>
+
+<p><strong>New types refuse to play.</strong> The old conversions can't be removed, for the reasons in <a href="../annex-b/">the Annex B essay</a>; the history paper adds that changing <code>typeof null</code> "would not be subtractive", so even strict mode couldn't take it. But nothing obliges new features to join in:</p>
+
+<pre tabindex="0"><code>1n + 1         <span class="c">// TypeError</span>
+Symbol() + ""  <span class="c">// TypeError</span></code></pre>
+
+<p>Node's message for the first is "Cannot mix BigInt and other types, use explicit conversions". The committee's actual response to a decade of coercion jokes, as I read it, was to stop extending the behaviour: the two primitive types added since, Symbol and BigInt, throw here where the 1995 types would have guessed. Meanwhile the old machinery got an official handle. ECMAScript 2015's <code>Symbol.toPrimitive</code> lets any object decide what <code>+</code> sees, and the specification's note observes that of the built-ins only Dates and Symbols use it.</p>
+
+<p><strong>"I would also accept type error" came true.</strong> I gave the talk's lines to TypeScript 6. <code>[] + {}</code> is rejected: "Operator '+' cannot be applied to types 'never[]' and '{}'." <code>"wat" - 1</code> is rejected too. TypeScript's <a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">handbook</a> opens its case with the same genre, noting that "Every language has its own quirks" and offering <code>"" == 0</code> as exhibit one. The banana still compiles, since unary plus on a string is allowed. And the page that hosts "Wat" now carries a plug for Execute Program, a set of interactive courses listed among the site's own products. The first course it names is TypeScript.</p>
+
+<p><strong>The same rules became an encoding.</strong> In July 2012 Martin Kleppe published <a href="https://jsfuck.com/">JSFuck</a>, which writes any program using six characters, <code>[]()!+</code>. It is "Wat" run in reverse: <code>![]</code> is false, <code>![]+[]</code> is the string "false", <code>+[]</code> is 0, so <code>(![]+[])[+[]]</code> is "f", and from enough letters you can spell a function's name and call it. The site credits an "Original discussion at Sla.ckers.org", a security forum, and I take the practical use to be getting script past filters that look for letters. The conversions people laughed at turned out to be complete enough to program in.</p>
+
+<h2>The takeaway</h2>
+
+<p>"Wat" and wtfjs were jokes about a language whose designers had been asked, early on, to make a web form's empty text box behave like zero, and who found by 1997 that they could not undo it. Every famous result is the specification working as written: <code>+</code> has two meanings and picks by what the operands convert to, objects convert through <code>toString</code>, and a line that starts with a brace starts with a block. The jokes were unfair in the details. Two of the four lines add nothing to an object, and several favourites belong to floating point. They were fair about the thing that mattered, which is that a reasonable programmer's guess was wrong every time.</p>
+
+<p>What the laughing achieved is easy to underrate. It made the conversion rules common knowledge, and I suspect a great many people know what ToPrimitive does only because someone explained a punchline to them. It gave teams a four-minute argument for <code>===</code>, linters and eventually a type checker. And it showed the committee what not to repeat, so that the newer types throw. The old behaviour is permanent, and <code>[] + {}</code> will be <code>"[object Object]"</code> for as long as there are browsers. The joke worked because everyone in the room had, at some point, been the person who guessed.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.destroyallsoftware.com/talks/wat">Wat</a>, Gary Bernhardt, lightning talk at CodeMash 2012, with its <a href="https://www.destroyallsoftware.com/captions/talks/wat.vtt">caption file</a></li>
+    <li><a href="https://news.ycombinator.com/item?id=3515845">Wat</a>, Hacker News discussion, January 26, 2012, with comments by Gary Bernhardt</li>
+    <li><a href="https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the">What is the explanation for these bizarre JavaScript behaviours mentioned in the 'Wat' talk for CodeMash 2012?</a>, Stack Overflow, question by NibblyPig and answer by Ventero, January 27, 2012</li>
+    <li><a href="https://www.globalnerdy.com/2012/01/28/wat-a-funny-look-at-ruby-and-javascript-oddities/">WAT? A Funny Look at Ruby and JavaScript Oddities</a> and <a href="https://www.globalnerdy.com/2012/01/29/javascript-oddities-from-the-wat-video-explained/">JavaScript Oddities from the WAT Video, Explained</a>, Joey deVilla, Global Nerdy, 2012</li>
+    <li><a href="https://wtfjs.com/">wtfjs</a> and its <a href="https://wtfjs.com/about">about page</a>, Brian LeRoux, Andrew Lunny and contributors, 2010 to 2016</li>
+    <li><a href="https://github.com/brianleroux/wtfjs">brianleroux/wtfjs</a>, the site's repository, 2010 to 2020</li>
+    <li><a href="https://dorey.github.io/JavaScript-Equality-Table/">JavaScript Equality Table</a>, dorey, 2011</li>
+    <li><a href="https://github.com/denysdovhan/wtfjs">What the f*ck JavaScript?</a>, Denys Dovhan and contributors, 2017 onwards</li>
+    <li><a href="https://jsfuck.com/">JSFuck</a>, Martin Kleppe, 2012</li>
+    <li><a href="https://0.30000000000000004.com/">Floating Point Math</a>, 0.30000000000000004.com</li>
+    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021)</li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-expressions.html">ECMAScript Language: Expressions</a>, Ecma TC39, current draft (see 13.15.3, ApplyStringOrNumericBinaryOperator, and 13.5.4, Unary + Operator)</li>
+    <li><a href="https://tc39.es/ecma262/multipage/abstract-operations.html">ECMAScript: Abstract Operations</a>, Ecma TC39, current draft (see 7.1.1, ToPrimitive, and 7.2.13, IsLooselyEqual)</li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html">ECMAScript Language: Statements and Declarations</a>, Ecma TC39, current draft (see 14.5, Expression Statement)</li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html">ECMAScript Data Types and Values</a>, Ecma TC39, current draft (see Number::equal)</li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_3rd_edition_december_1999.pdf">ECMA-262, 3rd edition</a>, Ecma, December 1999 (PDF; see 11.9.4, the Strict Equals Operator)</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a>, MDN Web Docs</li>
+    <li><a href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/types%20%26%20grammar/ch4.md">You Don't Know JS: Types &amp; Grammar, chapter 4, "Coercion"</a>, Kyle Simpson, first edition</li>
+    <li><a href="https://eslint.org/docs/latest/rules/eqeqeq">eqeqeq</a> and <a href="https://eslint.org/docs/latest/rules/no-implicit-coercion">no-implicit-coercion</a>, ESLint documentation</li>
+    <li><a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">TypeScript for the New Programmer</a>, TypeScript handbook</li>
+    <li><a href="https://github.com/nodejs/node/blob/v22.x/lib/repl.js">lib/repl.js</a>, Node.js, v22.x branch</li>
+  </ul>
+</section>
