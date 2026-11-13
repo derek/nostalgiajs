@@ -18,7 +18,7 @@ const REPO = 'https://github.com/derek/nostalgiajs';
 const GTM_ID = 'GTM-WX44MXWL';
 
 // GoatCounter page-view counter endpoint. Empty means no counter script is written.
-const GOATCOUNTER = 'https://derekgathright.goatcounter.com/count';
+const GOATCOUNTER = 'https://derek-io-nostalgiajs.goatcounter.com/count';
 
 // Topic groups, in the order the landing page shows them.
 const TOPICS = [
