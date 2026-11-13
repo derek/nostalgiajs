@@ -58,6 +58,9 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - npm and its rivals (2010): the package manager Isaac Schlueter built, Kiwi and its “seed” files, and the nested node_modules choice that made the ecosystem big
 - CoffeeScript (2009): square = (x) -> x * x, the compiler that Rails made a default and whose syntax came back through ES2015
 - Palm webOS (2009 to 2012): apps written in HTML and JavaScript, Mojo and Enyo, and Node.js services on a phone
+- E4X (2002 to 2013): `var x = <order id="7"/>`, XML literals standardized as ECMA-357, shipped in Firefox, Rhino and Flash, and removed again
+- Server-side JavaScript before Node.js (1996 to 2009): Netscape LiveWire, Rhino, Helma, Aptana Jaxer and the decade of attempts that didn't stick
+- Yahoo Pipes and YQL (2007 to 2019): wiring up the web with boxes and `select * from`, and the Yahoo API era's mashups
 
 
 ### People and culture
