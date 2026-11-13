@@ -8,7 +8,9 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
+- The hashbang URL (2009 to 2015): twitter.com/#!/name, Google’s _escaped_fragment_ scheme, Gawker’s outage and the return of server rendering
 - The Rhino book and the O'Reilly shelf: when the bookstore was the curriculum
+- “Wat” (2012), the wtfjs repo and the tradition of laughing at JavaScript: [] + {}, coercion and what the jokes taught
 - comp.lang.javascript, its FAQ, and learning from strangers on Usenet
 - IE6: the box model, `hasLayout` and conditional comments
 - Hiding scripts in HTML comments (`<!--` ... `//-->`) for browsers that didn't exist anymore
@@ -18,6 +20,7 @@ Derek's picks, in order. Always take the first item here. Only choose from the l
 - Web 2.0: the 2005 essay, glossy buttons, rounded corners and the permanent "beta" badge
 - "How it feels to learn JavaScript in 2016" and JavaScript fatigue
 - RSS 0.91, 1.0, 2.0 and Atom: the feed format war nobody won, and why every reader parses all of them
+- YUI: Yahoo’s internal front-end library goes public (2006), YAHOO.util.Dom.get(), Reset and Grids, YUI 3’s loader and sandbox, and its 2014 deprecation
 
 ## Ideas
 
@@ -52,6 +55,10 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - JSON: Crockford's "fat-free alternative to XML", `eval()` as a parser and the script-tag trick that became JSONP
 - The back button and the `#` fragment: how Ajax applications broke history and `pushState` repaired it
 - Hidden frames, Java applets and cookies: remote scripting before `XMLHttpRequest` (MSRS, JSRS, RSLite)
+- npm and its rivals (2010): the package manager Isaac Schlueter built, Kiwi and its “seed” files, and the nested node_modules choice that made the ecosystem big
+- CoffeeScript (2009): square = (x) -> x * x, the compiler that Rails made a default and whose syntax came back through ES2015
+- Palm webOS (2009 to 2012): apps written in HTML and JavaScript, Mojo and Enyo, and Node.js services on a phone
+
 
 ### People and culture
 
@@ -73,3 +80,4 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - "Hi Webmaster!": the 405 emails W3C's webmaster mailbox received in three weeks of 1995, and what newcomers thought the web was
 - Tim Berners-Lee's browser was an editor: the read-write web that shipped read-only
 - Delicious, Digg and Technorati: when a link's worth was counted in bookmarks, diggs and "authority"
+
