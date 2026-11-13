@@ -270,6 +270,24 @@
         "I name Christoph Ono only from the GitHub profile of the account that maintains the repository, which links to the studio in Cornify's footer; the Cornify site and its Hacker News account never give a person's name.",
         "The claim that Cornify began as a spoof of single-feature startups comes from the user-written Know Your Meme entry, Stack Overflow's 2009 joke is known to me only from the company's 2010 blog post, and my guess that the url parameter fed the home-page counter is an inference from the code."
       ]
+    },
+    {
+      "slug": "annex-b-the-features-the-web-kept",
+      "title": "Annex B: the features the web kept",
+      "description": "The JavaScript standard keeps escape(), substr, \"text\".blink() and HTML comments in an appendix of things it would delete if it could, and that appendix went from optional advice in 1999 to a requirement for every browser.",
+      "topic": "language",
+      "era": [
+        1995,
+        null
+      ],
+      "published": "2026-11-13T02:33:00+00:00",
+      "unverified": [
+        "I read Netscape's early JavaScript reference in a mirrored copy on a university server, because the Internet Archive would not open for me. The mirror carries no date, and I placed it in the Navigator 3 era from its \"Implemented in Navigator 3.0\" entries.",
+        "The \"icky\" classification of __proto__ and the remark that the committee agreed to move syntax items into the main body come from comments on two GitHub pull requests, which I read through an automated page summary and not line by line.",
+        "That the unescape(encodeURIComponent()) trick became a familiar way to feed btoa(), that it helps keep escape() from being removed, and that it accounts for a fair share of today's escape() calls are my own impressions. I have one 2006 blog post for the trick and no usage figures.",
+        "The third edition gives no reason for moving escape() to the annex. Tying it to the function's handling of Unicode is my reading, and the \"C++\" search-box example is my illustration, not a documented incident.",
+        "The history paper says substr was \"moved\" to Annex B in 1999. I found no mention of it in the first or second edition, so I say the annex was its way into the standard."
+      ]
     }
   ]
 }
