@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- The hashbang URL (2009 to 2015): twitter.com/#!/name, Google’s _escaped_fragment_ scheme, Gawker’s outage and the return of server rendering
 - The Rhino book and the O'Reilly shelf: when the bookstore was the curriculum
 - comp.lang.javascript, its FAQ, and learning from strangers on Usenet
 - IE6: the box model, `hasLayout` and conditional comments

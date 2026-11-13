@@ -306,6 +306,24 @@
         "Stack Overflow and GitHub refused my direct requests, so I read the question and answer through the Stack Exchange API and the repositories as clones; the vote and point counts are what those services reported on the day I looked.",
         "Three claims are my own inference: that the missing try statement helps explain why + returns a string, that making Symbol and BigInt throw was the committee's answer to the coercion jokes, and that JSFuck's practical use is evading filters. I did not open the Sla.ckers.org discussion JSFuck credits, and I found no first author for the banana joke beyond what Denys Dovhan's list says."
       ]
+    },
+    {
+      "slug": "hashbang",
+      "title": "#!: the URLs no server ever saw",
+      "description": "From 2010 Twitter and then Gawker put their pages behind twitter.com/#!/name addresses that only JavaScript could read, and the outage and argument that followed sent rendering back to the server.",
+      "topic": "browsers",
+      "era": [
+        2009,
+        2015
+      ],
+      "published": "2026-11-13T15:32:35+00:00",
+      "unverified": [
+        "Twitter's 2012 engineering post \"Improving performance on twitter.com\" would not load for me. Its text, date and byline come from NBC News, .net magazine and The Next Web, and I could not check them against the original.",
+        "The five-hour length of the Gawker outage rests on Mike Davies's essay alone. Other writers confirm the outage, but none gives a duration, and I found no account from Gawker of what failed.",
+        "Dan Webb's tweet about undoing Twitter's hashbang URLs is known to me only through Ubergizmo's report. Webb's essay \"It's About The Hashbangs\" is gone from Webb's site, so I rely on other pages for its existence and title.",
+        "Ben Ward's \"Hash, Bang, Wallop\" would not load either. The line of Ward's I quote is an earlier remark, taken from Davies's essay and not from its original page.",
+        "I could not open Google's full crawling specification, which now redirects to a general page, so the mechanism is described from the 2009 proposal and the 2017 notice. That Twitter's seeded request cache is an ancestor of today's hydration data, and that the scheme worked as permission for new hashbang sites, are my own readings."
+      ]
     }
   ]
 }

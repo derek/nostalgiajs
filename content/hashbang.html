@@ -19,7 +19,7 @@ u.hash      <span class="c">// "#!/timbray"</span></code></pre>
 
 <p>I also pointed <code>curl</code> at a local server with that path and fragment. The server logged <code>GET /</code> and nothing more.</p>
 
-<p>For a document, that is a sensible design. For an Ajax application it was the only loose floorboard in the building. Once a page fetched its content with <a href="../xmlhttprequest/">XMLHttpRequest</a> and never reloaded, the address bar stopped changing. The back button left the application altogether, and you could not bookmark or send anyone the screen you were looking at. Jesse James Garrett's follow-up to the essay that named Ajax listed the back button among its open questions. The fragment was the one piece of a URL that script could rewrite without triggering a page load, so that is where application state went.</p>
+<p>For a document, that is a sensible design. For an Ajax application it was the only loose floorboard in the building. Once a page fetched its content with <a href="../xmlhttprequest/">XMLHttpRequest</a> and never reloaded, the address bar stopped changing. The back button left the application altogether, and you could not bookmark or send anyone the screen you were looking at. The Q&amp;A Jesse James Garrett appended to the essay that named Ajax listed the back button among its open questions. The fragment was the one piece of a URL that script could rewrite without triggering a page load, so that is where application state went.</p>
 
 <p>Getting it to work took effort. In September 2005 Brad Neuberg <a href="https://codinginparadise.org/weblog/2005/09/ajax-history-libraries.html">counted five libraries and techniques</a> for "bookmarking and the back button in AJAX applications", Neuberg's own Really Simple History among them. Browsers had no event to tell you the fragment had changed, so libraries looked at <code>location.hash</code> on a timer. The W3C Technical Architecture Group's draft finding <a href="https://www.w3.org/2001/tag/2011/01/HashInURI-20110115">Repurposing the Hash Sign for the New Web</a>, which lists a first version from April 2009, gave the appeal ("the characters in the URI bar after the hash can be changed without causing the page to be reloaded") and the cost: "without running JavaScript, the URI has no meaning."</p>
 
@@ -37,7 +37,7 @@ https://example.com/dictionary.html?_escaped_fragment_=AJAX</code></pre>
 
 <p>How was the site to produce HTML for a page that existed only after its JavaScript ran? The proposal's answer was: "Use a headless browser that outputs an HTML snapshot on your web server". The server was to run a browser, load its own application in it, and send the crawler the result. Among the stated goals was "Users and search engines see the same content (no cloaking)". I'll come back to both of those.</p>
 
-<p>Mike Davies, whose essay is the centre of the next section, pointed out what else Google said at the time. The same guidance advised anyone starting from scratch to "build your site's structure and navigation using only HTML" and add Ajax afterwards. The <code>#!</code> scheme was, in Davies's word, a "lifeline" for sites that had already gone the other way. Within a year, a very large site read the workaround as an architecture.</p>
+<p>Mike Davies, whose essay is the centre of the next section, pointed out what Google had been telling people. Its Webmaster Central blog had <a href="https://developers.google.com/search/blog/2007/11/spiders-view-of-web-20">advised in 2007</a> that anyone starting from scratch should "build your site's structure and navigation using only HTML" and add Ajax afterwards. The <code>#!</code> scheme was, in Davies's word, a "lifeline" for sites that had already gone the other way. Within a year, a very large site read the workaround as an architecture.</p>
 
 <h2>Twitter takes the deal</h2>
 
@@ -47,7 +47,7 @@ https://example.com/dictionary.html?_escaped_fragment_=AJAX</code></pre>
 
 <p>Cherry continued that the <code>#!</code> "is there to comply with Google's Ajax crawling specification, so we don't lose out on search engine rankings with the new scheme." Moving from a profile to a tweet no longer threw away the page; script fetched JSON from Twitter's API and drew it.</p>
 
-<p>Tennison tested what the site did with each form of address in early 2011. A logged-in browser asking for the plain URL of a tweet got a 302 redirect to the <code>#!</code> version. Asking for <code>http://twitter.com/?_escaped_fragment_=/JeniT/status/35634274132561921</code> got a 301 back to the plain one. And <code>curl</code> on the hashbang URL got the home page, with, in Tennison's words, "no idea that the original hash-bang URI was supposed to give me anything different". Twitter had kept its old server-rendered pages and bolted the application on top. The next adopter did not keep a spare.</p>
+<p>Tennison tested what the site did with each form of address in early 2011. A logged-in browser asking for the plain URL of a tweet got a 302 redirect to the <code>#!</code> version. Asking for <code>http://twitter.com/?_escaped_fragment_=/JeniT/status/35634274132561921</code> got a 301 back to the plain one. And <code>curl</code> on the hashbang URL got the home page, with, in Tennison's words, "no idea that the original hash-bang URI was supposed to give me anything different". Twitter had kept its old server-rendered pages and bolted the application on top. The next adopter kept its spare for crawlers only.</p>
 
 <h2>Monday, February 7, 2011</h2>
 
@@ -84,7 +84,7 @@ $</code></pre>
 
 <h2>The argument, and the workarounds</h2>
 
-<p>The week after the outage produced one of the better public arguments the trade has had. Bray's piece put the objection as a contract. A link used to mean: here is a string, send it to a server, get back a representation. Now it meant sending part of the string and "being able to run the code the server sends you". Bray called the Google scheme "a hideous kludge". Jeremy Keith's <a href="https://adactio.com/journal/4346/">Going Postel</a> made the robustness point: HTML and CSS skip what they don't understand, while in JavaScript "a simple typo could potentially cause an entire script to fail". Ben Ward's essay "Hash, Bang, Wallop" no longer loads at any address I could find, but Davies preserved its rule of thumb: "If site content doesn't load through curl it's broken."</p>
+<p>The week after the outage produced one of the better public arguments the trade has had. Bray's piece put the objection as a contract. A link used to mean: here is a string, send it to a server, get back a representation. Now it meant sending part of the string and "being able to run the code the server sends you". Bray called the Google scheme "a hideous kludge". Jeremy Keith's <a href="https://adactio.com/journal/4346/">Going Postel</a> made the robustness point: HTML and CSS skip what they don't understand, while in JavaScript "a simple typo could potentially cause an entire script to fail". Ben Ward's essay "Hash, Bang, Wallop" no longer loads at any address I could find, but Davies quotes an earlier rule of thumb of Ward's: "If site content doesn't load through curl it's broken".</p>
 
 <p>Tennison's conclusion was the one that held up. Hash-bang URIs would "be around for several years", so use them only for browsers that have JavaScript and lack the History API, publish the plain URL as the one people share, and make the <code>_escaped_fragment_</code> form redirect to it. One warning in that essay has aged well: adopt hash-bangs as your primary URLs and you would be "reliant in perpetuity on Javascript routing" to decode them.</p>
 
@@ -112,11 +112,11 @@ if (this._hasPushState) {
 
 <p><a href="https://www.creativebloq.com/javascript/twitter-hashbang-walloped-5126276">.net magazine</a> quoted the part about URLs:</p>
 
-<blockquote><p>With hashbang URLs, the browser needs to download an HTML page, download and execute some JavaScript, recognize the hashbang path (which is only visible to the browser), then fetch and render the content for that URL.</p></blockquote>
+<blockquote><p>With hashbang URLs, the browser needs to download an HTML page, download and execute some JavaScript, recognize the hashbang path (which is only visible to the browser), then fetch and render the content for that URL&hellip;</p></blockquote>
 
 <p>Set that beside Cherry's "huge performance savings" from seventeen months earlier. Both were right. The hashbang made the second click fast and the first one slow, and every visit that begins with a link to a single tweet is a first click. Twitter's measure was the time until you could read one tweet, which <a href="https://thenextweb.com/news/twitter-dot-com-drops-the-hashbang-for-individual-tweets-and-makes-it-5-times-faster-to-view-timelines">The Next Web</a> reported as "time to first tweet". The <a href="../yslow/">performance people</a> had a new metric and the hashbang failed it.</p>
 
-<p>Google took longer. On October 14, 2015 it published <a href="https://developers.google.com/search/blog/2015/10/deprecating-our-ajax-crawling-scheme">Deprecating our AJAX crawling scheme</a>: "Times have changed", it said, and Googlebot could now "render and understand your web pages like modern browsers". The advice was progressive enhancement and <code>pushState</code>. A <a href="https://developers.google.com/search/blog/2017/12/rendering-ajax-crawling-pages">follow-up in December 2017</a> said that from the second quarter of 2018 Google would stop requesting <code>_escaped_fragment_</code> URLs and render the <code>#!</code> pages itself.</p>
+<p>Google took longer. On October 14, 2015 it published <a href="https://developers.google.com/search/blog/2015/10/deprecating-our-ajax-crawling-scheme">Deprecating our AJAX crawling scheme</a>: "Times have changed", it said, and Googlebot was now "generally able to render and understand your web pages like modern browsers". The advice was progressive enhancement and <code>pushState</code>. A <a href="https://developers.google.com/search/blog/2017/12/rendering-ajax-crawling-pages">follow-up in December 2017</a> said that from the second quarter of 2018 Google would stop requesting <code>_escaped_fragment_</code> URLs and render the <code>#!</code> pages itself.</p>
 
 <h2>What it left behind</h2>
 
@@ -124,7 +124,7 @@ if (this._hasPushState) {
 
 <p><strong>The data in the page source is older than you think.</strong> Cherry's 2010 article describes Twitter's Rails server predicting the first API calls the script would make and "sending down the expected response in the initial page source", to seed a client-side cache. I read that as a direct ancestor of the serialized state that server-rendering frameworks embed in a page for hydration. The JavaScript-only Twitter was already server-rendering its data, if not its markup.</p>
 
-<p><strong>A hashbang link cannot be redirected by a server.</strong> This is Tennison's "in perpetuity" warning, and it follows from the first code sample in this essay. A moved page can answer its old address with a 301. A page that lived at <code>/#!something</code> never had an address the server could see, so every such link ever pasted into an email or a forum arrives as a request for the home page, and only script shipped on that home page can forward it. When I requested Davies's two Lifehacker addresses, the plain one answered 410 Gone and the hashbang one answered 200 with the present-day front page.</p>
+<p><strong>A hashbang link cannot be redirected by a server.</strong> This is Tennison's "in perpetuity" warning, and it follows from the first code sample in this essay. A moved page can answer its old address with a 301. A page that lived at <code>/#!something</code> never had an address the server could see, so every such link ever pasted into an email or a forum arrives as a request for the home page, and only script shipped on that home page can forward it. When I requested Davies's two Lifehacker addresses, the plain one was redirected with a 301 to a renamed address that answered 410 Gone, and the hashbang one answered 200 with the present-day front page.</p>
 
 <p><strong>The prefix outlived the scheme.</strong> AngularJS 1.6.0, released on December 8, 2016, changed the default prefix for its hash URLs "from the empty string "" to the bang "!"", so that <code>mydomain.com/#/a/b/c</code> "will become" <code>mydomain.com/#!/a/b/c</code>, in the words of <a href="https://raw.githubusercontent.com/angular/angular.js/master/CHANGELOG.md">its changelog</a>. That was fourteen months after Google stopped recommending the convention.</p>
 
@@ -140,6 +140,7 @@ if (this._hasPushState) {
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
     <li><a href="https://developers.google.com/search/blog/2009/10/proposal-for-making-ajax-crawlable">A proposal for making AJAX crawlable</a>, Google Webmaster Central blog (proposal by Katharina Probst, Bruce Johnson, Arup Mukherjee, Erik van der Poel and Li Xiao; post by John Mueller), 2009</li>
+    <li><a href="https://developers.google.com/search/blog/2007/11/spiders-view-of-web-20">A spider's view of Web 2.0</a>, Google Webmaster Central blog, 2007</li>
     <li><a href="https://developers.google.com/search/blog/2015/10/deprecating-our-ajax-crawling-scheme">Deprecating our AJAX crawling scheme</a>, Kazushi Nagayama, Google, 2015</li>
     <li><a href="https://developers.google.com/search/blog/2017/12/rendering-ajax-crawling-pages">Rendering AJAX-crawling pages</a>, Google, 2017</li>
     <li><a href="https://isolani.co.uk/blog/javascript/BreakingTheWebWithHashBangs">Breaking the Web with hash-bangs</a>, Mike Davies, 2011</li>
@@ -149,7 +150,7 @@ if (this._hasPushState) {
     <li><a href="https://adequatelygood.com/Thoughts-on-the-Hashbang.html">Thoughts on the Hashbang</a>, Ben Cherry, 2011</li>
     <li><a href="https://calendar.perfplanet.com/2010/newtwitter/">The new Twitter</a>, Ben Cherry, Web Performance Calendar, 2010</li>
     <li><a href="https://shiflett.org/blog/2011/javascript-and-urls">JavaScript and URLs</a>, Chris Shiflett, 2011 (a guide to the whole argument)</li>
-    <li>"It's About The Hashbangs", Dan Webb, 2011, and "Hash, Bang, Wallop", Ben Ward, 2011 (neither would load)</li>
+    <li>"It's About The Hashbangs", Dan Webb, 2011, and "Hash, Bang, Wallop", Ben Ward, 2011 (neither would load; the line of Ward's quoted here is an earlier remark, taken from Davies)</li>
     <li>"Improving performance on twitter.com", Dan Webb, Twitter engineering blog, 2012 (would not load; quoted from the two reports below)</li>
     <li><a href="https://www.nbcnews.com/tech/tech-news/twitter-revs-speed-improvements-flna802768">Twitter revs up speed with improvements</a>, Suzanne Choney, NBC News, 2012</li>
     <li><a href="https://www.creativebloq.com/javascript/twitter-hashbang-walloped-5126276">Twitter hashbang walloped</a>, .net magazine at Creative Bloq, 2012</li>
