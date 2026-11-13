@@ -1,6 +1,6 @@
 // Nostalgia.js build. No dependencies: `node scripts/build.mjs` from the repository root.
-// Reads essays.json, archive.json and content/*.html, then writes every page,
-// the landing page and the feed. Generated files are committed, because
+// Reads essays.json, archive.json and content/*.html, then writes every essay
+// page (essays/<slug>/index.html), the landing page and the feed. Generated files are committed, because
 // GitHub Pages serves this repository as it is.
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -24,7 +24,6 @@ const TOPICS = [
   ['libraries', 'Libraries and tools'],
   ['people', 'People and culture'],
 ];
-const RESERVED = new Set(['about', 'content', 'scripts', 'og', 'index', 'feed', 'icons', 'buttons']);
 
 // Icon palette: one character per pixel in icons/<slug>.txt. A dot is transparent.
 const PALETTE = {
@@ -51,9 +50,8 @@ for (const e of essays) {
   for (const k of ['slug', 'title', 'description', 'topic', 'era', 'published']) {
     if (e[k] === undefined) fail(`${e.slug || '(no slug)'}: missing "${k}"`);
   }
-  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(e.slug)) fail(`${e.slug}: slug must be lowercase words joined by hyphens`);
+  if (!/^[a-z0-9]+(-[a-z0-9]+){0,2}$/.test(e.slug)) fail(`${e.slug}: slug must be one to three lowercase words joined by hyphens`);
   if (/^\d{4}-\d\d/.test(e.slug)) fail(`${e.slug}: slugs do not start with a date`);
-  if (RESERVED.has(e.slug)) fail(`${e.slug}: reserved name`);
   if (seen.has(e.slug)) fail(`${e.slug}: duplicate slug`);
   seen.add(e.slug);
   if (!topicName[e.topic]) fail(`${e.slug}: unknown topic "${e.topic}" (use ${TOPICS.map((t) => t[0]).join(', ')})`);
@@ -68,7 +66,7 @@ for (const e of essays) {
   if (!/<section class="sources"/.test(e.body)) fail(`${e.slug}: content needs a sources section`);
   if (/<time[\s>]/.test(e.body)) fail(`${e.slug}: essays carry no publication date`);
   for (const m of e.body.matchAll(/href="\.\.\/([^"/#]+)\/?[^"]*"/g)) {
-    if (!essays.some((x) => x.slug === m[1]) && m[1] !== 'about') fail(`${e.slug}: links to unknown essay "../${m[1]}/"`);
+    if (!essays.some((x) => x.slug === m[1]) && m[1] !== '..') fail(`${e.slug}: links to unknown essay "../${m[1]}/"`);
   }
   for (const r of e.related || []) {
     if (!essays.some((x) => x.slug === r)) fail(`${e.slug}: related essay "${r}" does not exist`);
@@ -80,7 +78,7 @@ for (const e of essays) {
   const text = e.body.replace(/<pre[\s\S]*?<\/pre>/g, ' ').replace(/<section class="sources"[\s\S]*$/, ' ').replace(/<[^>]+>/g, ' ');
   e.minutes = Math.max(1, Math.round(text.split(/\s+/).filter(Boolean).length / 220));
   e.eraText = e.era[1] === null ? `${e.era[0]} to today` : e.era[0] === e.era[1] ? String(e.era[0]) : `${e.era[0]} to ${e.era[1]}`;
-  e.url = SITE + e.slug + '/';
+  e.url = SITE + 'essays/' + e.slug + '/';
 }
 for (const f of readdirSync(join(ROOT, 'content'))) {
   if (f.endsWith('.html') && !f.startsWith('_') && !seen.has(f.slice(0, -5))) fail(`content/${f} has no entry in essays.json`);
@@ -271,7 +269,7 @@ ${e.corrections.map((c) => `          <li>${esc(c.date)}: ${esc(c.note)}</li>`).
   const main = `    <article>
       <p class="meta">${esc(topicName[e.topic])} · ${e.eraText} · ${e.minutes} min read</p>
       <div class="title">
-        <img src="../icons/${e.icon}.svg" width="64" height="64" alt="">
+        <img src="../../icons/${e.icon}.svg" width="64" height="64" alt="">
         <h1>${esc(e.title)}</h1>
       </div>
 
@@ -286,11 +284,11 @@ ${corrections}
       <ul>
 ${rel.map((r) => `        <li><a href="../${r.slug}/">${esc(r.title)}</a> <span>${esc(topicName[r.topic])} · ${r.eraText}</span></li>`).join('\n')}
       </ul>
-      <p><a href="../">All essays</a></p>
+      <p><a href="../../">All essays</a></p>
     </nav>`;
-  write(`${e.slug}/index.html`, page({
-    path: e.slug + '/', title: `${e.title} · ${NAME}`, description: e.description,
-    up: '../', ogImage: og, ogType: 'article', main,
+  write(`essays/${e.slug}/index.html`, page({
+    path: 'essays/' + e.slug + '/', title: `${e.title} · ${NAME}`, description: e.description,
+    up: '../../', ogImage: og, ogType: 'article', main,
   }));
 }
 
@@ -308,7 +306,7 @@ ${groups.map(([label, list]) => `    <section class="group" aria-labelledby="g-$
       <ul class="posts">
 ${list.map((e) => `        <li>
           <img src="icons/${e.icon}.svg" width="48" height="48" alt="">
-          <h3><a href="${e.slug}/">${esc(e.title)}</a></h3>
+          <h3><a href="essays/${e.slug}/">${esc(e.title)}</a></h3>
           <p class="meta">${e.eraText} · ${e.minutes} min read</p>
           <p>${esc(e.description)}</p>
         </li>`).join('\n')}
@@ -328,7 +326,7 @@ ${read('content/_about.html').trim()}
 }));
 
 // ---------- feed (full text) ----------
-const absolute = (html) => html.replace(/href="\.\.\/([^"]*)"/g, `href="${SITE}$1"`);
+const absolute = (html) => html.replace(/href="\.\.\/([^"]*)"/g, `href="${SITE}essays/$1"`);
 const newest = [...essays].sort((a, b) => Date.parse(b.published) - Date.parse(a.published)).slice(0, 30);
 const rfc822 = (iso) => new Date(iso).toUTCString();
 write('feed.xml', `<?xml version="1.0" encoding="UTF-8"?>

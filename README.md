@@ -22,7 +22,7 @@ The site is plain HTML, CSS and a single build script in Node. There are no npm 
 - `icons/` and `og/` hold the pixel icons and the link-preview cards.
 - `archive.json` records Internet Archive copies of the sources.
 
-The generated files (the essay pages, `index.html`, `about/index.html`, `feed.xml` and `icons/*.svg`) are committed, because GitHub Pages serves the repository as it is. Do not edit them by hand. Change the sources and run the build.
+The generated files (the essay pages in `essays/<slug>/`, `index.html`, `about/index.html`, `feed.xml` and `icons/*.svg`) are committed, because GitHub Pages serves the repository as it is. Do not edit them by hand. Change the sources and run the build.
 
 ## Commands
 
