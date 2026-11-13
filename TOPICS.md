@@ -14,6 +14,11 @@ Derek's picks, in order. Always take the first item here. Only choose from the l
 - IE6: the box model, `hasLayout` and conditional comments
 - Hiding scripts in HTML comments (`<!--` ... `//-->`) for browsers that didn't exist anymore
 - CSS Zen Garden (2003) and the tables-versus-CSS argument
+- A List Apart, "To Hell with Bad Browsers" and the Web Standards Project: developers lobbying browser makers
+- The Firefox 1.0 New York Times ad (2004): users paying to advertise a browser
+- Web 2.0: the 2005 essay, glossy buttons, rounded corners and the permanent "beta" badge
+- "How it feels to learn JavaScript in 2016" and JavaScript fatigue
+- RSS 0.91, 1.0, 2.0 and Atom: the feed format war nobody won, and why every reader parses all of them
 
 ## Ideas
 
@@ -54,11 +59,8 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - "Under construction" GIFs, 88x31 buttons and "Best viewed in" badges: the folk art of the early web
 - GeoCities neighborhoods, webrings and guestbooks: how people found each other before search and social
 - Copy-and-paste script archives (Dynamic Drive, The JavaScript Source) and the credit comment you were told not to remove
-- A List Apart, "To Hell with Bad Browsers" and the Web Standards Project: developers lobbying browser makers
 - The dot-com crash of 2000 to 2001 as web developers lived it
 - "Evergreen" browsers: Chrome's silent updater (2008), the six-week release train and the end of knowing your version number
-- The Firefox 1.0 New York Times ad (2004): users paying to advertise a browser
-- Web 2.0: the 2005 essay, glossy buttons, rounded corners and the permanent "beta" badge
 - "JavaScript: The World's Most Misunderstood Programming Language" (2001): how a toy language became respectable
 - The QuirksMode `addEvent()` recoding contest (2005): when the platform was patched by blog competition
 - Stack Overflow launches (2008), and what asking a programming question was like before it
@@ -68,9 +70,7 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - ServerJS becomes CommonJS (2009): the mailing list that gave JavaScript `require()` before it had a server to run on
 - "Hug a Conference Organizer" (2010) and the economics of the community tech conference, from hotel room blocks to ticket lotteries
 - The conference code of conduct: how one page of boilerplate spread from event to event in the early 2010s
-- "How it feels to learn JavaScript in 2016" and JavaScript fatigue
 - The "no right click" script, image theft and the early web's copyright anxieties
 - "Hi Webmaster!": the 405 emails W3C's webmaster mailbox received in three weeks of 1995, and what newcomers thought the web was
 - Tim Berners-Lee's browser was an editor: the read-write web that shipped read-only
-- RSS 0.91, 1.0, 2.0 and Atom: the feed format war nobody won, and why every reader parses all of them
 - Delicious, Digg and Technorati: when a link's worth was counted in bookmarks, diggs and "authority"
