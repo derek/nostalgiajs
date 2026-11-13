@@ -12,7 +12,7 @@ Every essay has a "Spot a mistake?" link that opens a new issue here, with the e
 
 ## How the site is built
 
-The site is plain HTML, CSS and a single build script in Node. There are no npm packages, frameworks, CDN scripts, trackers or web fonts, and the published pages use no JavaScript.
+The site is plain HTML, CSS and a single build script in Node. There are no npm packages, frameworks or web fonts. The only JavaScript on the published pages is two visit counters, GoatCounter and Google Tag Manager, written in by the build.
 
 - `essays.json` lists every essay: title, description, topic, era and publication time.
 - `content/<slug>.html` holds the body of each essay, as an HTML fragment.

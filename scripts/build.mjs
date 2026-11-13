@@ -17,6 +17,9 @@ const REPO = 'https://github.com/derek/nostalgiajs';
 // The GA4 tag itself is configured inside the GTM container.
 const GTM_ID = 'GTM-WX44MXWL';
 
+// GoatCounter page-view counter endpoint. Empty means no counter script is written.
+const GOATCOUNTER = 'https://derekgathright.goatcounter.com/count';
+
 // Topic groups, in the order the landing page shows them.
 const TOPICS = [
   ['browsers', 'Browsers and the platform'],
@@ -100,6 +103,13 @@ function related(e, n = 3) {
 // ---------- shared page parts ----------
 const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 
+// GoatCounter loader, written into every page's <head> when GOATCOUNTER is set.
+function goatcounterSnippet() {
+  if (!GOATCOUNTER) return '';
+  if (!/^https:\/\/[a-z0-9-]+\.goatcounter\.com\/count$/.test(GOATCOUNTER)) fail(`GOATCOUNTER "${GOATCOUNTER}" is not a GoatCounter count URL`);
+  return `<script data-goatcounter="${GOATCOUNTER}" async src="https://gc.zgo.at/count.js"></script>\n`;
+}
+
 // Google Tag Manager loader, written into every page's <head> when GTM_ID is set.
 function gtmSnippet() {
   if (!GTM_ID) return '';
@@ -135,7 +145,7 @@ function page({ path, title, description, up, ogImage, ogType = 'website', main 
 <link rel="icon" href="${FAVICON}">
 <link rel="stylesheet" href="${up}style.css">
 <link rel="alternate" type="application/rss+xml" title="${NAME}" href="${up}feed.xml">
-${gtmSnippet()}</head>
+${gtmSnippet()}${goatcounterSnippet()}</head>
 <body>
 <header class="bar">
   <div class="in">
