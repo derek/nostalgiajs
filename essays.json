@@ -288,6 +288,24 @@
         "The third edition gives no reason for moving escape() to the annex. Tying it to the function's handling of Unicode is my reading, and the \"C++\" search-box example is my illustration, not a documented incident.",
         "The history paper says substr was \"moved\" to Annex B in 1999. I found no mention of it in the first or second edition, so I say the annex was its way into the standard."
       ]
+    },
+    {
+      "slug": "wat",
+      "title": "Wat: the jokes about [] + {}",
+      "description": "Gary Bernhardt's four-minute talk \"Wat\" and the wtfjs site turned JavaScript's type conversions into a running joke, and every punchline, from [] + {} to a line that only works because {} is parsed as a block, is the specification doing what it says.",
+      "topic": "people",
+      "era": [
+        2010,
+        null
+      ],
+      "published": "2026-11-13T06:12:07+00:00",
+      "unverified": [
+        "I did not watch the video of \"Wat\": I quote it from the caption file on its own page, which has transcription slips, and I take what appeared on screen, the jsc console and the exact \" Batman!\" line from the Stack Overflow question and Hacker News comments written that week.",
+        "I date the talk to January 2012 from the conference's name and from write-ups and Hacker News submissions dated January 18 to 28; I found no page giving the day it was delivered.",
+        "That wtfjs began in February 2010 rests on the dates of its oldest posts and its own about page; I never saw the original Tumblr site, \"about 120 posts\" and \"dozens of contributors\" are my counts from the repository, and that Brian LeRoux spoke on PhoneGap at the first JSConf rests on the JSConf essay in this collection, not on a source I opened for this one.",
+        "Stack Overflow and GitHub refused my direct requests, so I read the question and answer through the Stack Exchange API and the repositories as clones; the vote and point counts are what those services reported on the day I looked.",
+        "Three claims are my own inference: that the missing try statement helps explain why + returns a string, that making Symbol and BigInt throw was the committee's answer to the coercion jokes, and that JSFuck's practical use is evading filters. I did not open the Sla.ckers.org discussion JSFuck credits, and I found no first author for the banana joke beyond what Denys Dovhan's list says."
+      ]
     }
   ]
 }

@@ -6,7 +6,164 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Fri, 13 Nov 2026 02:33:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 06:12:07 GMT</lastBuildDate>
+  <item>
+    <title>Wat: the jokes about [] + {}</title>
+    <link>https://derek.io/nostalgiajs/essays/wat/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/wat/</guid>
+    <pubDate>Fri, 13 Nov 2026 06:12:07 GMT</pubDate>
+    <description>Gary Bernhardt's four-minute talk &quot;Wat&quot; and the wtfjs site turned JavaScript's type conversions into a running joke, and every punchline, from [] + {} to a line that only works because {} is parsed as a block, is the specification doing what it says.</description>
+    <content:encoded><![CDATA[<p class="lede">Probably the best-known four minutes ever spent on JavaScript are a comedy routine, and every JavaScript result in it is behaviour the specification requires.</p>
+
+<pre tabindex="0"><code>[] + []   <span class="c">// ""</span>
+[] + {}   <span class="c">// "[object Object]"</span>
+{} + []   <span class="c">// 0</span>
+{} + {}   <span class="c">// NaN</span></code></pre>
+
+<p>Those four lines are the middle of <a href="https://www.destroyallsoftware.com/talks/wat">"Wat"</a>, a lightning talk Gary Bernhardt gave at the CodeMash conference in January 2012. I ran all four in Node 22 and got those four answers. The last two come with a condition, which the talk leaves out and which I'll get to: they are only true when the line is a statement on its own.</p>
+
+<p>The talk did not invent the genre. A site called wtfjs had been collecting this kind of result for two years, and the oddities themselves were as old as the language. But "Wat" is the version everybody saw, and it fixed the form: type something reasonable, show what comes back, wait for the room. This essay is about where the jokes came from, what each one is really doing, whether they were fair, and what the language did about them.</p>
+
+<h2>A blog with one kind of post</h2>
+
+<p>In February 2010 a site appeared at <a href="https://wtfjs.com/">wtfjs.com</a>. A line at the bottom of the page says it was "created by Brian LeRoux &amp; Andrew Lunny", and its <a href="https://wtfjs.com/about">about page</a> gives the mission: "JavaScript is a language we love despite it giving us so much to hate. This is a collection of those very special irregularities, inconsistencies and just plain painfully unintuitive moments for the language of the web."</p>
+
+<p>The oldest posts are dated February 12, 2010, and each is a few lines long. One reads, in full:</p>
+
+<pre tabindex="0"><code>typeof NaN // number, of course.</code></pre>
+
+<p>followed by "Now that makes sense." Another shows <code>typeof null // object</code>. A third shows <code>NaN === NaN // false</code> under the line "Some argue this makes sense. Some ppl also like to sniff glue." A fourth is <code>("foo" + + "bar") === "fooNaN"</code>, with the note "Proposal to rename this site: NaNwtf".</p>
+
+<p>The about page describes the plumbing. The first version "was a quick and dirty Tumblr thing". The second was a blog written from scratch in Node, then at version 0.1, and the <a href="https://github.com/brianleroux/wtfjs">repository</a> for it begins in May 2010 with a commit titled "happy birthday". After that a post was a Markdown file and a contribution was a pull request. LeRoux had given the PhoneGap talk at the <a href="https://derek.io/nostalgiajs/essays/jsconf/">first JSConf</a> the year before, and treated the site as a group effort: the repository holds about 120 posts from dozens of contributors, and the newest one on the site is dated March 2016.</p>
+
+<p>Not all of them are about the language. There are Internet Explorer host-object bugs, a complaint that <a href="https://derek.io/nostalgiajs/essays/firebug/">Firebug</a> won't let you declare a variable called <code>console</code>, and a 2014 entry on <a href="https://derek.io/nostalgiajs/essays/document-layers/"><code>document.all</code></a>, the object whose <code>typeof</code> is "undefined". But the centre of gravity was always type conversion. In February 2011 a GitHub user named dorey published the <a href="https://dorey.github.io/JavaScript-Equality-Table/">JavaScript equality table</a>, which its source says was converted from a gist: a grid showing which pairs of values count as equal under <code>==</code>, with further tabs for <code>===</code> and <code>if()</code>. The line it labels "Moral of the story" is the argument from <a href="https://derek.io/nostalgiajs/essays/jslint/">the JSLint essay</a> in one line: "Always use 3 equals unless you have a good reason to use 2."</p>
+
+<p>Allen Wirfs-Brock and Brendan Eich noticed all this. Their history of the language, <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>, has a short interlude on critics, which ends: "Articles that catalog JavaScript's quirks and websites such as wtfjs.com became a Web staple."</p>
+
+<h2>Four minutes in Sandusky</h2>
+
+<p>CodeMash 2012 was held in Sandusky, Ohio, at what Joey deVilla's <a href="https://www.globalnerdy.com/2012/01/28/wat-a-funny-look-at-ruby-and-javascript-oddities/">write-up of the talk</a> calls "Ohio's largest indoor waterpark". Bernhardt's slot there was a lightning talk, and the <a href="https://www.destroyallsoftware.com/captions/talks/wat.vtt">caption file</a> on the video ends at four minutes and seventeen seconds. I quote the talk from those captions.</p>
+
+<p>It starts with Ruby, which people forget. Refer to an undefined variable and you get a NameError. Assign one undefined variable to another and you get a NameError. Then:</p>
+
+<pre tabindex="0"><code>a = a   # =&gt; nil</code></pre>
+
+<p>I ran it in Ruby 3.3, and it still gives <code>nil</code>. A second Ruby bit uses <code>method_missing</code> to make bare words work as strings, and here Bernhardt is careful: "this is not deserving of wat. This is actually a result of how awesome Ruby is."</p>
+
+<p>Then: "Let's talk about JavaScript." The four lines arrive as a quiz. "What should array plus an array be?" Someone offers an empty array. "I would also accept type error." The answer is the empty string. Array plus object "should obviously be type error, because those are completely disparate types", and gives <code>[object Object]</code>. Then the best line in the talk: "because this is plus-- so you can flip the operands and the same thing comes out." The screen shows 0. Object plus object gives NaN, "so this one's actually right." Then: "Enough making fun of languages that suck. Let's talk about JavaScript."</p>
+
+<p>The closing run starts from <code>Array(16)</code>, joins it with the string "wat", and gets a rare concession: "This is actually the only line in this entire presentation that's reasonable." Adding 1 to the string gives "wat1" fifteen times. Subtracting 1 gives this, which I ran:</p>
+
+<pre tabindex="0"><code>Array(16).join("wat" - 1) + " Batman!"
+<span class="c">// "NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!"</span></code></pre>
+
+<p>It looks improvised and was the opposite. In the <a href="https://news.ycombinator.com/item?id=3515845">Hacker News thread</a> about the video, Bernhardt explained that the terminal sessions were pre-recorded and cut up in Keynote: "There are 37 slides in that four-minute talk." A commenter there identified the console as <code>jsc</code>, the command-line shell of Safari's JavaScript engine.</p>
+
+<p>The video went up on Bernhardt's screencast site, Destroy All Software, and reached Hacker News by January 18. A second submission on January 26 passed 500 points. The next day somebody asked Stack Overflow to explain the results, and the day after that deVilla's post went up, with a note that it also ran on Shopify's technology blog. The page hosting the video carries a one-line disclaimer that most of the later argument ignored: "This talk does not represent anyone's actual opinion."</p>
+
+<h2>What the plus sign actually does</h2>
+
+<p>The addition operator's rule is one step of an operation the <a href="https://tc39.es/ecma262/multipage/ecmascript-language-expressions.html">current specification</a> calls ApplyStringOrNumericBinaryOperator. Convert both operands with ToPrimitive. Then: "If leftPrimitive is a String or rightPrimitive is a String", convert both to strings and return "the string-concatenation". Otherwise treat both as numbers. So <code>+</code> never looks at what you gave it, only at what your operands turn into.</p>
+
+<p><a href="https://tc39.es/ecma262/multipage/abstract-operations.html">ToPrimitive</a>, for an ordinary object and no stated preference, tries two methods in order: "valueOf", then "toString". An array's <code>valueOf</code> returns the array, which is still an object, so the engine moves on to <code>toString</code>. For an array that method calls <code>join</code>, and for a plain object it produces the famous tag:</p>
+
+<pre tabindex="0"><code>String([])        <span class="c">// ""</span>
+String({})        <span class="c">// "[object Object]"</span>
+[1, 2] + [3]      <span class="c">// "1,23"</span></code></pre>
+
+<p>That is the first two lines of the talk. An empty array joins to an empty string, and two empty strings concatenate to an empty string. An empty string plus <code>"[object Object]"</code> is <code>"[object Object]"</code>. The audience member who guessed "empty array" assumed <code>+</code> has an array meaning. It has two meanings, and an array reaches it only as a string.</p>
+
+<p>The Batman line is the same rule seen from the other side. <code>"wat" + 1</code> has a string operand, so it concatenates. Subtraction has no string meaning at all, so <code>"wat" - 1</code> converts both sides to numbers and yields <code>NaN</code>. Then <code>join</code> turns its separator into the string "NaN" and puts it between sixteen empty slots, which makes fifteen of them. The captions have Bernhardt saying the bare array prints as "16 commas"; it prints as fifteen, for the same reason.</p>
+
+<h2>The block nobody mentioned</h2>
+
+<p>The third and fourth lines are a different trick. The statement grammar has a note attached to <a href="https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html">expression statements</a>: one "cannot start with a U+007B (LEFT CURLY BRACKET) because that might make it ambiguous with a Block." So a line that begins with <code>{}</code> begins with an empty block, and what follows is a separate expression with a unary plus on the front. The specification's note on that operator is brief: it "converts its operand to Number type."</p>
+
+<pre tabindex="0"><code>{} + []               <span class="c">// 0</span>
++[]                   <span class="c">// 0</span>
+({} + [])             <span class="c">// "[object Object]"</span>
+var o = {} + []; o    <span class="c">// "[object Object]"</span>
+{} + {}               <span class="c">// NaN</span>
+({} + {})             <span class="c">// "[object Object][object Object]"</span></code></pre>
+
+<p>I ran each of those. The first and fifth give those answers only as whole statements, which is how <code>node -p</code> and <code>eval</code> treat them and, by the Hacker News thread's account, how <code>jsc</code> and Chrome's console treated a typed line in 2012. Wrap them in parentheses, assign them, or pass them to <code>console.log</code>, and <code>{}</code> is an object again. So <code>+</code> was never non-commutative. No object was added to anything in line three: the array became <code>""</code> and the empty string became 0. In line four the object became <code>"[object Object]"</code>, which is not a number.</p>
+
+<p>Bernhardt knew. When a Hacker News commenter called the result a console bug, the reply was: "By wrapping in parenthesis, you're making it an expression. When you just say "{}+[]" in e.g. Chrome, the first {} is parsed as a block." And then: "I didn't mention any of this in the talk (it would've killed the flow ;)."</p>
+
+<h2>Why the language is like this</h2>
+
+<p><strong>The conversions were requested.</strong> The history paper is plain about it: "Automatic coercions were intended to lower the entry barrier for the initial adoption of JavaScript as a simple scripting language." Some were added after the first ten-day sprint because Netscape's own early users asked. They wanted an HTTP status of <code>"404"</code> to compare equal to the number 404, and they wanted "automatic coercion of empty strings to 0 in numeric contexts, providing a default value for empty fields of HTML forms." That second request is line three of the talk. <code>{} + []</code> is 0 because an empty form field was supposed to count as zero.</p>
+
+<p><strong>There was nothing else for <code>+</code> to do.</strong> The talk's preferred answer is a type error. JavaScript 1.0 could not give one in any way a script could handle: the history paper's table of features "not present in JavaScript 1.0" includes the <code>try</code> statement. My reading is that a scripting language with no way to catch an error had good reasons to return something, and a string was the something.</p>
+
+<p><strong>The fix was tried, and reverted.</strong> This is the part I think the jokes miss. The paper records that "Brendan Eich decided to fix == in JavaScript 1.2 by eliminating most of its automatic coercions", in 1997. It did not survive contact with the standard. Shon Katzenberger of Microsoft "successfully argued that it was too late to make such a change given the large number of existing Web pages it would break", and Eich "reverted to the original semantics" in JavaScript 1.3. The language was two years old and already could not take it back. What it got was a second operator: <code>===</code> appears in a Microsoft proposal from 1997 and in the third edition of the standard.</p>
+
+<p><strong>Some of it was never JavaScript's.</strong> <code>0.1 + 0.2</code> is <code>0.30000000000000004</code> in any language that uses binary floating point, and there is a whole website, <a href="https://0.30000000000000004.com/">0.30000000000000004.com</a>, that lists them, under the heading "Your language isn't broken, it's doing floating point math." <code>NaN</code> not equalling itself is the same standard's rule, and the specification's Number::equal starts "If x is NaN, return false." The history paper notes that for many beginners the browser is where they first meet these things, and they "typically assume that those problems are unique to JavaScript."</p>
+
+<p><strong>And some of it was an accident.</strong> <code>typeof null</code> is the honest example. Eich's recollection in the paper is that it leaked out of "the original Mocha implementation", where null carried the same internal tag as objects. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">MDN</a> records that "A fix was proposed for ECMAScript (via an opt-in), but was rejected."</p>
+
+<h2>Explaining the joke, and arguing about it</h2>
+
+<p>The first response to "Wat" was homework. The Stack Overflow question, <a href="https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the">"What is the explanation for these bizarre JavaScript behaviours mentioned in the 'Wat' talk for CodeMash 2012?"</a>, was posted on January 27, 2012 by someone who had tried the lines in a JSFiddle and got different answers. A user called Ventero replied within the hour, walking through each result by section number of the standard, block statement included. That answer has more than 1,500 votes. It set a pattern, and when Denys Dovhan started <a href="https://github.com/denysdovhan/wtfjs">a new wtfjs list</a> on GitHub in July 2017, crediting LeRoux for "the original idea", the entries came with explanations and, often, links to the clause responsible. One of them is the banana:</p>
+
+<pre tabindex="0"><code>"b" + "a" + +"a" + "a"  <span class="c">// "baNaNa"</span></code></pre>
+
+<p>Dovhan's list calls it "an old-school joke in JavaScript, but remastered", and gives the original as <code>"foo" + +"bar"</code>, which is the wtfjs post from February 2010.</p>
+
+<p>The second response was to say the jokes were unfair. Kyle Simpson's book <a href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/types%20%26%20grammar/ch4.md"><em>You Don't Know JS: Types &amp; Grammar</em></a> spends a long chapter on it. Of the equality algorithm, Simpson writes: "I think you'll be surprised at just how reasonable it is." Of the contrived examples: "Don't fall into the "my programming language should protect me from myself" fallacy." The chapter's position is that implicit conversion has good parts, and that "Potential abuses of a mechanism are not sufficient evidence to condemn the mechanism."</p>
+
+<p>I think both sides have a point and they are different points. Nobody ships <code>[] + {}</code>. It is very easy to ship a total that reads "10020" because one operand came out of a form field as text. The talk's examples are absurd, but they are a reduction of a real bug to its smallest form. Bernhardt's own answer, to a commenter who called the sleight of hand "tasteless", was shorter: "It's a joke. Relax."</p>
+
+<p>Day to day, people coped the way the <a href="https://derek.io/nostalgiajs/essays/jslint/">linters</a> told them to. ESLint's <a href="https://eslint.org/docs/latest/rules/eqeqeq"><code>eqeqeq</code></a> rule explains that <code>==</code> follows "the rather obscure Abstract Equality Comparison Algorithm", and a second rule, <a href="https://eslint.org/docs/latest/rules/no-implicit-coercion"><code>no-implicit-coercion</code></a>, exists to "flag shorter notations for the type conversion".</p>
+
+<h2>What it left behind</h2>
+
+<p><strong>Node's prompt quietly rewrote the punchline.</strong> Type <code>{} + []</code> at the Node 22 prompt and you get <code>'[object Object]'</code>, not 0. The reason is in <a href="https://github.com/nodejs/node/blob/v22.x/lib/repl.js">the REPL's source</a>: if the input looks like an object literal, a comment says, "Add parentheses to make sure `code` is parsed as an expression". The Hacker News thread shows Node already disagreeing with <code>jsc</code> in January 2012. So the most quoted line of the talk depends on which prompt you use. Nothing in the language changed. A tool decided that what people meant mattered more than what the grammar said.</p>
+
+<p><strong>New types mostly refuse to play.</strong> The old conversions can't be removed, for the reasons in <a href="https://derek.io/nostalgiajs/essays/annex-b/">the Annex B essay</a>; the history paper adds that changing <code>typeof null</code> "would not be subtractive", so even strict mode couldn't take it. But nothing obliges new features to join in:</p>
+
+<pre tabindex="0"><code>1n + 1         <span class="c">// TypeError</span>
+Symbol() + ""  <span class="c">// TypeError</span></code></pre>
+
+<p>Node's message for the first is "Cannot mix BigInt and other types, use explicit conversions". The committee's actual response to a decade of coercion jokes, as I read it, was to stop extending the behaviour: the two primitive types added since, Symbol and BigInt, throw here where the 1995 types would have guessed (BigInt still concatenates with a string and still <code>==</code> a Number: <code>1n + ""</code> is "1" and <code>1n == 1</code> is true). Meanwhile the old machinery got an official handle. ECMAScript 2015's <code>Symbol.toPrimitive</code> lets any object decide what <code>+</code> sees, and the specification's note observes that of the built-ins only Dates and Symbols use it.</p>
+
+<p><strong>"I would also accept type error" came true.</strong> I gave the talk's lines to TypeScript 6. <code>[] + {}</code> is rejected: "Operator '+' cannot be applied to types 'never[]' and '{}'." <code>"wat" - 1</code> is rejected too. TypeScript's <a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">handbook</a> opens its case with the same genre, noting that "Every language has its own quirks" and offering <code>"" == 0</code> as exhibit one. The banana still compiles, since unary plus on a string is allowed. And the page that hosts "Wat" now carries a plug for Execute Program, a set of interactive courses listed among the site's own products. The first course it names is TypeScript.</p>
+
+<p><strong>The same rules became an encoding.</strong> In July 2012 Martin Kleppe published <a href="https://jsfuck.com/">JSFuck</a>, which writes any program using six characters, <code>[]()!+</code>. It is "Wat" run in reverse: <code>![]</code> is false, <code>![]+[]</code> is the string "false", <code>+[]</code> is 0, so <code>(![]+[])[+[]]</code> is "f", and from enough letters you can spell a function's name and call it. The site credits an "Original discussion at Sla.ckers.org", a security forum, and I take the practical use to be getting script past filters that look for letters. The conversions people laughed at turned out to be complete enough to program in.</p>
+
+<h2>The takeaway</h2>
+
+<p>"Wat" and wtfjs were jokes about a language whose designers had been asked, early on, to make a web form's empty text box behave like zero, and who found by 1997 that they could not undo it. Every famous result is the specification working as written: <code>+</code> has two meanings and picks by what the operands convert to, objects convert through <code>toString</code>, and a line that starts with a brace starts with a block. The jokes were unfair in the details. Two of the four lines add nothing to an object, and several favourites belong to floating point. They were fair about the thing that mattered, which is that a reasonable programmer's guess was wrong every time.</p>
+
+<p>What the laughing achieved is easy to underrate. It made the conversion rules common knowledge, and I suspect a great many people know what ToPrimitive does only because someone explained a punchline to them. It gave teams a four-minute argument for <code>===</code>, linters and eventually a type checker. And it showed the committee what not to repeat, so that Symbol won't turn into a string and BigInt won't mix with Number. The old behaviour is permanent, and <code>[] + {}</code> will be <code>"[object Object]"</code> for as long as there are browsers. The joke worked because everyone in the room had, at some point, been the person who guessed.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.destroyallsoftware.com/talks/wat">Wat</a>, Gary Bernhardt, lightning talk at CodeMash 2012, with its <a href="https://www.destroyallsoftware.com/captions/talks/wat.vtt">caption file</a> <a class="archived" href="https://web.archive.org/web/20261107145438/https://www.destroyallsoftware.com/talks/wat">(archived)</a></li>
+    <li><a href="https://news.ycombinator.com/item?id=3515845">Wat</a>, Hacker News discussion, January 26, 2012, with comments by Gary Bernhardt <a class="archived" href="https://web.archive.org/web/20210818152350/https://news.ycombinator.com/item?id=3515845">(archived)</a></li>
+    <li><a href="https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the">What is the explanation for these bizarre JavaScript behaviours mentioned in the 'Wat' talk for CodeMash 2012?</a>, Stack Overflow, question by NibblyPig and answer by Ventero, January 27, 2012 <a class="archived" href="https://web.archive.org/web/20260101115649/https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the">(archived)</a></li>
+    <li><a href="https://www.globalnerdy.com/2012/01/28/wat-a-funny-look-at-ruby-and-javascript-oddities/">WAT? A Funny Look at Ruby and JavaScript Oddities</a> and <a href="https://www.globalnerdy.com/2012/01/29/javascript-oddities-from-the-wat-video-explained/">JavaScript Oddities from the WAT Video, Explained</a>, Joey deVilla, Global Nerdy, 2012 <a class="archived" href="https://web.archive.org/web/20260416151333/https://www.globalnerdy.com/2012/01/28/wat-a-funny-look-at-ruby-and-javascript-oddities/">(archived)</a></li>
+    <li><a href="https://wtfjs.com/">wtfjs</a> and its <a href="https://wtfjs.com/about">about page</a>, Brian LeRoux, Andrew Lunny and contributors, 2010 to 2016 <a class="archived" href="https://web.archive.org/web/20260908180708/https://wtfjs.com/">(archived)</a></li>
+    <li><a href="https://github.com/brianleroux/wtfjs">brianleroux/wtfjs</a>, the site's repository, 2010 to 2020 <a class="archived" href="https://web.archive.org/web/20260315152357/https://github.com/brianleroux/wtfjs">(archived)</a></li>
+    <li><a href="https://dorey.github.io/JavaScript-Equality-Table/">JavaScript Equality Table</a>, dorey, 2011 <a class="archived" href="https://web.archive.org/web/20261112003814/https://dorey.github.io/JavaScript-Equality-Table/">(archived)</a></li>
+    <li><a href="https://github.com/denysdovhan/wtfjs">What the f*ck JavaScript?</a>, Denys Dovhan and contributors, 2017 onwards <a class="archived" href="https://web.archive.org/web/20261009030222/https://github.com/denysdovhan/wtfjs">(archived)</a></li>
+    <li><a href="https://jsfuck.com/">JSFuck</a>, Martin Kleppe, 2012 <a class="archived" href="https://web.archive.org/web/20261013142501/https://jsfuck.com/">(archived)</a></li>
+    <li><a href="https://0.30000000000000004.com/">Floating Point Math</a>, 0.30000000000000004.com <a class="archived" href="https://web.archive.org/web/20260920181526/https://0.30000000000000004.com/">(archived)</a></li>
+    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-expressions.html">ECMAScript Language: Expressions</a>, Ecma TC39, current draft (see 13.15.3, ApplyStringOrNumericBinaryOperator, and 13.5.4, Unary + Operator)</li>
+    <li><a href="https://tc39.es/ecma262/multipage/abstract-operations.html">ECMAScript: Abstract Operations</a>, Ecma TC39, current draft (see 7.1.1, ToPrimitive, and 7.2.13, IsLooselyEqual) <a class="archived" href="https://web.archive.org/web/20261107132634/https://tc39.es/ecma262/multipage/abstract-operations.html">(archived)</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html">ECMAScript Language: Statements and Declarations</a>, Ecma TC39, current draft (see 14.5, Expression Statement) <a class="archived" href="https://web.archive.org/web/20261107071236/https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html">(archived)</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html">ECMAScript Data Types and Values</a>, Ecma TC39, current draft (see Number::equal)</li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_3rd_edition_december_1999.pdf">ECMA-262, 3rd edition</a>, Ecma, December 1999 (PDF; see 11.9.4, the Strict Equals Operator)</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a>, MDN Web Docs <a class="archived" href="https://web.archive.org/web/20261105215433/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">(archived)</a></li>
+    <li><a href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/types%20%26%20grammar/ch4.md">You Don't Know JS: Types &amp; Grammar, chapter 4, "Coercion"</a>, Kyle Simpson, first edition <a class="archived" href="https://web.archive.org/web/20260824150502/https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/types%20%26%20grammar/ch4.md">(archived)</a></li>
+    <li><a href="https://eslint.org/docs/latest/rules/eqeqeq">eqeqeq</a> and <a href="https://eslint.org/docs/latest/rules/no-implicit-coercion">no-implicit-coercion</a>, ESLint documentation <a class="archived" href="https://web.archive.org/web/20261105183716/https://eslint.org/docs/latest/rules/eqeqeq">(archived)</a></li>
+    <li><a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">TypeScript for the New Programmer</a>, TypeScript handbook <a class="archived" href="https://web.archive.org/web/20261110122526/https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">(archived)</a></li>
+    <li><a href="https://github.com/nodejs/node/blob/v22.x/lib/repl.js">lib/repl.js</a>, Node.js, v22.x branch <a class="archived" href="https://web.archive.org/web/20261009225851/https://github.com/nodejs/node/blob/v22.x/lib/repl.js">(archived)</a></li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>Annex B: the features the web kept</title>
     <link>https://derek.io/nostalgiajs/essays/annex-b/</link>
@@ -137,28 +294,28 @@ function decode_utf8(s) {
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
     <li><a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">ECMAScript Annex B: Additional ECMAScript Features for Web Browsers</a>, Ecma TC39, current draft <a class="archived" href="https://web.archive.org/web/20261105185938/https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">(archived)</a></li>
-    <li><a href="https://tc39.es/ecma262/multipage/conformance.html">ECMAScript, clause 2: Conformance</a>, Ecma TC39, current draft (defines "Normative Optional" and "Legacy")</li>
+    <li><a href="https://tc39.es/ecma262/multipage/conformance.html">ECMAScript, clause 2: Conformance</a>, Ecma TC39, current draft (defines "Normative Optional" and "Legacy") <a class="archived" href="https://web.archive.org/web/20261020003121/https://tc39.es/ecma262/multipage/conformance.html">(archived)</a></li>
     <li><a href="https://tc39.es/ecma262/multipage/fundamental-objects.html">ECMAScript, clause 20: Fundamental Objects</a>, Ecma TC39, current draft (see 20.1.3.8 and 20.1.3.9)</li>
     <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">ECMA-262, 1st edition</a>, Ecma, June 1997 (PDF; see 15.1.2.4 and 15.1.2.5) <a class="archived" href="https://web.archive.org/web/20261105185941/https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">(archived)</a></li>
     <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_3rd_edition_december_1999.pdf">ECMA-262, 3rd edition</a>, Ecma, December 1999 (PDF; see Annex B, "Compatibility")</li>
-    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_5.1_edition_june_2011.pdf">ECMA-262, edition 5.1</a>, Ecma, June 2011 (PDF)</li>
-    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf">ECMA-262, 6th edition (ECMAScript 2015)</a>, Ecma, June 2015 (PDF)</li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_5.1_edition_june_2011.pdf">ECMA-262, edition 5.1</a>, Ecma, June 2011 (PDF) <a class="archived" href="https://web.archive.org/web/20261107081158/https://ecma-international.org/wp-content/uploads/ECMA-262_5.1_edition_june_2011.pdf">(archived)</a></li>
+    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf">ECMA-262, 6th edition (ECMAScript 2015)</a>, Ecma, June 2015 (PDF) <a class="archived" href="https://web.archive.org/web/20261103072745/https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf">(archived)</a></li>
     <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
     <li><a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_a-c.htm">Navigator JavaScript reference, A to C</a> and <a href="https://hepwww.pp.rl.ac.uk/users/adye/js11/ref_d-e.htm">D to E</a>, Netscape, Navigator 3 era, mirrored copy</li>
-    <li><a href="https://developer.chrome.com/blog/smooshgate">SmooshGate FAQ</a>, Mathias Bynens, 2018</li>
+    <li><a href="https://developer.chrome.com/blog/smooshgate">SmooshGate FAQ</a>, Mathias Bynens, 2018 <a class="archived" href="https://web.archive.org/web/20260922112423/https://developer.chrome.com/blog/smooshgate">(archived)</a></li>
     <li><a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">TC39 meeting notes, May 22, 2018</a>, Ecma TC39 ("Array.prototype.flatten rename")</li>
-    <li><a href="https://github.com/tc39/ecma262/pull/2125">Normative: move __proto__ out of annex b</a>, pull request 2125, tc39/ecma262, 2020 to 2021</li>
-    <li><a href="https://github.com/tc39/ecma262/pull/1867">Normative: Make B.1.{1,2} normative</a>, pull request 1867, tc39/ecma262, 2020 to 2021</li>
-    <li><a href="https://github.com/tc39/proposal-string-left-right-trim">String.prototype.trimStart / String.prototype.trimEnd</a>, TC39 proposal</li>
-    <li><a href="https://github.com/tc39/proposal-regexp-legacy-features">Legacy RegExp features in JavaScript</a>, Claude Pache, TC39 proposal, Stage 3</li>
+    <li><a href="https://github.com/tc39/ecma262/pull/2125">Normative: move __proto__ out of annex b</a>, pull request 2125, tc39/ecma262, 2020 to 2021 <a class="archived" href="https://web.archive.org/web/20260520142820/https://github.com/tc39/ecma262/pull/2125">(archived)</a></li>
+    <li><a href="https://github.com/tc39/ecma262/pull/1867">Normative: Make B.1.{1,2} normative</a>, pull request 1867, tc39/ecma262, 2020 to 2021 <a class="archived" href="https://web.archive.org/web/20210207015011/https://github.com/tc39/ecma262/pull/1867">(archived)</a></li>
+    <li><a href="https://github.com/tc39/proposal-string-left-right-trim">String.prototype.trimStart / String.prototype.trimEnd</a>, TC39 proposal <a class="archived" href="https://web.archive.org/web/20260818113724/https://github.com/tc39/proposal-string-left-right-trim">(archived)</a></li>
+    <li><a href="https://github.com/tc39/proposal-regexp-legacy-features">Legacy RegExp features in JavaScript</a>, Claude Pache, TC39 proposal, Stage 3 <a class="archived" href="https://web.archive.org/web/20260513151238/https://github.com/tc39/proposal-regexp-legacy-features">(archived)</a></li>
     <li><a href="https://github.com/tc39/notes/blob/main/meetings/2026-01/january-21.md">TC39 meeting notes, January 21, 2026</a>, Ecma TC39</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/148">Firefox 148 release notes for developers</a>, MDN Web Docs, 2026</li>
-    <li><a href="https://github.com/tc39/ecma262/pull/3568">Normative: Add "Runtime Errors for Function Call Assignment Targets" to Annex B</a>, pull request 3568, tc39/ecma262, 2025</li>
-    <li><a href="https://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.html">Encoding / decoding UTF8 in javascript</a>, Johan Sundström, 2006</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">String.prototype.substr()</a>, MDN Web Docs</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/blink">String.prototype.blink()</a>, MDN Web Docs</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">RegExp.prototype.compile()</a>, MDN Web Docs</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape">escape()</a>, MDN Web Docs</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/148">Firefox 148 release notes for developers</a>, MDN Web Docs, 2026 <a class="archived" href="https://web.archive.org/web/20260917120537/https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/148">(archived)</a></li>
+    <li><a href="https://github.com/tc39/ecma262/pull/3568">Normative: Add "Runtime Errors for Function Call Assignment Targets" to Annex B</a>, pull request 3568, tc39/ecma262, 2025 <a class="archived" href="https://web.archive.org/web/20260629044610/https://github.com/tc39/ecma262/pull/3568">(archived)</a></li>
+    <li><a href="https://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.html">Encoding / decoding UTF8 in javascript</a>, Johan Sundström, 2006 <a class="archived" href="https://web.archive.org/web/20260829233352/http://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.html">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">String.prototype.substr()</a>, MDN Web Docs <a class="archived" href="https://web.archive.org/web/20261026213723/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/blink">String.prototype.blink()</a>, MDN Web Docs <a class="archived" href="https://web.archive.org/web/20261021044339/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/blink">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">RegExp.prototype.compile()</a>, MDN Web Docs <a class="archived" href="https://web.archive.org/web/20261103082138/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape">escape()</a>, MDN Web Docs <a class="archived" href="https://web.archive.org/web/20261105215431/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>
@@ -276,35 +433,35 @@ function decode_utf8(s) {
 <section class="sources" aria-labelledby="sources-h">
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
-    <li><a href="https://www.crockford.com/javascript/javascript.html">JavaScript: The World's Most Misunderstood Programming Language</a>, Douglas Crockford, 2001</li>
-    <li><a href="https://www.crockford.com/javascript/survey.html">A Survey of the JavaScript Programming Language</a>, Douglas Crockford, 2002</li>
-    <li><a href="https://www.crockford.com/javascript/prototypal.html">Prototypal Inheritance in JavaScript</a>, Douglas Crockford, 2006, with addenda to 2008</li>
-    <li><a href="https://www.crockford.com/javascript/recommend.html">Recommendations for Modifications to the ECMAScript Language Specification</a>, Douglas Crockford, 2007</li>
-    <li><a href="https://www.crockford.com/javascript/popular.html">The World's Most Misunderstood Programming Language Has Become the World's Most Popular Programming Language</a>, Douglas Crockford, 2008</li>
+    <li><a href="https://www.crockford.com/javascript/javascript.html">JavaScript: The World's Most Misunderstood Programming Language</a>, Douglas Crockford, 2001 <a class="archived" href="https://web.archive.org/web/20261108105034/http://crockford.com/javascript/javascript.html">(archived)</a></li>
+    <li><a href="https://www.crockford.com/javascript/survey.html">A Survey of the JavaScript Programming Language</a>, Douglas Crockford, 2002 <a class="archived" href="https://web.archive.org/web/20261024224942/http://crockford.com/javascript/survey.html">(archived)</a></li>
+    <li><a href="https://www.crockford.com/javascript/prototypal.html">Prototypal Inheritance in JavaScript</a>, Douglas Crockford, 2006, with addenda to 2008 <a class="archived" href="https://web.archive.org/web/20261022051210/http://crockford.com/javascript/prototypal.html">(archived)</a></li>
+    <li><a href="https://www.crockford.com/javascript/recommend.html">Recommendations for Modifications to the ECMAScript Language Specification</a>, Douglas Crockford, 2007 <a class="archived" href="https://web.archive.org/web/20260729070355/http://www.crockford.com/javascript/recommend.html">(archived)</a></li>
+    <li><a href="https://www.crockford.com/javascript/popular.html">The World's Most Misunderstood Programming Language Has Become the World's Most Popular Programming Language</a>, Douglas Crockford, 2008 <a class="archived" href="https://web.archive.org/web/20261030041717/http://crockford.com/javascript/popular.html">(archived)</a></li>
     <li><a href="https://www.crockford.com/jsmin.html">JSMin</a> and <a href="https://www.crockford.com/minify.html">Minify</a>, Douglas Crockford, 2019 <a class="archived" href="https://web.archive.org/web/20261021134751/https://www.crockford.com/jsmin.html">(archived)</a></li>
-    <li><a href="https://www.crockford.com/about.html">About Douglas Crockford</a>, crockford.com</li>
+    <li><a href="https://www.crockford.com/about.html">About Douglas Crockford</a>, crockford.com <a class="archived" href="https://web.archive.org/web/20261007125652/https://crockford.com/about.html">(archived)</a></li>
     <li><em>JavaScript: The Good Parts</em>, Douglas Crockford, O'Reilly, 2008. <a href="https://openlibrary.org/books/OL10781042M">Open Library record</a>, with the table of contents and back cover copy</li>
-    <li><a href="https://en.wikiquote.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikiquote, for the passage from chapter 1 of the book</li>
-    <li><a href="https://www.jslint.com/help.html">JSLint: Help</a>, jslint.com, read November 12, 2026</li>
+    <li><a href="https://en.wikiquote.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikiquote, for the passage from chapter 1 of the book <a class="archived" href="https://web.archive.org/web/20260315000100/https://en.wikiquote.org/wiki/Douglas_Crockford">(archived)</a></li>
+    <li><a href="https://www.jslint.com/help.html">JSLint: Help</a>, jslint.com, read November 12, 2026 <a class="archived" href="https://web.archive.org/web/20261013010922/https://www.jslint.com/help.html">(archived)</a></li>
     <li><a href="https://people.cs.nycu.edu.tw/~tsaiwn/oop/05_Tools/JSLint/lint.html">JSLint: The JavaScript Code Quality Tool</a>, Douglas Crockford, an older copy of the documentation kept on a course site at National Yang Ming Chiao Tung University</li>
     <li><a href="https://raw.githubusercontent.com/jslint-org/jslint/v2013.3.13/jslint.js">jslint.js, edition of 2013-03-13</a>, and the current <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/jslint.mjs">jslint.mjs</a>, <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/LICENSE">LICENSE</a> and <a href="https://raw.githubusercontent.com/jslint-org/jslint/master/CHANGELOG.md">CHANGELOG</a>, the jslint-org/jslint repository</li>
     <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
     <li><a href="https://raw.githubusercontent.com/disqus/disqus.github.com/master/_posts/2011-02-20-antonkovalyov-why-i-forked-jslint-to-jshint.html">Why I forked JSLint to JSHint</a>, Anton Kovalyov, 2011, as mirrored in a Disqus repository</li>
-    <li><a href="https://jshint.com/relicensing-2020/">2020 Relicensing</a>, <a href="https://jshint.com/about/">About JSHint</a> and <a href="https://jshint.com/docs/options/">JSHint Options</a>, the JSHint project</li>
-    <li><a href="https://www.json.org/license.html">The JSON License</a>, json.org, 2002</li>
-    <li><a href="https://www.gnu.org/licenses/license-list.html">Various Licenses and Comments about Them</a>, Free Software Foundation</li>
-    <li><a href="https://github.com/twbs/bootstrap/issues/3057">bootstrap-dropdown.js clearMenus() needs ; at the end</a>, issue 3057, twbs/bootstrap, 2012</li>
+    <li><a href="https://jshint.com/relicensing-2020/">2020 Relicensing</a>, <a href="https://jshint.com/about/">About JSHint</a> and <a href="https://jshint.com/docs/options/">JSHint Options</a>, the JSHint project <a class="archived" href="https://web.archive.org/web/20250702104235/https://jshint.com/relicensing-2020/">(archived)</a></li>
+    <li><a href="https://www.json.org/license.html">The JSON License</a>, json.org, 2002 <a class="archived" href="https://web.archive.org/web/20261106044247/https://www.json.org/license.html">(archived)</a></li>
+    <li><a href="https://www.gnu.org/licenses/license-list.html">Various Licenses and Comments about Them</a>, Free Software Foundation <a class="archived" href="https://web.archive.org/web/20261107174947/https://www.gnu.org/licenses/license-list.html">(archived)</a></li>
+    <li><a href="https://github.com/twbs/bootstrap/issues/3057">bootstrap-dropdown.js clearMenus() needs ; at the end</a>, issue 3057, twbs/bootstrap, 2012 <a class="archived" href="https://web.archive.org/web/20260614143225/https://github.com/twbs/bootstrap/issues/3057">(archived)</a></li>
     <li><a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.2/js/bootstrap-dropdown.js">bootstrap-dropdown.js, version 2.0.2</a> and <a href="https://raw.githubusercontent.com/twbs/bootstrap/v2.0.3/js/bootstrap-dropdown.js">version 2.0.3</a>, Twitter Bootstrap, 2012</li>
-    <li><a href="https://brendaneich.com/2012/04/the-infernal-semicolon/">The infernal semicolon</a>, Brendan Eich, 2012</li>
-    <li><a href="https://code.jquery.com/jquery-1.4.2.js">jQuery 1.4.2</a>, 2010</li>
-    <li><a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">Introducing ESLint</a>, Nicholas C. Zakas, 2013</li>
-    <li><a href="https://eslint.org/docs/latest/about/">About</a>, <a href="https://eslint.org/docs/latest/rules/eqeqeq">eqeqeq</a> and <a href="https://eslint.org/docs/latest/rules/no-plusplus">no-plusplus</a>, ESLint documentation</li>
-    <li><a href="https://standardjs.com/">JavaScript Standard Style</a></li>
-    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">ECMAScript Language: Source Text</a>, Ecma TC39, current draft, for strict mode code</li>
-    <li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-262/">ECMA-262</a>, Ecma International, for the dates of each edition</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">Strict mode</a>, MDN</li>
-    <li><a href="https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js">json2.js</a>, Douglas Crockford</li>
-    <li><a href="https://en.wikipedia.org/wiki/JSLint">JSLint</a>, <a href="https://en.wikipedia.org/wiki/JSHint">JSHint</a> and <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikipedia</li>
+    <li><a href="https://brendaneich.com/2012/04/the-infernal-semicolon/">The infernal semicolon</a>, Brendan Eich, 2012 <a class="archived" href="https://web.archive.org/web/20260608012941/https://brendaneich.com/2012/04/the-infernal-semicolon/">(archived)</a></li>
+    <li><a href="https://code.jquery.com/jquery-1.4.2.js">jQuery 1.4.2</a>, 2010 <a class="archived" href="https://web.archive.org/web/20261101161901/https://code.jquery.com/jquery-1.4.2.js">(archived)</a></li>
+    <li><a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">Introducing ESLint</a>, Nicholas C. Zakas, 2013 <a class="archived" href="https://web.archive.org/web/20260111130812/https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">(archived)</a></li>
+    <li><a href="https://eslint.org/docs/latest/about/">About</a>, <a href="https://eslint.org/docs/latest/rules/eqeqeq">eqeqeq</a> and <a href="https://eslint.org/docs/latest/rules/no-plusplus">no-plusplus</a>, ESLint documentation <a class="archived" href="https://web.archive.org/web/20261001082821/https://eslint.org/docs/latest/about/">(archived)</a></li>
+    <li><a href="https://standardjs.com/">JavaScript Standard Style</a> <a class="archived" href="https://web.archive.org/web/20261107061711/https://standardjs.com/">(archived)</a></li>
+    <li><a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">ECMAScript Language: Source Text</a>, Ecma TC39, current draft, for strict mode code <a class="archived" href="https://web.archive.org/web/20261020003121/https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">(archived)</a></li>
+    <li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-262/">ECMA-262</a>, Ecma International, for the dates of each edition <a class="archived" href="https://web.archive.org/web/20261107055607/https://ecma-international.org/publications-and-standards/standards/ecma-262/">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">Strict mode</a>, MDN <a class="archived" href="https://web.archive.org/web/20261105215439/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">(archived)</a></li>
+    <li><a href="https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js">json2.js</a>, Douglas Crockford <a class="archived" href="https://web.archive.org/web/20261024085744/https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js">(archived)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/JSLint">JSLint</a>, <a href="https://en.wikipedia.org/wiki/JSHint">JSHint</a> and <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">Douglas Crockford</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261102202938/https://en.wikipedia.org/wiki/JSLint">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>
@@ -439,35 +596,35 @@ FileETag none</code></pre>
 <section class="sources" aria-labelledby="sources-h">
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
-    <li><a href="https://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a>, Yahoo Exceptional Performance team, Yahoo Developer Network, first published 2007 and since extended to 35 practices</li>
+    <li><a href="https://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a>, Yahoo Exceptional Performance team, Yahoo Developer Network, first published 2007 and since extended to 35 practices <a class="archived" href="https://web.archive.org/web/20261106204526/https://developer.yahoo.com/performance/rules.html">(archived)</a></li>
     <li><a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">Performance Research, Part 1: What the 80/20 Rule Tells Us about Reducing HTTP Requests</a>, Tenni Theurer, YUI Blog, 2006 (archived copy at derek.io)</li>
     <li><a href="https://derek.io/yuiblog/2007/01/04/performance-research-part-2/">Performance Research, Part 2: Browser Cache Usage - Exposed!</a>, Tenni Theurer (bylined "YUI Team" in the archive), YUI Blog, 2007 (archived copy at derek.io)</li>
     <li><a href="https://derek.io/yuiblog/2007/09/04/video-souders/">YUI Theater — Steve Souders: "High Performance Web Sites: 14 Rules For Faster Pages"</a>, YUI Blog, 2007 (archived copy at derek.io)</li>
-    <li><a href="https://www.phpied.com/yslow-performance-extension-for-firebug/">YSlow performance extension for Firebug</a>, Stoyan Stefanov, July 25, 2007</li>
-    <li><a href="https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">Yahoo's YSlow Plug-in Tells You Why Your Site is Slow</a>, Slashdot, July 25, 2007</li>
+    <li><a href="https://www.phpied.com/yslow-performance-extension-for-firebug/">YSlow performance extension for Firebug</a>, Stoyan Stefanov, July 25, 2007 <a class="archived" href="https://web.archive.org/web/20251005101332/https://www.phpied.com/yslow-performance-extension-for-firebug/">(archived)</a></li>
+    <li><a href="https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">Yahoo's YSlow Plug-in Tells You Why Your Site is Slow</a>, Slashdot, July 25, 2007 <a class="archived" href="https://web.archive.org/web/20240320064635/https://tech.slashdot.org/story/07/07/25/1249239/yahoos-yslow-plug-in-tells-you-why-your-site-is-slow">(archived)</a></li>
     <li><a href="https://dri.es/yslow">YSlow</a>, Dries Buytaert, July 25, 2007</li>
-    <li><a href="https://simonwillison.net/tags/yslow/">Posts tagged "yslow"</a>, Simon Willison's Weblog, 2007</li>
-    <li><a href="https://third-bit.com/2007/07/30/yslow-and-the-browser-as-ide/">YSlow and the Browser as IDE</a>, Greg Wilson, 2007, for the OSCON announcement</li>
-    <li><a href="https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">YSlow: Yahoo's Problems Are Not Your Problems</a>, Jeff Atwood, Coding Horror, August 15, 2007, with scores and rule weights collected by Simone Chiaretta</li>
-    <li><a href="https://regex.info/blog/2007-09-26/584">High Performance Web Sites</a>, a review by Jeffrey Friedl, September 26, 2007</li>
+    <li><a href="https://simonwillison.net/tags/yslow/">Posts tagged "yslow"</a>, Simon Willison's Weblog, 2007 <a class="archived" href="https://web.archive.org/web/20261012182355/https://simonwillison.net/tags/yslow/">(archived)</a></li>
+    <li><a href="https://third-bit.com/2007/07/30/yslow-and-the-browser-as-ide/">YSlow and the Browser as IDE</a>, Greg Wilson, 2007, for the OSCON announcement <a class="archived" href="https://web.archive.org/web/20250908092910/https://third-bit.com/2007/07/30/yslow-and-the-browser-as-ide/">(archived)</a></li>
+    <li><a href="https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">YSlow: Yahoo's Problems Are Not Your Problems</a>, Jeff Atwood, Coding Horror, August 15, 2007, with scores and rule weights collected by Simone Chiaretta <a class="archived" href="https://web.archive.org/web/20260926183124/https://blog.codinghorror.com/yslow-yahoos-problems-are-not-your-problems/">(archived)</a></li>
+    <li><a href="https://regex.info/blog/2007-09-26/584">High Performance Web Sites</a>, a review by Jeffrey Friedl, September 26, 2007 <a class="archived" href="https://web.archive.org/web/20260613190033/https://regex.info/blog/2007-09-26/584">(archived)</a></li>
     <li><em>High Performance Web Sites: Essential Knowledge for Front-End Engineers</em>, Steve Souders, O'Reilly, 2007; publication details from <a href="https://openlibrary.org/isbn/9780596529307">Open Library</a></li>
-    <li><a href="https://www.phpied.com/yslow-er/">YSlow-er?</a>, Stoyan Stefanov, December 5, 2007, on version 0.9</li>
-    <li><a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">YSlow 2.0: the first sketches</a>, Stoyan Stefanov, 2011</li>
+    <li><a href="https://www.phpied.com/yslow-er/">YSlow-er?</a>, Stoyan Stefanov, December 5, 2007, on version 0.9 <a class="archived" href="https://web.archive.org/web/20260715200018/https://www.phpied.com/yslow-er/">(archived)</a></li>
+    <li><a href="https://www.phpied.com/yslow-2-0-the-first-sketches/">YSlow 2.0: the first sketches</a>, Stoyan Stefanov, 2011 <a class="archived" href="https://web.archive.org/web/20251005101330/https://www.phpied.com/yslow-2-0-the-first-sketches/">(archived)</a></li>
     <li><a href="https://yslow.org/">yslow.org</a>, its <a href="https://yslow.org/faq/">FAQ</a> and <a href="https://yslow.org/user-guide/">user guide</a>, and <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/util.js">util.js</a> and <a href="https://raw.githubusercontent.com/marcelduran/yslow/master/src/common/rules.js">rules.js</a> from the open-source repository</li>
-    <li><a href="https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">The Performance Golden Rule</a>, Steve Souders, 2012, including the comments by Mark Nottingham and Souders</li>
-    <li><a href="https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">Web Performance Community &amp; Conversation</a>, Steve Souders, 2012</li>
-    <li><a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">WPO – Web Performance Optimization</a>, Steve Souders, 2010</li>
-    <li><a href="https://www.stevesouders.com/blog/2010/04/09/google-adds-site-speed-to-search-ranking/">Google adds site speed to search ranking</a>, Steve Souders, 2010</li>
-    <li><a href="https://www.stevesouders.com/blog/2008/12/17/state-of-performance-2008/">State of Performance 2008</a>, Steve Souders, 2008</li>
-    <li><a href="https://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">Roundup on Parallel Connections</a>, Steve Souders, 2008</li>
-    <li><a href="https://www.stevesouders.com/blog/2008/05/27/google-ajax-libraries-api/">Google AJAX Libraries API</a>, Steve Souders, 2008</li>
-    <li><a href="https://www.stevesouders.com/blog/2016/11/09/velocity-farewell/">Velocity Farewell</a>, Steve Souders, 2016</li>
-    <li><a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">Introducing Page Speed</a>, the official Google Code blog, June 4, 2009</li>
-    <li><a href="https://alistapart.com/article/sprites/">CSS Sprites: Image Slicing's Kiss of Death</a>, Dave Shea, A List Apart, 2004</li>
-    <li><a href="https://www.rfc-editor.org/rfc/rfc1945.txt">RFC 1945</a>, HTTP/1.0, 1996; <a href="https://www.rfc-editor.org/rfc/rfc2616.txt">RFC 2616</a>, HTTP/1.1, 1999, section 8.1.4, and <a href="https://www.rfc-editor.org/rfc/rfc7230.txt">RFC 7230</a>, 2014, section 6.4</li>
+    <li><a href="https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">The Performance Golden Rule</a>, Steve Souders, 2012, including the comments by Mark Nottingham and Souders <a class="archived" href="https://web.archive.org/web/20260711014040/https://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">Web Performance Community &amp; Conversation</a>, Steve Souders, 2012 <a class="archived" href="https://web.archive.org/web/20260711041300/https://www.stevesouders.com/blog/2012/12/05/web-performance-community-conversation/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">WPO – Web Performance Optimization</a>, Steve Souders, 2010 <a class="archived" href="https://web.archive.org/web/20261004133543/https://www.stevesouders.com/blog/2010/05/07/wpo-web-performance-optimization/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2010/04/09/google-adds-site-speed-to-search-ranking/">Google adds site speed to search ranking</a>, Steve Souders, 2010 <a class="archived" href="https://web.archive.org/web/20251114222921/https://www.stevesouders.com/blog/2010/04/09/google-adds-site-speed-to-search-ranking/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2008/12/17/state-of-performance-2008/">State of Performance 2008</a>, Steve Souders, 2008 <a class="archived" href="https://web.archive.org/web/20250608235447/https://www.stevesouders.com/blog/2008/12/17/state-of-performance-2008/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">Roundup on Parallel Connections</a>, Steve Souders, 2008 <a class="archived" href="https://web.archive.org/web/20251227012459/https://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2008/05/27/google-ajax-libraries-api/">Google AJAX Libraries API</a>, Steve Souders, 2008 <a class="archived" href="https://web.archive.org/web/20260513224234/https://www.stevesouders.com/blog/2008/05/27/google-ajax-libraries-api/">(archived)</a></li>
+    <li><a href="https://www.stevesouders.com/blog/2016/11/09/velocity-farewell/">Velocity Farewell</a>, Steve Souders, 2016 <a class="archived" href="https://web.archive.org/web/20250418102440/https://www.stevesouders.com/blog/2016/11/09/velocity-farewell/">(archived)</a></li>
+    <li><a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">Introducing Page Speed</a>, the official Google Code blog, June 4, 2009 <a class="archived" href="https://web.archive.org/web/20250804071221/https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">(archived)</a></li>
+    <li><a href="https://alistapart.com/article/sprites/">CSS Sprites: Image Slicing's Kiss of Death</a>, Dave Shea, A List Apart, 2004 <a class="archived" href="https://web.archive.org/web/20261026194501/https://alistapart.com/article/sprites/">(archived)</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc1945.txt">RFC 1945</a>, HTTP/1.0, 1996; <a href="https://www.rfc-editor.org/rfc/rfc2616.txt">RFC 2616</a>, HTTP/1.1, 1999, section 8.1.4, and <a href="https://www.rfc-editor.org/rfc/rfc7230.txt">RFC 7230</a>, 2014, section 6.4 <a class="archived" href="https://web.archive.org/web/20261010015828/https://www.rfc-editor.org/rfc/rfc1945.txt">(archived)</a></li>
     <li><a href="https://hpbn.co/optimizing-application-delivery/">Optimizing Application Delivery</a>, in <em>High Performance Browser Networking</em>, Ilya Grigorik</li>
-    <li><a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">Lighthouse performance scoring</a> and <a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>, Chrome for Developers, and <a href="https://developer.chrome.com/blog/lighthouse-13-0">What's new in Lighthouse 13</a>, 2025</li>
-    <li><a href="https://developer.chrome.com/blog/http-cache-partitioning">Gaining security and privacy by partitioning the cache</a>, Eiji Kitamura, Chrome for Developers</li>
+    <li><a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">Lighthouse performance scoring</a> and <a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>, Chrome for Developers, and <a href="https://developer.chrome.com/blog/lighthouse-13-0">What's new in Lighthouse 13</a>, 2025 <a class="archived" href="https://web.archive.org/web/20261105213909/https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">(archived)</a></li>
+    <li><a href="https://developer.chrome.com/blog/http-cache-partitioning">Gaining security and privacy by partitioning the cache</a>, Eiji Kitamura, Chrome for Developers <a class="archived" href="https://web.archive.org/web/20261020164746/https://developer.chrome.com/blog/http-cache-partitioning">(archived)</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">the script element</a>, MDN Web Docs</li>
   </ul>
 </section>]]></content:encoded>
@@ -621,30 +778,30 @@ $(document).keydown(function(e) {
 <section class="sources" aria-labelledby="sources-h">
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
-    <li><a href="https://news.ycombinator.com/item?id=459861">Review my website: Cornify</a>, Hacker News thread, 2009</li>
-    <li><a href="https://www.cornify.com/about">About Cornify</a>, cornify.com</li>
-    <li><a href="https://www.cornify.com/extras">Get your Cornify button!</a>, cornify.com</li>
-    <li><a href="https://github.com/Cornify/Cornify">Cornify/Cornify</a>, GitHub repository, 2011 to 2021</li>
+    <li><a href="https://news.ycombinator.com/item?id=459861">Review my website: Cornify</a>, Hacker News thread, 2009 <a class="archived" href="https://web.archive.org/web/20261014023605/https://news.ycombinator.com/item?id=459861">(archived)</a></li>
+    <li><a href="https://www.cornify.com/about">About Cornify</a>, cornify.com <a class="archived" href="https://web.archive.org/web/20261014022417/https://www.cornify.com/about">(archived)</a></li>
+    <li><a href="https://www.cornify.com/extras">Get your Cornify button!</a>, cornify.com <a class="archived" href="https://web.archive.org/web/20260708072206/https://www.cornify.com/extras">(archived)</a></li>
+    <li><a href="https://github.com/Cornify/Cornify">Cornify/Cornify</a>, GitHub repository, 2011 to 2021 <a class="archived" href="https://web.archive.org/web/20260307124601/https://github.com/cornify/cornify">(archived)</a></li>
     <li><a href="https://github.com/Cornify/Cornify/blob/1c1b7620513543986fc235ac117d246132100ddd/js/cornify.js">cornify.js as first committed</a>, GitHub, 2011</li>
-    <li><a href="https://thehistoryoftheweb.com/postscript/wait-whats-a-bookmarklet/">Wait, what's a bookmarklet?</a>, Jay Hoffmann, The History of the Web, 2023</li>
-    <li><a href="https://www.bookmarklets.com/about/">About Bookmarklets</a>, Steve Kangas, Bookmarklets.com</li>
-    <li><a href="https://knowyourmeme.com/memes/cornify">Cornify</a>, Know Your Meme</li>
-    <li><a href="https://www.wired.com/2009/02/proof-why-the-c/">Proof why the Cornify button is a great Internet invention</a>, Bruce Sterling, Wired, 2009</li>
-    <li><a href="https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">Cornify Konami Easter Egg Plugin With jQuery</a>, Paul Irish, 2009</li>
-    <li><a href="https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">Konami-JS - Harness the power of the Konami Code!</a>, George Mandis, 2009</li>
-    <li><a href="https://stackoverflow.blog/2010/03/31/reminder-its-april-1st">Reminder: It's April 1st</a>, Stack Overflow Blog, 2010</li>
-    <li><a href="https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">The Konami Code Makes ESPN.com Magical!</a>, Michael McWhertor, Kotaku, 2009</li>
+    <li><a href="https://thehistoryoftheweb.com/postscript/wait-whats-a-bookmarklet/">Wait, what's a bookmarklet?</a>, Jay Hoffmann, The History of the Web, 2023 <a class="archived" href="https://web.archive.org/web/20261025193227/https://thehistoryoftheweb.com/postscript/wait-whats-a-bookmarklet/">(archived)</a></li>
+    <li><a href="https://www.bookmarklets.com/about/">About Bookmarklets</a>, Steve Kangas, Bookmarklets.com <a class="archived" href="https://web.archive.org/web/20260921175808/https://www.bookmarklets.com/about/">(archived)</a></li>
+    <li><a href="https://knowyourmeme.com/memes/cornify">Cornify</a>, Know Your Meme <a class="archived" href="https://web.archive.org/web/20260713115429/https://knowyourmeme.com/memes/cornify">(archived)</a></li>
+    <li><a href="https://www.wired.com/2009/02/proof-why-the-c/">Proof why the Cornify button is a great Internet invention</a>, Bruce Sterling, Wired, 2009 <a class="archived" href="https://web.archive.org/web/20230203004503/https://www.wired.com/2009/02/proof-why-the-c/">(archived)</a></li>
+    <li><a href="https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">Cornify Konami Easter Egg Plugin With jQuery</a>, Paul Irish, 2009 <a class="archived" href="https://web.archive.org/web/20250828231755/https://www.paulirish.com/2009/cornify-easter-egg-with-jquery/">(archived)</a></li>
+    <li><a href="https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">Konami-JS - Harness the power of the Konami Code!</a>, George Mandis, 2009 <a class="archived" href="https://web.archive.org/web/20260712024139/https://george.mand.is/2009/04/konami-js-harness-the-power-of-the-konami-code/">(archived)</a></li>
+    <li><a href="https://stackoverflow.blog/2010/03/31/reminder-its-april-1st">Reminder: It's April 1st</a>, Stack Overflow Blog, 2010 <a class="archived" href="https://web.archive.org/web/20260414222928/https://stackoverflow.blog/2010/03/31/reminder-its-april-1st/">(archived)</a></li>
+    <li><a href="https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">The Konami Code Makes ESPN.com Magical!</a>, Michael McWhertor, Kotaku, 2009 <a class="archived" href="https://web.archive.org/web/20260412180701/https://kotaku.com/the-konami-code-makes-espn-com-magical-5230185">(archived)</a></li>
     <li><a href="https://abcnews.com/Technology/PCWorld/story?id=7444224">ESPN.com, the Konami Code, and a Whole Lotta' Ponies</a>, David Murphy, PCWorld via ABC News, 2009</li>
-    <li><a href="https://news.ycombinator.com/item?id=556164">Ask HN: Review my webapp: hapylink.com</a>, Hacker News thread, 2009</li>
-    <li><a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">Cornify: SXSW Web Awards Finalist</a>, Hillary Till, SXTXState, 2010</li>
-    <li><a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a>, John Hobbs, 2010</li>
+    <li><a href="https://news.ycombinator.com/item?id=556164">Ask HN: Review my webapp: hapylink.com</a>, Hacker News thread, 2009 <a class="archived" href="https://web.archive.org/web/20090413145245/http://news.ycombinator.com:80/item?id=556164">(archived)</a></li>
+    <li><a href="https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">Cornify: SXSW Web Awards Finalist</a>, Hillary Till, SXTXState, 2010 <a class="archived" href="https://web.archive.org/web/20251005005435/https://sxtxstate.com/2010/03/cornify-sxsw-web-awards-finalist/">(archived)</a></li>
+    <li><a href="https://jmhobbs.github.io/Konami-Unicorn-Blitz/">Konami Unicorn Blitz</a>, John Hobbs, 2010 <a class="archived" href="https://web.archive.org/web/20200918001440/https://jmhobbs.github.io/Konami-Unicorn-Blitz/">(archived)</a></li>
     <li><a href="https://news.ycombinator.com/item?id=1386864">Konami Code for any website - Unicorn Blitz</a>, Hacker News thread, 2010</li>
-    <li><a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">SXSW Interactive 2010 Web Awards Announces Winners</a>, SXSW, 2010</li>
-    <li><a href="https://github.blog/news-insights/product-news/content-security-policy/">Content Security Policy</a>, Joshua Peek, The GitHub Blog, 2013</li>
-    <li><a href="https://www.w3.org/TR/CSP3/">Content Security Policy Level 3</a>, W3C Working Draft</li>
-    <li><a href="https://chromewebstore.google.com/detail/cornify-unicorn-and-rainb/ghdnfbmfflgelndafnlgabneckbmfpla">Cornify - Unicorn and rainbow happiness!!!</a>, Chrome Web Store</li>
-    <li><a href="http://kathack.com/">Katamari Hack</a>, Alex Leone, David Nufer and David Truong, 2011</li>
-    <li><a href="https://www.theregister.com/offbeat/2010/06/15/newsweek-zombies-rise-from-grave-invade-us/1406321">Newsweek: 'Zombies rise from grave, invade US'</a>, Cade Metz, The Register, 2010</li>
+    <li><a href="https://www.prnewswire.com/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">SXSW Interactive 2010 Web Awards Announces Winners</a>, SXSW, 2010 <a class="archived" href="https://web.archive.org/web/20170319192853/http://www.prnewswire.com:80/news-releases/sxsw-interactive-2010-web-awards-announces-winners-88029207.html">(archived)</a></li>
+    <li><a href="https://github.blog/news-insights/product-news/content-security-policy/">Content Security Policy</a>, Joshua Peek, The GitHub Blog, 2013 <a class="archived" href="https://web.archive.org/web/20261017160207/https://github.blog/news-insights/product-news/content-security-policy/">(archived)</a></li>
+    <li><a href="https://www.w3.org/TR/CSP3/">Content Security Policy Level 3</a>, W3C Working Draft <a class="archived" href="https://web.archive.org/web/20261106113349/https://www.w3.org/TR/CSP3/">(archived)</a></li>
+    <li><a href="https://chromewebstore.google.com/detail/cornify-unicorn-and-rainb/ghdnfbmfflgelndafnlgabneckbmfpla">Cornify - Unicorn and rainbow happiness!!!</a>, Chrome Web Store <a class="archived" href="https://web.archive.org/web/20261105121727/https://chromewebstore.google.com/detail/cornify-unicorn-and-rainb/ghdnfbmfflgelndafnlgabneckbmfpla">(archived)</a></li>
+    <li><a href="http://kathack.com/">Katamari Hack</a>, Alex Leone, David Nufer and David Truong, 2011 <a class="archived" href="https://web.archive.org/web/20261003054344/http://kathack.com/">(archived)</a></li>
+    <li><a href="https://www.theregister.com/offbeat/2010/06/15/newsweek-zombies-rise-from-grave-invade-us/1406321">Newsweek: 'Zombies rise from grave, invade US'</a>, Cade Metz, The Register, 2010 <a class="archived" href="https://web.archive.org/web/20260508074424/https://www.theregister.com/offbeat/2010/06/15/newsweek-zombies-rise-from-grave-invade-us/1406321">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>
@@ -790,7 +947,7 @@ $(document).keydown(function(e) {
     <li><a href="https://googlereader.blogspot.com/2006/09/something-looks-different.html">Something looks... different.</a>, Ben Darnell, Official Google Reader Blog, 2006 <a class="archived" href="https://web.archive.org/web/20260309165356/http://googlereader.blogspot.com/2006/09/something-looks-different.html">(archived)</a></li>
     <li><a href="https://googlereader.blogspot.com/2011/10/upcoming-changes-to-reader-new-look-new.html">Upcoming changes to Reader: a new look, new Google+ features, and some clean-up</a>, Alan Green, Official Google Reader Blog, 2011 <a class="archived" href="https://web.archive.org/web/20261103081555/http://googlereader.blogspot.com/2011/10/upcoming-changes-to-reader-new-look-new.html">(archived)</a></li>
     <li><a href="https://blog.google/topics/inside-google/a-second-spring-of-cleaning/">A second spring of cleaning</a>, Urs Hölzle, Google, 2013</li>
-    <li><a href="https://thenextweb.com/news/feedly-an-alternative-to-google-reader-has-picked-up-500000-new-users-since-googles-decision-to-can-reader">Feedly picks up 500,000 new users following Google's decision to can its Reader service</a>, The Next Web, 2013</li>
+    <li><a href="https://thenextweb.com/news/feedly-an-alternative-to-google-reader-has-picked-up-500000-new-users-since-googles-decision-to-can-reader">Feedly picks up 500,000 new users following Google's decision to can its Reader service</a>, The Next Web, 2013 <a class="archived" href="https://web.archive.org/web/20230128145019/https://thenextweb.com/news/feedly-an-alternative-to-google-reader-has-picked-up-500000-new-users-since-googles-decision-to-can-reader">(archived)</a></li>
     <li><a href="https://blog.codinghorror.com/introducing-stackoverflow-com/">Introducing Stackoverflow.com</a>, Jeff Atwood, Coding Horror, 2008 <a class="archived" href="https://web.archive.org/web/20260926183031/https://blog.codinghorror.com/introducing-stackoverflow-com/">(archived)</a></li>
     <li><a href="https://www.mozilla.org/en-US/firefox/64.0/releasenotes/">Firefox 64.0 release notes</a>, Mozilla, 2018 <a class="archived" href="https://web.archive.org/web/20260818090612/https://www.mozilla.org/en-US/firefox/64.0/releasenotes/">(archived)</a></li>
     <li><a href="https://podcasters.apple.com/support/823-podcast-requirements">Podcast RSS feed requirements</a>, Apple Podcasts for Creators <a class="archived" href="https://web.archive.org/web/20261030021242/https://podcasters.apple.com/support/823-podcast-requirements">(archived)</a></li>

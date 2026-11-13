@@ -10,7 +10,6 @@ Derek's picks, in order. Always take the first item here. Only choose from the l
 
 - The hashbang URL (2009 to 2015): twitter.com/#!/name, Google’s _escaped_fragment_ scheme, Gawker’s outage and the return of server rendering
 - The Rhino book and the O'Reilly shelf: when the bookstore was the curriculum
-- “Wat” (2012), the wtfjs repo and the tradition of laughing at JavaScript: [] + {}, coercion and what the jokes taught
 - comp.lang.javascript, its FAQ, and learning from strangers on Usenet
 - IE6: the box model, `hasLayout` and conditional comments
 - Hiding scripts in HTML comments (`<!--` ... `//-->`) for browsers that didn't exist anymore
@@ -72,7 +71,6 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - Stack Overflow launches (2008), and what asking a programming question was like before it
 - From webmaster to "front-end developer": how the job titles split
 - FizzBuzz, the whiteboard and the rituals of the developer interview
-- "Wat" (2012) and the tradition of laughing at JavaScript
 - ServerJS becomes CommonJS (2009): the mailing list that gave JavaScript `require()` before it had a server to run on
 - "Hug a Conference Organizer" (2010) and the economics of the community tech conference, from hotel room blocks to ticket lotteries
 - The conference code of conduct: how one page of boilerplate spread from event to event in the early 2010s
