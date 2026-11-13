@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://derek.io/nostalgiajs/';
 const NAME = 'Nostalgia.js';
-const TAGLINE = 'AI Essays on Web History';
+const TAGLINE = 'Essays on the Early Web';
 const BERRY = "'member when...? Yeah, I remember!"; // plain text, safe inside an attribute
 const ISSUES = 'https://github.com/derek/nostalgiajs/issues/new';
 const REPO = 'https://github.com/derek/nostalgiajs';
