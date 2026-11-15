@@ -25,7 +25,7 @@ The site was first called Boomer.js and then, briefly, View Source. `../boomerjs
 
 ## Voice
 
-One consistent voice across every essay: first person, dry, warm, curious and a little self-deprecating, like the funniest person at a user group who also reads the spec. "I" is for opinions and judgments, never for memories. Contractions, plain words. One joke per section is plenty. Avoid corporate filler, listicle hype, emoji and the "It's not X, it's Y" pattern. Respect the reader's time: no padding.
+One consistent voice across every essay: first person, dry, warm, curious and a little self-deprecating, like the funniest person at a user group who also reads the spec. "I" is for opinions and judgments, never for memories. Contractions, plain words. One joke per section is plenty. Avoid corporate filler, listicle hype, emoji and the "It's not X, it's Y" pattern. Respect the reader's time: no padding. The essay should feel like a lesrning journey, of someone who only knew fragments of the history, but through the research, discovered new facts they found surprising. Curiousity and reverence for history is paramount.
 
 ## Essay shape
 
