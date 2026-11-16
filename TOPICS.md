@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- The Rhino book and the O'Reilly shelf: when the bookstore was the curriculum
 - comp.lang.javascript, its FAQ, and learning from strangers on Usenet
 - IE6: the box model, `hasLayout` and conditional comments
 - Hiding scripts in HTML comments (`<!--` ... `//-->`) for browsers that didn't exist anymore
@@ -77,4 +76,7 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - "Hi Webmaster!": the 405 emails W3C's webmaster mailbox received in three weeks of 1995, and what newcomers thought the web was
 - Tim Berners-Lee's browser was an editor: the read-write web that shipped read-only
 - Delicious, Digg and Technorati: when a link's worth was counted in bookmarks, diggs and "authority"
+- The "beta book" and the 21-day promise: how 1990s computer books were written in three months, sold by thickness and corrected on errata pages
+- Computer Literacy Bookshops (1983 to 2001): the Silicon Valley store that stocked every computer book in print, and what closed it
+- Netscape DevEdge disappears and Mozilla Developer Center rescues it (2005): how MDN began as a salvage job
 
