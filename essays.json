@@ -339,6 +339,14 @@
         "jslint",
         "webmaster",
         "view-source"
+      ],
+      "unverified": [
+        "O'Reilly's own pages for the old editions would not load for me, so I read the 1997 and 2002 editions' prefaces, acknowledgments, colophon and copyright page in an unauthorised web copy of O'Reilly's CD Bookshelf, which I have not linked. I could not compare that text with a printed copy, and I never saw the 1996 beta edition itself.",
+        "Sources disagree about which Navigator 3.0 beta the beta edition covered. The 1996 book list says the 3.0b4 release, while the second edition's preface says the final beta and its acknowledgments mention Beta 6 features.",
+        "Flanagan's 2011 post about pirated copies is gone from his site, and I know its words only from Mark Bernstein's quotation, which does not give the post's own date. Nothing I read connects that post to Flanagan joining Mozilla the same year.",
+        "Mike Hendrickson's statement that the computer book market halved between 2000 and 2004 comes from an O'Reilly post I could not open, quoted on a librarian's blog. The same quotation admits O'Reilly had reliable sales data only from 2004, so the size of the fall is the company's estimate.",
+        "That the books were thick because thick books sold is Philip Greenspun's account of what publishers believed, not publisher data. A founder's recollection, hedged with \"I believe\", is my only source for Computer Literacy's stores closing in 2001.",
+        "The animals I give for the HTML, Webmaster, Dynamic HTML and CSS books come from the colophons of editions published from 2000 to 2002, and I did not check the 1990s covers. That the 1997 CD-ROM belongs to the line O'Reilly later called the CD Bookshelf, that reviewers at both Netscape and Microsoft show the book filled a gap in vendor documentation, and that the unauthorised copies now work as an archive are my own readings."
       ]
     }
   ]
