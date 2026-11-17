@@ -63,7 +63,7 @@
           <li><a href="#why-nothing-ever-leaves">Why nothing ever leaves</a></li>
           <li><a href="#2015-the-annex-becomes-law">2015: the annex becomes law</a></li>
           <li><a href="#living-with-it-lint-aliases-and-smoosh">Living with it: lint, aliases and smoosh</a></li>
-          <li><a href="#what-it-left-behind">What it left behind</a></li>
+          <li><a href="#the-annex-today">The annex today</a></li>
           <li><a href="#the-takeaway">The takeaway</a></li>
           <li><a href="#sources-h">Sources and further reading</a></li>
   </ol>
@@ -163,7 +163,7 @@ f(false)  <span class="c">// "undefined"</span></code></pre>
 
 <p>The FAQ's answer to "why not just break the Web?" is the Annex B argument in two sentences: "Sure, in retrospect MooTools did the wrong thing — but breaking the web doesn't punish them, it punishes users. These users do not know what a moo tool is." In May 2018 Michael Ficarra brought the rename to the committee, and <a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">the meeting notes</a> record the outcome in three words: "We choose <code>flat</code>." There is a <a href="../jquery/">jQuery-era</a> moral in there about libraries that extend built-in prototypes, and it is why the method you call is an adjective.</p>
 
-<h2 id="what-it-left-behind">What it left behind</h2>
+<h2 id="the-annex-today">The annex today</h2>
 
 <p><strong>The annex is shrinking, because its contents are being promoted.</strong> If you open today's Annex B looking for <code>__proto__</code> or octal literals, they are gone. Two pull requests merged in the summer of 2021 moved them into the main body: <a href="https://github.com/tc39/ecma262/pull/2125">one for <code>__proto__</code></a> and <a href="https://github.com/tc39/ecma262/pull/1867">one for the octal syntax</a>. <code>Object.prototype.__proto__</code> is now clause 20.1.3.8 of <a href="https://tc39.es/ecma262/multipage/fundamental-objects.html">the chapter on fundamental objects</a>, followed by <code>__defineGetter__</code> and its three friends, both clauses under a coloured box that says "Normative Optional, Legacy". The <a href="https://tc39.es/ecma262/multipage/conformance.html">conformance clause</a> defines the label: legacy features have undesirable characteristics, but "their continued usage in existing applications prevents their removal from this specification." A summary on the <code>__proto__</code> pull request sorts the pieces into required or optional, and "icky" or not. The object-literal syntax came out as required and not icky. The accessor came out optional and icky. In 1999 these things were outside the standard, in 2015 they were a required appendix, and now they are scattered through the main text with a warning label. The annex's own introduction says so: some of its features are now "specified in the main body of this document."</p>
 

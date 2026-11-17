@@ -68,7 +68,13 @@ Target 2,200 to 3,000 words of prose (about 10 to 13 minutes, plus code). Reader
 3. **What happened**: the facts, in order, with the real code from the time. Show the mechanism, not just the headline.
 4. **Why**: the forces behind it (market, standards, engines, tooling, money). Give each force its own paragraph. This is the part readers will argue with, so be fair.
 5. **How people coped**: the workarounds, tools and culture around the problem.
-6. **Where it went**: the afterlife. Follow the pieces of the story to where they are now: what moved, what was renamed, what got absorbed into something else, what quietly died. Two to four findings, each one specific and traceable to a source, and each opening with a plain sentence that states it ("The reference section moved to the web", "The bookmarklet turned into the extension"). Every essay needs at least one the reader probably has not met (an old idea that survived under a new name, a standard that ratified a proprietary feature, a fix that caused the next problem). This is reporting on what happened next, not a list of lessons; save the judgment for the takeaway.
+6. **What became of it**: connect the story to the present by reporting what happened next. Pick the form that fits this story, and say so in the heading:
+   - **Where it went**, when the thing scattered: follow each piece to where it is now ("Where the shelf went", "Where the unicorns went").
+   - **What survived**, when part of it is still running: show the old thing at work today ("What survives of the hashbang").
+   - **Who inherited it**, when it was displaced: name what took over each of its jobs ("Who inherited the mailbox").
+   - **What it cost**, when the story turns on a mistake: the bill that came due later, such as a fix that caused the next problem.
+
+   Whichever form you choose, give two to four findings, each specific and traceable to a source, and each opening with a plain sentence that states it ("The reference section moved to the web", "The bookmarklet turned into the extension"). At least one should be something the reader probably has not met. This is reporting, not a list of lessons; save the judgment for the takeaway. The four names above are forms, not headings: the heading names this essay's subject.
 7. **The takeaway**: a final section under the heading "The takeaway", one or two paragraphs that state the essay's conclusion outright. A reader who skips to the end should get the point. Where you can, close by returning to the artifact the essay opened with, as it stands now. Never end on a code block, a list or a question to the reader.
 8. **Sources and further reading**: the last thing in the essay.
 

@@ -135,7 +135,7 @@ if ( jQuery.browser.mozilla || jQuery.browser.opera ) {
 
 <p>They lost that one. I ran Resig's test case in a current Chromium while writing this, and <code>foo.querySelectorAll('div span')</code> still returns one element. You need to write <code>':scope div span'</code> to get zero.</p>
 
-<h2>What it left behind</h2>
+<h2>The dollar sign after jQuery</h2>
 
 <p><strong>The platform copied the homework, slowly.</strong> When GitHub <a href="https://github.blog/engineering/engineering-principles/removing-jquery-from-github-frontend/">removed jQuery in 2018</a>, its engineers listed what had made that possible, and the list reads as jQuery's table of contents translated into standards: "The <code>$(selector)</code> pattern can easily be replaced with <code>querySelectorAll()</code>," class switching with <code>Element.classList</code>, animation in CSS, <code>$.ajax</code> with the Fetch Standard. The dates are worth a look. <a href="https://www.w3.org/TR/selectors-api/">Selectors API Level 1</a> became a W3C Recommendation on February 21, 2013, seven and a half years after a student's blog post about fluff. jQuery got <a href="https://api.jquery.com/closest/"><code>.closest()</code></a> in version 1.3, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>Element.closest()</code></a> is now a standard DOM method with the same name and the same job.</p>
 

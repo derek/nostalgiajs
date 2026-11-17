@@ -106,7 +106,7 @@ window.onmousedown=right;
 
 <p>Nobody set out to end the lesson. Pages got heavy, bytes cost money, and the fix for bytes was to remove everything a human reader needed.</p>
 
-<h2>What it left behind</h2>
+<h2>What became of View Source</h2>
 
 <p><strong>The fix Russell asked for got built, and the default flipped.</strong> In that follow-up he said compiled JavaScript would need "brand new tools akin to symbol servers" to be workable. The seed already existed. The same Closure announcement mentions Closure Inspector, "a Firebug extension that makes debugging the obfuscated code almost as easy as debugging the human-readable source." <a href="https://tc39.es/ecma426/">The source map specification</a> says its first format "was created by Joseph Schorr for use by Closure Inspector". That format went through two more revisions, and in December 2024 it became <a href="https://ecma-international.org/publications-and-standards/standards/ecma-426/">ECMA-426</a>, an Ecma standard for mapping shipped code back to what a person wrote. So readable source came back as a file you may publish beside your code if you choose to. In 1996 you had to do nothing to be readable. Now you have to do something, and you may just as reasonably keep the map private for your own error reports. I'd argue that switch, from on by default to off by default, changed more than any single tool did.</p>
 

@@ -118,7 +118,7 @@ if (this._hasPushState) {
 
 <p>Google took longer. On October 14, 2015 it published <a href="https://developers.google.com/search/blog/2015/10/deprecating-our-ajax-crawling-scheme">Deprecating our AJAX crawling scheme</a>: "Times have changed", it said, and Googlebot was now "generally able to render and understand your web pages like modern browsers". The advice was progressive enhancement and <code>pushState</code>. A <a href="https://developers.google.com/search/blog/2017/12/rendering-ajax-crawling-pages">follow-up in December 2017</a> said that from the second quarter of 2018 Google would stop requesting <code>_escaped_fragment_</code> URLs and render the <code>#!</code> pages itself.</p>
 
-<h2>What it left behind</h2>
+<h2>What survives of the hashbang</h2>
 
 <p><strong>The snapshot became the product.</strong> Under Google's scheme the server-rendered HTML was a side dish for robots, and the JavaScript application was the meal. Current frameworks serve the snapshot to everyone and then start the application on top of it. React's documentation for <a href="https://react.dev/reference/react-dom/client/hydrateRoot"><code>hydrateRoot</code></a> describes attaching "to existing HTML that was already rendered by React in a server environment". The 2015 deprecation notice expected sites to "pre-render pages for performance benefits for users", and said that doing it only for Googlebot "is considered cloaking". The 2009 proposal had promised no cloaking, and then specified a second URL that only crawlers would ever request.</p>
 

@@ -62,7 +62,7 @@
           <li><a href="#three-fixes-and-a-standard">Three fixes and a standard</a></li>
           <li><a href="#why-a-one-line-method-went-so-wrong">Why a one-line method went so wrong</a></li>
           <li><a href="#how-everyone-coped">How everyone coped</a></li>
-          <li><a href="#what-it-left-behind">What it left behind</a></li>
+          <li><a href="#what-became-of-getyear">What became of getYear()</a></li>
           <li><a href="#the-takeaway">The takeaway</a></li>
           <li><a href="#sources-h">Sources and further reading</a></li>
   </ol>
@@ -155,7 +155,7 @@ datedisplay.setAttribute("value", dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"
 
 <p>In 2000, <code>getYear()</code> returns 100, and 2100 minus 100 is 2000. In 2001 it returns 101, and the page announces that it is 1999. That fix was good for exactly twelve months, and to be fair, it was written in one of them.</p>
 
-<h2 id="what-it-left-behind">What it left behind</h2>
+<h2 id="what-became-of-getyear">What became of getYear()</h2>
 
 <p><strong>The bug report became the documentation.</strong> Bug 22964 was closed in two hours and then refused to stay quiet. It has 67 duplicates. The last was filed in July 2013. Of its 80 comments, 51 date from 2005, which I'd guess is what happens when a browser built on that engine starts taking real market share and meets a web tested only in Internet Explorer. The thread contains the entire standards-versus-reality argument in miniature. One commenter quotes Annex B and concludes: "Mozilla should behave as it behaves now, and IE is wrong." Another answers with the point that browser vendors eventually organised their whole philosophy around: "the Mozilla user who browses the Internet CANNOT use getFullYear instead of getYear because he is not the author of the page he is browsing!!!" Both were right. The author of the page and the person hurt by the page are different people, and only one of them can deploy a fix.</p>
 

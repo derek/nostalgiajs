@@ -85,7 +85,7 @@
 
 <p>The next step was to remove the opinions from the tool altogether. In July 2013 Nicholas C. Zakas <a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">introduced ESLint</a> with a short history of the field: "A long time ago, JSLint was the state of the art in JavaScript linting technology. Then JSHint came along as a fork and took over due to increased flexibility." But JSHint had "no easy way to add additional rules," so the new tool would be one "where all rules are pluggable."</p>
 
-<h2>What it left behind</h2>
+<h2>JSLint's rules, absorbed</h2>
 
 <p><strong>The subset became a mode of the language.</strong> The <code>"use strict"</code> directive in the fifth edition is, I'd argue, JSLint's idea moved into the engine. The history paper traces it to Crockford's recommendations to the committee, not to the tool: "ES5 strict mode is the direct end product of Douglas Crockford's goal of 'correcting mistakes and inconveniences' in JavaScript's design." The paper calls it "subtractive": "It does not add new features to ECMAScript; instead it removes problematic features." In strict mode <code>with</code> is a syntax error and assigning to an undeclared name throws, which settles two of JSLint's oldest complaints. Then it stopped being optional. <a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">The current specification</a> says "Module code is always strict mode code" and that all parts of a class are too. So every file with an <code>import</code> in it runs in a dialect that, on my reading, began as a set of checkboxes on a web page.</p>
 

@@ -91,7 +91,7 @@ for(i = 1, fact = 1; i &lt; 10; i++, fact *= i) {
 
 <p>The legitimate version of the same idea was Safari. <a href="https://app.oreilly.com/pub/pr/922">A press release of October 1, 2001</a> announced a joint venture with Pearson and mentioned that the service for individuals had "been available at safari.oreilly.com since February 1, 2001", for $9.99 a month. Hilts had said readers bought computer books like a subscription. Four years later you could buy the subscription and skip the books.</p>
 
-<h2>What the shelf left behind</h2>
+<h2>Where the shelf went</h2>
 
 <p>The market that built the shelf peaked early. Publishers Weekly's <a href="https://www.publishersweekly.com/pw/print/20020909/27792-after-the-bust.html">"After the Bust"</a>, in September 2002, reports a McGraw-Hill publisher's estimate that the category reached its apex in 2000 and that the number of titles had since fallen by 25 to 30 percent. O'Reilly's Mike Hendrickson, in a 2009 market review that survives as <a href="https://jdupuis.blogspot.com/2009/03/state-of-computer-book-market-2008.html">a long quotation on a librarian's blog</a>, wrote that the market "cratered in 2001" and "stabilized in 2004 at about half the size that it was in 2000." The shops went with it. Barnes &amp; Noble's online arm bought Computer Literacy's successor company, Fatbrain, <a href="https://www.publishersweekly.com/pw/print/20020204/40542-barnes-amp-noble-com-to-integrate-fatbrain.html">in September 2000</a>, and Doernberg's footnote in the oral history says the original Sunnyvale store stayed open "until Barnes &amp; Noble closed all the stores in I believe 2001."</p>
 
@@ -276,7 +276,7 @@ if (this._hasPushState) {
 
 <p>Google took longer. On October 14, 2015 it published <a href="https://developers.google.com/search/blog/2015/10/deprecating-our-ajax-crawling-scheme">Deprecating our AJAX crawling scheme</a>: "Times have changed", it said, and Googlebot was now "generally able to render and understand your web pages like modern browsers". The advice was progressive enhancement and <code>pushState</code>. A <a href="https://developers.google.com/search/blog/2017/12/rendering-ajax-crawling-pages">follow-up in December 2017</a> said that from the second quarter of 2018 Google would stop requesting <code>_escaped_fragment_</code> URLs and render the <code>#!</code> pages itself.</p>
 
-<h2>What it left behind</h2>
+<h2>What survives of the hashbang</h2>
 
 <p><strong>The snapshot became the product.</strong> Under Google's scheme the server-rendered HTML was a side dish for robots, and the JavaScript application was the meal. Current frameworks serve the snapshot to everyone and then start the application on top of it. React's documentation for <a href="https://react.dev/reference/react-dom/client/hydrateRoot"><code>hydrateRoot</code></a> describes attaching "to existing HTML that was already rendered by React in a server environment". The 2015 deprecation notice expected sites to "pre-render pages for performance benefits for users", and said that doing it only for Googlebot "is considered cloaking". The 2009 proposal had promised no cloaking, and then specified a second URL that only crawlers would ever request.</p>
 
@@ -436,7 +436,7 @@ var o = {} + []; o    <span class="c">// "[object Object]"</span>
 
 <p>Day to day, people coped the way the <a href="https://derek.io/nostalgiajs/essays/jslint/">linters</a> told them to. ESLint's <a href="https://eslint.org/docs/latest/rules/eqeqeq"><code>eqeqeq</code></a> rule explains that <code>==</code> follows "the rather obscure Abstract Equality Comparison Algorithm", and a second rule, <a href="https://eslint.org/docs/latest/rules/no-implicit-coercion"><code>no-implicit-coercion</code></a>, exists to "flag shorter notations for the type conversion".</p>
 
-<h2>What it left behind</h2>
+<h2>The jokes, answered</h2>
 
 <p><strong>Node's prompt quietly rewrote the punchline.</strong> Type <code>{} + []</code> at the Node 22 prompt and you get <code>'[object Object]'</code>, not 0. The reason is in <a href="https://github.com/nodejs/node/blob/v22.x/lib/repl.js">the REPL's source</a>: if the input looks like an object literal, a comment says, "Add parentheses to make sure `code` is parsed as an expression". The Hacker News thread shows Node already disagreeing with <code>jsc</code> in January 2012. So the most quoted line of the talk depends on which prompt you use. Nothing in the language changed. A tool decided that what people meant mattered more than what the grammar said.</p>
 
@@ -585,7 +585,7 @@ f(false)  <span class="c">// "undefined"</span></code></pre>
 
 <p>The FAQ's answer to "why not just break the Web?" is the Annex B argument in two sentences: "Sure, in retrospect MooTools did the wrong thing — but breaking the web doesn't punish them, it punishes users. These users do not know what a moo tool is." In May 2018 Michael Ficarra brought the rename to the committee, and <a href="https://github.com/tc39/notes/blob/main/meetings/2018-05/may-22.md">the meeting notes</a> record the outcome in three words: "We choose <code>flat</code>." There is a <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery-era</a> moral in there about libraries that extend built-in prototypes, and it is why the method you call is an adjective.</p>
 
-<h2>What it left behind</h2>
+<h2>The annex today</h2>
 
 <p><strong>The annex is shrinking, because its contents are being promoted.</strong> If you open today's Annex B looking for <code>__proto__</code> or octal literals, they are gone. Two pull requests merged in the summer of 2021 moved them into the main body: <a href="https://github.com/tc39/ecma262/pull/2125">one for <code>__proto__</code></a> and <a href="https://github.com/tc39/ecma262/pull/1867">one for the octal syntax</a>. <code>Object.prototype.__proto__</code> is now clause 20.1.3.8 of <a href="https://tc39.es/ecma262/multipage/fundamental-objects.html">the chapter on fundamental objects</a>, followed by <code>__defineGetter__</code> and its three friends, both clauses under a coloured box that says "Normative Optional, Legacy". The <a href="https://tc39.es/ecma262/multipage/conformance.html">conformance clause</a> defines the label: legacy features have undesirable characteristics, but "their continued usage in existing applications prevents their removal from this specification." A summary on the <code>__proto__</code> pull request sorts the pieces into required or optional, and "icky" or not. The object-literal syntax came out as required and not icky. The accessor came out optional and icky. In 1999 these things were outside the standard, in 2015 they were a required appendix, and now they are scattered through the main text with a warning label. The annex's own introduction says so: some of its features are now "specified in the main body of this document."</p>
 
@@ -732,7 +732,7 @@ function decode_utf8(s) {
 
 <p>The next step was to remove the opinions from the tool altogether. In July 2013 Nicholas C. Zakas <a href="https://humanwhocodes.com/blog/2013/07/16/introducing-eslint/">introduced ESLint</a> with a short history of the field: "A long time ago, JSLint was the state of the art in JavaScript linting technology. Then JSHint came along as a fork and took over due to increased flexibility." But JSHint had "no easy way to add additional rules," so the new tool would be one "where all rules are pluggable."</p>
 
-<h2>What it left behind</h2>
+<h2>JSLint's rules, absorbed</h2>
 
 <p><strong>The subset became a mode of the language.</strong> The <code>"use strict"</code> directive in the fifth edition is, I'd argue, JSLint's idea moved into the engine. The history paper traces it to Crockford's recommendations to the committee, not to the tool: "ES5 strict mode is the direct end product of Douglas Crockford's goal of 'correcting mistakes and inconveniences' in JavaScript's design." The paper calls it "subtractive": "It does not add new features to ECMAScript; instead it removes problematic features." In strict mode <code>with</code> is a syntax error and assigning to an undeclared name throws, which settles two of JSLint's oldest complaints. Then it stopped being optional. <a href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html">The current specification</a> says "Module code is always strict mode code" and that all parts of a class are too. So every file with an <code>import</code> in it runs in a dialect that, on my reading, began as a set of checkboxes on a web page.</p>
 
@@ -893,7 +893,7 @@ FileETag none</code></pre>
 
 <p>And the idea spread to other vendors. In June 2009 Google <a href="https://googlecode.blogspot.com/2009/06/introducing-page-speed.html">open-sourced Page Speed</a>, a tool it had been using internally: "it's a Firefox Add-on integrated with Firebug." In April 2010 Google announced that site speed was a signal in search ranking. A month later Souders gave the field a name, WPO, for Web Performance Optimization, and described its origin without ceremony: "What started as a list of performance tips coded up in a browser plug-in."</p>
 
-<h2>What it left behind</h2>
+<h2>Where the rules went</h2>
 
 <p><strong>The grade outlived the tool, and changed what it graded.</strong> Chrome's Lighthouse gives a page a performance score out of 100, with 90 and up shown in green. But <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">its documentation</a> says that "only metrics contribute to your Lighthouse Performance score, not the results of Opportunities or Diagnostics." YSlow graded whether you had followed the rules. Lighthouse grades how long things took, and offers the rules as hints. Until <a href="https://developer.chrome.com/blog/lighthouse-13-0">Lighthouse 13</a> folded them into newer "insights" in 2025, several of those hints were old acquaintances, such as "Enable text compression" and "<a href="https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl">Serve static assets with an efficient cache policy</a>." Atwood's complaint was that the score rewarded following Yahoo's rules whether or not they suited your site. I'd argue the scoring eventually came round to that view.</p>
 
@@ -1079,7 +1079,7 @@ $(document).keydown(function(e) {
 
 <p>And one reader on day one named the real issue, in the middle of a joke review: "I am also a bit ashamed that I executed a stranger's Javascript in my Hacker News context. Who knows what just happened to my cookie?" They read the URL and decided they were safe, "at least for the javascript present the instant I downloaded it."</p>
 
-<h2>What it left behind</h2>
+<h2>Where the unicorns went</h2>
 
 <p><strong>The defence against it is why it often doesn't work now.</strong> That last comment describes the risk exactly. A site that included <code>cornify.js</code> ran whatever cornify.com chose to serve that day, with full access to the page. I've found no sign Cornify ever abused that, but an unapproved script from another host is exactly what Content Security Policy lets a site refuse. When GitHub turned CSP on in April 2013, <a href="https://github.blog/news-insights/product-news/content-security-policy/">Joshua Peek's announcement</a> warned that "it may cause issues with some browser extensions and bookmarklets." The spec said bookmarklets should be exempt, Peek wrote, but "none of the browsers get this correct." The <a href="https://www.w3.org/TR/CSP3/">current CSP draft</a> still says a policy "SHOULD NOT interfere with the operation of user-agent features like addons, extensions, or bookmarklets." In practice, as far as I understand it, a loader bookmarklet that injects a script from another host is asking for exactly what a strict policy refuses. The web got safer from strangers' scripts, and on those sites the unicorn link went quiet.</p>
 
@@ -1225,7 +1225,7 @@ $(document).keydown(function(e) {
 
 <p>It is fair to say Google's stated reason was not false. Feed reading had always been a habit of the people who read a lot, and The Verge notes that the Reader team "struggled to find ways to bring in more casual users." Everyone else was getting their links from a timeline by 2013. Firefox finished the retreat on December 11, 2018, when <a href="https://www.mozilla.org/en-US/firefox/64.0/releasenotes/">version 64</a> noted that "RSS feed preview and live bookmarks are available only via add-ons." The browser that had drawn the orange square no longer read feeds on its own.</p>
 
-<h2>What the feed era left behind</h2>
+<h2>Where the readers went</h2>
 
 <p><strong>RSS won a different market.</strong> The RSS 2.0 specification has an element called <code>&lt;enclosure&gt;</code> that attaches a media file to an item. Its example is an MP3:</p>
 
@@ -1370,7 +1370,7 @@ exports.increment = function(val) {
 
 <p>Chris and Laura Williams stepped back in 2015, after a farewell event that December called JSConf US Last Call. <a href="https://lastcall.jsconf.us/about.html">Its About page</a> explains that after a serious illness in the family, JSConf US "will be on hold for the foreseeable future." JSConf EU called <a href="https://2019.jsconf.eu/">its 2019 event</a>, "our 10th anniversary," the last edition "in its current form." The name outlived both. JSConf US did come back under that name; its 2019 site advertises Carlsbad, California that August. And in October 2025 <a href="https://events.linuxfoundation.org/jsconf-north-america/">JSConf North America</a> was held in Maryland, "back under the OpenJS Foundation."</p>
 
-<h2>What it left behind</h2>
+<h2>What JSConf handed on</h2>
 
 <p><strong>An identity, which is odder than it sounds.</strong> Lehnardt described the mood changing after lunch on the first day: "We are slowly starting to realise that we are JavaScript people who do Ruby on the side, Python on the side and PHP on the side." On that account, before 2009 "JavaScript developer" was mostly something a Rails or PHP developer also was. I can't measure that, but I'd argue the job title you see everywhere now needed a room in which people could try it on, and that the conference did less to serve a community than to convince one it existed.</p>
 
@@ -1539,7 +1539,7 @@ document.write('&lt;a href="mai' +
 
 <p>Five years later the courtesy was dropped. On November 11, 2020, Google Webmasters Central <a href="https://developers.google.com/search/blog/2020/11/goodbye-google-webmasters">became Google Search Central</a>, and the post said plainly that "the term is becoming archaic". A user study had shown that "very few web professionals identify themselves as webmasters anymore." The Princeton Review profile had allowed for it. Its outlook for the career warned that "what it means to be a Webmaster today may completely change over the next few years and may even become obsolete."</p>
 
-<h2>What the webmaster left behind</h2>
+<h2>Who inherited the mailbox</h2>
 
 <p><strong>The address became a key.</strong> This is the part I did not expect. When a certificate authority issues a TLS certificate, it has to check that the applicant controls the domain. The CA/Browser Forum's <a href="https://cabforum.org/working-groups/server/baseline-requirements/requirements/">Baseline Requirements</a> list the permitted methods, and one of them, section 3.2.2.4.4, is to send a random value by email to an address made from "'admin', 'administrator', 'webmaster', 'hostmaster', or 'postmaster'" at the domain and wait for a reply. Whoever reads <code>webmaster@</code> can be treated as the owner of the site.</p>
 
@@ -1719,7 +1719,7 @@ document.write('&lt;a href="mai' +
 
 <p>Support for Windows XP, and with it the commitment Hachamovitch had described, ended in April 2014. The browser was twelve and a half years old.</p>
 
-<h2>What it left behind</h2>
+<h2>After the funeral</h2>
 
 <p><strong>The real fix was removing the decision.</strong> In December 2011 Microsoft announced that Internet Explorer would start upgrading itself through Windows Update, following, as <a href="https://www.itnews.com.au/news/microsoft-switches-on-auto-upgrades-for-internet-explorer-284669">iTnews put it</a>, "in the footsteps of rivals Google and Mozilla." Then it went further and <a href="https://learn.microsoft.com/en-us/lifecycle/announcements/internet-explorer-dotnet-framework-support">announced</a> that after January 12, 2016, "only the most current version of Internet Explorer available for a supported operating system will receive technical support and security updates". Set that beside "their browser is their choice" from 2009. The industry's answer to IE6 was to take the choice away, and to call the result "evergreen." You very likely don't know what version of your browser you are running, and that ignorance is the campaign's most durable achievement.</p>
 
@@ -1917,7 +1917,7 @@ else
 
 <p>The X went quietly. Garrett's own Q&amp;A had already conceded that you didn't need XML, and could use "a technology like JavaScript Object Notation". Parsing a <code>responseXML</code> document with DOM calls was miserable next to getting an object you could use directly, and by December 2006 Crockford could tell an XML conference, to its face, that "JSON has become the X in Ajax".</p>
 
-<h2>What it left behind</h2>
+<h2>The object that stayed</h2>
 
 <p><strong>A standard written by transcription.</strong> The W3C published its <a href="https://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/">first working draft</a> of "The XMLHttpRequest Object" on April 5, 2006, seven years after the object shipped. Its stated method was to "document a minimum set of interoperable features based on existing implementations", and it adds that "only features that are already implemented are considered". It also acknowledges being derived from the WHATWG's work documenting existing behavior. So the chain runs: a Microsoft team writes a component for its own product, other browsers reverse-engineer the interface, a group of browser people writes down what the copies do, and the standards body publishes that. I don't mean this as a complaint. It is how most of the platform you rely on got specified, and this is one of the cleanest examples.</p>
 
@@ -2059,7 +2059,7 @@ else
 
 <p>The end was slow and fairly gracious. Mozilla decided to build developer tools into Firefox, and, as Odvarko wrote, "the decision was made not to use Firebug as the platform to build upon." <a href="https://www.mozilla.org/en-US/firefox/10.0/releasenotes/">Firefox 10</a>, in January 2012, shipped an "Inspect tool with content highlighting." Firebug 2.0 came out in June 2014, and after that the team was "in maintenance mode." The last version was 2.0.19. Then <a href="https://www.mozilla.org/en-US/firefox/57.0/releasenotes/">Firefox 57</a>, on November 14, 2017, stopped running the old kind of extension altogether. Odvarko, by then on the Firefox DevTools team, wrote that "more than a million loyal fans" were still using Firebug that autumn.</p>
 
-<h2>What it left behind</h2>
+<h2>Firebug inside every browser</h2>
 
 <p><strong>A standard nobody designed.</strong> There is now a <a href="https://console.spec.whatwg.org/">WHATWG Console Standard</a>. Fourteen of the sixteen names in <code>firebugx.js</code> are in it, every one except <code>profile</code> and <code>profileEnd</code>, along with the <code>%o</code> and <code>%s</code> format specifiers. The standard is frank about being written after the fact. A note says that "for historical reasons, <code>console</code> is lowercased," the namespace object gets a special rule "for historical web-compatibility reasons," and the part that puts text on the screen is left "implementation-defined." Its status section still calls it "an early work in progress" and "the editors' first specification." I ran the sixteen names through a current Chromium while writing this, and all sixteen are still functions, the two unstandardized ones included. So the most-typed debugging API on the web began in a 0.4 release of a browser add-on and was written down by a standards body years later. It is the route <a href="https://derek.io/nostalgiajs/essays/document-layers/">Microsoft's <code>innerHTML</code></a> took, ship first and specify later, except that this time the proprietary vendor was one person.</p>
 
@@ -2236,7 +2236,7 @@ window.onmousedown=right;
 
 <p>Nobody set out to end the lesson. Pages got heavy, bytes cost money, and the fix for bytes was to remove everything a human reader needed.</p>
 
-<h2>What it left behind</h2>
+<h2>What became of View Source</h2>
 
 <p><strong>The fix Russell asked for got built, and the default flipped.</strong> In that follow-up he said compiled JavaScript would need "brand new tools akin to symbol servers" to be workable. The seed already existed. The same Closure announcement mentions Closure Inspector, "a Firebug extension that makes debugging the obfuscated code almost as easy as debugging the human-readable source." <a href="https://tc39.es/ecma426/">The source map specification</a> says its first format "was created by Joseph Schorr for use by Closure Inspector". That format went through two more revisions, and in December 2024 it became <a href="https://ecma-international.org/publications-and-standards/standards/ecma-426/">ECMA-426</a>, an Ecma standard for mapping shipped code back to what a person wrote. So readable source came back as a file you may publish beside your code if you choose to. In 1996 you had to do nothing to be readable. Now you have to do something, and you may just as reasonably keep the map private for your own error reports. I'd argue that switch, from on by default to off by default, changed more than any single tool did.</p>
 
@@ -2423,7 +2423,7 @@ if ( jQuery.browser.mozilla || jQuery.browser.opera ) {
 
 <p>They lost that one. I ran Resig's test case in a current Chromium while writing this, and <code>foo.querySelectorAll('div span')</code> still returns one element. You need to write <code>':scope div span'</code> to get zero.</p>
 
-<h2>What it left behind</h2>
+<h2>The dollar sign after jQuery</h2>
 
 <p><strong>The platform copied the homework, slowly.</strong> When GitHub <a href="https://github.blog/engineering/engineering-principles/removing-jquery-from-github-frontend/">removed jQuery in 2018</a>, its engineers listed what had made that possible, and the list reads as jQuery's table of contents translated into standards: "The <code>$(selector)</code> pattern can easily be replaced with <code>querySelectorAll()</code>," class switching with <code>Element.classList</code>, animation in CSS, <code>$.ajax</code> with the Fetch Standard. The dates are worth a look. <a href="https://www.w3.org/TR/selectors-api/">Selectors API Level 1</a> became a W3C Recommendation on February 21, 2013, seven and a half years after a student's blog post about fluff. jQuery got <a href="https://api.jquery.com/closest/"><code>.closest()</code></a> in version 1.3, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>Element.closest()</code></a> is now a standard DOM method with the same name and the same job.</p>
 
@@ -2577,7 +2577,7 @@ datedisplay.setAttribute("value", dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"
 
 <p>In 2000, <code>getYear()</code> returns 100, and 2100 minus 100 is 2000. In 2001 it returns 101, and the page announces that it is 1999. That fix was good for exactly twelve months, and to be fair, it was written in one of them.</p>
 
-<h2>What it left behind</h2>
+<h2>What became of getYear()</h2>
 
 <p><strong>The bug report became the documentation.</strong> Bug 22964 was closed in two hours and then refused to stay quiet. It has 67 duplicates. The last was filed in July 2013. Of its 80 comments, 51 date from 2005, which I'd guess is what happens when a browser built on that engine starts taking real market share and meets a web tested only in Internet Explorer. The thread contains the entire standards-versus-reality argument in miniature. One commenter quotes Annex B and concludes: "Mozilla should behave as it behaves now, and IE is wrong." Another answers with the point that browser vendors eventually organised their whole philosophy around: "the Mozilla user who browses the Internet CANNOT use getFullYear instead of getYear because he is not the author of the page he is browsing!!!" Both were right. The author of the page and the person hurt by the page are different people, and only one of them can deploy a fix.</p>
 
@@ -2876,7 +2876,7 @@ function show(id) {
 
 <p>How sticky was the old habit? jQuery shipped a browser-sniffing helper, <code>$.browser</code>, deprecated it in 2009, and still didn't remove it until <a href="https://jquery.com/upgrade-guide/1.9/">jQuery 1.9</a> in 2013.</p>
 
-<h2>What it left behind</h2>
+<h2>What the fork handed down</h2>
 
 <p><strong>The winner wrote the standard.</strong> Remember <code>innerHTML</code>? It was a Microsoft invention in Internet Explorer 4. It was in no part of DOM Level 1, 2 or 3. It became part of a web standard only in the HTML5 era, when the specs finally wrote down what every browser already did, by which point it was how half the web updated itself. <code>XMLHttpRequest</code> took the same road, starting life as an Internet Explorer 5 ActiveX object. The lesson I take from both is that standards are often a record of what survived, and the fight over who gets to be the thing that survives happens in the wild, in production, on your client's site.</p>
 

@@ -65,7 +65,7 @@
           <li><a href="#the-include-and-its-wrappers">The include and its wrappers</a></li>
           <li><a href="#why-a-joke-travelled">Why a joke travelled</a></li>
           <li><a href="#living-with-unicorns">Living with unicorns</a></li>
-          <li><a href="#what-it-left-behind">What it left behind</a></li>
+          <li><a href="#where-the-unicorns-went">Where the unicorns went</a></li>
           <li><a href="#the-takeaway">The takeaway</a></li>
           <li><a href="#sources-h">Sources and further reading</a></li>
   </ol>
@@ -194,7 +194,7 @@ $(document).keydown(function(e) {
 
 <p>And one reader on day one named the real issue, in the middle of a joke review: "I am also a bit ashamed that I executed a stranger's Javascript in my Hacker News context. Who knows what just happened to my cookie?" They read the URL and decided they were safe, "at least for the javascript present the instant I downloaded it."</p>
 
-<h2 id="what-it-left-behind">What it left behind</h2>
+<h2 id="where-the-unicorns-went">Where the unicorns went</h2>
 
 <p><strong>The defence against it is why it often doesn't work now.</strong> That last comment describes the risk exactly. A site that included <code>cornify.js</code> ran whatever cornify.com chose to serve that day, with full access to the page. I've found no sign Cornify ever abused that, but an unapproved script from another host is exactly what Content Security Policy lets a site refuse. When GitHub turned CSP on in April 2013, <a href="https://github.blog/news-insights/product-news/content-security-policy/">Joshua Peek's announcement</a> warned that "it may cause issues with some browser extensions and bookmarklets." The spec said bookmarklets should be exempt, Peek wrote, but "none of the browsers get this correct." The <a href="https://www.w3.org/TR/CSP3/">current CSP draft</a> still says a policy "SHOULD NOT interfere with the operation of user-agent features like addons, extensions, or bookmarklets." In practice, as far as I understand it, a loader bookmarklet that injects a script from another host is asking for exactly what a strict policy refuses. The web got safer from strangers' scripts, and on those sites the unicorn link went quiet.</p>
 

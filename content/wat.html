@@ -101,7 +101,7 @@ var o = {} + []; o    <span class="c">// "[object Object]"</span>
 
 <p>Day to day, people coped the way the <a href="../jslint/">linters</a> told them to. ESLint's <a href="https://eslint.org/docs/latest/rules/eqeqeq"><code>eqeqeq</code></a> rule explains that <code>==</code> follows "the rather obscure Abstract Equality Comparison Algorithm", and a second rule, <a href="https://eslint.org/docs/latest/rules/no-implicit-coercion"><code>no-implicit-coercion</code></a>, exists to "flag shorter notations for the type conversion".</p>
 
-<h2>What it left behind</h2>
+<h2>The jokes, answered</h2>
 
 <p><strong>Node's prompt quietly rewrote the punchline.</strong> Type <code>{} + []</code> at the Node 22 prompt and you get <code>'[object Object]'</code>, not 0. The reason is in <a href="https://github.com/nodejs/node/blob/v22.x/lib/repl.js">the REPL's source</a>: if the input looks like an object literal, a comment says, "Add parentheses to make sure `code` is parsed as an expression". The Hacker News thread shows Node already disagreeing with <code>jsc</code> in January 2012. So the most quoted line of the talk depends on which prompt you use. Nothing in the language changed. A tool decided that what people meant mattered more than what the grammar said.</p>
 
