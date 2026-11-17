@@ -348,6 +348,25 @@
         "That the books were thick because thick books sold is Philip Greenspun's account of what publishers believed, not publisher data. A founder's recollection, hedged with \"I believe\", is my only source for Computer Literacy's stores closing in 2001.",
         "The animals I give for the HTML, Webmaster, Dynamic HTML and CSS books come from the colophons of editions published from 2000 to 2002, and I did not check the 1990s covers. That the 1997 CD-ROM belongs to the line O'Reilly later called the CD Bookshelf, that reviewers at both Netscape and Microsoft show the book filled a gap in vendor documentation, and that the unauthorised copies now work as an archive are my own readings."
       ]
+    },
+    {
+      "slug": "off-switch",
+      "title": "The tracker that got JavaScript an off switch",
+      "description": "In February 1996 a commuter's demo page showed that Netscape 2.0 let any site watch where you browsed next, and three weeks of public argument with the language's author ended in a patch, a $1,000 prize and the first preference to turn JavaScript off.",
+      "topic": "browsers",
+      "era": [
+        1996,
+        2013
+      ],
+      "published": "2026-11-17T08:44:57+00:00",
+      "unverified": [
+        "The tracker's own source code is lost: it was served by a program on an OSF machine that no longer answers, so my account of how it worked comes from LoVerso's descriptions, and the statement that the 2.01 patch stopped one window reading another site's address is my reconstruction from them.",
+        "No source says the preference to disable JavaScript was added because of LoVerso's report. He asked for a button, an unnamed correspondent asked Eich for the same thing, and there was other pressure at the time, so \"the report that did most to get JavaScript an off switch\" is my reading.",
+        "The Thursday-night bounty call comes only from Keith Dawson's newsletter, which places it after the RISKS post, while the RISKS header is dated Friday morning; I followed the header. The Naval Research Laboratory advisory also rests on Dawson alone, and the Mercury News front page on LoVerso's own list of press coverage.",
+        "I know Brendan Eich's message of February 29, 1996 only from Alex Kremer's repost to a mailing list the next day, and I could not open Netscape's own 2.01 release notes or security note, so Netscape's side rests on that repost, Frank Hecker's unofficial note, the CIAC bulletin and TidBITS.",
+        "Sources disagree on when Navigator 2.0 shipped: TBTF of February 10, 1996 says it was released the week before and LoVerso was testing it on February 13, while \"JavaScript: The First 20 Years\" gives March 1996. I followed the 1996 sources.",
+        "That the idea became working code in one evening is my inference from the timestamp on the sample log entry, and reading the same origin policy's later wording as a description of the Tennyson, Weston and LoVerso bugs is my own interpretation."
+      ]
     }
   ]
 }

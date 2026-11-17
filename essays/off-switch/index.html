@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The tracker that got JavaScript an off switch · Nostalgia.js</title>
+<meta name="description" content="In February 1996 a commuter's demo page showed that Netscape 2.0 let any site watch where you browsed next, and three weeks of public argument with the language's author ended in a patch, a $1,000 prize and the first preference to turn JavaScript off.">
+<link rel="canonical" href="https://derek.io/nostalgiajs/essays/off-switch/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The tracker that got JavaScript an off switch">
+<meta property="og:description" content="In February 1996 a commuter's demo page showed that Netscape 2.0 let any site watch where you browsed next, and three weeks of public argument with the language's author ended in a patch, a $1,000 prize and the first preference to turn JavaScript off.">
+<meta property="og:url" content="https://derek.io/nostalgiajs/essays/off-switch/">
+<meta property="og:image" content="https://derek.io/nostalgiajs/og/off-switch.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../../feed.xml">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WX44MXWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<script data-goatcounter="https://derek-io-nostalgiajs.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../../">Nostalgia.js<span>Essays on the Early Web</span></a>
+    <picture>
+      <source srcset="../../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../../">Essays</a>
+    <a href="../../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">Browsers and the platform · 1996 to 2013 · 13 min read</p>
+      <div class="title">
+        <img src="../../icons/off-switch.svg" width="64" height="64" alt="">
+        <h1>The tracker that got JavaScript an off switch</h1>
+      </div>
+
+<p class="lede">In February 1996 a web page could follow you around the web and report each address you visited to a stranger, and the one browser that ran such pages had no setting to stop them.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#javascript-fresh-out-of-beta">JavaScript, fresh out of beta</a></li>
+          <li><a href="#loverso-s-train-ride-home">LoVerso's train ride home</a></li>
+          <li><a href="#a-browser-with-no-javascript-switch">A browser with no JavaScript switch</a></li>
+          <li><a href="#netscape-s-bounty-and-eich-s-word-minor">Netscape's bounty, and Eich's word "minor"</a></li>
+          <li><a href="#navigator-2-01-broken-in-four-days">Navigator 2.01, broken in four days</a></li>
+          <li><a href="#where-the-tracker-s-fixes-went">Where the tracker's fixes went</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<pre tabindex="0"><code>Remember: We're watching...</code></pre>
+
+<p>That is the last line of a page titled "Real Time History Tracking", written by John Robert LoVerso on February 22, 1996. When I fetched it from <a href="http://www.schooner.com/~loverso/javascript/track-mee.html">LoVerso's own site</a>, it sat much as it was left. Its headline reads "JavaScript in Netscape 2.0 shouldn't let me do this, But it does". A few lines above the sign-off is a link labelled "Invoke the tracker", and further up is a sample of what the tracker collected:</p>
+
+<pre tabindex="0"><code>Wed Feb 21 23:34:07 EST 1996
+REMOTE_ADDR = xxx.xxx.xx.x
+REMOTE_HOST = xxxxxxxxx.com
+QUERY_STRING = result=3= http://www.yahoo.com/Business_and_Economy/Companies/Apparel/Lingerie/
+HTTP_USER_AGENT = Mozilla/2.0 (X11; I; SunOS 5.4 sun4m)  via proxy gateway  CERN-HTTPD/3.0 libwww/2.17</code></pre>
+
+<p>The page explains that this entry "was from a test a friend did for me". So at 11:34 on a Wednesday night, a friend on a Sun workstation opened a Yahoo category page, and a server at LoVerso's office wrote the address down. The friend knew. The point of the page was that the next person would not.</p>
+
+<p>I came to this page expecting JavaScript's first security hole. It wasn't the first, and LoVerso said so at the time. What it was is odder: the report that, as far as I can tell, did most to get JavaScript an off switch, argued over in public for three weeks by a commuter and the language's author.</p>
+
+<h2 id="javascript-fresh-out-of-beta">JavaScript, fresh out of beta</h2>
+
+<p>Netscape and Sun announced JavaScript on December 4, 1995. The language was already in people's hands by then under its earlier name, LiveScript, in the public betas of Navigator 2.0. The finished Navigator 2.0 came out around the start of February 1996; Keith Dawson's newsletter Tasty Bits from the Technology Front, dated February 10, <a href="https://tbtf.com/archive/1996-02-10.html">reported</a> it "was released last week on all platforms".</p>
+
+<p>Almost nobody could say what the new thing was. The name suggested a small Java, and Sun's Java was the most carefully examined language of the moment. Dawson's <a href="https://tbtf.com/archive/1996-02-19.html">issue of February 19</a> told readers that if they were confused about the difference "you are not alone", and passed on a report that Netscape already regretted the name. It then reprinted a comparison table adapted from Netscape's own tutorial. The two columns differed on every row but the last:</p>
+
+<pre tabindex="0"><code>          JavaScript                            Java
+ Secure. Cannot write to hard disk.   Secure. Cannot write to hard disk.</code></pre>
+
+<p>The betas had already put that row in doubt. Netscape ran a contest it called the Bugs Bounty, paying $1,000 for a security bug, and JavaScript kept winning it. In beta 2, Scott Weston found a way for a script to send a transcript of a visitor's whole session back to a page's owner; <a href="https://tbtf.com/archive/1995-12-02.html">Dawson called the demonstration</a> "massively scary" and noted it was fixed in beta 3. In January, John Tennyson reported a cluster of bugs with a similar effect, including one that let a script list the directories on your disk. Both were awarded the bounty.</p>
+
+<p>Then 2.0 shipped, and on February 13 LoVerso, a researcher at the OSF Research Institute in Cambridge, told Netscape that Tennyson's directory lister still worked in the finished product. His <a href="http://www.schooner.com/~loverso/javascript/dir.html">adapted copy of the exploit</a> survives, credited "Originally By" Tennyson. The trick was to submit a form to a <code>file:</code> address in a new window and then read that window's links. The window was asked to be as small as a window can be:</p>
+
+<pre tabindex="0"><code>winopts =
+  "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no," +
+  "resizable=no,copyhistory=yes," +
+  "width=0,height=0"
+;</code></pre>
+
+<h2 id="loverso-s-train-ride-home">LoVerso's train ride home</h2>
+
+<p>On Wednesday, February 21, LoVerso hit a bug by accident. He had a page whose <code>onload</code> handler put up an alert and then called <code>history.back()</code>, and a user at OSF who visited it found the handler would not go away. LoVerso posted to comp.lang.javascript that morning under the subject <a href="http://www.schooner.com/~loverso/javascript/new-hole">"Serious Security Bug"</a>:</p>
+
+<blockquote>
+<p>I have seen a case where JavaScript imported from one page is being executed by the Navigator for EVERY subsequent page it renders.</p>
+</blockquote>
+
+<p>He couldn't make it happen on demand, which makes for a poor exploit. That afternoon, in Netscape's own newsgroup, the language's author Brendan Eich answered a thread titled "Finding out a user's history?". LoVerso later quoted the reply on the tracker page: the <code>copyhistory</code> option had been disabled in beta 6 "to prevent your session history, with potentially secret keys or other URL query strings, from being stolen by malicious hidden scripts."</p>
+
+<p>LoVerso went home by commuter rail. Somewhere on that ride he worked out that he didn't need the unreliable bug at all. A script that stays in memory after you leave its page is a defect. A script that sits in its own window is just a window, and Navigator 2.0 let a script in one window ask another window where it was.</p>
+
+<p>The tracker's own source is the one piece I could not recover. It was served by a program on an OSF machine, and that address no longer answers. What survives is LoVerso's description, which is exact enough. His script opened a second, "(mostly) hidden" window and stayed there. Then, in his words, "it wakes up every second and sees what page you are viewing", and when the address changed it requested a CGI script on his server with the new address in the query string. That request is the log entry near the top of this essay. The page says the demonstration's windows were left large enough to see, and that a real attack could ask for <code>width=1,height=1</code>.</p>
+
+<p>The timestamp on that sample entry is 11:34 the same night. By my reading of the dates, the idea went from a train seat to a working spy in an evening.</p>
+
+<h2 id="a-browser-with-no-javascript-switch">A browser with no JavaScript switch</h2>
+
+<p>On Friday morning LoVerso sent the story to the RISKS Digest, Peter G. Neumann's moderated forum on the hazards of computers. It ran in <a href="https://catless.ncl.ac.uk/Risks/17/79">volume 17, issue 79</a> as "Netscape Navigator 2.0 exposes user's browsing history", between a year-2000 bug and a reply from Sun about Java security.</p>
+
+<p>The post is careful about its claims. LoVerso called his tracker "the third (or fourth?) way to steal private data from a user via JavaScript", and claimed only one thing as new: it worked in real time, on the finished 2.0, for as long as its window lived. Addresses carried secrets then as now, so anything a site put in a URL, a password or a session key, went into the log with the rest. He noted that Navigator opened Netscape's own home page at startup, that the page was full of JavaScript, and that a log of where people went next was worth a great deal to an advertiser.</p>
+
+<p>Then came the paragraph that mattered most:</p>
+
+<blockquote>
+<p>As it stands, with Netscape 2.0 you cannot disable JavaScript. You can disable Java.</p>
+</blockquote>
+
+<p>LoVerso thought that the wrong way round. Java's design had been pored over by thousands of people. Nobody outside Netscape had seen JavaScript's source, and its specification was whatever Navigator did. You could read any one script with <a href="../view-source/">View Source</a>, but nothing told you a page had a script in it, and by the time you looked it had already run.</p>
+
+<p>So people improvised. LoVerso's tracker page asked readers to write to Netscape and request a button. One correspondent in Netscape's developer newsgroup, whose name the surviving copy doesn't give, went further and reported having edited the program itself: "we've patched the binary to not recognize the SCRIPT tag, the onLoad function, and the 'livescript:' URL scheme". On March 7, <a href="https://tbtf.com/archive/1996-03-17.html">according to Dawson</a>, the security office of the Naval Research Laboratory advised U.S. military personnel not to use Netscape 2.0 until the problems were fixed. Two days before that, by LoVerso's own tally of the coverage, the story had been on the front page of the San Jose Mercury News.</p>
+
+
+<h2 id="netscape-s-bounty-and-eich-s-word-minor">Netscape's bounty, and Eich's word "minor"</h2>
+
+<p>Netscape had in fact answered before RISKS ran the story, and the answer was friendly. <a href="https://tbtf.com/archive/1996-02-27.html">Dawson's account</a>, which LoVerso says he was allowed to check before it went out, has Netscape telling LoVerso on Thursday night, the day the tracker page is dated and the evening before the RISKS submission, that he had won a $1,000 bounty. The money was slower: in early March LoVerso was still noting that he had only been told he would get it. His <a href="http://www.schooner.com/~loverso/javascript/">list of reported problems</a> now records the prize as awarded, and adds: "They also sent me a Mozilla mug."</p>
+
+<p>The second answer came a week later and was neither. On February 29 Eich replied at length to the newsgroup correspondent with the patched binary. The message survives because a subscriber named Alex Kremer <a href="https://www.obscure.org/javascript/archives/msg01019.html">reposted it to a JavaScript mailing list</a> the next day under the subject "*THIS* is the official word", although Eich's last lines say it is his opinion and not the company's. Eich ranked the holes:</p>
+
+<blockquote>
+<p>I consider the directory listing and mail spamming/address-stealing holes serious; the history tracker less so.</p>
+</blockquote>
+
+<p>The tracker was minor, Eich wrote, "because it is far from invisible" on every system he had tried. That was fair as far as it went: the demonstration was built to be seen. The same message conceded the larger point in one clause. A special release, 2.01, was about to replace 2.0, and it would fix the directory and mail bugs, "plus adding a Preference to disable JavaScript".</p>
+
+<p>The rest of the message is the best record I've found of how JavaScript's security was meant to work, and why the two of them talked past each other. I see three forces at work, two of them in this message.</p>
+
+<p>The first is that the feature and the hole were the same thing. Frames arrived in the same Navigator release as scripting, and a script that could not look into another frame or window could not do much with either. Eich's rule was that a script and the documents it examined "must come from the same server". The directory lister got through because that check had a bug. The tracker, as LoVerso described it, read another window's address with no bug involved. That is why LoVerso complained on his <a href="http://www.schooner.com/~loverso/javascript/press.html">page of press clippings</a> that reporters kept missing the point: the tracker used "a designed in feature of the language".</p>
+
+<p>The second is an honest disagreement about method. The correspondent wanted a written security model, something with the "sense of formalism" Java had. Eich answered that formalism had not saved Java, which had just needed a patch for a hole found by students at Princeton, and that he put more faith in code review and in paying people to publish their attacks. He also sketched what he wanted to build next: "taint" bits on private data, an idea borrowed from Perl, so that a script could read your history but could not send it anywhere.</p>
+
+<p>The third is that Netscape could hardly ship JavaScript switched off, as LoVerso had suggested, because its own site depended on the language. When the off switch arrived, <a href="https://tidbits.com/1996/03/18/netscape-posts-two-updates/">TidBITS noted</a> that with JavaScript disabled, pages that leaned on it, Netscape's included, might load worse than they did in browsers that had never heard of it.</p>
+
+<h2 id="navigator-2-01-broken-in-four-days">Navigator 2.01, broken in four days</h2>
+
+<p>Navigator 2.01 fixed the tracker and added the switch, and four days later LoVerso had the tracker running again. The release began appearing on Netscape's FTP server on March 14, three weeks to the day after the date on the tracker page. Frank Hecker, who worked in pre-sales technical support at Netscape, <a href="https://www.obscure.org/javascript/archives/msg01479.html">told the JavaScript list</a> that morning, with a postscript saying the note was not an official announcement. A bulletin from the Energy Department's incident team, <a href="https://catless.ncl.ac.uk/Risks/17/93">reprinted in RISKS</a>, listed five JavaScript problems, two already fixed in 2.0 and the rest fixed by 2.01. The fifth was the logging of every address a browser visited. Whatever Eich thought of the tracker on February 29, the patch covered it.</p>
+
+<p>And there was the switch. Padgett Peterson <a href="https://catless.ncl.ac.uk/Risks/17/94">told RISKS readers</a> where to find it: "you can turn JavaScript off (Options/Security)." LoVerso added an update dated 3/14 to the tracker page, saying the hole was fixed.</p>
+
+<p>The next update on the page is dated 3/18 and says there is a new way that works in 2.01. This time he did use the stuck <code>onload</code> bug from the morning of February 21, because he had found a dependable way to set it off: have the script throw up an unexpected Save File dialog and wait for the user to press Cancel. As he told the www-security list, "you'd press CANCEL, too, if that happened to you!" By March 22 he had two more attacks on 2.01, a rebuilt directory lister and a way to make any form button upload a file from your disk.</p>
+
+<p>What he did next is the part I didn't expect from the person whose page signs off "We're watching". He gave the two worse exploits to Netscape and to nobody else, and held them back for six weeks, partly because they were nasty and partly, he wrote, "because Netscape asked me to". He linked them only on May 1, once Navigator 2.02 was out and had fixed all three. And his March 22 note ends by pointing readers at the thing he had asked for in February: anyone on 2.01 could avoid all three attacks by switching JavaScript off.</p>
+
+<h2 id="where-the-tracker-s-fixes-went">Where the tracker's fixes went</h2>
+
+<p>The same-server check got a name and became the rule everything else rests on. Netscape's later <a href="https://docs.oracle.com/cd/E19957-01/816-6409-10/sec.htm">Client-Side JavaScript Guide</a> opens its security chapter with the same origin policy, and explains it in terms of this exact winter: the restriction "prevents scripts from fetching private information such as directory structures or user session history". By my reading those are Tennyson's bug, then Weston's and LoVerso's. The rule needed many more patches: the <a href="https://www.w3.org/Security/Faq/wwwsf2.html">W3C's security FAQ</a>, in an entry dated August 1997, describes scripts in invisible windows recording every page a user visits in Navigator 3, Communicator 4 and Internet Explorer 3 and 4, with variants that "reappear at almost monthly intervals".</p>
+
+<p>Eich's taint bits shipped, were withdrawn and left a fossil. The same guide records that data tainting arrived in JavaScript 1.1, the version in Navigator 3.0, where a user had to set an environment variable called <code>NS_ENABLE_TAINT</code> to turn it on, and that "it was removed in JavaScript 1.2". The method scripts used to ask about it outlived the feature. The <a href="https://html.spec.whatwg.org/multipage/system-state.html">HTML Standard</a> still specifies <code>navigator.taintEnabled()</code> for browsers in what it calls Gecko compatibility mode, in one sentence: "The taintEnabled() method must return false."</p>
+
+<p>The off switch lasted seventeen years in plain sight. It moved from the Security preferences to a Languages tab in the previews of Navigator 3.0, and its descendant was still a checkbox in Firefox when Alex Limi, of Mozilla's Firefox UX team, filed <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=851702">a bug in March 2013</a> titled "Remove 'Enable JavaScript' checkbox from Prefs". Limi's <a href="https://limi.net/checkboxes">essay on the subject</a> argued that most sites that do more than display content now fail "in interesting &amp; mysterious ways" without scripts, so that to ordinary users a browser with the box unticked simply looks broken. <a href="https://www.mozilla.org/en-US/firefox/23.0/releasenotes/">Firefox 23</a>, released August 6, 2013, took the checkbox out and reset anyone who had used it to the default. The setting survived in <code>about:config</code>, for people who know to look there.</p>
+
+<p>LoVerso stopped collecting bugs. His <a href="http://www.schooner.com/~loverso/javascript/">list of reported problems</a> has a note that he is no longer gathering JavaScript bugs because his time is going to "other, more important pursuits", a 2002 postscript wondering what he might have found had he kept at it, and a complaint that the file upload bug never earned him a second prize: "I would have preferred another $1000".</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>The first public fight over the safety of the finished JavaScript was not about a crash or a virus. It was about whether a page you had left could keep watching you, and it was settled in three weeks by a patch, a prize and a preference. The patch tightened the same-server check that later got the name same origin policy. The prize was a thousand dollars and a mug. The preference was an admission that the only safe answer to "what can this script do?" was, for a while, "nothing, if you say so". Eich was right that the 1996 demonstration was easy to spot, and LoVerso was right that spotting it was not the user's job. The web that followed took LoVerso's fear seriously and his remedy less and less, until a browser could remove the switch on the grounds that nobody could afford to use it.</p>
+
+<p>The tracker page is still up, with its dated updates and its 1996 log entry. The "Invoke the tracker" link points at port 8000 of a machine called freebase.osf.org, which did not answer when I tried it. Nothing is watching at that address now. The last line of the page hasn't been changed, and it has turned out to be a fair description of the web.</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>The tracker's own source code is lost: it was served by a program on an OSF machine that no longer answers, so my account of how it worked comes from LoVerso's descriptions, and the statement that the 2.01 patch stopped one window reading another site's address is my reconstruction from them.</li>
+    <li>No source says the preference to disable JavaScript was added because of LoVerso's report. He asked for a button, an unnamed correspondent asked Eich for the same thing, and there was other pressure at the time, so &quot;the report that did most to get JavaScript an off switch&quot; is my reading.</li>
+    <li>The Thursday-night bounty call comes only from Keith Dawson's newsletter, which places it after the RISKS post, while the RISKS header is dated Friday morning; I followed the header. The Naval Research Laboratory advisory also rests on Dawson alone, and the Mercury News front page on LoVerso's own list of press coverage.</li>
+    <li>I know Brendan Eich's message of February 29, 1996 only from Alex Kremer's repost to a mailing list the next day, and I could not open Netscape's own 2.01 release notes or security note, so Netscape's side rests on that repost, Frank Hecker's unofficial note, the CIAC bulletin and TidBITS.</li>
+    <li>Sources disagree on when Navigator 2.0 shipped: TBTF of February 10, 1996 says it was released the week before and LoVerso was testing it on February 13, while &quot;JavaScript: The First 20 Years&quot; gives March 1996. I followed the 1996 sources.</li>
+    <li>That the idea became working code in one evening is my inference from the timestamp on the sample log entry, and reading the same origin policy's later wording as a description of the Tennyson, Weston and LoVerso bugs is my own interpretation.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://catless.ncl.ac.uk/Risks/17/79">RISKS Digest 17.79: "Netscape Navigator 2.0 exposes user's browsing history"</a>, John Robert LoVerso, February 23, 1996 <a class="archived" href="https://web.archive.org/web/20261108144306/https://catless.ncl.ac.uk/risks/17/79">(archived)</a></li>
+    <li><a href="http://www.schooner.com/~loverso/javascript/track-mee.html">Real Time History Tracking</a> (the tracker page), John Robert LoVerso, February 1996 with later updates <a class="archived" href="https://web.archive.org/web/20240511194952/http://www.schooner.com/~loverso/javascript/track-mee.html">(archived)</a></li>
+    <li><a href="http://www.schooner.com/~loverso/javascript/">JavaScript Problems I've Discovered</a>, John Robert LoVerso, 1996 to 2002 <a class="archived" href="https://web.archive.org/web/20241113235226/https://www.schooner.com/~loverso/javascript/">(archived)</a></li>
+    <li><a href="http://www.schooner.com/~loverso/javascript/new-hole">"Serious Security Bug"</a>, John Robert LoVerso, comp.lang.javascript, February 21, 1996 <a class="archived" href="https://web.archive.org/web/20240511194953/http://www.schooner.com/~loverso/javascript/new-hole">(archived)</a></li>
+    <li><a href="http://www.schooner.com/~loverso/javascript/dir.html">Dir Browser 2.0</a>, John Robert LoVerso after John Tennyson, 1996 <a class="archived" href="https://web.archive.org/web/20240511194953/http://www.schooner.com/~loverso/javascript/dir.html">(archived)</a></li>
+    <li><a href="http://www.schooner.com/~loverso/javascript/www-sec-Mar22.html">"Netscape 2.01 &amp; JavaScript"</a>, John Robert LoVerso, www-security list, March 22, 1996 <a class="archived" href="https://web.archive.org/web/20240511194952/http://www.schooner.com/~loverso/javascript/www-sec-Mar22.html">(archived)</a></li>
+    <li><a href="http://www.schooner.com/~loverso/javascript/press.html">JavaScript Problems - In The Press</a>, John Robert LoVerso, 1996 <a class="archived" href="https://web.archive.org/web/20240511194952/http://www.schooner.com/~loverso/javascript/press.html">(archived)</a></li>
+    <li><a href="https://www.obscure.org/javascript/archives/msg01019.html">"*THIS* is the official word"</a>, Brendan Eich's newsgroup message of February 29, 1996, reposted by Alex Kremer, March 1, 1996</li>
+    <li><a href="https://www.obscure.org/javascript/archives/msg01479.html">"2.01 patch release"</a>, Frank Hecker, March 14, 1996</li>
+    <li><a href="https://tbtf.com/archive/1996-02-27.html">TBTF for 1996-02-27: "JavaScript can't claim to be secure"</a>, Keith Dawson, 1996 <a class="archived" href="https://web.archive.org/web/20230602173648/https://www.tbtf.com/archive/1996-02-27.html">(archived)</a></li>
+    <li><a href="https://tbtf.com/archive/1995-12-02.html">TBTF for 1995-12-02</a>, <a href="https://tbtf.com/archive/1996-02-10.html">1996-02-10</a>, <a href="https://tbtf.com/archive/1996-02-19.html">1996-02-19</a> and <a href="https://tbtf.com/archive/1996-03-17.html">1996-03-17</a>, Keith Dawson <a class="archived" href="https://web.archive.org/web/20231208221026/https://www.tbtf.com/archive/1995-12-02.html">(archived)</a></li>
+    <li><a href="https://catless.ncl.ac.uk/Risks/17/93">RISKS Digest 17.93: CIAC Notes 96-01, "Java and JavaScript Vulnerabilities"</a>, John Fisher, March 18, 1996 <a class="archived" href="https://web.archive.org/web/20260530111043/https://catless.ncl.ac.uk/risks/17/93">(archived)</a></li>
+    <li><a href="https://catless.ncl.ac.uk/Risks/17/94">RISKS Digest 17.94: "Lemmings"</a>, A. Padgett Peterson, March 24, 1996 <a class="archived" href="https://web.archive.org/web/20260519103934/https://catless.ncl.ac.uk/risks/17/94">(archived)</a></li>
+    <li><a href="https://catless.ncl.ac.uk/Risks/18/08">RISKS Digest 18.08: Java and JavaScript bug summary</a>, David Hopwood, April 1996 <a class="archived" href="https://web.archive.org/web/20261103155338/https://catless.ncl.ac.uk/risks/18/08">(archived)</a></li>
+    <li><a href="https://tidbits.com/1996/03/18/netscape-posts-two-updates/">Netscape Posts Two Updates</a>, TidBITS, March 18, 1996 <a class="archived" href="https://web.archive.org/web/20240719142044/https://tidbits.com/1996/03/18/netscape-posts-two-updates/">(archived)</a></li>
+    <li><a href="https://www.w3.org/Security/Faq/wwwsf2.html">The World Wide Web Security FAQ, client side security</a>, Lincoln D. Stein, W3C, late 1990s <a class="archived" href="https://web.archive.org/web/20261012012032/https://www.w3.org/Security/Faq/wwwsf2.html">(archived)</a></li>
+    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6409-10/sec.htm">Client-Side JavaScript Guide, chapter 14: JavaScript Security</a>, Netscape, as kept by Oracle <a class="archived" href="https://web.archive.org/web/20251207002834/https://docs.oracle.com/cd/E19957-01/816-6409-10/sec.htm">(archived)</a></li>
+    <li><a href="https://html.spec.whatwg.org/multipage/system-state.html">HTML Standard: system state and capabilities</a>, WHATWG <a class="archived" href="https://web.archive.org/web/20261116053108/https://html.spec.whatwg.org/multipage/system-state.html">(archived)</a></li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=851702">Bug 851702: Remove "Enable JavaScript" checkbox from Prefs</a>, Alex Limi, Mozilla, 2013 <a class="archived" href="https://web.archive.org/web/20260321124604/https://bugzilla.mozilla.org/show_bug.cgi?id=851702">(archived)</a></li>
+    <li><a href="https://limi.net/checkboxes">Checkboxes that kill your product</a>, Alex Limi, 2013 <a class="archived" href="https://web.archive.org/web/20260829042108/https://limi.net/checkboxes">(archived)</a></li>
+    <li><a href="https://www.mozilla.org/en-US/firefox/23.0/releasenotes/">Firefox 23.0 release notes</a>, Mozilla, 2013 <a class="archived" href="https://web.archive.org/web/20250805084934/https://www.mozilla.org/en-US/firefox/23.0/releasenotes/">(archived)</a></li>
+    <li><a href="https://www.wirfs-brock.com/allen/jshopl.pdf">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 <a class="archived" href="https://web.archive.org/web/20261110202652/https://www.wirfs-brock.com/allen/jshopl.pdf">(archived)</a></li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+The+tracker+that+got+JavaScript+an+off+switch&amp;body=Essay%3A+https%3A%2F%2Fderek.io%2Fnostalgiajs%2Fessays%2Foff-switch%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/off-switch.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/off-switch.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../document-layers/">if (document.layers): the web forks in two</a> <span>Browsers and the platform · 1995 to 2001</span></li>
+        <li><a href="../xmlhttprequest/">XMLHttpRequest: six years waiting for a name</a> <span>Browsers and the platform · 1998 to 2006</span></li>
+        <li><a href="../hashbang/">#!: the URLs no server ever saw</a> <span>Browsers and the platform · 2009 to 2015</span></li>
+      </ul>
+      <p><a href="../../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../../"><img src="../../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · Essays on the Early Web · <a href="../../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>
