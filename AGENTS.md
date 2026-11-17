@@ -25,7 +25,39 @@ The site was first called Boomer.js and then, briefly, View Source. `../boomerjs
 
 ## Voice
 
-One consistent voice across every essay: first person, dry, warm, curious and a little self-deprecating, like the funniest person at a user group who also reads the spec. "I" is for opinions and judgments, never for memories. Contractions, plain words. One joke per section is plenty. Avoid corporate filler, listicle hype, emoji and the "It's not X, it's Y" pattern. Respect the reader's time: no padding. The essay should feel like a lesrning journey, of someone who only knew fragments of the history, but through the research, discovered new facts they found surprising. Curiousity and reverence for history is paramount.
+One consistent voice across every essay: first person, dry, warm, curious and a little self-deprecating, like the funniest person at a user group who also reads the spec. "I" is for opinions and judgments, never for memories. Contractions, plain words. One joke per section is plenty. Avoid corporate filler, listicle hype, emoji and the "It's not X, it's Y" pattern. Respect the reader's time: no padding. The essay should feel like a learning journey, of someone who only knew fragments of the history, but through the research, discovered new facts they found surprising. Curiosity and reverence for history is paramount.
+
+## Is there a story?
+
+An essay here tells a story. A collection of facts, dates and other people's opinions about a topic is a report, and reports do not get published. Decide which one you have after the research and before you write.
+
+**What a story needs**
+
+1. **Someone who wanted something.** A person, a team or a company with a name, doing something for a reason: Flanagan writing a book about a language still in beta, a commuter working out that a web page can spy on its reader, a designer publishing a joke. A technology on its own is not a protagonist. Find who made it, who fought it or who was stuck with it.
+2. **Trouble, and a turn.** Something went wrong, surprised people or changed direction, on a date you can name. If nothing in your notes can be introduced with "and then", you have a timeline.
+3. **Stakes the reader felt.** Why it mattered at the time to someone doing the work: a site went blank, a job title disappeared, every effect had to be written twice.
+4. **An ending.** Where it stopped, who won, what gave way. "It is still used today" is a status, not an ending.
+5. **Something you did not know.** At least one discovery from the research that surprised you and will surprise a reader who was there. It should come from a source, not from your own framing.
+
+**The two-sentence test.** Write the story as: "X wanted Y, but Z happened, so W." Then write what the reader will know at the end that they did not know at the start. If either sentence comes out vague ("JavaScript had many quirks that developers discussed"), there is no story yet.
+
+**Signs you have a report, not a story**
+
+- Your notes are mostly what people said about the thing, and little of what anyone did.
+- No named person makes a decision anywhere in the outline.
+- The sections could be put in any order without loss.
+- The sources are commentary and retrospectives, with no artifact from the time (code, a release note, a bug report, a post, a page).
+- The draft goes "A said this. B said that. C disagreed."
+
+**Quotes are evidence, not narration.** Tell the story in your own sentences and quote to prove a point or to let a voice be heard: a line that is funny, exact or revealing. Paraphrase the rest, with attribution. As a guide, no more than one quotation in a paragraph and one block quotation in a section, and never two quotations back to back with only "X wrote" between them.
+
+**If there is no story, stop.** First try to rescue it once: narrow to a single episode or person, or widen to the event the topic was part of. If it still fails the test, do not write the essay. Cancelling is a good outcome and costs less than publishing something dull. Then:
+
+- Move the topic's line in `TOPICS.md` to the "Parked" list, with one sentence on why and one on what would change the answer (a source you could not open, a person whose account is missing, a better angle).
+- Publish nothing and commit only the `TOPICS.md` change.
+- Report what you found. The research is not wasted: say whether any of it belongs in another essay.
+
+The same applies later. If the finished draft or the reviewer shows that the essay is quotations strung together, cut it back to the story or cancel it. Derek's "Up next" picks can be parked too; he will see why and can overrule.
 
 ## Essay shape
 
@@ -36,11 +68,13 @@ Target 2,200 to 3,000 words of prose (about 10 to 13 minutes, plus code). Reader
 3. **What happened**: the facts, in order, with the real code from the time. Show the mechanism, not just the headline.
 4. **Why**: the forces behind it (market, standards, engines, tooling, money). Give each force its own paragraph. This is the part readers will argue with, so be fair.
 5. **How people coped**: the workarounds, tools and culture around the problem.
-6. **What it left behind**: reflection with at least three non-obvious takeaways, each tied to something in today's code or industry. Every essay needs at least one connection the reader probably has not made (an old idea that survived under a new name, a standard that ratified a proprietary feature, a fix that caused the next problem).
-7. **The takeaway**: a final section under the heading "The takeaway", one or two paragraphs that state the essay's conclusion outright. A reader who skips to the end should get the point. Never end on a code block, a list or a question to the reader.
+6. **Where it went**: the afterlife. Follow the pieces of the story to where they are now: what moved, what was renamed, what got absorbed into something else, what quietly died. Two to four findings, each one specific and traceable to a source, and each opening with a plain sentence that states it ("The reference section moved to the web", "The bookmarklet turned into the extension"). Every essay needs at least one the reader probably has not met (an old idea that survived under a new name, a standard that ratified a proprietary feature, a fix that caused the next problem). This is reporting on what happened next, not a list of lessons; save the judgment for the takeaway.
+7. **The takeaway**: a final section under the heading "The takeaway", one or two paragraphs that state the essay's conclusion outright. A reader who skips to the end should get the point. Where you can, close by returning to the artifact the essay opened with, as it stands now. Never end on a code block, a list or a question to the reader.
 8. **Sources and further reading**: the last thing in the essay.
 
-Section headings should describe the content of this essay. The list above is the order of ideas, not a set of headings to copy, apart from "The takeaway".
+Section headings should describe the content of this essay. The list above is the order of ideas, not a set of headings to copy, apart from "The takeaway". Name the thing in the heading and never use "it": write "Where the reference pages went" or "After Firebug", not "What it left behind", "Why it worked" or "Living with it". A reader scanning the contents list should be able to tell this essay from every other one.
+
+The order can bend to fit the story. If the trouble is the best way in, start there; if "how people coped" is one paragraph, fold it into another section. What may not go missing is the hook, the turn, the afterlife and the takeaway.
 
 **Link your sources.** When an essay mentions an essay, blog post, spec, book or project site, link it inline at the mention and list it again under "Sources and further reading" with author and year. Only link URLs you have opened and confirmed load and say what you claim. If you cannot open a source, name it without a link. Link to other Nostalgia.js essays as `../their-slug/` where they are relevant (essays are siblings under `essays/`, so the relative link works).
 
@@ -144,12 +178,13 @@ Run from the repository root. Needs Node 22 or newer. There is nothing to instal
 
 1. Pick the topic from `TOPICS.md`: the first item under "Up next" if that list has any, otherwise your choice from the lists.
 2. Research. Open the sources and collect the exact dates, versions and quotes you will use.
-3. Write `content/<slug>.html` and add the entry to `essays.json`. Draw the essay's icon as `icons/<slug>.txt`.
-4. **Second-pass fact check.** Have a separate reviewer (a subagent that has not seen your research notes) read the finished fragment, reopen every linked source, and try to find errors: wrong dates, versions, quotes that do not appear on the page, claims the source does not support. Fix or cut everything it finds. Do not skip this, even when you are confident. Then fill in the essay's `unverified` list.
-5. Delete the topic's line from `TOPICS.md` and renumber "Up next". Add any good new ideas to the lists.
-6. Run `npm run archive`, then `npm run og -- <slug>`, then `npm run build`.
-7. Check the new essay and the landing page at 375 px wide: no horizontal page scroll, no console errors, no broken local links.
-8. Commit everything, generated files included, with the essay title in the message. List in the commit body anything you could not verify.
+3. **Story check.** Apply "Is there a story?" above. Write the two-sentence test and name the protagonist, the turn, the ending and the surprise. If you cannot, try one rescue, and if that fails, park the topic and stop.
+4. Write `content/<slug>.html` and add the entry to `essays.json`. Draw the essay's icon as `icons/<slug>.txt`.
+5. **Second-pass review.** Have a separate reviewer (a subagent that has not seen your research notes) read the finished fragment and do two things. First, the fact check: reopen every linked source and try to find errors: wrong dates, versions, quotes that do not appear on the page, claims the source does not support. Second, the story check: say in two sentences what the story is, name any section that could be cut without losing it, and flag any stretch that is quotations strung together. Fix or cut everything it finds. Do not skip this, even when you are confident. Then fill in the essay's `unverified` list.
+6. Delete the topic's line from `TOPICS.md` and renumber "Up next". Add any good new ideas to the lists.
+7. Run `npm run archive`, then `npm run og -- <slug>`, then `npm run build`.
+8. Check the new essay and the landing page at 375 px wide: no horizontal page scroll, no console errors, no broken local links.
+9. Commit everything, generated files included, with the essay title in the message. List in the commit body anything you could not verify.
 
 ## Correcting an essay
 

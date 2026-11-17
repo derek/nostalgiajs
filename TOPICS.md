@@ -2,7 +2,7 @@
 
 Ideas for essays that have not been written yet. Published essays are listed in `essays.json`, not here.
 
-Pick the next essay from the first item under "Up next" if there is one, otherwise your choice from the lists. When you write an essay, delete its line from this file. Add new ideas to the lists as you find them, never to "Up next". Every topic should have a concrete artifact (a line of code, a tag, a product, a document) and a well-documented story. Check facts before writing; see `AGENTS.md`.
+Pick the next essay from the first item under "Up next" if there is one, otherwise your choice from the lists. When you write an essay, delete its line from this file. Add new ideas to the lists as you find them, never to "Up next". Every topic should have a concrete artifact (a line of code, a tag, a product, a document) and a well-documented story: someone who wanted something, trouble, and an ending. See "Is there a story?" in `AGENTS.md`. A topic that turns out to have no story is moved to "Parked" at the bottom of this file, not written.
 
 ## Up next
 
@@ -81,3 +81,8 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - Computer Literacy Bookshops (1983 to 2001): the Silicon Valley store that stocked every computer book in print, and what closed it
 - Netscape DevEdge disappears and Mozilla Developer Center rescues it (2005): how MDN began as a salvage job
 
+## Parked
+
+Topics that were researched and set aside because they did not make a story. Each says why, and what would change the answer. Derek can move any of them back to "Up next".
+
+- JavaScript's first hundred days on Usenet (December 1995 to spring 1996). Why: many voices and no protagonist, and its one dramatic event, the first security report, is its own essay. Would change: threads from the 1995 to 2000 archive (Google Groups only) showing a running argument between named people.
