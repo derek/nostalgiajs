@@ -8,6 +8,7 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
+- JavaScript's first security report (1996): John Robert LoVerso's RISKS Digest post "Netscape Navigator 2.0 exposes user's browsing history", the tracking demo, the days when you could not switch JavaScript off, and how Netscape answered
 - comp.lang.javascript, its FAQ, and learning from strangers on Usenet
 - IE6: the box model, `hasLayout` and conditional comments
 - Hiding scripts in HTML comments (`<!--` ... `//-->`) for browsers that didn't exist anymore
