@@ -362,10 +362,11 @@
       "unverified": [
         "The tracker's own source code is lost: it was served by a program on an OSF machine that no longer answers, so my account of how it worked comes from LoVerso's descriptions, and the statement that the 2.01 patch stopped one window reading another site's address is my reconstruction from them.",
         "No source says the preference to disable JavaScript was added because of LoVerso's report. He asked for a button, an unnamed correspondent asked Eich for the same thing, and there was other pressure at the time, so \"the report that did most to get JavaScript an off switch\" is my reading.",
-        "The Thursday-night bounty call comes only from Keith Dawson's newsletter, which places it after the RISKS post, while the RISKS header is dated Friday morning; I followed the header. The Naval Research Laboratory advisory also rests on Dawson alone, and the Mercury News front page on LoVerso's own list of press coverage.",
+        "The Thursday-night bounty call comes only from Keith Dawson's newsletter, which places it after the RISKS post, while the RISKS header is dated Friday morning; I followed the header. The Naval Research Laboratory advisory also rests on Dawson alone, and I could not find any of the 1996 press articles themselves, so the Mercury News front page and everything else I say about the coverage rest on LoVerso's own list of it.",
         "I know Brendan Eich's message of February 29, 1996 only from Alex Kremer's repost to a mailing list the next day, and I could not open Netscape's own 2.01 release notes or security note, so Netscape's side rests on that repost, Frank Hecker's unofficial note, the CIAC bulletin and TidBITS.",
         "Sources disagree on when Navigator 2.0 shipped: TBTF of February 10, 1996 says it was released the week before and LoVerso was testing it on February 13, while \"JavaScript: The First 20 Years\" gives March 1996. I followed the 1996 sources.",
-        "That the idea became working code in one evening is my inference from the timestamp on the sample log entry, and reading the same origin policy's later wording as a description of the Tennyson, Weston and LoVerso bugs is my own interpretation."
+        "That the idea became working code in one evening is my inference from the timestamp on the sample log entry, and reading the same origin policy's later wording as a description of the Tennyson, Weston and LoVerso bugs is my own interpretation.",
+        "I know Eich's 2012 talk only from its abstract, as kept by a conference index, and have not seen the talk or its slides."
       ]
     }
   ]
