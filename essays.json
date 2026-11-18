@@ -368,6 +368,30 @@
         "That the idea became working code in one evening is my inference from the timestamp on the sample log entry, and reading the same origin policy's later wording as a description of the Tennyson, Weston and LoVerso bugs is my own interpretation.",
         "I know Eich's 2012 talk only from its abstract, as kept by a conference index, and have not seen the talk or its slides."
       ]
+    },
+    {
+      "slug": "left-pad",
+      "title": "left-pad: the eleven lines npm had to un-unpublish",
+      "description": "Azer Koçulu lost the package name kik to a messaging company, asked npm how to delete everything he had published and was sent the command; when he ran it on March 22, 2016, one of his 273 packages was left-pad, and two and a half hours later npm broke its own rule to put it back.",
+      "topic": "libraries",
+      "era": [
+        2016,
+        null
+      ],
+      "related": [
+        "jquery",
+        "annex-b",
+        "wat"
+      ],
+      "unverified": [
+        "I could not open either Medium post: Azer Koçulu's \"I've Just Liberated My Modules\" or Mike Roberts's \"A discussion about the breaking of the Internet\", which holds the emails. Every line I quote from them comes by way of Ars Technica, The Register, The Verge or people quoting them on Hacker News that week, and neither post is linked.",
+        "That npm sent Koçulu the command that deleted his packages rests on Koçulu's own account: he told Ars Technica in 2016 that it came from Isaac Schlueter, and his 2024 essay says only that npm provided a script. npm's post-mortem doesn't mention it, and I have not seen the email. The March 18 date for npm's decision comes only from Wikipedia's summary of the emails, and I don't know what day Koçulu asked to leave.",
+        "Sources disagree on how many packages were removed: npm's post-mortem and The Verge say 273, The Register said more than 250 that night, and Koçulu's 2024 essay says there were more than 350.",
+        "I read the GitHub issue through a text rendering of the page, so the 2:27 PM unpublish by Koçulu and the 2:47 PM unpublish by Westland's account come from registry records pasted there, not from the registry itself. That the 2:47 unpublish and the 0.0.9 release were a second attempt at a usable version number, that 0.0.3 shares 0.0.9's timestamp because of how npm restored it, and that left-pad's downloads fell because of Babel's fix are my inferences.",
+        "That Kik never published anything under the name kik is what the registry's version list shows now; a release that was published and later removed would not appear there, and I found no statement from Kik or npm about why a placeholder went up the day after the name was transferred.",
+        "I could not find the date on which left-pad was marked deprecated; the registry shows the notice on every version but not when it was added."
+      ],
+      "published": "2026-11-18T09:02:19Z"
     }
   ]
 }

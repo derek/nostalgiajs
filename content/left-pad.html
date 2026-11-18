@@ -1,0 +1,151 @@
+<p class="lede">On the afternoon of March 22, 2016, a seventeen-line file that pads strings with spaces disappeared from the npm registry, and for about two and a half hours a large share of the JavaScript world could not install its own tools.</p>
+
+<pre tabindex="0"><code>npm ERR! code E404</code></pre>
+
+<p>That line comes from a Travis CI log that a developer with the handle silkentrance pasted into a new issue on a small GitHub repository that afternoon. The issue is <a href="https://github.com/left-pad/left-pad/issues/4">still there</a>, titled "npmjs.org tells me that left-pad is not available (404 page)". Further down the same log, npm explains itself:</p>
+
+<pre tabindex="0"><code>npm ERR! 404 'left-pad' is not in the npm registry.
+npm ERR! 404 You should bug the author to publish it (or use the name yourself!)
+npm ERR! 404 It was specified as a dependency of 'line-numbers'</code></pre>
+
+<p>The middle line is advice, and within fifteen minutes somebody had taken the half of it in brackets. The last line names a package that most of the people staring at this error had never knowingly installed.</p>
+
+<p>The legend has four parts: an angry developer, a trademark lawyer, eleven lines of code, a broken internet. The registry's own records and the accounts from that week tell it differently in three places. The author asked to leave and was handed the command to do it. The eleven lines printed in the news stories were not the version the builds were asking for. And the package name the whole fight was about has, as far as the registry shows, never been used by the company that won it.</p>
+
+<h2>Seventeen lines by Azer Koçulu</h2>
+
+<p>Here is the whole of <code>index.js</code> from left-pad 0.0.3, taken from the tarball the registry serves:</p>
+
+<pre tabindex="0"><code>module.exports = leftpad;
+
+function leftpad (str, len, ch) {
+  str = String(str);
+
+  var i = -1;
+
+  ch || (ch = ' ');
+  len = len - str.length;
+
+
+  while (++i &lt; len) {
+    str = ch + str;
+  }
+
+  return str;
+}</code></pre>
+
+<p>That is seventeen lines, eleven of them not blank, which is why the Register's headline said 11 and Ars Technica's said 17. Give it <code>7</code>, <code>3</code> and <code>'0'</code> and you get <code>"007"</code>.</p>
+
+<p>Azer Koçulu, a developer then living in Oakland, made the first commit on March 14, 2014 and published three small revisions that August. He wrote a great many modules like it. The Verge <a href="https://www.theverge.com/2016/3/24/11300840/how-an-irate-developer-briefly-broke-javascript">counted 273 packages</a> under his name, among them <code>rnd</code>, <code>strip</code> and <code>random-color</code>. The repository's history up to the day of the incident is ten commits long. Only one of them is by somebody else: on May 20, 2015, Steve Mao sent a fix titled "make the third argument work", which Koçulu merged and published as 0.0.4.</p>
+
+<p>Mao's fix matters to this story in a small way. In 0.0.3, the line <code>ch || (ch = ' ')</code> treats a numeric zero as no argument at all, so <code>leftpad(17, 5, 0)</code> pads with spaces. Version 0.0.4 replaced it with <code>if (!ch &amp;&amp; ch !== 0) ch = ' ';</code>. I ran both tarballs to check:</p>
+
+<pre tabindex="0"><code>leftpad(17, 5, 0)
+// 0.0.3 =&gt; "   17"
+// 0.0.4 =&gt; "00017"</code></pre>
+
+<p>The code that <a href="https://www.theregister.com/2016/03/23/npm_left_pad_chaos/">the Register</a> printed that night, and that most retellings have printed since, is the 0.0.4 version. The builds that failed were asking for 0.0.3.</p>
+
+<p>They were asking for it because of a package called line-numbers, by Simon Lydell, first published in December 2014. Its <code>package.json</code> named its one dependency exactly: <code>"left-pad": "0.0.3"</code>, with no caret and no tilde. That was the newest version at the time. Babel's error-printing module, babel-code-frame, depended on line-numbers, and Babel was by then inside most front-end build chains. The Verge noted it was built into React Native as well.</p>
+
+<p>So a module with, as one critic counted that week, eleven stars on GitHub was being fetched about 100,000 times every weekday and about a third as often at weekends, which is the signature of build servers and not of people. The Register quoted npm's figure of 2,486,696 downloads in the previous month. I added up npm's daily counts for February 21 to March 21 and got the same number to the digit.</p>
+
+<h2>Kik asks for the name kik</h2>
+
+<p>The dispute began with a different package. Koçulu also owned the name <code>kik</code>, and his versions in the registry still carry his description: "Kickstart your new projects with one command". He had first published it on October 31, 2015.</p>
+
+<p>On March 11, 2016, he got an email from Bob Stratton, a patent agent working for Kik Interactive, the Canadian company behind the Kik messaging app. I could not open the full correspondence, which Kik's Mike Roberts later published on Medium, so I'm relying on the long quotations in <a href="https://arstechnica.com/information-technology/2016/03/rage-quit-coder-unpublished-17-lines-of-javascript-and-broke-the-internet/">Sean Gallagher's report for Ars Technica</a>. Stratton said Kik wanted the name for a package it was about to release, and asked Koçulu to rename his. Koçulu declined. Stratton's second message is the one everybody remembers. It opened by saying Kik didn't mean to be unpleasant about this, in a shorter word than "unpleasant", and went on to say that if the project were released, "our trademark lawyers are going to be banging on your door and taking down your accounts and stuff like that". It ended by asking whether the two of them could compromise without involving lawyers. Koçulu answered in the same vocabulary, told Stratton not to email again and, after one more plea, named a price of $30,000.</p>
+
+<p>Stratton then took the matter to npm's support desk, which is the route npm's dispute policy provides. Isaac Schlueter, who created npm and ran the company, made the call and gave the name to Kik. Schlueter's reasoning, as told to Ars, was that someone who types <code>npm install kik</code> "would expect to get something related to Kik." Wikipedia's account dates that decision to March 18.</p>
+
+<p>Koçulu's reply to Schlueter is the hinge of the whole story. He wrote that he wanted everything gone:</p>
+
+<blockquote>
+<p>I want all my modules to be deleted including my account, along with this package. I don't wanna be a part of NPM anymore. If you don't do it, let me know how do it quickly.</p>
+</blockquote>
+
+<p>And npm let him know. Koçulu told Ars that the second email he got from npm "was the founder Isaac giving me a one-liner command that deletes all my stuff". Eight years later, in <a href="https://azerkoculu.com/posts/left-pad">an essay on his own site</a>, he wrote that npm had answered his request with a script that removed all his packages at once, without naming who sent it, and added that he had set no deadline and waited for a reply. The legend has a developer slamming a door. If these accounts and that date are right, he asked how to leave some days before he left, and the command he ran on Tuesday the 22nd came from npm.</p>
+
+<p>To be fair to npm, <a href="https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm">its own post-mortem</a> says the transfer would have broken nothing. Under the dispute policy, Koçulu's existing <code>kik</code> versions would have stayed installable and Kik would have published under a new major version. Nobody at npm, and by his account not Koçulu either, seems to have asked what else was on the list of 273.</p>
+
+<h2>The afternoon left-pad was gone</h2>
+
+<p>The registry stamped it all. All times here are Pacific, converted from the registry's UTC.</p>
+
+<p>At 2:27 PM and 15 seconds, left-pad was unpublished by the user <code>azer</code>. That timestamp survives because a commenter pasted the registry's record into the GitHub issue. Koçulu <a href="https://azerkoculu.com/posts/left-pad">wrote later</a> that he ran the script and left his desk for a few minutes, and that within ten a friend told him he was on Twitter "for some reason". npm says that shortly after 2:30 it began seeing hundreds of failed installs a minute.</p>
+
+<p>At 2:42 PM, fifteen minutes after the deletion, a left-pad 1.0.0 appeared. Cameron Westland had taken the source from GitHub and published it under the vacant name, which the rules of the day allowed anyone to do. The registry's record of that release has since been rewritten under npm's own account, so the attribution rests on Westland's note in the issue thread, which begins: "Yeah I published a 1.0.0 to try to resolve the dependency." It didn't resolve it. line-numbers wanted 0.0.3 and nothing else, and npm's firmest rule was that a version number, once used, could never be published again. A registry record pasted into the same thread shows the package unpublished again at 2:47, this time by Westland's account, and the registry has a 0.0.9 under that account at 2:51. I read those as a second attempt at a version number that would satisfy the pin. It was still not 0.0.3.</p>
+
+<p>The next repair came from Babel. At 3:12 PM, Sebastian McKenzie published babel-code-frame 6.7.3. Its dependency list is the same as the previous version's with one line removed: line-numbers is gone. Babel had cut itself free of the whole chain 45 minutes after the deletion.</p>
+
+<p>By 3:40, Koçulu's explanation, a Medium post called "I've Just Liberated My Modules", had been submitted to Hacker News. Its most quoted sentence is this one:</p>
+
+<blockquote>
+<p>This situation made me realize that NPM is someone's private land where corporate is more powerful than the people, and I do open source because, Power To The People.</p>
+</blockquote>
+
+<p>At 4:05 PM npm announced that it would do the thing its own rule forbade. The Register quotes Laurie Voss, npm's CTO, calling the step "un-un-publishing" and saying the company had chosen the needs of the many over the wishes of one author. npm's post-mortem says the original 0.0.3 was re-published from a backup and that the work was finished by 4:55. Westland <a href="https://news.ycombinator.com/item?id=11340510">explained on Hacker News</a> that evening that the request to restore it had been theirs, as the name's new maintainer, and that npm had checked the restored code was exactly the original, so that nothing could be slipped in.</p>
+
+<p>You can still see the seam. <a href="https://registry.npmjs.org/left-pad">The registry's record</a> for left-pad 0.0.3 lists Westland as its publisher and gives it the same timestamp as 0.0.9, to the millisecond: 2:51 PM on March 22, 2016, two hours before npm says the restore was done. The code file inside the tarball is dated August 15, 2014. The record says the licence is WTFPL, and the <code>package.json</code> inside says BSD.</p>
+
+<p>While that was going on, the other names were being picked up by strangers. At 4:52 PM somebody published a <code>kik</code> 1.0.1 whose description is "Damn you Kik". A Hacker News commenter pointed out that names like <code>map</code>, <code>alert</code> and <code>iframe</code> were now free for anyone to fill with any code they liked, to be run on the next <code>npm install</code>. npm's post-mortem says the other 272 packages were adopted by community members, some as forks and some as empty placeholders put there to keep worse people out.</p>
+
+<p>The next day Kik's Mike Roberts published the emails. The Register quoted his apology for "creating any impression that this was anything more than a polite request", and the Verge noted that Kik's own build had broken on Tuesday along with everyone else's. In the GitHub issue, in a comment GitHub dates March 23, Steve Mao asked for the repository, "since I'm the only other author of the module". Koçulu replied that Mao was the new owner.</p>
+
+<h2>Why one pinned package stopped Babel</h2>
+
+<p>The argument that week was about size. David Haney's essay <a href="https://www.davidhaney.io/npm-left-pad-have-we-forgotten-how-to-program/">"NPM &amp; left-pad: Have We Forgotten How To Program?"</a> went up the day after and collected 1,725 points on Hacker News. Haney had found a one-line <code>isArray</code> package with 18 million downloads in a month, and his verdict on anyone who couldn't write such a function in five minutes was that "you don't actually know how to code."</p>
+
+<p>The other side had been put the summer before, when Sindre Sorhus was <a href="https://github.com/sindresorhus/ama/issues/10">asked to justify one-line modules</a> and answered that line count has nothing to do with whether code deserves to be a module. I see four forces behind the outage, and I'd argue size is the weakest of them.</p>
+
+<p>The language had no way to pad a string. That is why the function existed at all, in npm and in every codebase that hadn't heard of npm. The <a href="https://github.com/tc39/proposal-string-pad-start-end">TC39 proposal</a> to add one notes that "nearly every app in FirefoxOS had implemented a left pad function". That proposal was already well along. Its README records that the names <code>padStart</code> and <code>padEnd</code> were settled at the committee's November 2015 meeting, four months before anything went missing.</p>
+
+<p>The dependency was pinned and fetched fresh. An exact version in someone else's <code>package.json</code>, several levels below yours, is invisible until it fails, and the weekday download curve shows how many builds were pulling every package from the registry every time. If left-pad had been five thousand lines long it would have failed in the same way.</p>
+
+<p>Deleting was a right. npm let any author remove any version at any time, for what the post-mortem calls "historical reasons", and a name emptied that way went straight back into the pool. The rule against reusing version numbers, which is a good rule, then guaranteed that nobody outside npm could repair the damage.</p>
+
+<p>And there was one namespace, run by one company, which had to decide who deserved a three-letter word. npm insisted the decision was editorial, not legal. Koçulu's point was that it could be made at all.</p>
+
+<h2>Where left-pad, kik and unpublish went</h2>
+
+<p>The right to unpublish went to npm's support desk. A week after the outage, on March 29, npm <a href="https://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy">announced</a> that a version more than 24 hours old could no longer be removed by its author; you had to write to support, who would refuse if anything depended on it. A fully removed package would be replaced by a placeholder so that the name could not be squatted. <a href="https://docs.npmjs.com/policies/unpublish">The policy as it reads now</a> is looser on time and stricter on everything else: nothing in the registry may depend on the package in any case, and then you have 72 hours from publishing, or longer only if it had under 300 downloads in the last week and has a single owner.</p>
+
+<p>Padding was approved for the language two months later. The committee's <a href="https://github.com/tc39/proposals/blob/main/finished-proposals.md">list of finished proposals</a> has string padding, championed by Jordan Harband, reaching stage 4 at the May 2016 meeting and it shipped in ES2017 the following year. The notes of that meeting don't mention left-pad at all. So <code>'7'.padStart(3, '0')</code> now does the job with nothing installed.</p>
+
+<p>left-pad outlived its replacement. Mao took over the package and released 1.1.0 on May 1, 2016. The last version, 1.3.0 from April 2018, pads by doubling the fill string and so does in a handful of steps what the original did one character at a time. Every version in the registry now carries the same deprecation notice, "use String.prototype.padStart()". Its traffic has a strange shape. The day after the outage, downloads fell from about 100,000 to 36,971, which I put down to Babel's fix, and through April and May weekdays ran mostly between 20,000 and 35,000. When I checked npm's counter in mid-November 2026, the deprecated package had been downloaded 2,295,504 times in the previous seven days, which is nearly what it managed in the whole month before it vanished.</p>
+
+<p>The name <code>kik</code> was never used. This is the finding I did not expect. On March 23, 2016, the day after the outage, the registry shows npm publishing a "security" placeholder under the name, with a description saying it "is not currently in use" and that npm will "probably give it to you if you want it." Thirteen days later, on the evening of April 4, Pacific time, Kik published its bot library for Node. It went out as <a href="https://registry.npmjs.org/@kikinteractive%2Fkik">@kikinteractive/kik</a>, under the company's own scope, where no dispute had ever been needed. <a href="https://registry.npmjs.org/kik">The registry's record for plain kik</a> lists Kik Interactive as the maintainer, Koçulu's old versions, the stranger's protest release, an empty release from an npm staff account and two placeholders. It lists nothing published by Kik.</p>
+
+<p>Koçulu left, first npm and then more. In the days after the outage he gave his repositories to volunteers. In the 2024 essay he says that a few months later he quit his job, left the United States for good and spent a year travelling, and that the part of him that cared about open source "was gone".</p>
+
+<h2>The takeaway</h2>
+
+<p>left-pad is remembered as a story about small modules, and I think that is the least of what happened. A company wanted a name. A registry that called itself a community resource turned out to have an owner who could reassign names, and an author who had taken "it's your code" at face value asked for the delete command and got it. The builds broke because of one exact version pin and a rule that made the gap impossible to fill. Then npm set aside that rule the same afternoon and wrote a new one within the week. Under the new rule the code you publish stays published, and whether it can come down is for npm to decide. Koçulu had called the registry someone's private land. npm's answer, in effect, was that it is, and that a build system can't work any other way.</p>
+
+<p>The error message at the top of this essay offered two remedies: bug the author, or use the name yourself. Both were tried within fifteen minutes on March 22, and since the following week the second has required a letter to npm support. The name left-pad is still there, deprecated and fetched a couple of million times a week. The name <code>kik</code> is there too, and what it installs is a placeholder.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://github.com/left-pad/left-pad/issues/4">"npmjs.org tells me that left-pad is not available (404 page)"</a>, issue 4 on the left-pad repository, opened by silkentrance, March 22, 2016</li>
+    <li><a href="https://registry.npmjs.org/left-pad">npm registry record for left-pad</a> (publish times, publishers, tarballs and the deprecation notice)</li>
+    <li><a href="https://registry.npmjs.org/kik">npm registry record for kik</a> and <a href="https://registry.npmjs.org/@kikinteractive%2Fkik">for @kikinteractive/kik</a></li>
+    <li><a href="https://registry.npmjs.org/line-numbers">npm registry records for line-numbers</a> and <a href="https://registry.npmjs.org/babel-code-frame">babel-code-frame</a></li>
+    <li><a href="https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm">kik, left-pad, and npm</a>, Isaac Z. Schlueter, npm blog, March 23, 2016</li>
+    <li><a href="https://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy">changes to npm's unpublish policy</a>, npm blog, March 29, 2016</li>
+    <li><a href="https://docs.npmjs.com/policies/unpublish">npm Unpublish Policy</a>, npm documentation, current version</li>
+    <li><a href="https://azerkoculu.com/posts/left-pad">left-pad</a>, Azer Koçulu, June 8, 2024</li>
+    <li>"I've Just Liberated My Modules", Azer Koçulu, Medium, March 22, 2016 (not linked: I could not open it)</li>
+    <li>"A discussion about the breaking of the Internet", Mike Roberts, Medium, March 23, 2016 (not linked: I could not open it)</li>
+    <li><a href="https://arstechnica.com/information-technology/2016/03/rage-quit-coder-unpublished-17-lines-of-javascript-and-broke-the-internet/">Rage-quit: Coder unpublished 17 lines of JavaScript and "broke the Internet"</a>, Sean Gallagher, Ars Technica, March 25, 2016</li>
+    <li><a href="https://www.theregister.com/2016/03/23/npm_left_pad_chaos/">How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript</a>, Chris Williams, The Register, March 23, 2016</li>
+    <li><a href="https://www.theverge.com/2016/3/24/11300840/how-an-irate-developer-briefly-broke-javascript">How an irate developer briefly broke JavaScript</a>, Paul Miller, The Verge, March 24, 2016</li>
+    <li><a href="https://news.ycombinator.com/item?id=11340510">Hacker News discussion of "I've Just Liberated My Modules"</a>, March 22, 2016, with comments by Cameron Westland and Laurie Voss</li>
+    <li><a href="https://www.davidhaney.io/npm-left-pad-have-we-forgotten-how-to-program/">NPM &amp; left-pad: Have We Forgotten How To Program?</a>, David Haney, March 23, 2016</li>
+    <li><a href="https://github.com/sindresorhus/ama/issues/10">"One-line node modules"</a>, question to Sindre Sorhus, July 2015</li>
+    <li><a href="https://github.com/tc39/proposal-string-pad-start-end">String.prototype.padStart / padEnd proposal</a>, Kevin Grandon and Jordan Harband, TC39</li>
+    <li><a href="https://github.com/tc39/proposals/blob/main/finished-proposals.md">Finished proposals</a>, TC39</li>
+    <li><a href="https://github.com/tc39/notes/blob/HEAD/meetings/2016-05/may-25.md">TC39 meeting notes, May 25, 2016</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Npm_left-pad_incident">npm left-pad incident</a>, Wikipedia</li>
+  </ul>
+</section>
