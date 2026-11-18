@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- left-pad (2016): one developer in a trademark dispute unpublishes his packages, eleven lines go missing, builds break across the web, and the registry changes its rules
 - The IE8 "version targeting" row (2008): Microsoft proposes that pages opt in to modern rendering with `X-UA-Compatible`, developers revolt, and Microsoft reverses within weeks
 - FormMail and Matt's Script Archive: the Perl script a teenager wrote that ran every contact form, the day it became a spam relay, and its author telling people to stop using it
 - The pop-up ad and the pop-up blocker: who wrote the first pop-up code and why, the arms race that followed, and the author's later public apology
