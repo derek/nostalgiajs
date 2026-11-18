@@ -32,6 +32,7 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 
 ### Technology
 
+- ViolaWWW and the Eolas patent (1993 to 2013): Pei-Yuan Wei gives away a browser that runs embedded programs, tells Michael Doyle on www-talk in 1995 that the patent on that idea should not stick, and waits through a $520 million verdict and IE's "click to activate" for a 2012 Texas jury to agree; the 2001 W3C patent policy fight is the "why". Research notes in `research/2026-11-18/`; Wei's own account of the case has not been opened yet
 - Image rollovers and `MM_swapImage`: Dreamweaver writes your JavaScript
 - The `window.status` scroller and other things we thought were cool
 - Frames, framesets and frame-busting
