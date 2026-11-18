@@ -101,6 +101,7 @@ The order can bend to fit the story. If the trouble is the best way in, start th
 | `scripts/ship.mjs`, `scripts/check.mjs` | The publish steps as one command, and the pre-publish checks. See "Commands". |
 | `work/<slug>/` | Working files for an essay in progress: scout report, research file, entry, review. Ignored by git and never published. |
 | `TOPICS.md` | Essay ideas, with Derek's "Up next" queue at the top. |
+| `research/<date>/` | Working research notes and reports, as Markdown. Not essays, and not checked like essays. `research/index.html` is a hand-written page that lists them; add a section to it when you add a dated folder. It is not linked from the site and not written by the build. |
 | `essays/<slug>/index.html`, `index.html`, `about/index.html`, `feed.xml`, `icons/*.svg` | Generated. Do not edit. |
 
 ### An entry in `essays.json`
