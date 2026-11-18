@@ -191,6 +191,17 @@ One essay per session, started fresh, so nothing from an earlier essay is carrie
 
 The session that runs this is the coordinator. It should be a Sonnet session. It starts each stage below as a subagent with the model named, one at a time, and waits for it. Stages hand off through files in `work/<slug>/`; the coordinator passes file paths and reads only the short verdict each stage returns, never the research or the draft. Each subagent reads this file first.
 
+Start each stage with this model and effort level, set explicitly:
+
+| Stage | Model | Effort | Why |
+| --- | --- | --- | --- |
+| Scout | Sonnet | low | A quick go or park verdict. |
+| Research | Sonnet | medium | Mostly fetching pages and copying exact words. |
+| Write and fix | Fable | high | This is where the essay's quality is decided. |
+| Check | Sonnet | high | Working dates and numbers out again is where a careless pass misses things. |
+
+If a named model or effort level cannot be set, use what is available, do not skip the stage, and say so in the report.
+
 | File in `work/<slug>/` | Written by | What it holds |
 | --- | --- | --- |
 | `scout.md` | Scout | The candidate story and a go or park verdict |
