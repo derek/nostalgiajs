@@ -7,6 +7,8 @@
     "build": "node scripts/build.mjs",
     "archive": "node scripts/archive.mjs",
     "og": "node scripts/og.mjs",
+    "check": "node scripts/check.mjs",
+    "ship": "node scripts/ship.mjs",
     "serve": "python3 -m http.server 8000"
   }
 }
