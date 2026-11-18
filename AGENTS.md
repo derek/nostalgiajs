@@ -99,6 +99,7 @@ The order can bend to fit the story. If the trouble is the best way in, start th
 | `buttons/*.png` | The three 88x31 footer buttons, drawn by `scripts/buttons.py` (needs Python with Pillow; run only to change them). |
 | `scripts/build.mjs` | Generates every page, the landing page and the feed. |
 | `TOPICS.md` | Essay ideas, with Derek's "Up next" queue at the top. |
+| `research/<date>/` | Working research notes and reports, as Markdown. Not essays, and not checked like essays. `research/index.html` is a hand-written page that lists them; add a section to it when you add a dated folder. It is not linked from the site and not written by the build. |
 | `essays/<slug>/index.html`, `index.html`, `about/index.html`, `feed.xml`, `icons/*.svg` | Generated. Do not edit. |
 
 ### An entry in `essays.json`
