@@ -6,7 +6,167 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Thu, 19 Nov 2026 00:49:15 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 19 Nov 2026 01:45:56 GMT</lastBuildDate>
+  <item>
+    <title>Cookies: the standard said off, the browsers said on</title>
+    <link>https://derek.io/nostalgiajs/essays/cookies/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/cookies/</guid>
+    <pubDate>Thu, 19 Nov 2026 01:45:56 GMT</pubDate>
+    <description>In 1997 the cookie's own standard said third-party cookies should be off by default. Lou Montulli, who invented the cookie at Netscape and co-wrote that standard, was the one who left them on, and his reasoning was still winning in 2025.</description>
+    <content:encoded><![CDATA[<p class="lede">In 1997 the web cookie got a standard that said a cookie from a site you never chose to visit should be off until you switched it on, and one of its two authors is the engineer who, by his own account, decided to leave it on.</p>
+
+<pre tabindex="0"><code>Cookie: CUSTOMER=WILE_E_COYOTE</code></pre>
+
+<p>That is a browser introducing itself to a shop, in the worked example from Netscape's own cookie specification, a page headed <a href="https://curl.se/rfc/cookie_spec.html">"Preliminary Specification - Use with caution"</a>. Over the next few requests the customer puts <code>ROCKET_LAUNCHER_0001</code> in the basket and chooses <code>SHIPPING=FEDEX</code>. The page's overview explains the name of the thing in one clause: "The state object is called a cookie, for no compelling reason."</p>
+
+<p>I knew the short version of this history: the cookie was a shopping-cart hack that advertisers turned into a tracking device while nobody was looking. The reading says people were looking. Cookies were first argued over in public as the more private of the options on offer. A standards group found the advertising hole in the winter of 1995 to 1996, when its members had barely heard of an advertising network, and wrote a rule to close it. The rule was published and the browsers ignored it, and the person who made that call at Netscape, by his own account, was Lou Montulli, who had invented the cookie and whose name is on the rule.</p>
+
+<h2>A server with no memory</h2>
+
+<p>HTTP forgets you between requests. A server in 1994 answered a request for a page and hung up, and the next request from the same person was a stranger's. That is fine for documents and useless for a shop.</p>
+
+<p>Montulli told the origin story himself in 2013, in <a href="https://montulli.blogspot.com/2013/05/the-reasoning-behind-web-cookies.html">"The reasoning behind Web Cookies"</a>. One fix that kept coming up in the web's design groups was to give every browser a unique identifier. Montulli was against it, "because the unique identifier could be used to track a user at every website." Then, around July 1994 by his account, he went to a meeting about a shopping server another group at Netscape was building. They needed a cart and had no reasonable way to make one. Within a week he had the idea: let a single site hand the browser a token that the browser gives back only to that site. He widened the token into a general payload, and took the name from "magic cookie", a term from an operating systems course. It shipped in the browser Netscape released that autumn.</p>
+
+<p>It shipped quietly. David Kristol, who comes into this story as a rival and leaves it as Montulli's co-author, wrote the long insider account, <a href="https://arxiv.org/pdf/cs/0105018">"HTTP Cookies: Standards, Privacy, and Politics"</a>, in 2001. Kristol says the first public Navigator supported cookies "although that fact was not well known at the time", and gives a slightly different origin, a request from one of Netscape's customers. Both could be true, and I can't settle it.</p>
+
+<p>Sites that could not wait for a mechanism made their own, and it was worse. Here is what Time Warner's Pathfinder did to its visitors in July 1995, as <a href="https://lists.w3.org/Archives/Public/www-talk/1995Jul/0200.html">recorded on the www-talk mailing list</a> by Robert Thau, writing from an ai.mit.edu address:</p>
+
+<pre tabindex="0"><code>http://www.pathfinder.com/@@VFNihgAAAAAAQDIL/pathfinder/Quick_Navigator.html</code></pre>
+
+<p>The part after <code>@@</code> is you. Brian Behlendorf, who had built the access system at HotWired, had opened <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0130.html">a thread called "Session tracking"</a> on that list on the evening of 17 April 1995 to say that schemes like this were "fatally flawed". Bookmark such a URL, or mail it to your friends, and they all arrive wearing your session. And because every visitor gets a different address for the same page, the caches fill up with copies.</p>
+
+<h2>Three proposals by lunchtime</h2>
+
+<p>Behlendorf's own proposal was the gentlest one of the year. The browser, not the server, would make up a <code>Session-ID</code> of 32 random characters and change it at every restart, or whenever the user liked, on the principle that any solution had to protect the user's anonymity. The next day brought two answers. Kristol, writing from an AT&amp;T address, <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0134.html">proposed</a> a single opaque value that the server would issue and the browser would hand back. Less than an hour and a half after that, <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0136.html">Montulli replied</a>: "We have been doing some work along these lines."</p>
+
+<pre tabindex="0"><code>Set-Cookie: NAME=OPAQUE_STRING \
+            [; expires= ] \
+            [; path=] \
+            [; domain=] \
+            [; secure]
+
+Cookie: NAME=OPAQUE_STRING *[; NAME=OPAQUE_STRING]</code></pre>
+
+<p>"Some work" was a modest way to describe a feature that had been in a shipping browser for months. And the two optional parts that would cause all the later trouble are already there. <code>expires</code> lets a cookie outlive the session, so the server can know you next month. <code>domain</code> lets one machine set a cookie that its sibling machines receive. Larry Masinter, at Xerox PARC, pressed on that within two days: what stops a malicious site A telling the browser to send its cookies to site B? <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0177.html">Montulli's answer</a> was the rule already in the proposal, that only a host inside a domain may set a cookie for it.</p>
+
+<h2>Worse than a cardboard box</h2>
+
+<p>Asked what all this was for, <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0155.html">Montulli named the shopping basket</a>, and the back button as the reason it could not live anywhere else. State kept in a URL or a hidden form field goes wrong the moment the shopper navigates out of order. A cookie is tied to neither the URL nor the document.</p>
+
+<p>Paul Burchard was not charmed. The objection, preserved in <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0191.html">Montulli's reply of 21 April</a>, was about who gets to see the basket:</p>
+
+<blockquote>
+<p>As I feared. A cookie hidden in the HTTP headers is not the way to implement this! Just think about it from the customer's point of view: With a real shopping basket, I can see at all times what I've collected so far.</p>
+</blockquote>
+
+<p>Burchard added: "Your solution compares poorly with a cardboard box :-)". Then Marc Andreessen <a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0195.html">turned up in the thread</a> to make the commercial case: the server can draw the basket page whenever the customer asks, so the web gets to use HTML and forms as they are and no browser needs new machinery. That approach had worked before, when Andreessen <a href="https://derek.io/nostalgiajs/essays/img-tag/">shipped the image tag</a> past a list full of more general designs.</p>
+
+<p>The argument came back in July, and this time <a href="https://lists.w3.org/Archives/Public/www-talk/1995Jul/0193.html">Burchard said of cookies</a> something much closer to what everyone would be saying a year later: "'Shopping basket' information may even be invisibly transported to a completely different server without any visual hint to the naive user." Burchard's alternative was a cookie as a real linked document that the browser could show you.</p>
+
+<p>What I did not expect is who was on the other side of the privacy argument. Thau's Pathfinder message comes down, tentatively, on the side of cookies, and on privacy grounds. With a session ID in a URL, whatever the server keeps about you is invisible. A cookie at least sits on your own machine, where the browser could show it to you, and Thau wished aloud for a menu entry that did. Thau closed with a prediction worth holding on to: refusing to bless a mechanism would not stop tracking, it would "force people to create forms of session-id which you can't regulate".</p>
+
+<h2>The rival who wrote the standard</h2>
+
+<p>By December 1995 there were three proposals in circulation (Behlendorf's, Kristol's and Montulli's) and an HTTP working group at the IETF with more urgent things to do. Its co-chair, Masinter, asked the interested parties to go away and come back with one. Kristol agreed to lead the group, which grew from three people to eight, Montulli among them.</p>
+
+<p>Kristol is candid about what Kristol wanted: "frankly, I hoped my State-Info proposal would prevail." It did not survive the first weeks. Netscape's mechanism was already deployed, in browsers and in servers, and anything new would have to coexist with it, so the group gave up on simpler designs and took on the job of tightening up Montulli's specification, which Kristol found fuzzy.</p>
+
+<h2>The hole behind the inline image</h2>
+
+<p>On a conference call late that December, the group started talking about cookies that arrive with inline images. A page from one site can pull its pictures from another, and the second server can set and read cookies of its own. If the same second server supplies pictures to a thousand sites, it sees you on all of them. Kristol's phrase for it is that they "had stumbled onto" third-party cookies.</p>
+
+<p>The person who saw where it led was Koen Holtman, a Dutch participant whose comments had already pushed Kristol into adding privacy sections to the State-Info drafts. Holtman worked out that third-party cookies could be used to build profiles, and persuaded the group that Europeans, at least, would be very troubled by it: an EU directive of October 1995 already called for informed consent before personal data was collected. Here is the part that changed my picture. The group's motive, Kristol writes, "was not advertising networks (which at best we were only dimly aware of at that time)". DoubleClick was incorporated in January 1996 and, by Kristol's footnote, did not come up in the group's discussions until June. The rule was written against a theory.</p>
+
+<p>The February 1996 draft took Holtman's wording nearly verbatim, and it survived into <a href="https://www.rfc-editor.org/rfc/rfc2109.txt">RFC 2109</a>. A request the user did not choose and could not have checked first, such as an image the browser fetches on its own, is an "unverifiable transaction", and on one of those a browser must neither send nor accept cookies unless the other server falls inside a domain that the page the user asked for has already exchanged a cookie for. Then comes the sentence the fight was about:</p>
+
+<blockquote>
+<p>User agents may offer configurable options that allow the user agent, or any autonomous programs that the user agent executes, to ignore the above rule, so long as these override options default to "off".</p>
+</blockquote>
+
+<p>That same month, on 12 February 1996, the Financial Times ran the story that Kesan and Shah, in <a href="https://yjolt.org/sites/default/files/kesan-6-yjolt-277.pdf">a 2004 law-journal study</a>, credit with telling the public that cookies existed. I could not open it, and nothing I read says whether the newspaper and the committee knew about each other.</p>
+
+<p>Montulli was in the room for all of it, and on the cautious side. In June 1996, when someone argued for a new feature that would let cookies spread more widely, on the grounds that privacy could be subverted by other means anyway, <a href="https://lists.w3.org/Archives/Public/ietf-http-wg/1996AprJun/0838.html">he told the working group</a> he was with Holtman. Privacy might be subverted in other ways, but "I do not want to be a party to making it trivially easy." The IETF's steering group thought the draft too soft, if anything: it relied on a sophisticated user reading the page's HTML to see where requests would go, and the steering group would accept <a href="https://derek.io/nostalgiajs/essays/view-source/">View Source</a> as a privacy control only as the bare minimum. It approved the document on 2 December 1996. RFC 2109 came out in February 1997, by D. Kristol of Bell Laboratories and L. Montulli of Netscape Communications.</p>
+
+<h2>Ninety-nine percent of the population</h2>
+
+<p>The RFC was announced on 18 February 1997, and two things went wrong with it at once.</p>
+
+<p>The first was a bug. The new standard reused Netscape's header names and added attributes, on the assumption that old browsers would skip what they did not understand. The previous October, Holtman had tested that assumption. A server sent this:</p>
+
+<pre tabindex="0"><code>Set-cookie: xx="1=2\&amp;3-4";
+Comment="blah";
+Version=1; Max-Age=15552000; Path=/;
+Expires=Sun, 27 Apr 1997 01:16:23 GMT</code></pre>
+
+<p>Navigator 3 sent back <code>Cookie: xx="1=2\&amp;3-4"</code>. Internet Explorer 3 sent back <code>Cookie: Max-Age=15552000</code>, which is an attribute and not the cookie. The two major browsers could not be sent the same standard cookie. Kristol was circulating a corrected draft on 17 February, hoping to swap it for the one in the publication queue, when "events overtook our plan" and the flawed one was published the next day.</p>
+
+<p>The second was that the theory now had an industry living inside it. On 13 March, Dwight Merriman of DoubleClick told the working group that the default was the whole game: switching the feature off by default "is basically equivalent to not allowing them at all, because 99% of the population will see no reason to change the default". Others replied, in Kristol's summary, that the default would by no means disable advertising networks, only the business models that depended on third-party cookies. Sixty-nine messages later, inside a week, Masinter called a halt so that HTTP/1.1 could get some attention.</p>
+
+<p>Then the browsers answered, by doing nothing. Netscape's own <a href="https://www-archive.mozilla.org/docs/netlib/cookies">documentation for its networking library</a>, a page signed by Judson Valeski in 1998, says that version 4 and later let a user refuse what it calls "foreign cookies", and that none of Netscape's browsers complied with RFC 2109. The option existed. Kristol records which way it pointed: the vendors left third-party cookies enabled by default.</p>
+
+<p>Kristol's paper does not say who decided that. Montulli's 2013 post does:</p>
+
+<blockquote>
+<p>In the end the decision to disable 3rd party cookies or keep them on was left to me. I agonized about the decision for weeks and in the end I chose to keep them.</p>
+</blockquote>
+
+<h2>Why the default lost</h2>
+
+<p>The calendar did a lot of it. Kristol's reckoning is that the document was essentially complete seven months after the group began and then took seven more to be published. When they started, in December 1995, Navigator dominated, Internet Explorer barely existed and advertising networks scarcely did. Fourteen months later Internet Explorer was a serious competitor, e-commerce was blossoming and the networks were common, and a rule drafted against a theory arrived as what the networks felt, in Kristol's phrase, was "a dagger aimed at the heart of their business".</p>
+
+<p>Money did the rest, in Kristol's opinion, and I think it's a fair one. Both browser makers were giving the browser away and selling servers. The people buying servers wanted advertising, and the networks wanted targeting. Vendors were going to listen to "their paying customers, not the people who got programs for free."</p>
+
+<p>And Montulli had a reason that was not about money. A company able to track people across a large part of the web would have to be large and visible, and cookies can be seen, so the public would have a way to push back. Take third-party cookies away and the advertisers would switch to something with less visibility and control: "We would be trading out one problem for another." It is Thau's 1995 prediction, made by the person who says the switch was his.</p>
+
+<p>My own view is that the first half of that bet failed and the second half has never been disproved. People could look at their cookies, and in time could refuse the foreign ones, and almost nobody did: a 2001 study Kristol cites found users rejecting fewer than 1% of cookies across more than a billion page views. Merriman's arithmetic worked in both directions: whichever way the default pointed, that is where 99% of the population would stay.</p>
+
+<h2>What the cookie default cost</h2>
+
+<p>The standard was the thing that got withdrawn. Kristol and Montulli fixed the compatibility bug with new headers, <code>Set-Cookie2</code> and <code>Cookie2</code>, in <a href="https://www.rfc-editor.org/rfc/rfc2965.txt">RFC 2965</a>, which sat with the steering group for two years and came out in October 2000. In April 2011 <a href="https://www.rfc-editor.org/rfc/rfc6265.txt">RFC 6265</a>, by A. Barth, said so officially: of the Netscape page and the two RFCs, "none of these documents describe how the Cookie and Set-Cookie headers are actually used on the Internet." It asked for both RFCs to be marked Historic, deprecated the <code>2</code> headers, and wrote down what browsers did. On third-party cookies it declined to endorse any policy at all.</p>
+
+<p>Something close to the default the RFC asked for reached a mainstream browser twenty-three years later. On 24 March 2020 <a href="https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/">WebKit announced</a> that Safari, after three years of tightening restrictions, now blocked cross-site cookies by default "across the board". By WebKit's own account only the Tor Browser had done it fully before.</p>
+
+<p>Chrome set out to follow, and stopped. Two months before Safari's move, <a href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html">its engineers said</a> they would phase third-party cookies out within two years, though not by simply blocking them, because "blunt approaches to cookies encourage the use of opaque techniques such as fingerprinting". That is the argument Montulli says he made to himself in the 1990s. In July 2024 <a href="https://privacysandbox.com/news/privacy-sandbox-update/">Google proposed</a> asking users to choose instead. In April 2025 <a href="https://privacysandbox.com/news/privacy-sandbox-next-steps/">it dropped the prompt too</a> and kept things as they were, and that October <a href="https://privacysandbox.com/news/update-on-plans-for-privacy-sandbox-technologies/">it retired</a> most of the replacement technologies it had built for the purpose.</p>
+
+<p>The standard that replaced RFC 2109 concedes the other side's point. Blocking third-party cookies often fails, RFC 6265 says, because two cooperating servers can track a user with no cookies at all, "by injecting identifying information into dynamic URLs." I'd call that Pathfinder's trick, sixteen years on.</p>
+
+<h2>The takeaway</h2>
+
+<p>The cookie beat its rivals because it was already in the browser when the argument started, and the rule against third-party cookies lost for the same reason: third-party cookies were already in the browser too. In between sat fourteen months in which a committee that found the problem before it had properly heard of the advertisers was overtaken by them. I came away thinking the standard was right and that it hardly matters. On the web the default is set by whoever ships, at the moment they ship, and a document written afterwards can only describe it or be ignored.</p>
+
+<p>Nobody in this story was careless. Montulli refused a browser-wide identifier in 1994 because it could track people, sided with Holtman in 1996, signed the rule in 1997, and somewhere in those years weighed it against an advertising-funded web and something worse than cookies, and kept the hole open on purpose. You can think that was the wrong call and still see that it was a call. <code>Cookie: CUSTOMER=WILE_E_COYOTE</code> still fits the grammar in RFC 6265, and the shop it is sent to is still not the difficulty. Mr Coyote's trouble was always the thing arriving from somewhere he wasn't looking.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://curl.se/rfc/cookie_spec.html">Persistent Client State: HTTP Cookies, Preliminary Specification</a>, Netscape, undated, in the copy kept by the curl project <a class="archived" href="https://web.archive.org/web/20261118022532/https://curl.se/rfc/cookie_spec.html">(archived)</a></li>
+    <li><a href="https://montulli.blogspot.com/2013/05/the-reasoning-behind-web-cookies.html">The reasoning behind Web Cookies</a>, Lou Montulli, 2013 <a class="archived" href="https://web.archive.org/web/20261115235945/https://montulli.blogspot.com/2013/05/the-reasoning-behind-web-cookies.html">(archived)</a></li>
+    <li><a href="https://montulli.blogspot.com/2013/05/why-blocking-3rd-party-cookies-could-be.html">Why blocking 3rd party cookies could be a bad thing</a>, Lou Montulli, 2013 <a class="archived" href="https://web.archive.org/web/20261113192532/https://montulli.blogspot.com/2013/05/why-blocking-3rd-party-cookies-could-be.html">(archived)</a></li>
+    <li><a href="https://arxiv.org/pdf/cs/0105018">HTTP Cookies: Standards, Privacy, and Politics</a>, David M. Kristol, 2001 <a class="archived" href="https://web.archive.org/web/20261110034033/https://arxiv.org/pdf/cs/0105018">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0130.html">Session tracking</a>, Brian Behlendorf, www-talk, 17 April 1995</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0134.html">Re: Session tracking</a>, Dave Kristol, www-talk, 18 April 1995</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0136.html">Re: Session tracking</a>, Lou Montulli, www-talk, 18 April 1995 (the cookie proposal)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0155.html">Re: Session tracking</a>, Lou Montulli, www-talk, 19 April 1995 (the shopping basket)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0177.html">Re: Session tracking</a>, Lou Montulli answering Larry Masinter, www-talk, 20 April 1995</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0191.html">Re: Shopping baskets (was: Session tracking)</a>, Lou Montulli answering Paul Burchard, www-talk, 21 April 1995</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Apr/0195.html">Re: Shopping baskets (was: Session tracking)</a>, Marc Andreessen, www-talk, 22 April 1995</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Jul/0193.html">Session-Id vs. Cookies</a>, Paul Burchard, www-talk, 26 July 1995 <a class="archived" href="https://web.archive.org/web/20261114102318/https://lists.w3.org/Archives/Public/www-talk/1995Jul/0193.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1995Jul/0200.html">session-ids here now, with *all* the problems.</a>, Robert S. Thau, www-talk, 26 July 1995</li>
+    <li><a href="https://lists.w3.org/Archives/Public/ietf-http-wg/1996AprJun/0838.html">Re: "1:n domain cookies" issue status</a>, Lou Montulli, ietf-http-wg, 17 June 1996 <a class="archived" href="https://web.archive.org/web/20250917165316/https://lists.w3.org/Archives/Public/ietf-http-wg/1996AprJun/0838.html">(archived)</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc2109.txt">RFC 2109: HTTP State Management Mechanism</a>, D. Kristol and L. Montulli, 1997 <a class="archived" href="https://web.archive.org/web/20261117133907/https://www.rfc-editor.org/rfc/rfc2109.txt">(archived)</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc2965.txt">RFC 2965: HTTP State Management Mechanism</a>, D. Kristol and L. Montulli, 2000 <a class="archived" href="https://web.archive.org/web/20261106011938/https://www.rfc-editor.org/rfc/rfc2965.txt">(archived)</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc6265.txt">RFC 6265: HTTP State Management Mechanism</a>, A. Barth, 2011 <a class="archived" href="https://web.archive.org/web/20261105061724/https://www.rfc-editor.org/rfc/rfc6265.txt">(archived)</a></li>
+    <li><a href="https://yjolt.org/sites/default/files/kesan-6-yjolt-277.pdf">Deconstructing Code</a>, Jay P. Kesan and Rajiv C. Shah, Yale Journal of Law and Technology, 2004 <a class="archived" href="https://web.archive.org/web/20250623004954/https://yjolt.org/sites/default/files/kesan-6-yjolt-277.pdf">(archived)</a></li>
+    <li><a href="https://www-archive.mozilla.org/docs/netlib/cookies">netlib Cookies</a>, Judson Valeski, Mozilla, 1998 <a class="archived" href="https://web.archive.org/web/20240715153937/https://www-archive.mozilla.org/docs/netlib/cookies">(archived)</a></li>
+    <li><a href="https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/">Full Third-Party Cookie Blocking and More</a>, John Wilander, WebKit, 2020 <a class="archived" href="https://web.archive.org/web/20261021173909/https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/">(archived)</a></li>
+    <li><a href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html">Building a more private web: A path towards making third party cookies obsolete</a>, Justin Schuh, Chromium Blog, 2020 <a class="archived" href="https://web.archive.org/web/20261110133633/https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html">(archived)</a></li>
+    <li><a href="https://privacysandbox.com/news/privacy-sandbox-update/">A new path for Privacy Sandbox on the web</a>, Anthony Chavez, Google, 2024 <a class="archived" href="https://web.archive.org/web/20251124065114/https://privacysandbox.com/news/privacy-sandbox-update/">(archived)</a></li>
+    <li><a href="https://privacysandbox.com/news/privacy-sandbox-next-steps/">Next steps for Privacy Sandbox and tracking protections in Chrome</a>, Anthony Chavez, Google, 2025 <a class="archived" href="https://web.archive.org/web/20251126095844/https://privacysandbox.com/news/privacy-sandbox-next-steps/">(archived)</a></li>
+    <li><a href="https://privacysandbox.com/news/update-on-plans-for-privacy-sandbox-technologies/">Update on Plans for Privacy Sandbox Technologies</a>, Anthony Chavez, Google, 2025 <a class="archived" href="https://web.archive.org/web/20251119081830/https://privacysandbox.com/news/update-on-plans-for-privacy-sandbox-technologies/">(archived)</a></li>
+    <li>"This Bug in Your PC is a Smart Cookie", Tim Jackson, Financial Times, 12 February 1996: cited by Kesan and Shah, not opened and not linked</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>IMG: the tag that shipped mid-argument</title>
     <link>https://derek.io/nostalgiajs/essays/img-tag/</link>
