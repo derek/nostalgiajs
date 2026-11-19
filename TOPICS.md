@@ -8,10 +8,10 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- FormMail and Matt's Script Archive: the Perl script a teenager wrote that ran every contact form, the day it became a spam relay, and its author telling people to stop using it
-- The pop-up ad and the pop-up blocker: who wrote the first pop-up code and why, the arms race that followed, and the author's later public apology
 - The `<img>` tag (1993): proposed on a mailing list, objected to, countered with alternatives, and shipped anyway; the whole argument survives in a public archive
 - The cookie (1994): invented at Netscape for a shopping cart, then a newspaper privacy scare and a standards fight over third-party cookies that was never really settled
+- FormMail and Matt's Script Archive: the Perl script a teenager wrote that ran every contact form, the day it became a spam relay, and its author telling people to stop using it
+- The pop-up ad and the pop-up blocker: who wrote the first pop-up code and why, the arms race that followed, and the author's later public apology
 - The founding of WHATWG (2004): browser makers lose a vote at a W3C workshop, start their own group days later, and end up writing HTML5
 - The Samy worm (2005): one MySpace profile script that made a million friends in a day, and what happened to its author
 - Opera's "Bork" edition (2003): Opera says Microsoft's site is sending it broken pages, and answers with a build that turns that site into Swedish Chef gibberish
