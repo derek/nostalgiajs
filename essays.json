@@ -415,6 +415,30 @@
         "The check-in comment \"With great reluctance, admit X-UA-Compatible exists\" is unsigned in the bug record, and the link from the bug to the spec change returned an error, so what the validator accepts comes from Michael[tm] Smith's comment there and I have not read the spec text itself. The March 21, 2011 date for HTML5 Boilerplate 1.0 comes from the project's later changelog, and I am assuming the v1.0 file I read is that release. That Sam Ruby wrote the Apache lines is my reading of Dubost's page, and its seventeen links are counted as the page stands now."
       ],
       "published": "2026-11-19T00:23:35Z"
+    },
+    {
+      "slug": "img-tag",
+      "title": "IMG: the tag that shipped mid-argument",
+      "description": "In February 1993 Marc Andreessen proposed an image tag that already worked in Mosaic; Tim Berners-Lee and others answered with more general designs, Mosaic 0.10 shipped IMG seventeen days later, and the losing ideas came back as ALT, ISMAP and the wording of the standard.",
+      "topic": "browsers",
+      "era": [
+        1993,
+        null
+      ],
+      "related": [
+        "view-source",
+        "document-layers",
+        "xmlhttprequest"
+      ],
+      "unverified": [
+        "Every time and interval in the 1993 thread is worked out from the Date headers of the messages, which come from different machines and time zones; Tony Johnson's is marked PDT in February, and the archive files Andreessen's proposal under February 26 because it converts to UTC. Treat \"a little over two hours\" and \"just under eight hours\" as approximate.",
+        "I could not open the demo page Andreessen announced with Mosaic 0.10 (the host is gone and the Internet Archive holds only a 404), so what the first IMG release did comes from its release notes alone. I have not run Mosaic 0.10, Midas or Viola: that Midas 2.0 had an ICON tag and Viola had bitmap tags rests on one sentence each from their authors.",
+        "That the \"Lou\" who suggested ALT to frans van hoesel was Lou Montulli of Lynx is my inference from Montulli's June message and Dougherty's report that Lynx supported the attribute; the message says only \"Lou\". Likewise \"Dan C\" as Dan Connolly is an inference from van Rossum naming Connolly in the same thread.",
+        "That the 1992 tag list had no image element rests on one preserved copy that I searched. Raggett's HTML+ paper carries no date I could find, and I did not confirm the publication date of HTML 4.01, so the essay gives neither; that HTML 4.01 made ALT required is read from the element definition on the one page of it I opened.",
+        "Several judgments are mine and not any source's: that holding HTML steady for the RFC track, with no amendment procedure I could find in the thread, left a browser release as the only way to add a feature; that RFC 1866's wording is Berners-Lee's EMBED and PRESENT model; that OBJECT lost to IMG for pictures in practice; and that srcset is a relative of the format negotiation Raggett wanted. I also did not check when srcset entered the standard.",
+        "That Raggett both proposed the end-tag idea and wrote a spec that entrenched IMG rests on the author line of HTML 3.2 and on the HTML+ paper; the HTML 4.01 page I read names no author, so I do not credit OBJECT to anyone. The \"single-hop principle\" is Andreessen's phrase, and \"a page had been one fetch\" is my gloss on it."
+      ],
+      "published": "2026-11-19T00:49:15Z"
     }
   ]
 }

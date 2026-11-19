@@ -1,0 +1,149 @@
+<p class="lede">The web's picture tag was proposed late on a Thursday in February 1993, in a mailing-list message that mentioned near the bottom that the thing already worked.</p>
+
+<blockquote>
+<p>I'd like to propose a new, optional HTML tag:</p>
+<p>IMG</p>
+<p>Required argument is SRC="url".</p>
+</blockquote>
+
+<p>That is the top of <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0060.html">"proposed new tag: IMG"</a>, sent to the www-talk list by Marc Andreessen of the National Center for Supercomputing Applications, with a header dated February 25, 1993, 21:09 Pacific time. Further down comes the sentence that settles most of what follows: "This is required functionality for X Mosaic; we have this working, and we'll at least be using it internally." It is followed at once by an invitation to anyone with a better idea to say so.</p>
+
+<p>People did. I knew the outline, as most web developers do: Andreessen proposed, Tim Berners-Lee would have preferred something else, Mosaic shipped, the end. What I had not understood until I read the thread is how many better ideas arrived, how quickly, and from whom. Two other browsers already had picture markup of their own. Berners-Lee's alternative was specific enough to type in. And within a week the tag's own author was wondering on the list whether the real answer was something else entirely.</p>
+
+<h2>Pictures in a separate window</h2>
+
+<p>HTML had no picture element to argue about. The <a href="https://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html">list of tags</a> preserved in the W3C's copy of the project's pages from November 1992 has titles, anchors, headings and lists, and in the copy I opened the words "image" and "IMG" do not appear.</p>
+
+<p>That did not mean a browser could not show you a GIF. The <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0024.html">release notes for Mosaic 0.9</a>, posted a week after the IMG proposal, show how it was done at the time. They list ten kinds of file as recognised automatically, GIF, JPEG, MPEG and PostScript among them, and give the mechanism in four words: "Pipe to external viewers". There is a setting called <code>gifViewerCommand</code>, and its default is <code>xv</code>. You followed a link, and a different program opened a different window with the picture in it.</p>
+
+<p>The same notes call that arrangement a temporary hack and promise "inlined" multimedia later. The word doing the work is "inlined". Putting the picture in the middle of the text, where the author wanted it, was the missing piece, and it needed markup that HTML did not have.</p>
+
+<h2>Three browsers, three picture tags</h2>
+
+<p>Andreessen's proposal is short and practical. It gives one example:</p>
+
+<pre tabindex="0"><code>&lt;IMG SRC="file://foobar.com/foo/bar/blargh.xbm"&gt;</code></pre>
+
+<p>There is no closing tag. Put the tag inside an anchor and it becomes a clickable icon, which means the clickable image is as old as the image. On formats the message shrugs: browsers get to choose, with XBM and XPM, the X Window System's bitmap and pixmap files, suggested as good ones to support. GIF is not mentioned. Andreessen knew this was a hole and said the only course was to "wait for the perfect solution to come along (MIME, someday, maybe)."</p>
+
+<p>The first reply is the one that surprised me. About two hours later, if its header's "PDT" is a slip for Pacific time, <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0061.html">Tony Johnson of SLAC wrote</a> that much the same thing existed in another browser, Midas 2.0, which was in use at SLAC and "due for public release any week now". Midas spelled it like this:</p>
+
+<pre tabindex="0"><code>&lt;ICON name="NoEntry" href="http://note/foo/bar/NoEntry.xbm"&gt;</code></pre>
+
+<p>The extra <code>name</code> let a browser use a built-in picture instead of fetching one, and Johnson thought it could also hint to a line-mode browser what symbol to print in the picture's place. That is a first sketch of a problem nobody would properly pick up for almost seven months. Johnson mildly preferred the name ICON and cared more about agreement: "it would be sensible if we used the same things."</p>
+
+<p>The same message carries a second idea. Johnson also wanted an <code>&lt;INCLUDE HREF="..."&gt;</code> tag for Midas, to drop one document into another, pictures of any size included, and offered a variant written as an ordinary anchor with an extra word in it, so that browsers that didn't understand would simply show the link.</p>
+
+<p>The next evening <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0079.html">Pei Wei reported</a> that Viola was in a similar position: it had "a number of bitmap tags, but for a DTD other than HTML", kept apart so as not to make a mess of HTML. So three browser authors had each arrived at picture markup, one inside NCSA, one unreleased at SLAC, one outside HTML, and the question in front of the list was whose spelling everybody would use.</p>
+
+<h2>Berners-Lee's link that embeds</h2>
+
+<p>Tim Berners-Lee <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0064.html">answered</a> just under eight hours after the proposal, and the answer was that no new tag was needed. A figure was a kind of link:</p>
+
+<pre tabindex="0"><code>&lt;a name=fig1 href="fghjkdfghj"  REL="EMBED, PRESENT"&gt;Figure &lt;/a&gt;</code></pre>
+
+<p>EMBED meant put the thing here when showing it. PRESENT meant fetch it without waiting to be asked. A browser that understood neither word would show an ordinary link reading "Figure", and nothing broke, which is the advantage Johnson's anchor variant had pointed to the night before. The message spots its own weakness, that a clickable icon would mean one anchor nested inside another, and ends that thought with "Hmmm. But I hadn't wanted a special tag."</p>
+
+<p>A <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0069.html">second message</a> later that day makes a case I found more interesting than I expected. The reader, not the author, might want to choose which figures open inline and which in a separate window, and a link with switches leaves that choice open. It also imagines anchors carrying x,y coordinates inside a picture, which is the image map, described before the image had shipped. And it closes with the objection that was really about procedure: "I don't want to change HTML now if I can help it, until it has gone to RFC track".</p>
+
+<p>Andreessen's <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0075.html">reply</a> agrees, "in all cases", and then explains why it would happen anyway: browsers were going to implement inline pictures whether or not they were standard, so it would be better to agree on one form first.</p>
+
+<p>A second objection came from the other direction. <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0070.html">Jay Weber</a> of Enterprise Integration Technologies had no quarrel with pictures but did not want "idiosyncratic hooks for media one at a time", and asked what had become of the plan to use MIME types. Dave Raggett of HP Labs <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0001.html">seconded that message</a> on March 1. Weber, in <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0076.html">a follow-up</a>, predicted where one-off tags would lead: next week, somebody would propose an AUD tag for audio.</p>
+
+<p>Then Berners-Lee moved. On February 27 a message <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0080.html">conceded</a> that HTML2 should have something for inclusion, and saw no reason to limit it to images. On March 2, in a single sentence, the no-special-tag position was gone: <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0018.html">"Let the IMG tag be INCLUDE and let it refer to an arbitrary document type."</a> Five days in, the inventor of HTML had accepted a dedicated tag, under the name Johnson had floated, and was asking only that it be general. Andreessen, meanwhile, <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0006.html">was wondering aloud</a> whether the list should instead be designing a graphics language with links in it, something between PostScript and CGM. The author of IMG was not, at that moment, its strongest advocate.</p>
+
+<h2>The decision and Mosaic 0.10</h2>
+
+<p>The thread went quiet for ten days. Then, on the night of March 12, Andreessen <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0054.html">came back to it</a> with a release nearly ready and three decisions made.</p>
+
+<blockquote>
+<p>We're not prepared to support INCLUDE/EMBED at this point; it raises a number of nasty issues that are quite separate from the idea of inlined images. For example, what happens if one EMBEDS a document that in turn EMBEDS the first document? Oops.</p>
+</blockquote>
+
+<p>That disposed of generality. The name went next, and the reason was Andreessen's own: it would be IMG and not ICON, because not every inlined image could sensibly be called an icon. The format question was answered by the code. Inlined images would carry no content type for now, and it did not matter, because Mosaic's image routines worked out the format by reading the file.</p>
+
+<p>The loop objection lasted a few hours. <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0056.html">Guido van Rossum</a>, writing from CWI in Amsterdam, called it an author's error that a browser should detect, at the cost of keeping a stack of nested embeds. Andreessen's <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0057.html">answer</a> fell back to performance and to principle, and contains the most candid parenthesis in the thread. A document pieced together from other documents, it says, "essentially throws the single-hop principle of WWW out the door (well, IMG does that too, but for a very specific reason and in a very limited sense)". My gloss on "single-hop" is that a page had been one fetch. Andreessen conceded that IMG already bent that, and held that the bend was small.</p>
+
+<p>Within a day the argument was over, because the software was out. <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0059.html">Mosaic 0.10</a> was announced on March 14, 1993, seventeen days after the proposal by the calendar, in notes signed "Marc &amp; Eric" for Andreessen and Eric Bina. The first item is support for the IMG tag, which "Handles X bitmap and GIF formats so far". So GIF, which the proposal never mentioned, was in, and XPM, which it recommended, is not on the list. A new setting, <code>colorsPerInlinedImage</code>, capped the colours a picture could use at a default of 50. Three days later <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0069.html">version 0.11</a> fixed bitmaps showing in the wrong colours on X servers that weren't SGI's.</p>
+
+<h2>Why the general answer lost</h2>
+
+<p>The first force is the plain one: working code on a short cycle. Mosaic put out three releases in under two weeks, on March 4, 14 and 17. The list took five days to converge on the principle of inclusion and had not started on its syntax.</p>
+
+<p>The second is that every general design leaned on things that were not there yet. Johnson's plan for typing images was to use the file extension until "HTTP2 comes along". Wei wanted MIME identifiers. And in the middle of March van Rossum could still ask, in a postscript, whether there was any consensus on how the web should use MIME, and get the answer from Andreessen that Mosaic handed files ending in <code>.mime</code> to an external program and that beyond that nobody was sure. The general tag needed a way to say what a thing was. The specific tag needed code that could tell a GIF from a bitmap by looking at it.</p>
+
+<p>The third is that there was no process to lose to. Berners-Lee did not want HTML changed until it was on the RFC track, and Wei agreed that "HTML should stay stable". Nobody declared a freeze, and on March 10 Berners-Lee <a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0042.html">told the list</a> the specs were headed towards an Internet Draft. But I'd argue the wish had an unintended effect: while the document was being held steady, and with no procedure for amending it that I can find in the thread, the only place a new feature could happen that month was inside a browser.</p>
+
+<p>The fourth is the one I think gets left out of the usual telling: the rivals didn't fight. Johnson didn't much care about tag names. Wei had no particular preference either. Jim Davis of Cornell <a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0066.html">summed up the mood</a>: "I am indifferent to the syntax, so long as we get a standard." The people who might have defended ICON or a Viola tag wanted one answer more than they wanted theirs. In fairness to both sides, Andreessen asked before shipping, and the worry about pages assembled from many fetches was not a silly one. Equally, van Rossum was right that the loop was cheap to catch, and Weber's worry would be echoed years later in the HTML specification itself.</p>
+
+<h2>ISMAP, ALT and the text browsers</h2>
+
+<p>Two months later the pattern repeated, and this time its author described it better than I can. On May 18, 1993, Andreessen <a href="https://lists.w3.org/Archives/Public/www-talk/1993May/0131.html">pre-announced</a> that Mosaic 1.1 would support ISMAP, an attribute credited to Tony Sanders that, going by <a href="https://lists.w3.org/Archives/Public/www-talk/1993Jun/0006.html">a description quoted on the list that June</a>, sent the coordinates of a click on an image to the server:</p>
+
+<blockquote>
+<p>I realize that this is another unplanned change that I'm making without getting a consensus or having it added to the spec or whatever. I also realize that, as with the IMG tag, it may be used fairly widely in documents on the net even though it's not part of the HTML spec, possibly making those documents not as friendly to other browsers (although I hear the next Midas will support this, and really, it's not that complex to add to an existing image-capable browser).</p>
+</blockquote>
+
+<p>One of the three reasons given is that there was no other way to get the effect, for want of a "CGM-style hypermedia graphics description language". The grand idea from March had become the excuse for the small attribute in May.</p>
+
+<p>Note the qualifier in that parenthesis: easy for an image-capable browser. The ones with no graphics at all had to wait. In June, Lou Montulli of Lynx, the text browser, <a href="https://lists.w3.org/Archives/Public/www-talk/1993Jun/0031.html">described</a> how Lynx might ask a server for a text description in place of a picture, and admitted there had been no time yet to make Lynx aware of images. The fix reached the list on September 21, 1993, almost seven months after the proposal, when <a href="https://lists.w3.org/Archives/Public/www-talk/1993Sep/0186.html">frans van hoesel</a> described an attribute used "as suggested to me by Lou", which I take to mean Montulli:</p>
+
+<pre tabindex="0"><code>&lt;img src="some_url" alt="some title"&gt;</code></pre>
+
+<p>The text would appear on line-mode browsers in place of the default, which was the word IMAGE in square brackets. Van hoesel had already put it on a page and asked the list three questions at once: "can I use this tag, should I, will it be part of HTML+". Raggett <a href="https://lists.w3.org/Archives/Public/www-talk/1993Sep/0195.html">offered</a> something more ambitious, an IMG with an end tag whose contents were the description, links and all. The attribute won anyway, for the reason IMG had: by October 15, <a href="https://lists.w3.org/Archives/Public/www-talk/1993Oct/0213.html">Dale Dougherty</a> of O'Reilly's Global Network Navigator could report that Lynx supported it and that GNN was using it on its navigation icons.</p>
+
+<p>The same message shows how far things had moved in under eight months. Dougherty had complaints from users of older text browsers and had to tell them the documents would not be changed to suit. The remedy Dougherty proposed, and it was only one publisher's proposal, was to grade browsers. Level 0 was original HTML, and Level 1 "Supports HTML extensions introduced by Mosaic such as the IMG tag." The optional tag had become the first rung.</p>
+
+<h2>What survives of the 1993 arguments</h2>
+
+<p>The standard, when it came, described the tag in Berners-Lee's terms. HTML 2.0, <a href="https://www.rfc-editor.org/rfc/rfc1866.txt">RFC 1866</a>, is dated November 1995 and says of itself that it roughly corresponds to HTML "in common use prior to June 1994", which is a polite way of saying it wrote down what browsers did. But look at how it words the element: IMG "refers to an image or icon via a hyperlink", and a later section lets such hyperlinks be followed without the user asking and their results embedded where the tag stands. That is EMBED and PRESENT in a specification's vocabulary. My reading is that the people who lost the syntax kept the model. There is even a note advising that an essential graphic be referenced from an anchor and not from IMG.</p>
+
+<p>Raggett's end tag came back twice, and the person who proposed it also wrote a spec that entrenched its rival. Raggett's <a href="https://www.w3.org/MarkUp/htmlplus_paper/htmlplus.html">HTML+ paper</a> has a FIG element whose contents are shown only on non-graphical displays. The <a href="https://www.w3.org/TR/html401/struct/objects.html">HTML 4.01 specification</a> has OBJECT, with fallback text inside it, and a sentence Weber could have written: IMG and APPLET "fail to solve the more general problem of how to include new and future media types." Between the two came <a href="https://www.w3.org/TR/2018/SPSD-html32-20180315/">HTML 3.2</a>, a W3C Recommendation of January 14, 1997 with Raggett named as author, in which IMG goes from the four attributes of HTML 2.0 to ten. The general element was specified; the specific one is what pages kept using, as far as I can judge.</p>
+
+<p>ALT stayed optional through two versions of the standard. In the HTML 2.0 definition SRC is required and ALT is not. HTML 3.2 calls ALT "vital for interoperability with speech-based and text only user agents" and, a few lines away, leaves it optional in exactly the same way. Only in the HTML 4.01 definition is it marked required. The <a href="https://html.spec.whatwg.org/multipage/embedded-content.html">current HTML standard</a> has since caught up with Raggett in its wording if not its syntax: the alt text "is the img element's fallback content".</p>
+
+<p>And the one required argument is no longer strictly required. The proposal's third line made SRC mandatory. The current standard says: "At least one of the src and srcset attributes must be present." Somewhere in the three decades since, the tag gained a second attribute for offering several files to suit different screens, with the browser doing the choosing. I read that as a modest cousin of the format negotiation Raggett asked for on March 1, 1993.</p>
+
+<h2>The takeaway</h2>
+
+<p>IMG won because it was the smallest thing that worked and it was in a release seventeen days after it was proposed. In the thread the careful designers get their hearing: their objections were mostly correct, and the person shipping the hack agreed with a fair number of them. Several of them, Andreessen included, wrote as though something more general was on its way. General solutions did arrive, and the stopgap absorbed them instead: the fallback text became an attribute, the hypergraphics became an attribute, the link model became a paragraph in the RFC.</p>
+
+<p>My own conclusion is narrower than "shipping beats talking", and it is a judgment, not something any message says. I think the argument was lost while HTML was being held steady for the RFC track with no procedure yet in sight, because that left a browser release as the only ballot. The example from that Thursday night would still be recognised as an image element now: no closing tag, one source, pointing at a bitmap called blargh on a host called foobar.com that was, I assume, never expected to answer.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0060.html">proposed new tag: IMG</a>, Marc Andreessen, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0061.html">Re: proposed new tag: IMG</a>, Tony Johnson, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0064.html">Re: proposed new tag: IMG</a>, Tim Berners-Lee, www-talk, 1993 (the EMBED, PRESENT reply)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0066.html">Re: proposed new tag: IMG</a>, Jim Davis, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0069.html">Re: proposed new tag: IMG</a>, Tim Berners-Lee, www-talk, 1993 (the longer reply)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0070.html">Re: proposed new tag: IMG</a>, Jay C. Weber, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0075.html">Re: proposed new tag: IMG</a>, Marc Andreessen, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0076.html">Re: proposed new tag: IMG</a>, Jay C. Weber, www-talk, 1993 (the AUD prediction)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0079.html">Re: proposed new tag: IMG</a>, Pei Y. Wei, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Feb/0080.html">Re: proposed new tag: IMG</a>, Tim Berners-Lee, www-talk, 1993 ("something for inclusion")</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0001.html">Re: proposed new tag: IMG</a>, Dave Raggett, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0006.html">Re: proposed new tag: IMG</a>, Marc Andreessen, www-talk, 1993 (PostScript and CGM)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0018.html">Re: proposed new tag: IMG</a>, Tim Berners-Lee, www-talk, 1993 ("Let the IMG tag be INCLUDE")</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0024.html">NCSA Mosaic for X 0.9 released</a>, Marc Andreessen and Eric Bina, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0042.html">World-Wide Web documentation in paper form</a>, Tim Berners-Lee, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0054.html">Re: proposed new tag: IMG</a>, Marc Andreessen, www-talk, 1993 (the decision)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0056.html">Re: proposed new tag: IMG</a>, Guido van Rossum, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0057.html">Re: proposed new tag: IMG</a>, Marc Andreessen, www-talk, 1993 (the single-hop principle)</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0059.html">NCSA Mosaic for X 0.10 released</a>, Marc Andreessen and Eric Bina, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Mar/0069.html">NCSA Mosaic for X 0.11 (maintenance release)</a>, Marc Andreessen, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993May/0131.html">IMG extension for Mosaic 1.1</a>, Marc Andreessen, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Jun/0031.html">Current Server Work at O'Reilly.... (fwd)</a>, Lou Montulli, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Jun/0006.html">&lt;IMG&gt; and ISMAP (again)</a>, Dave Raggett, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Sep/0186.html">ALT tag used in IMG</a>, frans van hoesel, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Sep/0195.html">Re: ALT tag used in IMG</a>, Dave Raggett, www-talk, 1993</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-talk/1993Oct/0213.html">ALT attribute &amp; Conformance levels</a>, Dale Dougherty, www-talk, 1993</li>
+    <li><a href="https://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html">Tags used in HTML</a>, in the W3C's copy of the project's pages from November 1992</li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc1866.txt">RFC 1866: Hypertext Markup Language - 2.0</a>, Tim Berners-Lee and Dan Connolly, 1995</li>
+    <li><a href="https://www.w3.org/MarkUp/htmlplus_paper/htmlplus.html">HTML+ paper</a>, Dave Raggett, undated</li>
+    <li><a href="https://www.w3.org/TR/2018/SPSD-html32-20180315/">HTML 3.2 Reference Specification</a>, Dave Raggett, W3C, 1997</li>
+    <li><a href="https://www.w3.org/TR/html401/struct/objects.html">HTML 4.01: Objects, Images, and Applets</a>, W3C</li>
+    <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html">HTML Living Standard: the img element</a>, WHATWG</li>
+  </ul>
+</section>
