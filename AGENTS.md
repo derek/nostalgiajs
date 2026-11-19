@@ -279,4 +279,4 @@ Readers report mistakes through the "Spot a mistake?" link, which opens a GitHub
 
 ## Branches and PRs
 
-New essays go straight to `main` once the review has been applied (see "Adding an essay"). For any other change, develop on the branch you were given. Do not open a PR unless asked. When you open one, list anything you could not verify. Never force-push.
+New essays go straight to `main` once the review has been applied (see "Adding an essay"). Agents may push to `main` without asking for confirmation, for essays and for changes to `TOPICS.md` and this file, as long as it is a normal push. For any other change, develop on the branch you were given. Do not open a PR unless asked. When you open one, list anything you could not verify. Never force-push.
