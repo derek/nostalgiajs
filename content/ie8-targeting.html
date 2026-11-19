@@ -1,0 +1,154 @@
+<p class="lede">On December 3, 2014, the HTML specification finally acknowledged a line that had been turning up at the top of web pages since 2008, and the check-in comment on the change ran to six words.</p>
+
+<blockquote>
+<p>With great reluctance, admit X-UA-Compatible exists.</p>
+</blockquote>
+
+<p>That is revision r8870 of the WHATWG's HTML spec, as recorded in <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27091">the bug that asked for it</a>. The thing being admitted is a <code>meta</code> tag, and the admission was as narrow as the comment sounds: about four weeks earlier the validator had been changed to accept the tag with one value, <code>IE=edge</code>, and to reject any other.</p>
+
+<p>You may know the line as furniture: it came with the template and told Internet Explorer something. What I had not understood until I did the reading is that it is what's left of a row that ran for forty-two days in early 2008, after Microsoft proposed that IE8 should go on behaving like IE7 unless a page asked for better. The proposal was written with the help of web standards advocates, and the people who attacked it hardest were other web standards advocates. And the value that ended up in the templates was the one the tag's first write-up had marked "strongly discouraged".</p>
+
+<h2>What IE7 broke</h2>
+
+<p>Since about 2000, browsers had offered two rendering modes and chosen between them by reading the top of the page. In <a href="https://alistapart.com/article/beyonddoctype/">"Beyond DOCTYPE"</a>, Aaron Gustafson credits the idea to Todd Fahrner in 1998 and its first implementation to IE5 for the Mac two years later. A complete, current DOCTYPE got a page standards mode. Anything else got quirks mode, laid out the way IE5 for Windows had done it. The switch worked because, at first, only people who cared about standards wrote a DOCTYPE at all.</p>
+
+<p>Chris Wilson, IE's platform architect, later put a number on that. In <a href="https://learn.microsoft.com/en-us/archive/blogs/ie/compatibility-and-ie8">a post on the IE team's blog</a>, Wilson says that when IE6 shipped in 2001 the team ran a report on the top 200 websites and found less than 1% of them in standards mode. Gustafson names what changed. IE6's rendering went five years without an update, so developers came to treat it as fixed, and the makers of authoring tools began putting complete DOCTYPEs into everything they generated, "egged on by A List Apart and The Web Standards Project". That was the first thing I did not expect: the standards campaign's own success helped wear out the switch it relied on, and the admission ran in A List Apart.</p>
+
+<p>By the time IE7 shipped in late 2006, Wilson writes, roughly half of the top 200 US sites were in standards mode, opted in by a tool or by people trying to do the right thing, who had then worked around IE6's faults until the page looked correct. IE7 fixed a good many of those faults, in standards mode only, on the theory that the switch would contain the damage. It didn't, to the team's surprise, and the pages adjusted to fit the faults broke. The team's rule, through six major versions by Wilson's count, had been "Don't Break the Web". The post rewrites it as a longer and sadder one: don't change what developers expect IE to do for pages that are already deployed.</p>
+
+<p>IE8 was going to be a much bigger change. On December 19, 2007, the general manager of Internet Explorer, Dean Hachamovitch, <a href="https://learn.microsoft.com/en-us/archive/blogs/ie/internet-explorer-8-and-acid2-a-milestone">announced</a> that a week earlier IE8 had correctly rendered Acid2, the Web Standards Project's test page. The same post set the goal of getting there "without breaking the existing web". Gustafson's article says how Microsoft set about having both: it asked the Web Standards Project, and a few other standards-minded developers, for help.</p>
+
+<h2>The opt-in for IE8</h2>
+
+<p>The answer came out on January 21, 2008, in two places at once. Wilson's post, "Compatibility and IE8", gave the summary in three bullets: quirks mode stays as it is; standards mode "remains the same as IE7"; and a developer who really wants the best IE8 can do may ask for it. Gustafson's article, in issue 251 of A List Apart, showed how to ask:</p>
+
+<pre tabindex="0"><code>&lt;meta http-equiv="X-UA-Compatible" content="IE=8" /&gt;</code></pre>
+
+<p>The tag had to sit near the top of the <code>head</code>, and a server could send the same thing as an HTTP header for a whole site. The task force called the idea version targeting: a page names the browser version it was tested in, and every later version of that browser undertakes to behave like it. A page that named nothing would be treated as tested in IE7, and Gustafson <a href="https://www.webstandards.org/2008/02/24/wasp-round-table-ie8s-default-version-targeting-behavior/index.html">later spelled out</a> for how long: it would render as IE7 "even if the site was being viewed on IE8, IE9, or IE1000."</p>
+
+<p>Two details matter later. The syntax was built for more than one browser, with an example value of <code>IE=8;FF=3;OtherUA=4</code>, and Gustafson hoped other vendors would join in. And under "Extra credit" there was a keyword, <code>IE=edge</code>, which asked for whatever the newest engine happened to be. The article discourages it for anything but experimental sites, since "even Eric Meyer can't predict layout or scripting bugs that may be accidentally introduced by a new browser version."</p>
+
+<p>Gustafson's own reason was not quite Microsoft's, and I find it the most sympathetic way in. The article describes a panel on digital preservation and asks whether reading a page built for IE6 will one day mean keeping a copy of IE6. Seen from there, the tag is an archivist's tool.</p>
+
+<h2>Standardistas against standardistas</h2>
+
+<p>The same issue carried a second piece, by Eric Meyer, called <a href="https://alistapart.com/article/fromswitchestotargets/">"From Switches to Targets: A Standardista's Journey"</a>. It opens with Meyer's first reaction, that the mechanism was "just wrong, completely backwards, the exact opposite of what we ought to be doing", and looked like <a href="../document-layers/">browser sniffing</a> coming back with a vendor's blessing. Then the piece argues itself round: sniffing asks a page to guess at future browsers, targeting asks a browser to remember a past one, and the past is easier to predict.</p>
+
+<p><a href="https://meyerweb.com/eric/thoughts/2008/01/22/targeted/">Meyer's own site</a> carried a less settled note that day. Meyer had come round only after arguing with Gustafson on the magazine's editorial board, and had also argued against the IE7 default with a member of the IE team, and lost: "I couldn't make what I wanted square with their requirements, and came to see that I couldn't, and was deeply saddened by it."</p>
+
+<p>So the proposal arrived with its doubts attached, and more came within a day. The Web Standards Project published <a href="https://www.webstandards.org/2008/01/22/microsofts-version-targeting-proposal">a note by Drew McLellan</a> saying that not every member backed the proposal. At the W3C, Karl Dubost's <a href="https://www.w3.org/QA/2008/01/ie8_versioning_snowstorm.html">list of responses</a> grew to seventeen links, one of them titled <code>&lt;META HTTP-EQUIV="X-BALL-CHAIN"&gt;</code>. John Resig, of <a href="../jquery/">jQuery</a>, went after the multi-browser syntax in <a href="https://ejohn.org/blog/meta-madness/">"Meta Madness"</a>. No other vendor had helped design the tag, Resig wrote, and none could adopt it without hauling its old engines around. Resig's summary: "A shiv for jamming standards support into future versions of Internet Explorer."</p>
+
+<p>The sharpest objection was also the politest. Jeremy Keith had no quarrel with the tag, only with what happened in its absence, and made the case a month later in A List Apart, in <a href="https://alistapart.com/article/theyshootbrowsers/">"They Shoot Browsers, Don't They?"</a> Keith had asked Wilson directly what IE8 would do with a valid page under a strict DOCTYPE, and was told it would behave exactly like its predecessor. The article's opening has the line I'd keep from the whole row: "the only way to opt out of using the technology is, perversely, to use it."</p>
+
+<p>Meanwhile anyone who just wanted IE8's engine already had a recipe. Dubost's list credits Sam Ruby with two lines of Apache configuration that put the discouraged keyword on every response sent to IE:</p>
+
+<pre tabindex="0"><code>BrowserMatch MSIE best-standards-support
+Header set X-UA-Compatible IE=edge env=best-standards-support</code></pre>
+
+<h2>The case for acting like IE7</h2>
+
+<p>It would be easy to tell this as a company protecting its old mistakes. The defenders deserve better, and they had four arguments.</p>
+
+<p>The first was about who pays. A site that breaks in a new browser gets fixed by its developer, but the person who meets the broken page is a reader with no way to know whose fault it is. Wilson's post speaks of half a billion users and says the team could not break existing sites "for users like my mom", however good the reason.</p>
+
+<p>The second was that some pages have nobody left to fix them: pages burned onto a CD, as an unsigned reply in the comments under Wilson's post pointed out, and above all the company intranet, built for one browser and never opened in another. When three Web Standards Project members held a call with Wilson on February 16, one idea on the table was a patch to IIS that would mark every site it served as an IE7 site, to spare the intranets.</p>
+
+<p>The third was script, and for anyone who has this filed as a quarrel about CSS, it changes the picture. In <a href="https://alistapart.com/article/minorthreat/">"Version Targeting: Threat or Menace?"</a>, which ran opposite Keith's piece, Jeffrey Zeldman, A List Apart's publisher, pointed out that IE8 was also due to overhaul its DOM support and drop conflicting JScript behaviour:</p>
+
+<blockquote>
+<p>While the CSS changes in IE7 may have "broken" a site's layout, IE8's JavaScript improvements could easily render a site useless.</p>
+</blockquote>
+
+<p>The fourth was one nobody at Microsoft said in public. Zeldman had <a href="https://zeldman.com/2008/01/22/in-defense-of-version-targeting/">defended the default</a> that first week, arguing that if IE8 broke enough sites, the complaints might, "in the hands of the wrong director of marketing", cost the standards-minded engineers on the IE team their jobs. That is Zeldman's fear, and I have seen nothing that reports it as fact. But it explains why standards campaigners were defending a default that ignored them: they thought the alternative was an IE that gave up.</p>
+
+<p>Keith's reply to the whole case was to ask for evidence. What was at stake, the article says, was "some websites" displaying differently in one browser, and how much that mattered was a matter of faith until somebody measured. So measure: ship a beta of IE8 with the new engine on by default and see what breaks. If the damage turned out to be real, Keith promised to back the IE7 default.</p>
+
+<h2>Forty-two days</h2>
+
+<p>On March 3, 2008, forty-two days after Wilson's post, Hachamovitch published <a href="https://learn.microsoft.com/en-us/archive/blogs/ie/microsofts-interoperability-principles-and-ie8">a new one</a>. It began:</p>
+
+<blockquote>
+<p>We've decided that IE8 will, by default, interpret web content in the most standards compliant way it can. This decision is a change from what we've posted previously.</p>
+</blockquote>
+
+<p>The tag survived with its meaning turned over. Pages in standards mode would get IE8's engine, and a site that needed IE7's would have to ask. Zeldman <a href="https://zeldman.com/2008/03/04/microsoft-reverses-version-targeting-default/">reported the next day</a> that developers from Microsoft had phoned round before the announcement, and listed the readings on offer: Microsoft had caved, or had listened, or meant what it said.</p>
+
+<p>What it said is the second thing I did not expect. The post credits feedback from the community, but its headline reason is a set of Interoperability Principles the company had recently published (Meyer dates them to February 21). Then comes a sentence of a kind a browser team's blog rarely carries: "While we do not believe any current legal requirements would dictate which rendering mode a browser must use, this step clearly removes this question as a potential legal and regulatory issue."</p>
+
+<p><a href="https://www.informationweek.com/software-services/rise-and-fall-of-version-targeting-in-internet-explorer-8">InformationWeek</a> pointed out that the reversal followed an 899 million euro antitrust fine, and that Microsoft's press release gave nearly the same sentence to Brad Smith, the company's general counsel. <a href="https://meyerweb.com/eric/thoughts/2008/03/03/meta-change/">Meyer's reading</a> that day was that the IE team "seems to have used recent Microsoft PR efforts to their, and our, advantage", and in the comments Meyer added that the IE7 default had never been the team's first choice. My best guess is that six weeks of argument made the case and the lawyers' sentence made it winnable, but it is a guess.</p>
+
+<p>Meyer was glad, and worried that once a public beta showed how many sites broke, the default would flip back.</p>
+
+<h2>The beta and the button</h2>
+
+<p>Two days later, at Microsoft's MIX conference, <a href="https://learn.microsoft.com/en-us/archive/blogs/ie/internet-explorer-8-beta-1-for-developers-now-available">IE8 Beta 1 went out to developers</a>, with the new engine as the default. That was the experiment Keith had asked for, and Joel Spolsky wrote up a result. <a href="https://www.joelonsoftware.com/2008/03/17/martian-headsets/">"Martian Headsets"</a>, published on March 17, declines to take a side, on the grounds that the IE team had been asked to walk "a line of negative width". But Spolsky had installed the beta:</p>
+
+<blockquote>
+<p>Almost every web site I visited with IE8 is broken in some way. Websites that use a lot of JavaScript are generally completely dead.</p>
+</blockquote>
+
+<p>One person's browsing is a long way from a survey, but it is Zeldman's script argument observed in the wild. Spolsky predicted that Microsoft would run a long beta, find that too little of the web rendered properly, apologise and go back to the IE7 default before shipping.</p>
+
+<p>Microsoft did something more interesting. Beta 1 had an Emulate IE7 button. On August 27, 2008, writing about Beta 2, Scott Dickens of the IE team <a href="https://learn.microsoft.com/en-us/archive/blogs/ie/introducing-compatibility-view">introduced its replacement</a>, Compatibility View: a button beside the address bar that redrew the current site the way IE7 would have, and remembered the choice for that domain. The team later used telemetry on where the beta's users pressed it, among other feedback, to build <a href="https://learn.microsoft.com/en-us/archive/blogs/ie/compatibility-view-list-and-ie8-rtw">a list of sites</a> to show that way unprompted. The list was offered to each user as a choice when the browser first ran.</p>
+
+<p>The Beta 2 post also contains this, under a heading about the enterprise: by default, public sites display in IE8's standards mode "and all intranet websites display in Internet Explorer 7 Standards mode". The January proposal had moved indoors. On office networks, IE8 acted like IE7 unless told otherwise, which is how Wilson's January proposal had worked for every page. A site's owner could overrule all of it with the tag, whose presence, the same post says, also hid the button.</p>
+
+<p><a href="https://learn.microsoft.com/en-gb/archive/blogs/ie/internet-explorer-8-final-available-now">IE8 shipped</a> on March 19, 2009, at the following year's MIX, with its own standards mode as the default for the public web. Spolsky's prediction had missed, and so had Meyer's worry. I'd argue the line turned out to have some width after all, once the default could differ by zone, by site and by user.</p>
+
+<h2>Where the meta tag went</h2>
+
+<p>The discouraged value became the standard one. Microsoft's own <a href="https://learn.microsoft.com/en-us/previous-versions/cc817574(v=msdn.10)">IE8 documentation</a> said that Edge mode "actually breaks the 'lock-in' paradigm" and recommended keeping it to test pages. But the intranet rule and the button gave careful developers a reason to reach for it: without the tag, a page they had tested in IE8 could still be shown as IE7. <a href="https://raw.githubusercontent.com/h5bp/html5-boilerplate/v1.0/index.html">Version 1.0 of HTML5 Boilerplate</a>, which the project's changelog dates to March 21, 2011, says so in a comment:</p>
+
+<pre tabindex="0"><code>  &lt;!-- Always force latest IE rendering engine (even in intranet) &amp; Chrome Frame
+       Remove this if you use the .htaccess --&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;</code></pre>
+
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/jj676915(v=vs.85)">later documentation</a> concedes the point: developers had used the tag to hide the Compatibility View button, and from IE11 the mode <code>IE=edge</code> selects is "the preferred document mode", having been treated as experimental before.</p>
+
+<p>Google borrowed the header. The second half of that Boilerplate line, <code>chrome=1</code>, belongs to <a href="https://blog.chromium.org/2009/09/introducing-google-chrome-frame.html">Chrome Frame</a>, the plug-in Google released on September 22, 2009 to run Chrome's engine inside Internet Explorer (it has a part in <a href="../ie6-funeral/">the IE6 funeral</a>). Resig had said no other vendor could usefully adopt Microsoft's tag. Google used it as the switch for a plug-in that swapped out IE's engine. Google <a href="https://cloud.googleblog.com/2013/06/retiring-chrome-frame.html">announced the plug-in's retirement</a> in June 2013, and Boilerplate 4.3.0 <a href="https://raw.githubusercontent.com/h5bp/html5-boilerplate/v4.3.0/CHANGELOG.md">removed the code</a> that September.</p>
+
+<p>The HTML spec held out until 2014. One of the three names on the Chrome Frame announcement was Alex Russell, who wrote to the WHATWG's mailing list that October asking for <code>X-</code> headers to be allowed in <code>http-equiv</code>. Ian Hickson, the spec's editor, <a href="https://lists.w3.org/Archives/Public/public-whatwg-archive/2009Oct/0207.html">answered a few days later</a>: "This would make X-UA-Compatible conforming, which is not desireable." So the line failed validation, as Boilerplate's <a href="https://raw.githubusercontent.com/h5bp/html5-boilerplate/v4.3.0/doc/html.md">own documentation</a> warned. In October 2014 Michael[tm] Smith filed the bug this essay opened with, titled "deal with the reality of meta@http-equiv=x-ua-compatible", and about three weeks later changed the validator. The spec followed.</p>
+
+<p>And the DOCTYPE got its old job back. Meyer's January 2008 piece had mentioned, late in the piece, that an HTML5 DOCTYPE might be targeted by default to some later version of IE. Microsoft's documentation from the IE11 years says that document modes are deprecated, recommends the HTML5 DOCTYPE for nearly everything, and describes <code>IE=edge</code> as "functionally equivalent" to it. The switch that Gustafson's article had declared broken was back in service.</p>
+
+<h2>The takeaway</h2>
+
+<p>The row over IE8 was an argument about who should pay when a browser gets better, and every answer to it was a default. Microsoft's first answer charged the developers who had followed the standards: one line on every page, for ever. The reversal charged everyone else for the length of a beta, then refunded the people least able to pay, with the IE7 default for office networks, a list for popular sites and a button for users. I think both camps were right. A browser that won't use its own engine unless asked has things backwards, as Keith said. And a great many pages that claimed to follow the standards were really following IE, as Wilson said and Spolsky's time with the beta showed.</p>
+
+<p>What the web kept is the rule the objectors were defending, one that had never needed saying: a page that says nothing gets the newest behaviour, and a page that wants the past has to ask for it. When the tag was finally let in, the validator would pass exactly one value, the one that tells IE to use the newest engine it has. Keith's complaint in February 2008 was that the only way to opt out of version targeting was to use it. Nearly seven years later the specification admitted the tag on those terms and no others, with great reluctance.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/ie/compatibility-and-ie8">Compatibility and IE8</a>, Chris Wilson, IEBlog, 2008</li>
+    <li><a href="https://alistapart.com/article/beyonddoctype/">Beyond DOCTYPE: Web Standards, Forward Compatibility, and IE8</a>, Aaron Gustafson, A List Apart, 2008</li>
+    <li><a href="https://alistapart.com/article/fromswitchestotargets/">From Switches to Targets: A Standardista's Journey</a>, Eric Meyer, A List Apart, 2008</li>
+    <li><a href="https://meyerweb.com/eric/thoughts/2008/01/22/targeted/">Targeted</a>, Eric Meyer, 2008</li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/ie/internet-explorer-8-and-acid2-a-milestone">Internet Explorer 8 and Acid2: A Milestone</a>, Dean Hachamovitch, IEBlog, 2007</li>
+    <li><a href="https://www.webstandards.org/2008/01/22/microsofts-version-targeting-proposal">Microsoft's Version Targeting Proposal</a>, Drew McLellan, The Web Standards Project, 2008</li>
+    <li><a href="https://www.w3.org/QA/2008/01/ie8_versioning_snowstorm.html">IE8 versioning snowstorm</a>, Karl Dubost, W3C, 2008</li>
+    <li><a href="https://ejohn.org/blog/meta-madness/">Meta Madness</a>, John Resig, 2008</li>
+    <li><a href="https://zeldman.com/2008/01/22/in-defense-of-version-targeting/">In defense of version targeting</a>, Jeffrey Zeldman, 2008</li>
+    <li><a href="https://alistapart.com/article/theyshootbrowsers/">They Shoot Browsers, Don't They?</a>, Jeremy Keith, A List Apart, 2008</li>
+    <li><a href="https://alistapart.com/article/minorthreat/">Version Targeting: Threat or Menace?</a>, Jeffrey Zeldman, A List Apart, 2008</li>
+    <li><a href="https://www.webstandards.org/2008/02/24/wasp-round-table-ie8s-default-version-targeting-behavior/index.html">WaSP Round Table: IE8's Default Version Targeting Behavior</a>, Aaron Gustafson, The Web Standards Project, 2008</li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/ie/microsofts-interoperability-principles-and-ie8">Microsoft's Interoperability Principles and IE8</a>, Dean Hachamovitch, IEBlog, 2008</li>
+    <li><a href="https://meyerweb.com/eric/thoughts/2008/03/03/meta-change/">Meta-change</a>, Eric Meyer, 2008</li>
+    <li><a href="https://zeldman.com/2008/03/04/microsoft-reverses-version-targeting-default/">Microsoft reverses version targeting default</a>, Jeffrey Zeldman, 2008</li>
+    <li><a href="https://www.informationweek.com/software-services/rise-and-fall-of-version-targeting-in-internet-explorer-8">Rise And Fall Of Version Targeting In Internet Explorer 8</a>, InformationWeek, 2008</li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/ie/internet-explorer-8-beta-1-for-developers-now-available">Internet Explorer 8 Beta 1 for Developers Now Available</a>, IEBlog, 2008</li>
+    <li><a href="https://www.joelonsoftware.com/2008/03/17/martian-headsets/">Martian Headsets</a>, Joel Spolsky, 2008</li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/ie/introducing-compatibility-view">Introducing Compatibility View</a>, Scott Dickens, IEBlog, 2008</li>
+    <li><a href="https://learn.microsoft.com/en-gb/archive/blogs/ie/internet-explorer-8-final-available-now">Internet Explorer 8 Final Available Now</a>, IEBlog, 2009</li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/ie/compatibility-view-list-and-ie8-rtw">Compatibility View List and IE8 RTW</a>, Scott Dickens, IEBlog, 2009</li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/cc817574(v=msdn.10)">META Tags and Locking in Future Compatibility</a>, Microsoft, 2009</li>
+    <li><a href="https://blog.chromium.org/2009/09/introducing-google-chrome-frame.html">Introducing Google Chrome Frame</a>, Amit Joshi, Alex Russell and Mike Smith, Chromium Blog, 2009</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-whatwg-archive/2009Oct/0207.html">[whatwg] X-UA-Compatible, X-* headers, validators, etc.</a>, Ian Hickson, WHATWG mailing list, 2009</li>
+    <li><a href="https://raw.githubusercontent.com/h5bp/html5-boilerplate/v1.0/index.html">index.html, HTML5 Boilerplate 1.0</a>, 2011</li>
+    <li><a href="https://raw.githubusercontent.com/h5bp/html5-boilerplate/v4.3.0/doc/html.md">The HTML, HTML5 Boilerplate 4.3.0 documentation</a>, 2013</li>
+    <li><a href="https://raw.githubusercontent.com/h5bp/html5-boilerplate/v4.3.0/CHANGELOG.md">Changelog, HTML5 Boilerplate 4.3.0</a>, 2013</li>
+    <li><a href="https://cloud.googleblog.com/2013/06/retiring-chrome-frame.html">Retiring Chrome Frame</a>, Robert Shield, Google, 2013</li>
+    <li><a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27091">Bug 27091: deal with the reality of meta@http-equiv=x-ua-compatible</a>, Michael[tm] Smith, W3C Bugzilla, 2014</li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/jj676915(v=vs.85)">Specifying legacy document modes</a>, Microsoft, 2015</li>
+  </ul>
+</section>

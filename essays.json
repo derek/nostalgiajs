@@ -392,6 +392,29 @@
         "I could not find the date on which left-pad was marked deprecated; the registry shows the notice on every version but not when it was added."
       ],
       "published": "2026-11-18T09:02:19Z"
+    },
+    {
+      "slug": "ie8-targeting",
+      "title": "X-UA-Compatible: the default that lasted 42 days",
+      "description": "In January 2008 Microsoft, with help from web standards advocates, proposed that IE8 should render like IE7 unless a page opted in with a meta tag; the standards world turned on itself, Microsoft reversed the default 42 days later, and the tag's discouraged value, IE=edge, ended up in the templates anyway.",
+      "topic": "browsers",
+      "era": [
+        2008,
+        2014
+      ],
+      "related": [
+        "ie6-funeral",
+        "document-layers",
+        "annex-b"
+      ],
+      "unverified": [
+        "I could not open Microsoft's press release of March 3, 2008. The sentence given to Brad Smith and the 899 million euro fine come from InformationWeek's report, and the February 21 date for the Interoperability Principles rests on a comment Eric Meyer left under the \"Meta-change\" entry, as does the remark that the IE7 default was never the IE team's first choice.",
+        "Sources disagree by a day or two on the dates. Wilson's post and its comments are dated January 21, 2008 and say the A List Apart article went up that day, while the magazine's own page dates it January 22; my count of forty-two days runs from Wilson's post. The February pair of articles is dated the 19th by Zeldman and Meyer and the 21st by the magazine's page. I have the date of the IE team's post about Beta 2 but not the release date of Beta 2 itself.",
+        "I could not find Jeremy Keith's first response, a January 2008 entry called \"Broken\", so the argument is taken from Keith's A List Apart article a month later. The reply about pages burned onto CDs is anonymous in the archived copy of Wilson's post, and I don't know who wrote it.",
+        "No source I opened says why Microsoft changed its mind beyond the reasons in Hachamovitch's post. That complaints might have cost IE's engineers their jobs is Zeldman's speculation, and that the legal sentence is what made the reversal winnable is my guess. Spolsky's account of the beta is one person's browsing, and I found no figures for how many sites broke.",
+        "The check-in comment \"With great reluctance, admit X-UA-Compatible exists\" is unsigned in the bug record, and the link from the bug to the spec change returned an error, so what the validator accepts comes from Michael[tm] Smith's comment there and I have not read the spec text itself. The March 21, 2011 date for HTML5 Boilerplate 1.0 comes from the project's later changelog, and I am assuming the v1.0 file I read is that release. That Sam Ruby wrote the Apache lines is my reading of Dubost's page, and its seventeen links are counted as the page stands now."
+      ],
+      "published": "2026-11-19T00:23:35Z"
     }
   ]
 }
