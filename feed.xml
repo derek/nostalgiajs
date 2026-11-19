@@ -6,7 +6,127 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Thu, 19 Nov 2026 01:45:56 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 19 Nov 2026 17:12:59 GMT</lastBuildDate>
+  <item>
+    <title>FormMail: the contact form that mailed anyone</title>
+    <link>https://derek.io/nostalgiajs/essays/formmail/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/formmail/</guid>
+    <pubDate>Thu, 19 Nov 2026 17:12:59 GMT</pubDate>
+    <description>Matt Wright wrote FormMail in high school in 1995 and it became the web's default contact form; it took its recipient from the page, spammers turned it into a mail relay, and the author ended up offering the London Perl Mongers' replacement from the same download site.</description>
+    <content:encoded><![CDATA[<p class="lede">From 1995 the contact form on a great many small websites was one free Perl script, and the script sent its mail to whatever address the web page told it to.</p>
+
+<pre tabindex="0"><code>&lt;input type=hidden
+  name="recipient"
+  value="email@your.host.com"&gt;</code></pre>
+
+<p>That tag comes from <a href="https://www.scriptarchive.com/readme/formmail.html">the Readme of FormMail</a>, which prints it on one line; I have broken it to fit. "There is only one form field that you must have in your form, for FormMail to work correctly," the Readme says, and names this one. You put your address in a hidden input, pointed the form at <code>FormMail.pl</code>, and whatever a visitor typed arrived in your inbox.</p>
+
+<p>FormMail was written by Matt Wright and given away at Matt's Script Archive. I knew it the way most people now do, as the script spammers abused and Perl programmers warned you off. What I had not understood until I read its change log, the security advisory written against it and its author's own account was how the trouble was built into the selling point, how hard the author was to find when it mattered, and that the people who wrote the replacement ended up with their download links on the author's own site.</p>
+
+<h2>A mail gateway for people without a cgi-bin</h2>
+
+<p>Wright tells the beginning on <a href="https://www.scriptarchive.com/nms.html">a page of the archive</a>. The scripts went up from 1995, when Wright was still in high school and had no formal training in programming: "I released the code as I learned, hoping others would find it useful." The history at the end of the Readme dates version 1.0 of FormMail to June 11, 1995. The header of <a href="https://www.scriptarchive.com/download.cgi?s=formmail&amp;c=txt&amp;f=FormMail%2Epl">the script itself</a> says June 9.</p>
+
+<p>A form needs a program on the server to receive it, and the Readme's list of possible uses describes who had trouble with that: people who wanted a form mailed to them and did not know how to write the program, and webmasters who wanted their users to have forms without giving each of them a <code>cgi-bin</code> directory. FormMail's answer was one script, installed once, that every form on the server could be aimed at, with its options set in hidden fields of the form itself. <a href="https://www.scriptarchive.com/formmail.html">Wright's page for the script</a> calls this "the perfect system-wide solution for allowing users form-based user feedback capabilities without the risks of allowing freedom of CGI access." So FormMail was offered to administrators partly as a safety measure.</p>
+
+<p>It had security fixes almost at once. Version 1.1, on August 3, 1995, closed a hole that let users run commands under the server's user ID, with thanks to a Paul Phillips who noticed it. Version 1.3, in January 1996, closed the door on strangers' forms, and its history entry is my favourite line in the file: "Security hole, which allowed any user on any system to bum off of your formmail script, has been plugged up with the @referers variable." You listed your own domains, and the script checked that the browser's <code>Referer</code> header named one of them. That decided whose forms could use your copy. It put no limit on where the mail could go.</p>
+
+<p>Then came version 1.6, on May 2, 1997, and after it nothing for more than four years. Wright's page about the archive says most of its scripts stopped being updated after 1996, apart from major security flaws and bugs. The downloads did not stop. Wright's page for the script claims FormMail was "downloaded over 2,000,000 times since 1997" and may be the most used CGI program on the internet. Those are Wright's own figures, and I have no second source for them.</p>
+
+<h2>How FormMail 1.6 became a mail relay</h2>
+
+<p>The best account of what went wrong is <a href="https://seclists.org/bugtraq/2002/Jan/308">an advisory posted to the Bugtraq mailing list</a> on January 23, 2002, by Ronald F. Guilmette and Justin Mason, who is identified in it as the maintainer of SpamAssassin. Abuse, it says, "was rendered trivial by the script's total reliance on information transmitted by the web client to the web server", both to decide whether a request was allowed and to decide where the mail went.</p>
+
+<p>This is the referer check, from the 2009 release of the script; the advisory quotes the same lines from the version current in 2002.</p>
+
+<pre tabindex="0"><code>if ($ENV{'HTTP_REFERER'}) {
+    foreach $referer (@referers) {
+        if ($ENV{'HTTP_REFERER'} =~ m|https?://([^/]*)$referer|i) {
+            $check_referer = 1;
+            last;
+        }
+    }
+}
+else {
+    $check_referer = 1;
+}</code></pre>
+
+<p>Read the <code>else</code>. A request with no <code>Referer</code> header at all is waved through. The advisory expects most attackers to do exactly that, and adds in a footnote that the Lynx browser had a <code>-noreferer</code> switch for the purpose. If you could not drop the header, the pattern would still pass any URL that had an allowed domain somewhere in it, such as <code>http://www.attacker.tld/myform.html?http://www.victim.com/</code>. That mattered to anyone attacking from a browser: the authors note that JavaScript's <code>submit()</code> always sent a <code>Referer</code> and they had found no way to stop it. Guilmette's covering note points to a working demonstration, written entirely in client-side JavaScript, of an exploit for FormMail 1.6. I have not seen that page.</p>
+
+<p>Once past that check, in the version that had spread, there was no second one. The Readme's history shows no list of permitted recipients until version 1.7, in 2001. Until then the address in the hidden field was simply believed, and a stranger needed only the URL of your <code>FormMail.pl</code> and a request that set <code>recipient</code> to anyone they liked. The script piped the message to the mail program on the same machine, which treated it as a trusted local user, and the advisory points out that a recipient could trace such a message "only as far as the web server that hosts the FormMail script."</p>
+
+<p>The advisory dates the discovery loosely, to some time between the release of 1.6 and March 2001, by when spammers were using installed copies as what it calls the functional equivalent of anonymising open mail relays. In September 2001, on the Security Incidents list, Jay D. Dyson <a href="https://seclists.org/incidents/2001/Sep/26">answered a report of probes</a> for the script by saying that many had succeeded at one agency Dyson advised, and offered a theory: "spammers have tired of simply looking for open relays and are now looking for other avenues by which they can abuse third-party mail systems".</p>
+
+<p>FormMail did have one accidental defence. Every message it sent began with its own line, "Below is the result of your feedback form." The advisory's authors assume, with what reads like some pleasure, that this habit annoyed spammers enough to explain why they had generally preferred ordinary open relays. Even a spammer has brand standards.</p>
+
+<h2>Three patches in a week, then silence</h2>
+
+<p>The Readme's history shows Wright coming back to the script in the summer of 2001, and it shows the chase. Version 1.7, on July 27, added <code>@recipients</code>, a list kept in the script on the server of where mail was allowed to go, and the entry says outright that it was there to defeat spamming. Version 1.8 followed on August 2, because "under certain cases in v1.7, spam could still get through by appending a legit recipient to the list of intended spam victims." Version 1.9 came the next day, with a check against newline characters in the subject field. That is three releases in a week, each fixing what the one before had missed.</p>
+
+<p>The January 2002 advisory was about 1.9, and it found that the job was not finished. It goes further than the Readme does, and says versions before 1.9 did no checking of the recipient at all; I have not seen the 1.7 or 1.8 code, so I can only report that the two disagree. On 1.9 itself the advisory is specific. The referer check was unchanged. The recipient check compared only the end of the address against the allowed list, so if you had allowed your whole domain, an address such as <code>user%somewhere.tld@ourdomain.tld</code> passed. That is what the advisory calls the old Sendmail percent hack, a form of address that the mail server next to FormMail would, the authors explain, almost certainly accept and send on to <code>user@somewhere.tld</code>. And the newline check covered the subject only. The sender's address and name went into the header through this line, unfiltered:</p>
+
+<pre tabindex="0"><code>print MAIL "From: $Config{'email'} ($Config{'realname'})\n";</code></pre>
+
+<p>Put a newline in the <code>email</code> field and you were writing mail headers of your own. The advisory's example sets it to <code>IGNORED\nCc: user@somewhere.tld,...</code>, where <code>\n</code> stands for a real newline, and then shows the same trick supplying a subject and an opening line of body text, which pushes FormMail's tell-tale sentence down the page. The sample text is "MAKE MONEY FAST!!!".</p>
+
+<p>The part I did not know is in the section headed "Notification". Both authors wrote to the address on the FormMail home page more than five working days before publishing and got no answer, and had no more luck by telephone. Guilmette posted a patched copy, labelled 1.9s, warned in capitals that nobody had reviewed or even tested it, and explained why: "I have been totally unable to even get into contact with the original FormMail author, so you may be sure that he has not even seen this (1.9s) version of his script." A script its author thought might be the most used CGI program on the internet had, as far as two security researchers could tell that month, nobody at the other end. I have only their side of this. Nothing I read gives Wright's.</p>
+
+<p>The answer came just under three months later. The history's entry for version 1.91, dated April 19, 2002, concedes the point in its first sentence: "The same vulnerability that was patched in 1.9 with the subject field still existed in the email and realname fields." The same release tightened the default recipient patterns against the percent hack, and the Readme's overview says it addresses the worst problems made public in an advisory it cites by URL, a PDF on Guilmette's site that I could not open and that looks to be this one. The script's page still carries the banner from that week, a security update dated April 19, 2002, telling everyone on an earlier version, 1.6 included, to upgrade immediately.</p>
+
+<h2>Why one script sat on so many servers</h2>
+
+<p>The first force was convenience, and I'd argue it cannot be separated from the flaw. A script that takes its settings from the HTML can be used by someone who cannot edit a script. A form handler configured by the page has to trust the page, and the page comes from the browser.</p>
+
+<p>The second was that popularity fed itself. Dave Cross laid this out in <a href="https://perlhacks.com/articles/perl-com/finding-cgi-scripts/">"Finding CGI Scripts"</a>, an article the copy on the Perl Hacks site says first ran on perl.com in January 2002. Searching for CGI scripts put Matt's Script Archive in the first two results, and the people searching were not programmers who could judge the Perl they downloaded. So the best-known archive got the links, the links got it the ranking, and, as Cross put it, "at no point does any kind of quality control enter into the process."</p>
+
+<p>The third was time. Perl changed a great deal after 1995, and the script mostly did not. Cross's checklist for a trustworthy script (warnings, <code>use strict</code>, taint mode, the standard <code>CGI.pm</code> module, recent updates) is a list of things FormMail lacked, and the <a href="https://nms-cgi.sourceforge.net/about.html">nms project's own site</a>, which I'll come to, was blunter about the archive's code. Wright's page does not really argue. "My interests and activies have moved on", it says, typo and all, and it adds that there has been no time to update the scripts. A person who wrote something useful in high school is allowed to grow up and do other things. The web had no arrangement for what happens to two million downloads when they do. Dyson's theory supplies the trigger: if spammers came to form scripts because the lists that tracked open relays had shut or started charging, the hole sat in plain sight for years and became valuable only when the easier doors closed. That is one administrator's reading, from one mailing-list post.</p>
+
+<h2>The London Perl Mongers' drop-in replacement</h2>
+
+<p>The fix that lasted did not come from the archive. Cross's article says that in the summer of 2001 a group of London Perl Mongers began to wonder what it would take to write replacements for the CGI programs in common use. The article says "we" throughout, so I take Cross to have been one of them. They called the project nms and chose Wright's scripts as the target, for a reason Cross was careful about: "This wasn't because Matt Wright's scripts were the worst out there, but simply that they were the most commonly used."</p>
+
+<p>What I admire is the constraint they set themselves. The scripts had to be drop-in replacements, so that anyone using one of Wright's could put the new one in its place and carry on, and the nms site is clear that the audience was <a href="https://derek.io/nostalgiajs/essays/webmaster/">webmasters</a> who might not know much Perl at all. And they could use no modules beyond those that ship with Perl, even though that meant the form mailer ended up "talking directly to sendmail" where good practice would have used a mail module. Cross's reasoning was that the audience was on hosted servers, often without shell access. A secure script nobody could install would protect nobody.</p>
+
+<p>The other rule was about readers of the code. The nms site complains that "one of the worst legacies of Matt's scripts is that people use them to learn Perl", so every replacement had to run clean under <code>use strict</code> with warnings and taint checking on. Free scripts were the <a href="https://derek.io/nostalgiajs/essays/view-source/">View Source</a> of the server side: people opened them to change a colour and copied the habits.</p>
+
+<p>It was not a clean victory, and the sources say so themselves. Cross admitted in January 2002 that "the one advantage that Matt's scripts have over ours is that they've had many years of testing on a large number of Web sites." The Bugtraq advisory, the same month, names nms as one of two fixed versions of FormMail in circulation and says neither dealt with every problem it raised. The name was a small embarrassment too. By Cross's account it began as a disparaging remark about one of the existing archives, and by the time the group thought better of that, the initials had stuck. Officially they stand for nothing.</p>
+
+<p>For everyone else, coping meant the advice Dyson gave that September: don't run a web-to-mail gateway "unless you've got your script configured to allow only specific recipients." The <a href="https://nms-cgi.sourceforge.net/news.html">nms news page</a> records how far that advice had to travel. It says SecurityFocus put attacks on Wright's FormMail third in its list of top attacks for the first quarter of 2002. I could not open SecurityFocus's own list, so that is nms's report of it.</p>
+
+<h2>What survives of FormMail</h2>
+
+<p>The author recommended the replacement, and hosts it. The nms site says that in May 2002 Wright redesigned the archive and added a page about the project. That page is still there, and it is not grudging. It recommends the nms versions to anyone who wants to learn CGI programming, and says of the archive's own code that it is "not representative of how even I would code these days." Below that, the archive offers the nms files for download from its own server, fourteen of them, each listed against the script of Wright's that it replaces. The originals stay up, Wright explains, because they still work for many people.</p>
+
+<p>The nms site quotes Wright's page and adds one line of its own: "I call that a good result :)".</p>
+
+<p>The referer check is still in the script, with a label on it. The last release I could find is 1.93, dated July 14, 2009, two months after <a href="http://www.ush.it/team/ush/hack-formmail_192/adv.txt">three researchers at ush.it</a> reported cross-site scripting and response-splitting holes in 1.92; the script's header credits them by name. The code I quoted earlier is from that release, <code>else</code> branch included. What changed is the documentation around it. The Readme now describes the check as a remnant of the days when it was used for security, and says: "This is not a security check. Referer headers can EASILY be faked."</p>
+
+<p>FormMail turned into a service. The archive's pages advertise FormMail.com, a hosted form processor for people who would rather not install anything, with plans "at less than $1 per month". The script's first pitch was that one copy could serve every form on a server. The hosted version is that idea with the server moved to the author's side.</p>
+
+<p>And old copies were still in service long afterwards. Under Cross's article there is a comment from March 2017 by a reader who mentions having used the archive's scripts as a teacher, and who had "hundreds of scripts that send email using the old formmail.pl code" and server logs showing thousands of messages going out. The comment does not say how the mail was being sent, or whether those scripts were Wright's FormMail or things built on it. Cross replied within minutes and told the reader to start by taking the compromised program off the server. That was more than fifteen years after the first anti-spam patch.</p>
+
+<h2>The takeaway</h2>
+
+<p>FormMail believed what the browser sent, which is how a great deal of the early web went wrong. The design that let anyone use it without touching a script, with the destination written in the page, was the design that let any stranger use it too, and the patches of 2001 and 2002 were attempts to keep the convenience while taking back the trust. What I find worth remembering is how the ending went. The people who wrote the replacement were rude about the code and careful about the users, they built it to be swapped in by people who could not read it, and the author put it on the front counter next to the original and said plainly that it was the one to learn from.</p>
+
+<p>The hidden field is still in the Readme, and a form written for FormMail would still need it. The difference is one sentence further up the same file: "@recipients is the most important variable you need to configure." The page still says where the mail should go. The script no longer takes its word for it.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.scriptarchive.com/readme/formmail.html">FormMail: Readme</a>, with the version history, Matt Wright, Matt's Script Archive, last revised 2009 <a class="archived" href="https://web.archive.org/web/20260612181856/https://www.scriptarchive.com/readme/formmail.html">(archived)</a></li>
+    <li><a href="https://www.scriptarchive.com/formmail.html">FormMail</a>, Matt Wright, Matt's Script Archive, 2009 <a class="archived" href="https://web.archive.org/web/20261102070900/https://www.scriptarchive.com/formmail.html">(archived)</a></li>
+    <li><a href="https://www.scriptarchive.com/download.cgi?s=formmail&amp;c=txt&amp;f=FormMail%2Epl">FormMail.pl, version 1.93</a>, Matt Wright, 2009 <a class="archived" href="https://web.archive.org/web/20250422183348/https://www.scriptarchive.com/download.cgi?s=formmail&amp;c=txt&amp;f=FormMail.pl">(archived)</a></li>
+    <li><a href="https://www.scriptarchive.com/nms.html">nms Project</a>, Matt Wright, Matt's Script Archive, 2002, as it stood in 2009 <a class="archived" href="https://web.archive.org/web/20261110140306/https://www.scriptarchive.com/nms.html">(archived)</a></li>
+    <li><a href="https://seclists.org/bugtraq/2002/Jan/308">Anonymous Mail Forwarding Vulnerabilities in FormMail 1.9</a>, Ronald F. Guilmette and Justin Mason, Bugtraq, 2002 <a class="archived" href="https://web.archive.org/web/20161003085953/http://seclists.org/bugtraq/2002/Jan/308">(archived)</a></li>
+    <li><a href="https://seclists.org/incidents/2001/Sep/26">Re: formmail</a>, Jay D. Dyson, Security Incidents mailing list, 2001 <a class="archived" href="https://web.archive.org/web/20151009042955/http://seclists.org/incidents/2001/Sep/26">(archived)</a></li>
+    <li><a href="https://perlhacks.com/articles/perl-com/finding-cgi-scripts/">Finding CGI Scripts</a>, Dave Cross, first published on perl.com, 2002, with later reader comments <a class="archived" href="https://web.archive.org/web/20260517030028/https://perlhacks.com/articles/perl-com/finding-cgi-scripts/">(archived)</a></li>
+    <li><a href="https://nms-cgi.sourceforge.net/about.html">About nms</a>, the nms project, last modified 2004 <a class="archived" href="https://web.archive.org/web/20260325224503/https://nms-cgi.sourceforge.net/about.html">(archived)</a></li>
+    <li><a href="https://nms-cgi.sourceforge.net/news.html">nms: Latest News</a>, the nms project, last modified 2004 <a class="archived" href="https://web.archive.org/web/20260325224543/https://nms-cgi.sourceforge.net/news.html">(archived)</a></li>
+    <li><a href="http://www.ush.it/team/ush/hack-formmail_192/adv.txt">Multiple Vulnerabilities in FormMail</a>, Francesco Ongaro, Giovanni Pellerano and Antonio Parata, ush.it, 2009 <a class="archived" href="https://web.archive.org/web/20260809222712/https://www.ush.it/team/ush/hack-formmail_192/adv.txt">(archived)</a></li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>Cookies: the standard said off, the browsers said on</title>
     <link>https://derek.io/nostalgiajs/essays/cookies/</link>

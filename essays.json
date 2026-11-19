@@ -462,6 +462,30 @@
         "That third-party cookies are still on by default in ordinary Chrome windows is my reading of Google's 2025 announcements, which say only that Chrome keeps its \"current approach\". The comparison between Chrome's 2020 argument and Montulli's is mine, and so is the link from RFC 6265's warning to Pathfinder."
       ],
       "published": "2026-11-19T01:45:56Z"
+    },
+    {
+      "slug": "formmail",
+      "title": "FormMail: the contact form that mailed anyone",
+      "description": "Matt Wright wrote FormMail in high school in 1995 and it became the web's default contact form; it took its recipient from the page, spammers turned it into a mail relay, and the author ended up offering the London Perl Mongers' replacement from the same download site.",
+      "topic": "libraries",
+      "era": [
+        1995,
+        2009
+      ],
+      "related": [
+        "webmaster",
+        "view-source",
+        "left-pad"
+      ],
+      "unverified": [
+        "I never saw FormMail 1.6, the version that was abused, or versions 1.7 and 1.8. The code I quote is from the 2009 release, and I rely on the 2002 Bugtraq advisory for what earlier versions did. The advisory says nothing checked the recipient before version 1.9, while the Readme's history says 1.7 and 1.8 added and fixed such a check, and I could not settle which is right.",
+        "Sources disagree about when FormMail began. The Readme's history says June 11, 1995, the script's header says June 9, and the Bugtraq advisory says July 9. That it was downloaded two million times is Wright's own figure and I found no second source for it.",
+        "I could not open SecurityFocus, so the ranking of FormMail attacks as third in its top attacks for early 2002 comes from the nms news page, and I did not read the earlier advisories the Bugtraq authors cite. The May 2002 date for Wright's redesign and nms page also comes only from the nms site; the copy of Wright's page I read is from 2009.",
+        "The Readme credits an advisory at a PDF address on Guilmette's site that would not open for me. I assume it is the same text as the Bugtraq posting I read, which points to a PostScript copy at the same path. The Bugtraq archive masks e-mail addresses, so I have put the @ signs back into the exploit strings I quote, and the JavaScript demonstration is something I know only from the advisory's mention of it.",
+        "The 2017 comment under Dave Cross's article is hard to parse. It does not say whether the scripts were Wright's FormMail or the reader's own work built on it, or how the mail was being sent, so I can't say the old recipient or referer holes were the cause.",
+        "I found nothing from Wright about the weeks in 2002 when the advisory's authors could not reach the author, so the essay has only their side of that. That the script spread because people who could not program could use it is my inference from the Readme's list of uses, that Cross was one of the London Perl Mongers is my inference from the article's use of \"we\", that spammers came to FormMail because open relays were being blocked is one administrator's theory from 2001, and that the script's convenience and its flaw were the same design decision is my own reading."
+      ],
+      "published": "2026-11-19T17:12:59Z"
     }
   ]
 }
