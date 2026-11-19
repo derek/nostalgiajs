@@ -486,6 +486,29 @@
         "I found nothing from Wright about the weeks in 2002 when the advisory's authors could not reach the author, so the essay has only their side of that. That the script spread because people who could not program could use it is my inference from the Readme's list of uses, that Cross was one of the London Perl Mongers is my inference from the article's use of \"we\", that spammers came to FormMail because open relays were being blocked is one administrator's theory from 2001, and that the script's convenience and its flaw were the same design decision is my own reading."
       ],
       "published": "2026-11-19T17:12:59Z"
+    },
+    {
+      "slug": "yui",
+      "title": "YUI: the toolkit Yahoo gave away, and the notice that ended it",
+      "description": "In 2006 Yahoo gave away the toolkit its own pages ran on, with a CSS reset, a grid, a browser policy and a lecture series attached. In 2014 it stopped, and the engineer who signed the notice wrote the next day that the announcement should have come sooner, maybe a year sooner.",
+      "topic": "libraries",
+      "era": [
+        2006,
+        2014
+      ],
+      "related": [
+        "jquery",
+        "yslow",
+        "jslint"
+      ],
+      "unverified": [
+        "How long YUI had been winding down before the announcement rests on one sentence in Julien Lecomte's reply on the mailing list, hedged with \"Maybe a year ago\" and speaking of new development, not releases. Releases went on until 3.18.1, and I have no source for who at Yahoo made the decision, or when.",
+        "The thread from Isaac Schlueter to npm is my own connection. The résumé, the YUI Compressor changelog and the Increment interview each say what I report, but none of them ties npm to YUI, the words \"at Yahoo\" in the interview are the interviewer's bracket, and it does not say which package manager Schlueter used there.",
+        "The Dom.get comment and my description of Reset come from the final YUI 2 build in the yui/yui2 repository, not from the 2006 files, which I could not open. I also could not open Yahoo's original Graded Browser Support article, so I describe the policy from the blog's August 2006 update, and the documentation I link is the copy at clarle.github.io, not Yahoo's own site.",
+        "Sources disagree by a day about the launch: the welcome post is dated 12 February 2006, while the library announcement and Yahoo's 2014 notice say 13 February. The dates for the YUI 3 beta and the 2014 releases, and the talks by Schlueter and John Resig, are post titles in the archive's index, and I did not open those posts. The Ext JS dates come from Jay Garcia's 2017 history, the 3.18.1 date from Wikipedia, and the post counts from the archive itself.",
+        "Several readings are mine: that SimpleYUI was an answer to jQuery, that Zakas's local alias is what Crockford meant, that the blog was a larger gift than the library, and that the rewrite cost YUI its momentum. How widely the end was expected before the notice I can't say; Liferay and some posters point to earlier hints, including a July blog comment I know only from a poster's quotation. I list the FLOSS Weekly episode as further listening without having heard it."
+      ],
+      "published": "2026-11-19T18:18:56Z"
     }
   ]
 }

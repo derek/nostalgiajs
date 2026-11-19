@@ -6,7 +6,179 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Thu, 19 Nov 2026 17:12:59 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 19 Nov 2026 18:18:56 GMT</lastBuildDate>
+  <item>
+    <title>YUI: the toolkit Yahoo gave away, and the notice that ended it</title>
+    <link>https://derek.io/nostalgiajs/essays/yui/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/yui/</guid>
+    <pubDate>Thu, 19 Nov 2026 18:18:56 GMT</pubDate>
+    <description>In 2006 Yahoo gave away the toolkit its own pages ran on, with a CSS reset, a grid, a browser policy and a lecture series attached. In 2014 it stopped, and the engineer who signed the notice wrote the next day that the announcement should have come sooner, maybe a year sooner.</description>
+    <content:encoded><![CDATA[<p class="lede">For eight years Yahoo gave away the JavaScript library its own pages ran on, and the documentation is still online, with a notice across the top.</p>
+
+<blockquote>
+<p>IMPORTANT: The YUI library is no longer actively maintained. Please see this announcement for more information.</p>
+</blockquote>
+
+<p>That banner sits on the home page of <a href="https://clarle.github.io/yui3/">the YUI documentation</a>. Under it the page carries on as though nothing had happened, still offering to get you started with YUI 3.18.1 in two easy steps, and a little further down: "Pull requests welcome!"</p>
+
+<p>I knew YUI as the big one, where fetching an element was spelled <code>YAHOO.util.Dom.get</code>. What I had not understood until I read the archive was how much shipped under those three letters (a CSS reset, a grid system, a browser support policy, a minifier, a lecture series), or how the rewrite meant to modernise the library left its users running two of them. I also had the ending wrong. The announcement behind that banner says development stops immediately. The engineer who signed it wrote on a mailing list the next day that it should have come much sooner, perhaps a year sooner.</p>
+
+<h2>The toolkit behind My Yahoo!</h2>
+
+<p>YUI went public in February 2006, in two posts on a new blog. <a href="https://derek.io/yuiblog/2006/02/12/welcome-to-the-yahoo-user-interface-blog/">The first</a>, dated the 12th and signed by Nate Koechley, Bill Scott and Eric Miraglia, announced two libraries at once: JavaScript components under a BSD licence, and a Design Pattern Library under Creative Commons. <a href="https://derek.io/yuiblog/2006/02/13/the-yahoo-user-interface-library/">The second</a>, a day later and signed by Thomas Sha, Koechley and Miraglia, described the code: five utilities and three widgets, shaped by more than 100 of Yahoo's web engineers and already running under My Yahoo!. These were, the welcome post said, "the exact same things that power Yahoo! today."</p>
+
+<p>Other libraries already existed, and Miraglia explained why Yahoo had built its own four days later, in <a href="https://derek.io/yuiblog/2006/02/17/developing-a-javascript-library-for-yahoo/">"Developing a JavaScript Library for Yahoo!"</a>. The word doing the work is heterogeneity. Yahoo was many products, built by different teams with different technologies, and by an internal estimate more than 10,000 different client configurations turned up at them regularly. A library for that company could not ask a team to rebuild its pages around a framework. In Miraglia's words the library "had to impose few constraints and live happily in a lot of different ecosystems."</p>
+
+<p>Under the code sat a policy. Koechley had spent years on what Yahoo called Graded Browser Support, and made it public alongside the library. It sorted every desktop browser into one of three grades, so that each got an answer and QA had a fixed list to test. The chart was revised quarterly, and <a href="https://derek.io/yuiblog/2006/08/18/browser-support-update-2006q3/">by that August</a> it was warning that IE 5.5 was next to lose its A.</p>
+
+<h2>One global, in capitals</h2>
+
+<p>Everything in the library hung off a single name. In June 2006 Douglas Crockford of <a href="https://derek.io/nostalgiajs/essays/jslint/">JSLint</a>, who worked at Yahoo and taught its engineers the language, wrote a short post called <a href="https://derek.io/yuiblog/2006/06/01/global-domination/">"Global Domination"</a> that turns on one short paragraph: "Global variables are evil." A page that mixes components from many authors is safest, Crockford reasoned, when each claims exactly one global. Yahoo's was <code>YAHOO</code>, in capitals so that nobody would make one by accident.</p>
+
+<p>The price was length, and Crockford's answer to anyone who minded <code>YAHOO.util.Dom.get</code> is my favourite line in the archive: "if you don't like the length, you only have to type it once." Here is what typing it looked like. Nicholas Zakas used this function in <a href="https://derek.io/yuiblog/2008/02/11/helping-the-yui-compressor/">a 2008 post</a> on the same blog:</p>
+
+<pre tabindex="0"><code>function toggle(element){
+    if (YAHOO.util.Dom.hasClass(element, "selected")){
+        YAHOO.util.Dom.removeClass(element, "selected");
+    } else {
+        YAHOO.util.Dom.addClass(element, "selected");
+    }
+}</code></pre>
+
+<p>The post is about helping the minifier. Julien Lecomte's <a href="https://julienlecomte.net/blog/2007/08/11.html">YUI Compressor</a>, released the previous August, shortened local variable names but could do nothing with a global or a dotted path. Zakas's fix was, I'd say, Crockford's advice in practice: type it once, as <code>var YUD = YAHOO.util.Dom;</code>.</p>
+
+<p>What the typing bought was a browser problem you never had to meet. In <a href="https://raw.githubusercontent.com/yui/yui2/master/build/dom/dom.js">the last YUI 2 source</a>, <code>Dom.get</code> doesn't simply trust <code>document.getElementById</code>. It checks that the element that came back really carries the id that was asked for, and the comment beside the check says why: <code>// IE: avoid false match on "name" attribute</code>. Somebody had already found that bug for you, which, multiplied by every method, was the case for the library.</p>
+
+<h2>A reset, a grid and a lecture hall</h2>
+
+<p>In the summer of 2006 YUI began shipping stylesheets that <a href="https://derek.io/yuiblog/2007/10/29/video-koechley/">the blog credits to Koechley</a>. <a href="https://raw.githubusercontent.com/yui/yui2/master/build/reset/reset.css">Reset</a> flattened every browser's default styling: margins and padding to zero, list bullets gone, headings the size and weight of body text. Grids built page layouts out of ids and class names, which Koechley walked through in <a href="https://24ways.org/2006/intricate-fluid-layouts/">an article for 24 ways</a> that December:</p>
+
+<pre tabindex="0"><code>&lt;div id="doc3" class="yui-t3"&gt;
+  &lt;div id="yui-main"&gt;
+    &lt;div class="yui-b"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="yui-b"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The id <code>doc3</code> meant a fluid page at full width. The class <code>yui-t3</code> put a 300-pixel secondary column on the left, whichever order the two blocks came in the source. <a href="https://derek.io/yuiblog/2006/10/16/pageweight-yui0114/">By Miraglia's count that October</a> the one Grids file could produce "more than 130 different wireframes", and Reset, Fonts and Grids together weighed 1.3KB on the wire.</p>
+
+<p>The part I had underrated is the blog. <a href="https://derek.io/yuiblog/">The archive of YUIBlog</a> holds 1,002 posts by 87 contributors, <a href="https://derek.io/yuiblog/stats/">by its own count</a>, and they range well beyond YUI. Joe Hewitt came to Yahoo in May 2006 to show <a href="https://derek.io/nostalgiajs/essays/firebug/">Firebug</a>, then about five months old, and <a href="https://derek.io/yuiblog/2006/05/30/hewitt-firebug/">the video went up on the blog</a>. Tenni Theurer's measurements of where page-load time goes <a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">were published there</a> that November, the work of <a href="https://derek.io/yuiblog/2007/09/04/video-souders/">the performance team</a> whose leader wrote <a href="https://derek.io/nostalgiajs/essays/yslow/">YSlow</a>. Crockford's classes on the language <a href="https://derek.io/yuiblog/2006/10/20/video-crockford-domtheory/">were filmed and posted</a>, in a series that became YUI Theater and later carried talks by John Resig, the creator of <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery</a>.</p>
+
+<p>I'd argue this was the larger gift. The library was one company's answer to scripting across browsers. The blog was that company teaching its working habits in public (grade your browsers, stay out of the global scope, minify and gzip, measure the page), and the habits travelled further than <code>YAHOO.util</code> did.</p>
+
+<h2>YUI 3 and the sandbox</h2>
+
+<p>By 2008 the team wanted to start again. <a href="https://derek.io/yuiblog/2008/08/13/yui3pr1/">YUI 3.0 Preview Release 1</a>, announced by Miraglia and Matt Sweeney on 13 August, set five goals: lighter, faster, more consistent, more powerful, and one I didn't expect, more securable, glossed as "safer and easier to expose to multiple developers working in the same environment". That is the heterogeneity problem of 2006 again: many teams, one page. The answer this time was to stop sharing an object at all. This is how the first production release, <a href="https://derek.io/yuiblog/2009/09/29/yui-3-0-0/">3.0.0 on 29 September 2009</a>, told you to make something draggable:</p>
+
+<pre tabindex="0"><code>&lt;div id="demo"&gt;I'm draggable.&lt;/div&gt;
+&lt;script type="text/javascript" src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+YUI().use('dd-plugin', function(Y) {
+    Y.one('#demo').plug(Y.Plugin.Drag);
+});
+&lt;/script&gt;</code></pre>
+
+<p>One small seed file went on the page, 6.2KB gzipped. You named the modules you wanted. The seed worked out what they depended on, fetched the lot from Yahoo's CDN in what was usually a single combined request, and called your function with a private instance of the library, named <code>Y</code>. The post bills this as three easy steps, and the third reads: "Step 3: There is no step 3."</p>
+
+<p><a href="https://clarle.github.io/yui3/yui/docs/yui/">The YUI documentation</a> calls the pattern a sandbox and describes it as "the most important concept to understand about YUI." Modules attached to one instance were out of reach of another, and the only global left was the function <code>YUI</code>. Three years after "Global Domination", the library had gone from one global object that held everything to one global function that handed out private copies.</p>
+
+<p>The bill was stated up front. The preview's FAQ asks whether YUI 3.0 is backward compatible with YUI 2.x, and the answer begins with one word: "No." Migrating would take real effort, it went on, though a limited compatibility layer was promised and the two libraries could share a page. The schedule slipped, too: the preview expected a beta in December 2008, and by the dates in the blog's archive the beta arrived in June 2009.</p>
+
+<p>In November 2010 Miraglia published <a href="https://derek.io/yuiblog/2010/11/05/a-status-check-on-the-yui-2-to-3-transition/">"A Status Check on the YUI 2-to-3 Transition"</a>. The old library was a giant: downloaded more than 2 million times, with Yahoo's CDN serving about 15 billion YUI files a month. The new one had the better utilities, but at the widget level it was, in Miraglia's words, "still catching up." The DataTable, Editor, Menu, Button and Calendar that had made YUI 2 popular were still the YUI 2 versions, and anyone who needed them from YUI 3 was pointed to a bridge called YUI 2-in-3, which loaded both libraries. Miraglia's own verdict was upbeat: counting community modules, YUI 3 already offered more widget options than YUI 2 had shipped with. The post also concedes that switching between two APIs was less than ideal, and I'd argue that was the part a YUI shop felt, with the library it was supposed to be leaving still doing the heavy lifting.</p>
+
+<p>Two months earlier the team had announced <a href="https://derek.io/yuiblog/2010/09/03/coming-inyui-3-2-0-simpleyui/">SimpleYUI</a>, a build that skipped the instantiation and bound everything to "a global Y variable", so that <code>Y.one("#foo").addClass("highlight");</code> worked straight after the script tag. I read it as an answer to jQuery, though the post never names it: the most important concept in YUI now came with an off switch.</p>
+
+<h2>The notice of August 2014</h2>
+
+<p>There were signs. On 16 June 2014 Lecomte, the author of the Compressor, <a href="https://derek.io/yuiblog/2014/06/16/yui-gallery-deprecation-announcement/">announced</a> that the YUI Gallery, by then more than 600 community modules served from Yahoo's CDN, would get its last build on 31 July. Anyone publishing a module to npm or bower was asked to tag it <code>yui-module</code>.</p>
+
+<p>On Monday 25 August a post signed "Administrator" appeared under the title <a href="https://derek.io/yuiblog/2014/08/25/weve-moved-to-tumblr/">"We've Moved to Tumblr!"</a>. The blog would become read-only, and announcements would now come from the Yahoo Engineering Tumblr. On the Friday one did. <a href="https://yahooeng.tumblr.com/post/96098168666">"Important Announcement Regarding YUI"</a>, signed by Lecomte as Director of Engineering, walks through everything that had changed in front-end development (Node, npm and bower, Grunt and Gulp, Backbone and React and Angular, browsers that update themselves) and arrives at one sentence: "we have made the difficult decision to immediately stop all new development on YUI". Future releases would be rare, and confined to fixes Yahoo's own sites could not do without.</p>
+
+<p>The same text went to the yui-support mailing list, opening with "Howdy!", and <a href="https://groups.google.com/g/yui-support/c/eck-X0g2bkM">the thread under it</a> is uncomfortable reading. The first reply quoted a July comment on the blog, about cool things happening that could not be discussed yet, and counted a month wasted since then on more legacy YUI code. One poster objected to the greeting. Lecomte answered on the Saturday, and the first point of the answer is the thing I had not known:</p>
+
+<blockquote>
+<p>I agree that the announcement should have come a long time ago. Maybe a year ago, when all new development on YUI effectively ceased. There is nothing else I can say about this besides apologizing to the community.</p>
+</blockquote>
+
+<p>That is one person's estimate, hedged with "Maybe", and it concerns new development, not releases. From outside the library had looked alive: the blog's archive lists 3.15.0 in February 2014, 3.16.0 in April and 3.17 in May and June. The rest of the reply is blunter than the official notice, and I think fairer. Yahoo depended on YUI more than anyone and could not rewrite millions of lines overnight either. The code was open, so fork it. It was written on a weekend, and at least one poster wrote back with thanks.</p>
+
+<p>Not everyone was surprised. Liferay, which had built its AlloyUI components on YUI 3, <a href="https://liferay.dev/b/yui-liferay-and-the-future">posted the same day</a>. The news was no news there, Nate Cavanaugh wrote, pointing to the Gallery notice and other public hints, and Liferay, being close to the YUI team, had been discussing its options for a couple of months. The hints were there for anyone to read. The plain statement came on the Friday.</p>
+
+<h2>Why Yahoo stopped</h2>
+
+<p>The notice gives its own reasons, and its most candid sentence concedes that many developers had come to see large libraries "as walled gardens they don't want to be locked into." One word is missing from its list of tools, frameworks, standards and browsers: jQuery.</p>
+
+<p>The first force is the one the notice ends its list on: the browsers converged. YUI existed because of those 10,000 client configurations, and by 2014 browsers updated themselves. John Lindal, who had worked at Yahoo, put it plainly in the thread: for most of the company YUI had "mostly been a browser-independence layer", and with old Internet Explorer on the way out a thick one was no longer needed.</p>
+
+<p>The second is the package manager. Put YUI 3's loader, CDN and Gallery together and you have a private one: ask for a module by name, and something resolves its dependencies and delivers it. Getting a module into it meant <a href="https://derek.io/yuiblog/2009/11/04/introducing-the-yui-3-gallery/">signing a contributor agreement, sending a pull request and waiting for the next push to the CDN</a>, about every two weeks. Then npm (which has <a href="https://derek.io/nostalgiajs/essays/left-pad/">an essay of its own</a>) and bower did that job for any JavaScript at all.</p>
+
+<p>There is a detail here that stopped me. <a href="https://izs.me/resume">Isaac Schlueter's résumé</a> lists four years at Yahoo, from January 2006 to January 2010, ending as lead front-end architect on the Yahoo! Application Platform. <a href="https://raw.githubusercontent.com/yui/yuicompressor/master/doc/CHANGELOG">The changelog for YUI Compressor 2.0</a> includes the line "Integrated Isaac Schlueter's CSS compressor", and Schlueter spoke at YUIConf 2009 on solving problems with YUI 3. In <a href="https://increment.com/development/interview-with-isaac-z-schlueter-ceo-of-npm/">an interview with Increment</a>, Schlueter dates the first version of npm to September 2009, the month YUI 3.0.0 shipped, and describes it as automating a habit picked up at Yahoo, of working with a package manager. Nothing I read connects these facts to each other, and I am not suggesting npm was an answer to YUI. But the first package manager the notice names was started by a Yahoo front-end engineer, in the same month Yahoo shipped a loader of its own.</p>
+
+<p>The third force, I'd argue, was the rewrite. YUI 3 asked every user to move while the widgets they depended on stayed behind. The archive's own tally shows posts to the blog falling from 194 in 2010 to 94 in 2011, which may mean many things, and the notice describes most core modules as having no active maintainer. One poster, Simon Gilligan, called the technical explanation "a diversion" and asked the question the notice doesn't: how the project lost its momentum in the first place.</p>
+
+<p>The fourth is the sponsor. YUI was Yahoo's toolkit before it was anyone else's, which in 2006 was the selling point and in 2014 was the exit: the code would now change only when a Yahoo property needed it to. Gilligan drew the moral in two words, "Buyer beware", and thanked Yahoo for the library all the same. What was decided inside Yahoo, and by whom, I have no source for. The notice carries one signature.</p>
+
+<h2>Where YUI's pieces went</h2>
+
+<p>The reset had a descendant within a year. When Eric Meyer published <a href="https://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/">"Reset Reloaded"</a> in May 2007, commenters asked how it compared with Yahoo's. Meyer answered that the work had started from Yahoo's styles, and could be considered "a variant on theirs, or a fork, or a sequel, or maybe just an alternative." I had always thought of the two resets as rivals.</p>
+
+<p>A stranger's extension became a company. In August 2006 a developer named Jack Slocum began publishing extensions to YUI under the namespace <code>YAHOO.ext</code>, and by October <a href="https://derek.io/yuiblog/2006/10/10/ten-questions-slocum/">the YUI Blog was interviewing Slocum</a> about a Grid component that had the blogs talking. Asked what YUI itself should build next, Slocum replied: "Definitely not a Grid component. :-)" According to <a href="https://hackernoon.com/the-rise-and-fall-of-ext-js-c9d727131991">Jay Garcia's history of the project</a>, the namespace was shortened to <code>Ext</code> in January 2007 and Ext JS 1.0 followed that April. Six days after Yahoo's notice, the company that Ext JS turned into, Sencha, published <a href="https://www.sencha.com/blog/a-fond-farewell-to-yui/">"A Fond Farewell to YUI"</a>. It says that big enterprise frameworks remain the right idea, as a company selling one would.</p>
+
+<p>One large outside user tried every exit. On the day of the notice Cavanaugh listed Liferay's options: take over stewardship of YUI, migrate off it, or fork a cleaned-up "YUI4". By mid-September <a href="https://liferay.dev/b/the-future-of-ui-development-and-alloyui-in-liferay-7">the plan</a> was AlloyUI 4, rebuilt as jQuery plugins, and in October <a href="https://liferay.dev/b/alloyui-3-released-bye-bye-yui">AlloyUI 3.0.0</a> shipped as the last release on YUI. Then, <a href="https://liferay.dev/b/the-status-and-direction-of-the-frontend-infrastructure-in-liferay-7-dxp">in 2016</a>, Cavanaugh reported that the jQuery version had been dropped, because putting a different API under the same name "would lead to a very confusing situation", and that AlloyUI itself was deprecated as of Liferay 7. The YUI4 fork does not come up again in those posts.</p>
+
+<p>The blog and the docs were kept. The "Moved to Tumblr" post promised that the blog would be archived, and <a href="https://derek.io/yuiblog/">an archive exists</a>. The documentation stops at version 3.18.1, which <a href="https://en.wikipedia.org/wiki/YUI_Library">Wikipedia</a> dates to 22 October 2014, under two months after development officially ended.</p>
+
+<h2>The takeaway</h2>
+
+<p>YUI was built for a web of ten thousand client configurations and a company of many teams, where the most valuable thing a library could offer was one tested, documented answer to everything: one global, one reset, one grid, one loader, one list of browsers that mattered. For a few years that completeness was the product. Then the browsers converged, a package manager made it cheap to assemble your own answer from small parts, and the completeness started to look like a wall. The rewrite had already asked YUI's users to cross over once, and the sponsor that made the library trustworthy was the only party who could decide it was finished. The avoidable mistake, I'd argue, was the silence: by Lecomte's own estimate the announcement came perhaps a year late.</p>
+
+<p>The code is the part that lasted least. The habits the blog taught lasted longer (graded browsers, clean globals, minified files), and so did the descendants, in a reset here and an enterprise framework there. The documentation is still up, banner and all, and "Pull requests welcome!" is the line I keep returning to. It was true in the way it is true of any open repository, and Lecomte's notice says exactly why it had stopped being true in the way that counts: few reviewers still had the time to look at them.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://derek.io/yuiblog/">YUI Blog: A Historical Archive (2006-2014)</a>, and <a href="https://derek.io/yuiblog/stats/">YUI Blog Over the Years</a>, the archive's own counts</li>
+    <li><a href="https://clarle.github.io/yui3/">YUI Library home page</a> and <a href="https://clarle.github.io/yui3/yui/docs/yui/">YUI Global Object</a>, YUI documentation, version 3.18.1</li>
+    <li><a href="https://derek.io/yuiblog/2006/02/12/welcome-to-the-yahoo-user-interface-blog/">Welcome to the Yahoo! User Interface Blog</a>, Nate Koechley, Bill Scott and Eric Miraglia, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/02/13/the-yahoo-user-interface-library/">The Yahoo! User Interface Library</a>, Thomas Sha, Nate Koechley and Eric Miraglia, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/02/17/developing-a-javascript-library-for-yahoo/">Developing a JavaScript Library for Yahoo!</a>, Eric Miraglia, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/08/18/browser-support-update-2006q3/">Graded Browser Support: Update, Roadmap, and FAQ</a>, YUI Blog, unsigned, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/06/01/global-domination/">Global Domination</a>, Douglas Crockford, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2008/02/11/helping-the-yui-compressor/">Helping the YUI Compressor</a>, Nicholas Zakas, YUI Blog, 2008</li>
+    <li><a href="https://julienlecomte.net/blog/2007/08/11.html">Introducing the YUI Compressor</a>, Julien Lecomte, 2007</li>
+    <li><a href="https://raw.githubusercontent.com/yui/yuicompressor/master/doc/CHANGELOG">YUI Compressor changelog</a>, yui/yuicompressor on GitHub</li>
+    <li><a href="https://raw.githubusercontent.com/yui/yui2/master/build/dom/dom.js">build/dom/dom.js</a> and <a href="https://raw.githubusercontent.com/yui/yui2/master/build/reset/reset.css">build/reset/reset.css</a>, yui/yui2 on GitHub, the final YUI 2 build</li>
+    <li><a href="https://derek.io/yuiblog/2007/10/29/video-koechley/">YUI Theater: Nate Koechley, "The YUI CSS Foundation"</a>, YUI Blog, 2007</li>
+    <li><a href="https://24ways.org/2006/intricate-fluid-layouts/">Intricate Fluid Layouts in Three Easy Steps</a>, Nate Koechley, 24 ways, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/10/16/pageweight-yui0114/">YUI: Weighing in on Pageweights</a>, Eric Miraglia, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/05/30/hewitt-firebug/">Video: Joe Hewitt Talks About FireBug</a>, Eric Miraglia, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">Performance Research, Part 1</a>, Tenni Theurer, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2006/10/20/video-crockford-domtheory/">Video: Douglas Crockford, "An Inconvenient API: The Theory of the Dom"</a>, Eric Miraglia, YUI Blog, 2006</li>
+    <li><a href="https://derek.io/yuiblog/2007/09/04/video-souders/">YUI Theater: Steve Souders, "High Performance Web Sites: 14 Rules For Faster Pages"</a>, YUI Blog, 2007</li>
+    <li><a href="https://derek.io/yuiblog/2008/08/13/yui3pr1/">YUI 3.0 Preview Release 1</a>, Eric Miraglia and Matt Sweeney, YUI Blog, 2008</li>
+    <li><a href="https://derek.io/yuiblog/2009/09/29/yui-3-0-0/">YUI 3.0.0: First GA Release of YUI's Next-Generation Codeline</a>, Eric Miraglia, YUI Blog, 2009</li>
+    <li><a href="https://derek.io/yuiblog/2009/11/04/introducing-the-yui-3-gallery/">Introducing the YUI 3 Gallery</a>, Eric Miraglia and Dav Glass, YUI Blog, 2009</li>
+    <li><a href="https://derek.io/yuiblog/2010/09/03/coming-inyui-3-2-0-simpleyui/">Coming in YUI 3.2.0: SimpleYUI</a>, Eric Miraglia and Adam Moore, YUI Blog, 2010</li>
+    <li><a href="https://derek.io/yuiblog/2010/11/05/a-status-check-on-the-yui-2-to-3-transition/">A Status Check on the YUI 2-to-3 Transition</a>, Eric Miraglia, YUI Blog, 2010</li>
+    <li><a href="https://derek.io/yuiblog/2014/06/16/yui-gallery-deprecation-announcement/">YUI Gallery Deprecation Announcement</a>, Julien Lecomte, YUI Blog, 2014</li>
+    <li><a href="https://derek.io/yuiblog/2014/08/25/weve-moved-to-tumblr/">We've Moved to Tumblr!</a>, YUI Blog, signed "Administrator", 2014</li>
+    <li><a href="https://yahooeng.tumblr.com/post/96098168666">Important Announcement Regarding YUI</a>, Julien Lecomte, Yahoo Engineering, 2014</li>
+    <li><a href="https://groups.google.com/g/yui-support/c/eck-X0g2bkM">Important Announcement Regarding YUI</a>, the yui-support mailing list thread, with replies from Julien Lecomte and others, 2014</li>
+    <li><a href="https://liferay.dev/b/yui-liferay-and-the-future">YUI, Liferay, and the future</a>, Nate Cavanaugh, Liferay, 2014</li>
+    <li><a href="https://liferay.dev/b/the-future-of-ui-development-and-alloyui-in-liferay-7">The future of UI Development and AlloyUI in Liferay 7</a>, Nate Cavanaugh, Liferay, 2014</li>
+    <li><a href="https://liferay.dev/b/alloyui-3-released-bye-bye-yui">AlloyUI 3 Released: Bye Bye YUI</a>, Zeno Rocha, Liferay, 2014</li>
+    <li><a href="https://liferay.dev/b/the-status-and-direction-of-the-frontend-infrastructure-in-liferay-7-dxp">The status and direction of the frontend infrastructure in Liferay 7 &amp; DXP</a>, Nate Cavanaugh, Liferay, 2016</li>
+    <li><a href="https://izs.me/resume">Résumé</a>, Isaac Z. Schlueter</li>
+    <li><a href="https://increment.com/development/interview-with-isaac-z-schlueter-ceo-of-npm/">Interview with Isaac Z. Schlueter, CEO of npm</a>, Glenn Fleishman, Increment</li>
+    <li><a href="https://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/">Reset Reloaded</a>, Eric Meyer, 2007, with Meyer's reply in the comments</li>
+    <li><a href="https://derek.io/yuiblog/2006/10/10/ten-questions-slocum/">Ten Questions with YAHOO.ext Author Jack Slocum</a>, YUI Blog, 2006</li>
+    <li><a href="https://hackernoon.com/the-rise-and-fall-of-ext-js-c9d727131991">The rise and fall of Ext JS</a>, Jay Garcia, Hackernoon, 2017</li>
+    <li><a href="https://www.sencha.com/blog/a-fond-farewell-to-yui/">A Fond Farewell to YUI</a>, Sencha, 2014</li>
+    <li><a href="https://en.wikipedia.org/wiki/YUI_Library">YUI Library</a>, Wikipedia</li>
+    <li>Further listening: <a href="https://twit.tv/shows/floss-weekly/episodes/23">FLOSS Weekly 23: The Yahoo User Interface Library</a>, with Nate Koechley, TWiT, 2008</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>FormMail: the contact form that mailed anyone</title>
     <link>https://derek.io/nostalgiajs/essays/formmail/</link>

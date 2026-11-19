@@ -19,7 +19,6 @@ Derek's picks, in order. Always take the first item here. Only choose from the l
 - Web 2.0: the 2005 essay, glossy buttons, rounded corners and the permanent "beta" badge
 - "How it feels to learn JavaScript in 2016" and JavaScript fatigue
 - RSS 0.91, 1.0, 2.0 and Atom: the feed format war nobody won, and why every reader parses all of them
-- YUI: Yahoo’s internal front-end library goes public (2006), YAHOO.util.Dom.get(), Reset and Grids, YUI 3’s loader and sandbox, and its 2014 deprecation
 
 ## Ideas
 
