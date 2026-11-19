@@ -509,6 +509,31 @@
         "Several readings are mine: that SimpleYUI was an answer to jQuery, that Zakas's local alias is what Crockford meant, that the blog was a larger gift than the library, and that the rewrite cost YUI its momentum. How widely the end was expected before the notice I can't say; Liferay and some posters point to earlier hints, including a July blog comment I know only from a poster's quotation. I list the FLOSS Weekly episode as further listening without having heard it."
       ],
       "published": "2026-11-19T18:18:56Z"
+    },
+    {
+      "slug": "popup",
+      "title": "The pop-up ad: a separate window for good intentions",
+      "description": "Around 1997 Ethan Zuckerman moved an ad into its own window at Tripod to keep a car company off a user's page; the trick spread when ad prices collapsed, a Mozilla bug report about porn sites worked out the rule that tamed it, Microsoft adopted the same rule in 2004, and ten years later the apology arrived as an aside.",
+      "topic": "browsers",
+      "era": [
+        1996,
+        2014
+      ],
+      "related": [
+        "off-switch",
+        "cookies",
+        "document-layers"
+      ],
+      "unverified": [
+        "I could not open The Atlantic's own pages for Zuckerman's essay or for Adrienne LaFrance's short item about the first pop-up. The passage I quote is as First Things, Gizmodo and Entrepreneur reproduced it, word for word alike, and none of those copies shows brackets, so that the apology was a parenthetical comment is Zuckerman's own description a month later, as are the 300 words and the forty news outlets. The \"original sin\" line is as NBC News quoted it, and his remark to Wired is taken from Engadget because I did not open Wired.",
+        "Sources disagree about the essay's date within August 2014. The History of the Web cites August 8, while Wikipedia's citation and the earliest coverage I read say August 14, so the essay says only \"August 2014\".",
+        "I found no copy of Tripod's original JavaScript or Perl, so the code I show is from Netscape's 1999 documentation and not from Zuckerman's script. The date of late 1996 or early 1997 is from his own biography page, which carries a 2013 date and has been edited since, and NBC's \"1997\" is the only other date I found.",
+        "I could not establish which browser blocked pop-ups first, and I found no source for Internet Explorer's share of the market in these years. That Opera had a setting by July 1999 is what one Mozilla bug reporter says they had read, Wikipedia's claim that Opera was first carries a citation-needed tag, and I found no Opera release note. That Internet Explorer had nothing built in before Service Pack 2 rests on InternetNews in 2003 and on Wikipedia. I also did not confirm which Mozilla release first carried the preference (the bug's approval says 0.9.4 and its milestone field says 0.9.5) or the date Service Pack 2 finally shipped.",
+        "Bugzilla shows the commenter who proposed the user-action rule and the person who marked the first bug \"Future\" only by e-mail address, so I have not named them. Bug dates and intervals are worked out from Bugzilla's UTC timestamps, so a local date may differ by a day. For the two 1999 requests, the Outlook Web Access bug and the New York Times bug I read only the opening comments, and that \"invalid\" meant Mozilla judged the Outlook problem to be the site's is my reading of the bug's status and its Tech Evangelism category.",
+        "On Microsoft's archived copy of jeffdav's post every comment is labelled Anonymous, and the author appears only as jeffdav. That the reply about checking for null is jeffdav's is my inference from its wording, and I describe the chat-client developer from a single comment. That the first Service Pack 2 release had the blocker off is my reading of InternetNews's phrase \"a complete about face\".",
+        "The ad prices are one Adweek editor's estimate in a Fox News piece whose year I take from its contents, and the description of the present-day pop-under rests on Wikipedia alone. That the nsnull line is why a blocked call returned null in Mozilla is my reading of the code. The connections I draw between the porn-site bug and the car company, between Microsoft's rule and the Mozilla comment, and between the 2001 argument over the word \"privacy\" and Zuckerman's essay are my own."
+      ],
+      "published": "2026-11-19T22:08:31Z"
     }
   ]
 }

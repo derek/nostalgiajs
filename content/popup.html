@@ -1,0 +1,165 @@
+<p class="lede">The pop-up ad was invented to keep an advertisement off a web page, and the programmer who wrote it eventually apologised in print, in an aside.</p>
+
+<blockquote>
+<p>I wrote the code to launch the window and run an ad in it. I'm sorry. Our intentions were good.</p>
+</blockquote>
+
+<p>That is Ethan Zuckerman in "The Internet's Original Sin", an essay The Atlantic published in August 2014. In the 1990s Zuckerman worked at Tripod, which gave people free home pages and paid for them with advertising, and the essay owns up to what Tripod made along the way: "one of the most hated tools in the advertiser's toolkit: the pop-up ad." The Atlantic's site would not open for me, so I'm quoting the passage as <a href="https://firstthings.com/adworld-wide-web/">First Things</a> and several news sites reproduced it that month.</p>
+
+<p>The apology is famous; forty news outlets saw to that. What I hadn't understood was nearly everything around it. The pop-up was built to put distance between an ad and a page, because an advertiser asked. The cure was argued out in a bug report about porn sites, and the rule that finally worked was suggested in that report's fifth reply, four years before Internet Explorer adopted it. And the apology sat inside an essay about something larger, which its author spent the following month trying to get people to read.</p>
+
+<h2>A banner on the wrong page</h2>
+
+<p>Zuckerman's <a href="https://ethanzuckerman.com/about-me/">own biography page</a> says he left graduate school in 1994 to join friends building Tripod in Williamstown, Massachusetts, as the only one of them who knew HTML. The site was meant to offer "tools for life" to people in their twenties. What caught on was the free home page, and somebody had to pay for it. In <a href="https://ethanzuckerman.com/2014/09/17/a-public-apology-on-screwing-up-by-not-questioning-assumptions-my-talk-at-bif10/">a talk he posted in September 2014</a>, Zuckerman explains the choice plainly: most people didn't yet know why they would want a home page, so they were not going to pay for one, and "we ended up with the only business model we could think of", the one broadcast television used. Tripod put banners on its users' pages.</p>
+
+<p>The weakness of that arrangement is that the advertiser buys space on pages nobody at the company has read. The Atlantic passage says Tripod came up with the pop-up "when a major car company freaked out that they'd bought a banner ad on a page that celebrated anal sex." So the ad moved into a small window of its own, beside the page instead of on it.</p>
+
+<p>How much of this was Zuckerman's? <a href="https://www.engadget.com/2014-08-14-the-creator-of-the-pop-up-ad-says-sorry.html">Engadget quoted</a> what he told Wired that week: he had deployed what was "probably" the first pop-up, and had written both the JavaScript and the server-side Perl that launched it. The hedge is his. The biography page is more careful still, and it gives a date and a second motive:</p>
+
+<blockquote>
+<p>I designed a vertically-oriented popup window that included navigation tools and an ad for inclusion on webpages at some point in late 1996 or early 1997. It was intended to be less intrusive than inserting an ad into the middle of a user's homepage.</p>
+</blockquote>
+
+<p>The same paragraph declines the title of inventor and ends "the fault is at least in part mine, and I'm sorry. :-)" The page carries a 2013 date and has been edited since, so I can't tell when that was written. Put the two accounts together and the window was a partition serving both sides: the car company stayed off the page, and the page stayed clear of the car company. I'd call that brand safety, done with a second window.</p>
+
+<p>The JavaScript was the easy part. Netscape's <a href="https://docs.oracle.com/cd/E19957-01/816-6408-10/window.htm">reference for the window object</a> lists the <code>open</code> method as "Implemented in JavaScript 1.0", and the <a href="https://docs.oracle.com/cd/E19957-01/816-6409-10/windows.htm">1999 edition of its JavaScript guide</a> teaches it in one line, then adds the options that made a window small and bare:</p>
+
+<pre tabindex="0"><code>msgWindow=window.open("sesame.html")
+
+msgWindow=window.open
+   ("sesame.html","displayWindow","toolbar=no,scrollbars=yes")</code></pre>
+
+<p>Nothing in either statement consults the person at the keyboard. A script could call <code>open</code> as a page loaded or as it closed: the same reference documents <code>onLoad</code> and <code>onUnload</code> handlers, and those two events are where the rest of this story happens. I found no copy of Tripod's own script, so I can't show the original.</p>
+
+<h2>Why the windows multiplied</h2>
+
+<p>The pop-up spread when the money went. A <a href="https://www.foxnews.com/story/pop-under-ads-click-off-web-surfers">Fox News report from 2001</a> has Kipp Cheng, an editor at Adweek, putting the price of a thousand ad views at about $85 in 2000 and $1 to $1.50 a year later. That is one editor's estimate, but a publisher facing anything like it sells whatever still pays. In the first half of 2001 a company called X10 bought "pop-under" ads, which opened behind the page, for a small video camera. Fox reported that x10.com was the fifth most visited site on the internet that May, with nearly 30 million visitors, "or, rather, the site went to 30 million unique visitors." In June <a href="https://www.internetnews.com/marketing/pop-under-ads-catching-on-as-more-advertisers-take-the-bait/">InternetNews reported</a> that New York Times Digital was adding the pop-under to its regular offering.</p>
+
+<p>The first force, then, was desperation, and the trade said so: "Part of it is the industry got a little bit desperate", an advertising researcher told <a href="https://www.internetnews.com/marketing/are-pop-ups-doomed/">InternetNews in December 2002</a>. X10's own defence was that this kind of advertising pays the running costs of the sites you visit for free, which is Tripod's bargain restated by a camera company.</p>
+
+<p>The second was that the format seemed to work. In the same article Orbitz, which Nielsen//NetRatings ranked the second most frequent user of pop-ups, said people who clicked its pop-unders bought at a rate "extremely high compared to other forms of advertising", and NYTimes.com said it had raised its pop-up rates for 2003. Both capped how often a reader saw one. Orbitz answered complaints by recommending a free pop-up blocker, which is sporting of the number two advertiser in the format.</p>
+
+<p>The third was the platform. <code>window.open</code> had no idea who was asking and, as Jesse Ruderman put it in a Mozilla bug, "is not standardized anywhere". Unless you installed a filter or had a browser with a setting for windows, the switch you were left with was <a href="../off-switch/">the one that turned JavaScript off</a> altogether.</p>
+
+<h2>A bug report about porn</h2>
+
+<p>Mozilla had been asked before. <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=9307">A request from July 1999</a> says its author had read that Opera could already refuse new windows, and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=18441">another that November</a> complains of advertisements that kept popping up after being closed. Both were later folded into the report that drew the votes, whose author was thinking about the same kind of page as the car company. On 26 February 2000 Jesse Ruderman opened <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=29346">bug 29346</a>, "Prevent repeating pop-up windows", like this:</p>
+
+<blockquote>
+<p>Since netscape has been established as the leading porn browser (because of its handy "close all" feature, which is now called "quit"), it should also be set up to easily disallow a porn site from opening lots of new windows, each of which has javascript to open more windows (on open and/or on close events), etc.</p>
+</blockquote>
+
+<p>Ruderman added that such a site could be impossible to leave, and proposed an allowance of two pop-ups per site. A month later Warren Harris filed <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=33448">a companion bug</a> about windows that reopened as you closed them, and later explained its priority: "when you're surfing porn, this is the number one bug you want to have fixed." The pop-up was written to get an advertiser away from this sort of page. Three years on, this sort of page was where it had become unbearable.</p>
+
+<p>Four days into Ruderman's bug, a commenter offered something simpler than an allowance: restrict <code>open()</code> to calls that user input had triggered. Ruderman saw the hole at once, which was that moving the mouse counts as input, and the commenter tightened the wording to "events that require explicit user action to visible elements of a page."</p>
+
+<p>Nobody built it. The thread ran for a year, and it is a good record of how a sensible request fails to ship. In August 2000 someone writing from a Netscape address filed it under "Future" as a "cool feature that tiny percentage of power users would love"; in fairness, the same comment says Netscape had no resources for enhancements before its release. Mitchell Stoltz, the engineer the bug was assigned to, pointed out repeatedly that a per-site block already existed in the preferences file. It had no screen, and for months its documented syntax was wrong. Blocking by event, Stoltz said, would be a large addition to the security model. In March 2001, by which time one commenter had counted 56 votes and 11 duplicates, Stoltz closed the bug, saying its purpose had become "utterly confused".</p>
+
+<h2>Good enough, in a month</h2>
+
+<p>The pop-under changed the answer. On 31 July 2001 Robert Ginda opened <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=92955">bug 92955</a>, citing the looming threat of pop-unders. Once every site carries these ads, Ginda argued, a list of banned sites is useless, so block by occasion instead: refuse <code>window.open</code> while a page is loading or unloading. Ginda called this a "good enough" solution and listed its holes in the same message, among them that a site could dodge it with <code>setTimeout</code>. A patch followed within two hours, and a better one that also covered timers under four hours after that.</p>
+
+<p>Two days later Stoltz reviewed the idea and forecast the next several years:</p>
+
+<blockquote>
+<p>This will probably block the majority of popups/popunders right now, until the advertisers get wise to it and/or we regain enough market share to make it worth their while. Then, they will open popups on mouseover, on focus, etc. In the meantime, I think this is a good idea. We'll need to make this controllable by pref, because Netscape will probably want it off.</p>
+</blockquote>
+
+<p>Stoltz took the patch over at the end of August and added the preference, and the last argument was about its name. The patch called it <code>privacy.block_open_during_load</code>. Mike Shaver objected that privacy should keep meaning personal information. Stoltz answered that pop-up ads were "a violation of my privacy (in that they are annoying, not that they steal personal info)", then gave way and renamed it <code>dom.disable_open_during_load</code>. Here is the heart of the change as Johnny Stenback posted it in review, with the diff's plus signs removed and the missing closing brace as posted:</p>
+
+<pre tabindex="0"><code>  /* If we're in a commonly abused state (top level script, running a
+   * timeout, or onload/onunload), and the preference is enabled, block
+   * the window.open().
+   */
+  if (CheckForAbusePoint()) {
+    nsCOMPtr&lt;nsIPref&gt; prefs(do_GetService(kPrefServiceCID));
+
+    if (prefs) {
+      PRBool blockOpenOnLoad = PR_FALSE;
+      prefs-&gt;GetBoolPref("privacy.block_open_during_load", &amp;blockOpenOnLoad);
+
+      if (blockOpenOnLoad) {
+#ifdef DEBUG
+        printf ("*** Blocking window.open.\n");
+#endif
+
+        *_retval = nsnull;
+
+        return NS_OK;
+    }
+  }</code></pre>
+
+<p>Stenback flagged the <code>*_retval = nsnull</code> line as important. As I read the code, it is why a blocked <code>window.open()</code> hands the calling script a null where it expected a window. The fix was checked in on 31 August, a month to the day after the report. There was no checkbox. You opened <code>prefs.js</code> and typed:</p>
+
+<pre tabindex="0"><code>user_pref("dom.disable_open_during_load", true);</code></pre>
+
+<p>It broke things, as honest fixes do. A month after check-in, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=102481">a user who spent all day in Outlook Web Access</a> reported that with the preference set, Reply closed the message and opened nothing. The bug was closed as invalid, which I read as Mozilla calling it the site's problem. By February 2002 the setting had a checkbox, and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=126224">a new bug</a> opened with a user who had unticked it and found that "Somehow, NYTIMES.COM has managed to get around this." The bug's title names the trick: an <code>onload</code> handler on an image, which the check didn't cover.</p>
+
+<h2>Microsoft turns the blocker on</h2>
+
+<p>Mozilla's fix did not slow the format down. When Netscape 7.01 arrived with pop-up blocking options in December 2002, InternetNews put Netscape's share of the market that August at 3.4 percent. In July 2003, by Nielsen//NetRatings' count, 7.3 billion pop-up ads were served, <a href="https://www.internetnews.com/marketing/pop-ups-under-siege/">up 189 percent</a> on the July before.</p>
+
+<p>Internet Explorer had nothing built in, and its users got their first relief from outside. EarthLink bundled a blocker with its software in August 2002. In June 2003 <a href="https://www.internetnews.com/marketing/googles-new-toolbar-blocks-pop-ups/">Google added one to a beta of its toolbar</a>, which InternetNews called "the first one-click option" for the browser. It blocked every pop-up whatever its purpose and played a sound effect when it did.</p>
+
+<p>Microsoft's own blocker came with Windows XP Service Pack 2, and in the first SP2 release it was not switched on. On 17 March 2004 Microsoft said it would ship switched on after all, <a href="https://www.internetnews.com/developer/windows-xp-sp2-turns-on-pop-up-blocking/">a complete reversal</a> that the company put down to significant customer feedback. Five days later an Internet Explorer developer who blogged as jeffdav <a href="https://learn.microsoft.com/en-us/archive/blogs/jeffdav/xp-sp2-rc1">described the design</a>. The team had started by blocking everything, then met the legitimate uses, such as a shop's sizing chart, and needed a rule to tell them apart: "if the user clicks a link that wants to open a new window, we allow it to open one new window." That is the commenter's idea from bug 29346, four years on. I have no evidence anyone at Microsoft had read it. My guess is that it's simply where you end up once the other rules have failed.</p>
+
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/previous-versions/ms997645(v=msdn.10)">guidance for site builders that July</a> turned the rule into documentation: a window opened as the direct result of a user's action is allowed, and a blocked call returns null. In the comments under jeffdav's post, the developer of a web chat client that opened a window whenever a friend's message arrived wrote that the new default made the product impossible. A reply there, apparently from jeffdav, advised checking what <code>window.open()</code> returned, "which all good scripts should be doing already :)".</p>
+
+<h2>The apology in parentheses</h2>
+
+<p>Ten years later Zuckerman, by then director of MIT's Center for Civic Media, wrote his Atlantic essay to argue that advertising was <a href="https://www.nbcnews.com/tech/tech-news/pop-up-ads-creator-ethan-zuckerman-im-sorry-n182096">"the original sin of the web"</a>: that paying for everything with ads had led, a step at a time, to keeping everyone under watch. The pop-up was his own exhibit. By his account in that September talk, the admission was hidden in a parenthetical comment, and his editor, Adrienne LaFrance, saw that readers would care about it far more than about three thousand words on surveillance. LaFrance interviewed him and ran a separate 300-word item.</p>
+
+<p>That item, Zuckerman writes, "lightly rewritten, appeared in about forty news outlets over the next 24 hours". Jimmy Fallon and Conan O'Brien made jokes. Abuse arrived in several languages, and he spent a week offline until only one email in five was a death threat. He is careful to call the threats tongue in cheek, and mild beside what women who write online put up with routinely. On <a href="https://www.npr.org/2014/08/18/341409795/pop-up-ad-man-fesses-to-an-internet-sin-but-hopes-to-fix-it">NPR</a>, Robert Siegel accepted the apology personally, and Zuckerman spent most of his five minutes explaining that the pop-up had not been the point.</p>
+
+<p>The reply he singled out was a tweet, which he gives approximately: "I do not accept your apology. This is your Frankenstein monster. You made it, you should kill it." He liked it enough to name the idea behind it the rat bastard theory of history, in which one person is to blame for whatever is broken, and to concede half of it: people like him should be trying to fix things.</p>
+
+<p>His own theory of the web is less satisfying and, I think, better supported by everything above. It "was built by idiots like me, doing the best we could at the time."</p>
+
+<h2>Where the pop-up went</h2>
+
+<p>The rule moved into the definition of the function. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">MDN's page for <code>window.open()</code></a> now states that pop-ups "must be opened in direct response to user input", with a separate user gesture for each call, and that the method returns null when a blocker refuses. Every example in the 1999 guide assumes the window opens. The current page tells you what you get when it doesn't.</p>
+
+<p>The preference kept the name from the argument. Firefox's <a href="https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/app/profile/firefox.js">default settings file</a> still contains, under a comment reading "Scripts &amp; Windows prefs", a line that sets <code>dom.disable_open_during_load</code> to <code>true</code>. It is on by default in Firefox now, and it is still not called privacy.</p>
+
+<p>The pop-under moved to the click. Stoltz expected mouseover and focus events. The present-day pop-under, as <a href="https://en.wikipedia.org/wiki/Pop-up_ad">Wikipedia describes it</a> (the only source I have for this), uses the one event the rule lets through: a click listener on the whole document, so that selecting a word of text counts as asking for a window.</p>
+
+<p>The ad moved into the page. Two weeks after Microsoft's about-face, a commenter on jeffdav's blog predicted: "The marketing people will just cover up the content the user wants to see with DHTML instead." A blocker that watches <code>window.open</code> has no opinion about <a href="../document-layers/">a positioned layer</a>. In August 2014 Peter Leithart began his First Things piece on Zuckerman's essay by reporting that the first thing on his screen when he clicked through to The Atlantic was a pop-up. The page where I read that lists, in its cookie notice, four cookies belonging to a plugin called Popup Maker.</p>
+
+<h2>The takeaway</h2>
+
+<p>The pop-up took one line of documented JavaScript and a business short of better ideas, and it was written by someone trying to be considerate to two parties at once: the advertiser who didn't want to be on the page, and the user whose page it was. What turned it into a plague was that <code>window.open</code> couldn't tell who was asking. The cure was to teach it one question, whether the person at the keyboard had just done something, and that took four years, a bug nobody could close cleanly, a patch its author called "good enough" and a change of mind at Microsoft.</p>
+
+<p>The window got its rule. The business that wanted the window did not, which was Zuckerman's point, and I think it has aged better than the jokes about him. In August 2001 Stoltz and Shaver argued for two hours over whether an ad you can't get away from is a privacy problem or only an annoyance, and settled it with a neutral name. Zuckerman's argument, thirteen years later, was that a web paid for by advertising had got everyone used to being watched. If that is right, I'd say the two were one problem the whole time. The preference they named is still in Firefox, set to true. The sentence that explains how it got there is still "Our intentions were good."</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li>"The Internet's Original Sin", Ethan Zuckerman, The Atlantic, August 2014: not opened, and quoted from the reproductions below</li>
+    <li><a href="https://firstthings.com/adworld-wide-web/">AdWorld Wide Web</a>, Peter J. Leithart, First Things, 2014</li>
+    <li><a href="https://ethanzuckerman.com/about-me/">About Me</a>, Ethan Zuckerman, dated 2013 and since revised</li>
+    <li><a href="https://ethanzuckerman.com/2014/09/17/a-public-apology-on-screwing-up-by-not-questioning-assumptions-my-talk-at-bif10/">A public apology – on screwing up by not questioning assumptions – my talk at #BIF10</a>, Ethan Zuckerman, 2014</li>
+    <li><a href="https://www.npr.org/2014/08/18/341409795/pop-up-ad-man-fesses-to-an-internet-sin-but-hopes-to-fix-it">Pop-Up Ad Man 'Fesses To An Internet 'Sin' — But Hopes To Fix It</a>, Robert Siegel with Ethan Zuckerman, NPR, 2014</li>
+    <li><a href="https://www.engadget.com/2014-08-14-the-creator-of-the-pop-up-ad-says-sorry.html">The man responsible for pop-up ads reveals why he cursed us</a>, Chris Velazco, Engadget, 2014</li>
+    <li><a href="https://www.nbcnews.com/tech/tech-news/pop-up-ads-creator-ethan-zuckerman-im-sorry-n182096">Pop-Up Ads Creator Ethan Zuckerman: 'I'm Sorry'</a>, Devin Coldewey, NBC News, 2014</li>
+    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6408-10/window.htm">Client-Side JavaScript Reference: window</a>, Netscape, 1999, hosted by Oracle</li>
+    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6409-10/windows.htm">Client-Side JavaScript Guide, chapter 12: Using Windows and Frames</a>, Netscape, 1999, hosted by Oracle</li>
+    <li><a href="https://www.foxnews.com/story/pop-under-ads-click-off-web-surfers">'Pop-Under' Ads Click Off Web Surfers</a>, Fox News, 2001</li>
+    <li><a href="https://www.internetnews.com/marketing/pop-under-ads-catching-on-as-more-advertisers-take-the-bait/">Pop-Under Ads Catching On, as More Advertisers Take the Bait</a>, Christopher Saunders, InternetNews, 2001</li>
+    <li><a href="https://www.internetnews.com/marketing/are-pop-ups-doomed/">Are Pop-Ups Doomed?</a>, Brian Morrissey, InternetNews, 2002</li>
+    <li><a href="https://www.internetnews.com/marketing/pop-ups-under-siege/">Pop-Ups Under Siege</a>, Brian Morrissey, InternetNews, 2003</li>
+    <li><a href="https://www.internetnews.com/marketing/googles-new-toolbar-blocks-pop-ups/">Google's New Toolbar Blocks Pop-Ups</a>, Ryan Naraine, InternetNews, 2003</li>
+    <li><a href="https://www.internetnews.com/developer/windows-xp-sp2-turns-on-pop-up-blocking/">Windows XP SP2 Turns 'On' Pop-up Blocking</a>, Ryan Naraine, InternetNews, 2004</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=9307">Bug 9307: [RFE] ability to say no to window.open</a>, Chris Booton and others, Mozilla, 1999</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=18441">Bug 18441: Switch to turn off spawning of additional windows</a>, Mozilla, 1999</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=29346">Bug 29346: Prevent repeating pop-up windows</a>, Jesse Ruderman and others, Mozilla, 2000</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=33448">Bug 33448: disable 'new window' when close box clicked</a>, Warren Harris and others, Mozilla, 2000</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=92955">Bug 92955: Disable window.open from onload and onunload</a>, Robert Ginda, Mitchell Stoltz and others, Mozilla, 2001</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=102481">Bug 102481: Outlook Web Access - "reply" breaks after disabling pop-ups</a>, David Gerard and others, Mozilla, 2001</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=126224">Bug 126224: (NY Times) Web sites can create pop-up windows using img onload even if unrequested window is blocked</a>, Mozilla, 2002</li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/jeffdav/xp-sp2-rc1">XP SP2 RC1</a>, jeffdav, Microsoft, 2004</li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/ms997645(v=msdn.10)">Fine-Tune Your Web Site for Windows XP Service Pack 2</a>, Microsoft, 2004</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">Window: open() method</a>, MDN</li>
+    <li><a href="https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/app/profile/firefox.js">firefox.js, the default preferences of the Firefox browser</a>, Mozilla</li>
+    <li><a href="https://en.wikipedia.org/wiki/Pop-up_ad">Pop-up ad</a>, Wikipedia</li>
+  </ul>
+</section>
