@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Samy worm: a million friends in 20 hours · Nostalgia.js</title>
+<meta name="description" content="In October 2005 a 19-year-old got JavaScript past MySpace's filter that sent him a friend request, named him the viewer's hero and copied itself to each viewer's profile; his counter passed a million in a day, the site went down, and he pleaded guilty and gave his next conference talk with someone else working the computer.">
+<link rel="canonical" href="https://derek.io/nostalgiajs/essays/samy-worm/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Samy worm: a million friends in 20 hours">
+<meta property="og:description" content="In October 2005 a 19-year-old got JavaScript past MySpace's filter that sent him a friend request, named him the viewer's hero and copied itself to each viewer's profile; his counter passed a million in a day, the site went down, and he pleaded guilty and gave his next conference talk with someone else working the computer.">
+<meta property="og:url" content="https://derek.io/nostalgiajs/essays/samy-worm/">
+<meta property="og:image" content="https://derek.io/nostalgiajs/og/samy-worm.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../../feed.xml">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WX44MXWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<script data-goatcounter="https://derek-io-nostalgiajs.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../../">Nostalgia.js<span>Essays on the Early Web</span></a>
+    <picture>
+      <source srcset="../../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../../">Essays</a>
+    <a href="../../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">People and culture · 2005 to today · 6 min read</p>
+      <div class="title">
+        <img src="../../icons/samy-worm.svg" width="64" height="64" alt="">
+        <h1>The Samy worm: a million friends in 20 hours</h1>
+      </div>
+
+<p class="lede">On 4 October 2005 a 19-year-old in Los Angeles released a script meant to win him a few friends on MySpace, and by that evening his profile showed more than a million friend requests and the site was down for maintenance.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#thirteen-photos">Thirteen photos</a></li>
+          <li><a href="#a-filter-beaten-one-word-at-a-time">A filter beaten one word at a time</a></li>
+          <li><a href="#the-morning-the-math-showed-up">The morning the math showed up</a></li>
+          <li><a href="#xss-after-samy">XSS after Samy</a></li>
+          <li><a href="#what-the-worm-cost-kamkar">What the worm cost Kamkar</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<blockquote>
+<p>my grandma of course ... but most of all, samy is my hero.</p>
+</blockquote>
+
+<p>The first four words were typed by a MySpace user into the "Heroes" box of their profile. The rest arrived without them. A week later a commenter relayed that user's puzzled note under <a href="https://samy.pl/myspace/">Samy Kamkar's own account of the day</a>, and by then the same eight words sat at the end of heroes lists all over the site. Each one had been added by JavaScript running in the browser of a logged-in member who had done nothing more than look at somebody's profile.</p>
+
+<p>Kamkar wrote that JavaScript, and published a <a href="https://samy.pl/myspace/tech.html">technical write-up</a> of it once MySpace had closed the hole.</p>
+
+<h2 id="thirteen-photos">Thirteen photos</h2>
+
+<p>MySpace in 2005 let you decorate. A profile could carry your own HTML, which is why so many of them were yellow text on a blue background, and the site tried to keep that freedom safe with a filter that stripped out anything that could run code. By Kamkar's account it allowed a short list of tags and refused scripts, event handlers and the obvious ways of smuggling JavaScript in.</p>
+
+<p>Kamkar had opened an account a few months earlier because his friends were there. He had left school at 16 and was writing software for a living, and what caught his attention was the limits. The headline field was too short for the line he wanted. The photos page stopped at twelve. So he spent, by the estimate he gave the blogger Philipp Lenssen that month, an hour or two a day for about a week poking at what the site would accept, and got thirteen photos onto a page meant for twelve.</p>
+
+<p>Then the goal shifted. He found he could make a visitor's browser add him to their list of heroes, and send him a friend request (his accounts differ on which came first). The last idea arrived late. "It was only in the last day that I thought that this could be a worm," he told <a href="https://abcnews.go.com/amp/Technology/PCWorld/story?id=3891906">Robert McMillan of IDG News Service</a> in 2007.</p>
+
+<h2 id="a-filter-beaten-one-word-at-a-time">A filter beaten one word at a time</h2>
+
+<p>Kamkar's write-up reads as a list of small defeats turned around: the filter blocked one thing, he found a form the browser would still accept, the filter blocked that too, and so on down the page. In <a href="https://blogoscoped.com/archive/2005-10-14-n81.html">an interview Lenssen published on 14 October</a> he would not blame the site. "The hole was actually not in MySpace," he said; the site had done a good job of blocking malicious code. What let his code run was browsers being lenient about where they would execute script. He had tested it only in Internet Explorer.</p>
+
+<p>The filter stripped the word "javascript" wherever it appeared, so Kamkar relied on a browser quirk that read a broken-up version of the word as the real thing. It also removed other words and the quote characters his code needed, so the code assembled the words from pieces as it ran and produced the quotes from character codes.</p>
+
+<p>Past the filter, the worm had the visitor's own browser talk to MySpace in the background with <code>XMLHttpRequest</code>, the machinery that had been named <a href="../xmlhttprequest/">Ajax</a> that February, so every request carried the member's own session. The code sent Kamkar a friend request, appended the hero line, and then copied itself into the viewer's profile so the next visitor would run it too. The worm was, he told Lenssen, "my intro to and first time using Ajax".</p>
+
+<h2 id="the-morning-the-math-showed-up">The morning the math showed up</h2>
+
+<p>He released it a little after midnight and went to bed. The log he posted when the day was over records a person being overtaken by his own program. At 8:35 in the morning he had 221 friend requests, and worked out from them that two hundred people had been infected in eight hours, which he reckoned meant six hundred new friends a day. An hour later the number had more than doubled, and the penny dropped: "Oh wait, it's exponential, isn't it. Oops." I like the wrong sum better than the right one. It is what a person who expected nothing would calculate.</p>
+
+<p>Ten years on, Kamkar told <a href="https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/">Motherboard</a> that he emailed MySpace anonymously that morning with a way to stop the worm and never heard back. By early afternoon he had 2,503 friends and more than 6,000 requests, and people were writing to say they had reported him for hacking them. He cancelled his account, which he knew would stop nothing. Members who removed him from their friends were reinfected at the next profile they looked at. What frightened him, the log says, was "FOX's legal department": by his telling MySpace had been bought a few weeks before for 580 million dollars. Then he went out for a burrito.</p>
+
+<p>When he checked again at 6:20 in the evening his counter read 917,084, and it climbed past a million while he watched, before his profile went dark. "I have hit 1,000,000+ users. In less than 20 hours." Within the hour MySpace itself was down, and by his log it stayed down until about 9:30 while the worm was cleaned out. When the site came back the self-copying code was gone, but his girlfriend's profile, he wrote, was one of a great many where the hero line remained.</p>
+
+<h2 id="xss-after-samy">XSS after Samy</h2>
+
+<p>The worm gave cross-site scripting its public demonstration. Security people had known for some time that a site could be made to serve one member's script to another, and <a href="https://www.zdnet.com/article/samy-opens-new-front-in-worm-war/">ZDNet's report of 17 October</a> has Scott Chasin, chief technology officer of MX Logic, calling this the first worm he had come across that was built on the flaw. Jeremiah Grossman, the founder of WhiteHat Security, told Motherboard in 2015 that everyone in the trade knew every site had the weakness and nobody had shown what could be done with it. "Samy did, and he changed the industry forever."</p>
+
+<p>The defence took his name. The Open Web Application Security Project started a library to let sites accept users' HTML without accepting their scripts, and called it the <a href="https://owasp.org/www-project-antisamy/">AntiSamy Project</a>.</p>
+
+<p>The code was copied. Kamkar told McMillan in 2007 that he had heard of other worms built on his, with a few things changed, and that the restrictions MySpace had added since kept them from getting far.</p>
+
+<h2 id="what-the-worm-cost-kamkar">What the worm cost Kamkar</h2>
+
+<p>About six months after the worm, by Motherboard's account, the Secret Service and an LAPD task force searched his apartment and office and took his computers. The Los Angeles District Attorney pursued him under California's computer-crime law, and after about a year of negotiation between lawyers he pleaded guilty in January 2007. Kamkar says he was never arrested. <a href="https://www.computerworld.com/article/1474032/as-web-2-0-evolves-security-becomes-an-issue.html">Computerworld</a> gives the sentence as three years' probation, and a <a href="https://it.slashdot.org/story/07/02/04/1439222/myspace-worm-creator-sentenced">Slashdot summary</a> adds community service and restitution to MySpace. McMillan reported that he could use computers only for work; Kamkar told Motherboard it was one registered machine with no internet. I think that is a steep bill for a prank that deleted nothing, though Kamkar told McMillan he could see the prosecutors' side of it.</p>
+
+<p>In November 2007 Kamkar spoke at the OWASP application-security conference in San Jose, where McMillan writes that he was treated like a celebrity. He could not run his own slides. He had dictated them to a friend, and they were shown on a computer operated by a conference staffer. Asked by McMillan whether he regretted the worm, he said: "I wish I could take it back." In 2008, Motherboard reports, a court lifted the probation, and Kamkar went to an Apple Store, bought a laptop and took it to the nearest Starbucks.</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>MySpace's filter was good, by the account of the person who beat it, and it lost anyway, because a filter has to guess what every browser will agree to run and the browser only has to be generous once. After that, one stranger's script in a member's session could do whatever the member could. The worm proved it with a friend request and eight words, and the proof was paid for mostly by its author.</p>
+
+<p>Nine days after the worm, <a href="https://blogoscoped.com/archive/2005-10-13-n73.html">Lenssen searched MSN</a> for "samy is my hero" on myspace.com and got 2,533 results. One of them, I assume, was under somebody's grandma.</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>The million is Kamkar's own count of friend requests on his profile, from the log he posted, and not a number MySpace published. The later reports I read give about the same figure and none shows a source of its own.</li>
+    <li>The release time of a little after midnight follows Motherboard and the gaps in Kamkar's log, whose first entry says &quot;pm&quot; in what looks like a typo. The length of the outage is from that log alone; the fact check found a report in The Register of 17 October 2005, which I have not read, that describes a weekend outage instead.</li>
+    <li>Kamkar's accounts disagree with each other: about a week of work in the 2005 interview and &quot;a few days&quot; in 2007, and the hero step first in his 2005 account but the friend step first in 2007. The anonymous warning to MySpace appears only in what he told Motherboard in 2015, not in the log.</li>
+    <li>The plea is dated January 2007 by McMillan; I could not open a court record or MySpace's statement, and I left out the word &quot;felony&quot;, which I found only second-hand. Sources disagree on the terms: computers for work only, or one registered machine with no internet, and community service given as three months, 90 days or 720 hours. That the probation was lifted in 2008 is Motherboard's report alone.</li>
+    <li>That the search came about six months after the worm, by the Secret Service and an LAPD task force, comes only from Motherboard's 2015 article, as does Kamkar's statement that he was never arrested; McMillan's questions in 2007 speak of an arrest and an indictment.</li>
+    <li>That AntiSamy was named for the worm rests on Motherboard; the OWASP page I link describes the library and does not explain the name. The remark about a filter having to guess what every browser will run is my own reading of Kamkar's write-up.</li>
+    <li>Grossman's quotation about the worm rests on a single source, the Motherboard retrospective.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://samy.pl/myspace/">The MySpace Worm</a>, Samy Kamkar, 2005, his hour-by-hour account of the day <a class="archived" href="https://web.archive.org/web/20250502014520/https://samy.pl/myspace/">(archived)</a></li>
+    <li><a href="https://samy.pl/myspace/tech.html">Technical explanation of The MySpace Worm</a>, Samy Kamkar, 2005, published after MySpace fixed the hole <a class="archived" href="https://web.archive.org/web/20250602024847/https://samy.pl/myspace/tech.html">(archived)</a></li>
+    <li><a href="https://blogoscoped.com/archive/2005-10-14-n81.html">Samy, Their Hero</a>, interview by Philipp Lenssen, Google Blogoscoped, 2005 <a class="archived" href="https://web.archive.org/web/20261031072933/https://blogoscoped.com/archive/2005-10-14-n81.html">(archived)</a></li>
+    <li><a href="https://blogoscoped.com/archive/2005-10-13-n73.html">How to Make 1 Million Friends on MySpace</a>, Philipp Lenssen, Google Blogoscoped, 2005 <a class="archived" href="https://web.archive.org/web/20260831215950/https://blogoscoped.com/archive/2005-10-13-n73.html">(archived)</a></li>
+    <li><a href="https://www.zdnet.com/article/samy-opens-new-front-in-worm-war/">Samy opens new front in worm war</a>, Munir Kotadia, ZDNet, 2005 <a class="archived" href="https://web.archive.org/web/20210919184418/https://www.zdnet.com/article/samy-opens-new-front-in-worm-war/">(archived)</a></li>
+    <li><a href="https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/">The MySpace Worm that Changed the Internet Forever</a>, Lorenzo Franceschi-Bicchierai, Motherboard, 2015 <a class="archived" href="https://web.archive.org/web/20261104000700/https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/">(archived)</a></li>
+    <li><a href="https://abcnews.go.com/amp/Technology/PCWorld/story?id=3891906">MySpace Hacker Tells His Story</a>, Robert McMillan, IDG News Service, as carried by ABC News, 2007 <a class="archived" href="https://web.archive.org/web/20221008010148/https://abcnews.go.com/amp/Technology/PCWorld/story?id=3891906">(archived)</a></li>
+    <li><a href="https://it.slashdot.org/story/07/02/04/1439222/myspace-worm-creator-sentenced">MySpace Worm Creator Sentenced</a>, Slashdot, 2007 <a class="archived" href="https://web.archive.org/web/20260111024847/https://it.slashdot.org/story/07/02/04/1439222/myspace-worm-creator-sentenced">(archived)</a></li>
+    <li><a href="https://www.computerworld.com/article/1474032/as-web-2-0-evolves-security-becomes-an-issue.html">As Web 2.0 evolves, security becomes an issue</a>, Robert McMillan, Computerworld, 2007</li>
+    <li><a href="https://owasp.org/www-project-antisamy/">OWASP AntiSamy Project</a>, OWASP <a class="archived" href="https://web.archive.org/web/20260903194636/https://owasp.org/www-project-antisamy/">(archived)</a></li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+The+Samy+worm%3A+a+million+friends+in+20+hours&amp;body=Essay%3A+https%3A%2F%2Fderek.io%2Fnostalgiajs%2Fessays%2Fsamy-worm%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/samy-worm.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/samy-worm.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../xmlhttprequest/">XMLHttpRequest: six years waiting for a name</a> <span>Browsers and the platform · 1998 to 2006</span></li>
+        <li><a href="../cookies/">Cookies: the standard said off, the browsers said on</a> <span>Browsers and the platform · 1994 to today</span></li>
+        <li><a href="../popup/">The pop-up ad: a separate window for good intentions</a> <span>Browsers and the platform · 1996 to 2014</span></li>
+      </ul>
+      <p><a href="../../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../../"><img src="../../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · Essays on the Early Web · <a href="../../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>

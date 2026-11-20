@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- The Samy worm (2005): one MySpace profile script that made a million friends in a day, and what happened to its author
 - Opera's "Bork" edition (2003): Opera says Microsoft's site is sending it broken pages, and answers with a build that turns that site into Swedish Chef gibberish
 - IE6: the box model, `hasLayout` and conditional comments
 - CSS Zen Garden (2003) and the tables-versus-CSS argument

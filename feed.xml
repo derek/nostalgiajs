@@ -6,7 +6,83 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Fri, 20 Nov 2026 13:41:34 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 21:54:12 GMT</lastBuildDate>
+  <item>
+    <title>The Samy worm: a million friends in 20 hours</title>
+    <link>https://derek.io/nostalgiajs/essays/samy-worm/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/samy-worm/</guid>
+    <pubDate>Fri, 20 Nov 2026 21:54:12 GMT</pubDate>
+    <description>In October 2005 a 19-year-old got JavaScript past MySpace's filter that sent him a friend request, named him the viewer's hero and copied itself to each viewer's profile; his counter passed a million in a day, the site went down, and he pleaded guilty and gave his next conference talk with someone else working the computer.</description>
+    <content:encoded><![CDATA[<p class="lede">On 4 October 2005 a 19-year-old in Los Angeles released a script meant to win him a few friends on MySpace, and by that evening his profile showed more than a million friend requests and the site was down for maintenance.</p>
+
+<blockquote>
+<p>my grandma of course ... but most of all, samy is my hero.</p>
+</blockquote>
+
+<p>The first four words were typed by a MySpace user into the "Heroes" box of their profile. The rest arrived without them. A week later a commenter relayed that user's puzzled note under <a href="https://samy.pl/myspace/">Samy Kamkar's own account of the day</a>, and by then the same eight words sat at the end of heroes lists all over the site. Each one had been added by JavaScript running in the browser of a logged-in member who had done nothing more than look at somebody's profile.</p>
+
+<p>Kamkar wrote that JavaScript, and published a <a href="https://samy.pl/myspace/tech.html">technical write-up</a> of it once MySpace had closed the hole.</p>
+
+<h2>Thirteen photos</h2>
+
+<p>MySpace in 2005 let you decorate. A profile could carry your own HTML, which is why so many of them were yellow text on a blue background, and the site tried to keep that freedom safe with a filter that stripped out anything that could run code. By Kamkar's account it allowed a short list of tags and refused scripts, event handlers and the obvious ways of smuggling JavaScript in.</p>
+
+<p>Kamkar had opened an account a few months earlier because his friends were there. He had left school at 16 and was writing software for a living, and what caught his attention was the limits. The headline field was too short for the line he wanted. The photos page stopped at twelve. So he spent, by the estimate he gave the blogger Philipp Lenssen that month, an hour or two a day for about a week poking at what the site would accept, and got thirteen photos onto a page meant for twelve.</p>
+
+<p>Then the goal shifted. He found he could make a visitor's browser add him to their list of heroes, and send him a friend request (his accounts differ on which came first). The last idea arrived late. "It was only in the last day that I thought that this could be a worm," he told <a href="https://abcnews.go.com/amp/Technology/PCWorld/story?id=3891906">Robert McMillan of IDG News Service</a> in 2007.</p>
+
+<h2>A filter beaten one word at a time</h2>
+
+<p>Kamkar's write-up reads as a list of small defeats turned around: the filter blocked one thing, he found a form the browser would still accept, the filter blocked that too, and so on down the page. In <a href="https://blogoscoped.com/archive/2005-10-14-n81.html">an interview Lenssen published on 14 October</a> he would not blame the site. "The hole was actually not in MySpace," he said; the site had done a good job of blocking malicious code. What let his code run was browsers being lenient about where they would execute script. He had tested it only in Internet Explorer.</p>
+
+<p>The filter stripped the word "javascript" wherever it appeared, so Kamkar relied on a browser quirk that read a broken-up version of the word as the real thing. It also removed other words and the quote characters his code needed, so the code assembled the words from pieces as it ran and produced the quotes from character codes.</p>
+
+<p>Past the filter, the worm had the visitor's own browser talk to MySpace in the background with <code>XMLHttpRequest</code>, the machinery that had been named <a href="https://derek.io/nostalgiajs/essays/xmlhttprequest/">Ajax</a> that February, so every request carried the member's own session. The code sent Kamkar a friend request, appended the hero line, and then copied itself into the viewer's profile so the next visitor would run it too. The worm was, he told Lenssen, "my intro to and first time using Ajax".</p>
+
+<h2>The morning the math showed up</h2>
+
+<p>He released it a little after midnight and went to bed. The log he posted when the day was over records a person being overtaken by his own program. At 8:35 in the morning he had 221 friend requests, and worked out from them that two hundred people had been infected in eight hours, which he reckoned meant six hundred new friends a day. An hour later the number had more than doubled, and the penny dropped: "Oh wait, it's exponential, isn't it. Oops." I like the wrong sum better than the right one. It is what a person who expected nothing would calculate.</p>
+
+<p>Ten years on, Kamkar told <a href="https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/">Motherboard</a> that he emailed MySpace anonymously that morning with a way to stop the worm and never heard back. By early afternoon he had 2,503 friends and more than 6,000 requests, and people were writing to say they had reported him for hacking them. He cancelled his account, which he knew would stop nothing. Members who removed him from their friends were reinfected at the next profile they looked at. What frightened him, the log says, was "FOX's legal department": by his telling MySpace had been bought a few weeks before for 580 million dollars. Then he went out for a burrito.</p>
+
+<p>When he checked again at 6:20 in the evening his counter read 917,084, and it climbed past a million while he watched, before his profile went dark. "I have hit 1,000,000+ users. In less than 20 hours." Within the hour MySpace itself was down, and by his log it stayed down until about 9:30 while the worm was cleaned out. When the site came back the self-copying code was gone, but his girlfriend's profile, he wrote, was one of a great many where the hero line remained.</p>
+
+<h2>XSS after Samy</h2>
+
+<p>The worm gave cross-site scripting its public demonstration. Security people had known for some time that a site could be made to serve one member's script to another, and <a href="https://www.zdnet.com/article/samy-opens-new-front-in-worm-war/">ZDNet's report of 17 October</a> has Scott Chasin, chief technology officer of MX Logic, calling this the first worm he had come across that was built on the flaw. Jeremiah Grossman, the founder of WhiteHat Security, told Motherboard in 2015 that everyone in the trade knew every site had the weakness and nobody had shown what could be done with it. "Samy did, and he changed the industry forever."</p>
+
+<p>The defence took his name. The Open Web Application Security Project started a library to let sites accept users' HTML without accepting their scripts, and called it the <a href="https://owasp.org/www-project-antisamy/">AntiSamy Project</a>.</p>
+
+<p>The code was copied. Kamkar told McMillan in 2007 that he had heard of other worms built on his, with a few things changed, and that the restrictions MySpace had added since kept them from getting far.</p>
+
+<h2>What the worm cost Kamkar</h2>
+
+<p>About six months after the worm, by Motherboard's account, the Secret Service and an LAPD task force searched his apartment and office and took his computers. The Los Angeles District Attorney pursued him under California's computer-crime law, and after about a year of negotiation between lawyers he pleaded guilty in January 2007. Kamkar says he was never arrested. <a href="https://www.computerworld.com/article/1474032/as-web-2-0-evolves-security-becomes-an-issue.html">Computerworld</a> gives the sentence as three years' probation, and a <a href="https://it.slashdot.org/story/07/02/04/1439222/myspace-worm-creator-sentenced">Slashdot summary</a> adds community service and restitution to MySpace. McMillan reported that he could use computers only for work; Kamkar told Motherboard it was one registered machine with no internet. I think that is a steep bill for a prank that deleted nothing, though Kamkar told McMillan he could see the prosecutors' side of it.</p>
+
+<p>In November 2007 Kamkar spoke at the OWASP application-security conference in San Jose, where McMillan writes that he was treated like a celebrity. He could not run his own slides. He had dictated them to a friend, and they were shown on a computer operated by a conference staffer. Asked by McMillan whether he regretted the worm, he said: "I wish I could take it back." In 2008, Motherboard reports, a court lifted the probation, and Kamkar went to an Apple Store, bought a laptop and took it to the nearest Starbucks.</p>
+
+<h2>The takeaway</h2>
+
+<p>MySpace's filter was good, by the account of the person who beat it, and it lost anyway, because a filter has to guess what every browser will agree to run and the browser only has to be generous once. After that, one stranger's script in a member's session could do whatever the member could. The worm proved it with a friend request and eight words, and the proof was paid for mostly by its author.</p>
+
+<p>Nine days after the worm, <a href="https://blogoscoped.com/archive/2005-10-13-n73.html">Lenssen searched MSN</a> for "samy is my hero" on myspace.com and got 2,533 results. One of them, I assume, was under somebody's grandma.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://samy.pl/myspace/">The MySpace Worm</a>, Samy Kamkar, 2005, his hour-by-hour account of the day <a class="archived" href="https://web.archive.org/web/20250502014520/https://samy.pl/myspace/">(archived)</a></li>
+    <li><a href="https://samy.pl/myspace/tech.html">Technical explanation of The MySpace Worm</a>, Samy Kamkar, 2005, published after MySpace fixed the hole <a class="archived" href="https://web.archive.org/web/20250602024847/https://samy.pl/myspace/tech.html">(archived)</a></li>
+    <li><a href="https://blogoscoped.com/archive/2005-10-14-n81.html">Samy, Their Hero</a>, interview by Philipp Lenssen, Google Blogoscoped, 2005 <a class="archived" href="https://web.archive.org/web/20261031072933/https://blogoscoped.com/archive/2005-10-14-n81.html">(archived)</a></li>
+    <li><a href="https://blogoscoped.com/archive/2005-10-13-n73.html">How to Make 1 Million Friends on MySpace</a>, Philipp Lenssen, Google Blogoscoped, 2005 <a class="archived" href="https://web.archive.org/web/20260831215950/https://blogoscoped.com/archive/2005-10-13-n73.html">(archived)</a></li>
+    <li><a href="https://www.zdnet.com/article/samy-opens-new-front-in-worm-war/">Samy opens new front in worm war</a>, Munir Kotadia, ZDNet, 2005 <a class="archived" href="https://web.archive.org/web/20210919184418/https://www.zdnet.com/article/samy-opens-new-front-in-worm-war/">(archived)</a></li>
+    <li><a href="https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/">The MySpace Worm that Changed the Internet Forever</a>, Lorenzo Franceschi-Bicchierai, Motherboard, 2015 <a class="archived" href="https://web.archive.org/web/20261104000700/https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/">(archived)</a></li>
+    <li><a href="https://abcnews.go.com/amp/Technology/PCWorld/story?id=3891906">MySpace Hacker Tells His Story</a>, Robert McMillan, IDG News Service, as carried by ABC News, 2007 <a class="archived" href="https://web.archive.org/web/20221008010148/https://abcnews.go.com/amp/Technology/PCWorld/story?id=3891906">(archived)</a></li>
+    <li><a href="https://it.slashdot.org/story/07/02/04/1439222/myspace-worm-creator-sentenced">MySpace Worm Creator Sentenced</a>, Slashdot, 2007 <a class="archived" href="https://web.archive.org/web/20260111024847/https://it.slashdot.org/story/07/02/04/1439222/myspace-worm-creator-sentenced">(archived)</a></li>
+    <li><a href="https://www.computerworld.com/article/1474032/as-web-2-0-evolves-security-becomes-an-issue.html">As Web 2.0 evolves, security becomes an issue</a>, Robert McMillan, Computerworld, 2007</li>
+    <li><a href="https://owasp.org/www-project-antisamy/">OWASP AntiSamy Project</a>, OWASP <a class="archived" href="https://web.archive.org/web/20260903194636/https://owasp.org/www-project-antisamy/">(archived)</a></li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>The WHATWG: eight for, eleven against</title>
     <link>https://derek.io/nostalgiajs/essays/whatwg/</link>
@@ -114,36 +190,36 @@
 <section class="sources" aria-labelledby="sources-h">
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
-    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/">W3C Workshop on Web Applications and Compound Documents</a>, W3C, 2004</li>
-    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040601.html">Workshop minutes, day 1</a>, Leigh Klotz for the W3C, 2004</li>
-    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040602.html">Workshop minutes, day 2</a>, Leigh Klotz for the W3C, 2004</li>
-    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/summary.html">Workshop summary</a>, Dean Jackson, W3C, 2004</li>
-    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html">Position Paper for the W3C Workshop on Web Applications and Compound Documents</a>, the Mozilla Foundation and Opera Software, 2004</li>
-    <li><a href="http://ln.hixie.ch/?start=1074466808&amp;count=1">Void filling: Web Applications Language</a>, Ian Hickson, 2004</li>
-    <li><a href="http://ln.hixie.ch/?start=1086158925&amp;count=1">Spring 2004 Travelog: Part 8 (First Day of the Workshop)</a>, Ian Hickson, 2004</li>
-    <li><a href="http://ln.hixie.ch/?start=1086387609&amp;count=1">Spring 2004 Travelog: Part 9 (Return to Europe)</a>, Ian Hickson, 2004</li>
-    <li><a href="http://ln.hixie.ch/?count=1&amp;start=1088526392">State of the WHAT</a>, Ian Hickson, 2004</li>
-    <li><a href="https://ian.hixie.ch/career/resume.html">Résumé</a>, Ian Hickson</li>
-    <li><a href="https://lists.whatwg.org/pipermail/whatwg-whatwg.org/2004-June/042278.html">WHAT open mailing list announcement</a>, Ian Hickson, WHATWG mailing list, 2004</li>
-    <li><a href="https://whatwg.org/specs/web-forms/2004-06-27-call-for-comments/">Web Forms 2.0, call for comments</a>, Ian Hickson, editor, WHATWG, 2004</li>
-    <li><a href="https://brendaneich.com/2004/06/the-non-world-non-wide-non-web/">The non-world non-wide non-web</a>, Brendan Eich, 2004, with Robin Berjon's comment</li>
-    <li><a href="https://dbaron.org/log/2004-06">Weblog, June 2004</a>, David Baron, 2004</li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/">W3C Workshop on Web Applications and Compound Documents</a>, W3C, 2004 <a class="archived" href="https://web.archive.org/web/20261118091059/https://www.w3.org/2004/04/webapps-cdf-ws/">(archived)</a></li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040601.html">Workshop minutes, day 1</a>, Leigh Klotz for the W3C, 2004 <a class="archived" href="https://web.archive.org/web/20261101081218/https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040601.html">(archived)</a></li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040602.html">Workshop minutes, day 2</a>, Leigh Klotz for the W3C, 2004 <a class="archived" href="https://web.archive.org/web/20260312015629/https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040602.html">(archived)</a></li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/summary.html">Workshop summary</a>, Dean Jackson, W3C, 2004 <a class="archived" href="https://web.archive.org/web/20240609144048/https://www.w3.org/2004/04/webapps-cdf-ws/summary.html">(archived)</a></li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html">Position Paper for the W3C Workshop on Web Applications and Compound Documents</a>, the Mozilla Foundation and Opera Software, 2004 <a class="archived" href="https://web.archive.org/web/20261118091100/https://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html">(archived)</a></li>
+    <li><a href="http://ln.hixie.ch/?start=1074466808&amp;count=1">Void filling: Web Applications Language</a>, Ian Hickson, 2004 <a class="archived" href="https://web.archive.org/web/20260514055241/http://ln.hixie.ch/?start=1074466808&amp;count=1">(archived)</a></li>
+    <li><a href="http://ln.hixie.ch/?start=1086158925&amp;count=1">Spring 2004 Travelog: Part 8 (First Day of the Workshop)</a>, Ian Hickson, 2004 <a class="archived" href="https://web.archive.org/web/20260608120040/https://ln.hixie.ch/?start=1086158925&amp;count=1">(archived)</a></li>
+    <li><a href="http://ln.hixie.ch/?start=1086387609&amp;count=1">Spring 2004 Travelog: Part 9 (Return to Europe)</a>, Ian Hickson, 2004 <a class="archived" href="https://web.archive.org/web/20260715101929/http://ln.hixie.ch/?start=1086387609&amp;count=1">(archived)</a></li>
+    <li><a href="http://ln.hixie.ch/?count=1&amp;start=1088526392">State of the WHAT</a>, Ian Hickson, 2004 <a class="archived" href="https://web.archive.org/web/20260608114917/https://ln.hixie.ch/?start=1088526392&amp;count=1">(archived)</a></li>
+    <li><a href="https://ian.hixie.ch/career/resume.html">Résumé</a>, Ian Hickson <a class="archived" href="https://web.archive.org/web/20260516115335/http://ian.hixie.ch/career/resume.html">(archived)</a></li>
+    <li><a href="https://lists.whatwg.org/pipermail/whatwg-whatwg.org/2004-June/042278.html">WHAT open mailing list announcement</a>, Ian Hickson, WHATWG mailing list, 2004 <a class="archived" href="https://web.archive.org/web/20260210220235/https://lists.whatwg.org/pipermail/whatwg-whatwg.org/2004-June/042278.html">(archived)</a></li>
+    <li><a href="https://whatwg.org/specs/web-forms/2004-06-27-call-for-comments/">Web Forms 2.0, call for comments</a>, Ian Hickson, editor, WHATWG, 2004 <a class="archived" href="https://web.archive.org/web/20260501231959/https://whatwg.org/specs/web-forms/2004-06-27-call-for-comments/">(archived)</a></li>
+    <li><a href="https://brendaneich.com/2004/06/the-non-world-non-wide-non-web/">The non-world non-wide non-web</a>, Brendan Eich, 2004, with Robin Berjon's comment <a class="archived" href="https://web.archive.org/web/20251103233732/https://brendaneich.com/2004/06/the-non-world-non-wide-non-web/">(archived)</a></li>
+    <li><a href="https://dbaron.org/log/2004-06">Weblog, June 2004</a>, David Baron, 2004 <a class="archived" href="https://web.archive.org/web/20260529173021/https://dbaron.org/log/2004-06">(archived)</a></li>
     <li>"Reinventing HTML", Tim Berners-Lee, 2006: not linked, because the original would not load for me</li>
-    <li><a href="https://lemire.me/blog/2006/10/30/reinventing-html-or-yes-we-admit-it-xhtml-failed/">Reinventing HTML or, yes we admit it, XHTML failed</a>, Daniel Lemire, 2006</li>
-    <li><a href="https://annevankesteren.nl/2006/10/html-wg">Victory: new HTML WG</a>, Anne van Kesteren, 2006</li>
-    <li><a href="https://www.w3.org/Submission/web-forms2/">Web Forms 2.0, W3C Member Submission</a>, Opera Software and the Mozilla Foundation, 2005</li>
-    <li><a href="https://www.w3.org/TR/2006/WD-web-forms-2-20060821">Web Forms 2.0, W3C Working Draft</a>, Ian Hickson, editor, 2006</li>
-    <li><a href="https://www.w3.org/2007/03/HTML-WG-charter.html">HTML Working Group charter</a>, W3C, 2007</li>
-    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/0429.html">Proposal to Adopt HTML5</a>, Maciej Stachowiak and five others, public-html, 2007</li>
+    <li><a href="https://lemire.me/blog/2006/10/30/reinventing-html-or-yes-we-admit-it-xhtml-failed/">Reinventing HTML or, yes we admit it, XHTML failed</a>, Daniel Lemire, 2006 <a class="archived" href="https://web.archive.org/web/20230319145230/https://lemire.me/blog/2006/10/30/reinventing-html-or-yes-we-admit-it-xhtml-failed/">(archived)</a></li>
+    <li><a href="https://annevankesteren.nl/2006/10/html-wg">Victory: new HTML WG</a>, Anne van Kesteren, 2006 <a class="archived" href="https://web.archive.org/web/20260812085219/https://annevankesteren.nl/2006/10/html-wg">(archived)</a></li>
+    <li><a href="https://www.w3.org/Submission/web-forms2/">Web Forms 2.0, W3C Member Submission</a>, Opera Software and the Mozilla Foundation, 2005 <a class="archived" href="https://web.archive.org/web/20221205210607/http://www.w3.org/Submission/web-forms2/">(archived)</a></li>
+    <li><a href="https://www.w3.org/TR/2006/WD-web-forms-2-20060821">Web Forms 2.0, W3C Working Draft</a>, Ian Hickson, editor, 2006 <a class="archived" href="https://web.archive.org/web/20250804170500/https://www.w3.org/TR/2006/WD-web-forms-2-20060821/">(archived)</a></li>
+    <li><a href="https://www.w3.org/2007/03/HTML-WG-charter.html">HTML Working Group charter</a>, W3C, 2007 <a class="archived" href="https://web.archive.org/web/20261116045805/https://www.w3.org/2007/03/HTML-WG-charter.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/0429.html">Proposal to Adopt HTML5</a>, Maciej Stachowiak and five others, public-html, 2007 <a class="archived" href="https://web.archive.org/web/20261008142855/https://lists.w3.org/Archives/Public/public-html/2007Apr/0429.html">(archived)</a></li>
     <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1240.html">HTML5 proposal response</a>, Chris Wilson, public-html, 2007</li>
-    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1241.html">Re: HTML5 proposal response</a>, Ian Hickson, public-html, 2007</li>
-    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007May/0909.html">Results of HTML 5 text, editor, name questions</a>, Dan Connolly, public-html, 2007</li>
-    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007May/0911.html">Re: results of HTML 5 text, editor, name questions</a>, Ian Hickson, public-html, 2007</li>
-    <li><a href="https://blog.whatwg.org/html-is-the-new-html5">HTML is the new HTML5</a>, Ian Hickson, WHATWG blog, 2011</li>
-    <li><a href="https://www.w3.org/2014/10/html5-rec.html.en">Open Web Platform Milestone Achieved with HTML5 Recommendation</a>, W3C press release, 2014</li>
-    <li><a href="https://blog.whatwg.org/2017/12">Further working mode changes</a>, WHATWG blog, 2017</li>
-    <li><a href="https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/">W3C and WHATWG to work together to advance the open Web platform</a>, Jeff Jaffe, W3C, 2019</li>
-    <li><a href="https://www.w3.org/2019/04/WHATWG-W3C-MOU.html">Memorandum of Understanding between W3C and WHATWG</a>, 2019</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1241.html">Re: HTML5 proposal response</a>, Ian Hickson, public-html, 2007 <a class="archived" href="https://web.archive.org/web/20241210070010/https://lists.w3.org/Archives/Public/public-html/2007Apr/1241.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007May/0909.html">Results of HTML 5 text, editor, name questions</a>, Dan Connolly, public-html, 2007 <a class="archived" href="https://web.archive.org/web/20261102115731/https://lists.w3.org/Archives/Public/public-html/2007May/0909.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007May/0911.html">Re: results of HTML 5 text, editor, name questions</a>, Ian Hickson, public-html, 2007 <a class="archived" href="https://web.archive.org/web/20240720043637/https://lists.w3.org/Archives/Public/public-html/2007May/0911.html">(archived)</a></li>
+    <li><a href="https://blog.whatwg.org/html-is-the-new-html5">HTML is the new HTML5</a>, Ian Hickson, WHATWG blog, 2011 <a class="archived" href="https://web.archive.org/web/20261118023745/https://blog.whatwg.org/html-is-the-new-html5">(archived)</a></li>
+    <li><a href="https://www.w3.org/2014/10/html5-rec.html.en">Open Web Platform Milestone Achieved with HTML5 Recommendation</a>, W3C press release, 2014 <a class="archived" href="https://web.archive.org/web/20230531210506/https://www.w3.org/2014/10/html5-rec.html.en">(archived)</a></li>
+    <li><a href="https://blog.whatwg.org/2017/12">Further working mode changes</a>, WHATWG blog, 2017 <a class="archived" href="https://web.archive.org/web/20261111163232/https://blog.whatwg.org/2017/12">(archived)</a></li>
+    <li><a href="https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/">W3C and WHATWG to work together to advance the open Web platform</a>, Jeff Jaffe, W3C, 2019 <a class="archived" href="https://web.archive.org/web/20230529101319/https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/">(archived)</a></li>
+    <li><a href="https://www.w3.org/2019/04/WHATWG-W3C-MOU.html">Memorandum of Understanding between W3C and WHATWG</a>, 2019 <a class="archived" href="https://web.archive.org/web/20261108150753/https://www.w3.org/2019/04/WHATWG-W3C-MOU.html">(archived)</a></li>
     <li><a href="https://html.spec.whatwg.org/multipage/introduction.html">HTML Standard, introduction and history</a>, WHATWG</li>
     <li><a href="https://html.spec.whatwg.org/multipage/input.html">HTML Standard, the input element</a>, WHATWG</li>
   </ul>
@@ -480,32 +556,32 @@ msgWindow=window.open
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
     <li>"The Internet's Original Sin", Ethan Zuckerman, The Atlantic, August 2014: not opened, and quoted from the reproductions below</li>
-    <li><a href="https://firstthings.com/adworld-wide-web/">AdWorld Wide Web</a>, Peter J. Leithart, First Things, 2014</li>
-    <li><a href="https://ethanzuckerman.com/about-me/">About Me</a>, Ethan Zuckerman, dated 2013 and since revised</li>
-    <li><a href="https://ethanzuckerman.com/2014/09/17/a-public-apology-on-screwing-up-by-not-questioning-assumptions-my-talk-at-bif10/">A public apology – on screwing up by not questioning assumptions – my talk at #BIF10</a>, Ethan Zuckerman, 2014</li>
-    <li><a href="https://www.npr.org/2014/08/18/341409795/pop-up-ad-man-fesses-to-an-internet-sin-but-hopes-to-fix-it">Pop-Up Ad Man 'Fesses To An Internet 'Sin' — But Hopes To Fix It</a>, Robert Siegel with Ethan Zuckerman, NPR, 2014</li>
-    <li><a href="https://www.engadget.com/2014-08-14-the-creator-of-the-pop-up-ad-says-sorry.html">The man responsible for pop-up ads reveals why he cursed us</a>, Chris Velazco, Engadget, 2014</li>
+    <li><a href="https://firstthings.com/adworld-wide-web/">AdWorld Wide Web</a>, Peter J. Leithart, First Things, 2014 <a class="archived" href="https://web.archive.org/web/20260611162916/https://firstthings.com/adworld-wide-web/">(archived)</a></li>
+    <li><a href="https://ethanzuckerman.com/about-me/">About Me</a>, Ethan Zuckerman, dated 2013 and since revised <a class="archived" href="https://web.archive.org/web/20260827201509/https://ethanzuckerman.com/about-me/">(archived)</a></li>
+    <li><a href="https://ethanzuckerman.com/2014/09/17/a-public-apology-on-screwing-up-by-not-questioning-assumptions-my-talk-at-bif10/">A public apology – on screwing up by not questioning assumptions – my talk at #BIF10</a>, Ethan Zuckerman, 2014 <a class="archived" href="https://web.archive.org/web/20260813174236/https://ethanzuckerman.com/2014/09/17/a-public-apology-on-screwing-up-by-not-questioning-assumptions-my-talk-at-bif10/">(archived)</a></li>
+    <li><a href="https://www.npr.org/2014/08/18/341409795/pop-up-ad-man-fesses-to-an-internet-sin-but-hopes-to-fix-it">Pop-Up Ad Man 'Fesses To An Internet 'Sin' — But Hopes To Fix It</a>, Robert Siegel with Ethan Zuckerman, NPR, 2014 <a class="archived" href="https://web.archive.org/web/20251206231410/https://www.npr.org/2014/08/18/341409795/pop-up-ad-man-fesses-to-an-internet-sin-but-hopes-to-fix-it">(archived)</a></li>
+    <li><a href="https://www.engadget.com/2014-08-14-the-creator-of-the-pop-up-ad-says-sorry.html">The man responsible for pop-up ads reveals why he cursed us</a>, Chris Velazco, Engadget, 2014 <a class="archived" href="https://web.archive.org/web/20260714044424/https://www.engadget.com/2014-08-14-the-creator-of-the-pop-up-ad-says-sorry.html">(archived)</a></li>
     <li><a href="https://www.nbcnews.com/tech/tech-news/pop-up-ads-creator-ethan-zuckerman-im-sorry-n182096">Pop-Up Ads Creator Ethan Zuckerman: 'I'm Sorry'</a>, Devin Coldewey, NBC News, 2014</li>
-    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6408-10/window.htm">Client-Side JavaScript Reference: window</a>, Netscape, 1999, hosted by Oracle</li>
-    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6409-10/windows.htm">Client-Side JavaScript Guide, chapter 12: Using Windows and Frames</a>, Netscape, 1999, hosted by Oracle</li>
-    <li><a href="https://www.foxnews.com/story/pop-under-ads-click-off-web-surfers">'Pop-Under' Ads Click Off Web Surfers</a>, Fox News, 2001</li>
-    <li><a href="https://www.internetnews.com/marketing/pop-under-ads-catching-on-as-more-advertisers-take-the-bait/">Pop-Under Ads Catching On, as More Advertisers Take the Bait</a>, Christopher Saunders, InternetNews, 2001</li>
-    <li><a href="https://www.internetnews.com/marketing/are-pop-ups-doomed/">Are Pop-Ups Doomed?</a>, Brian Morrissey, InternetNews, 2002</li>
-    <li><a href="https://www.internetnews.com/marketing/pop-ups-under-siege/">Pop-Ups Under Siege</a>, Brian Morrissey, InternetNews, 2003</li>
-    <li><a href="https://www.internetnews.com/marketing/googles-new-toolbar-blocks-pop-ups/">Google's New Toolbar Blocks Pop-Ups</a>, Ryan Naraine, InternetNews, 2003</li>
-    <li><a href="https://www.internetnews.com/developer/windows-xp-sp2-turns-on-pop-up-blocking/">Windows XP SP2 Turns 'On' Pop-up Blocking</a>, Ryan Naraine, InternetNews, 2004</li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=9307">Bug 9307: [RFE] ability to say no to window.open</a>, Chris Booton and others, Mozilla, 1999</li>
+    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6408-10/window.htm">Client-Side JavaScript Reference: window</a>, Netscape, 1999, hosted by Oracle <a class="archived" href="https://web.archive.org/web/20250130093936/https://docs.oracle.com/cd/E19957-01/816-6408-10/window.htm">(archived)</a></li>
+    <li><a href="https://docs.oracle.com/cd/E19957-01/816-6409-10/windows.htm">Client-Side JavaScript Guide, chapter 12: Using Windows and Frames</a>, Netscape, 1999, hosted by Oracle <a class="archived" href="https://web.archive.org/web/20241111151937/https://docs.oracle.com/cd/E19957-01/816-6409-10/windows.htm">(archived)</a></li>
+    <li><a href="https://www.foxnews.com/story/pop-under-ads-click-off-web-surfers">'Pop-Under' Ads Click Off Web Surfers</a>, Fox News, 2001 <a class="archived" href="https://web.archive.org/web/20261105025116/https://www.foxnews.com/story/pop-under-ads-click-off-web-surfers">(archived)</a></li>
+    <li><a href="https://www.internetnews.com/marketing/pop-under-ads-catching-on-as-more-advertisers-take-the-bait/">Pop-Under Ads Catching On, as More Advertisers Take the Bait</a>, Christopher Saunders, InternetNews, 2001 <a class="archived" href="https://web.archive.org/web/20251013132015/https://www.internetnews.com/marketing/pop-under-ads-catching-on-as-more-advertisers-take-the-bait/">(archived)</a></li>
+    <li><a href="https://www.internetnews.com/marketing/are-pop-ups-doomed/">Are Pop-Ups Doomed?</a>, Brian Morrissey, InternetNews, 2002 <a class="archived" href="https://web.archive.org/web/20251115120946/https://www.internetnews.com/marketing/are-pop-ups-doomed/">(archived)</a></li>
+    <li><a href="https://www.internetnews.com/marketing/pop-ups-under-siege/">Pop-Ups Under Siege</a>, Brian Morrissey, InternetNews, 2003 <a class="archived" href="https://web.archive.org/web/20250804101214/https://www.internetnews.com/marketing/pop-ups-under-siege/">(archived)</a></li>
+    <li><a href="https://www.internetnews.com/marketing/googles-new-toolbar-blocks-pop-ups/">Google's New Toolbar Blocks Pop-Ups</a>, Ryan Naraine, InternetNews, 2003 <a class="archived" href="https://web.archive.org/web/20251006194518/https://www.internetnews.com/marketing/googles-new-toolbar-blocks-pop-ups/">(archived)</a></li>
+    <li><a href="https://www.internetnews.com/developer/windows-xp-sp2-turns-on-pop-up-blocking/">Windows XP SP2 Turns 'On' Pop-up Blocking</a>, Ryan Naraine, InternetNews, 2004 <a class="archived" href="https://web.archive.org/web/20250715095813/https://www.internetnews.com/developer/windows-xp-sp2-turns-on-pop-up-blocking/">(archived)</a></li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=9307">Bug 9307: [RFE] ability to say no to window.open</a>, Chris Booton and others, Mozilla, 1999 <a class="archived" href="https://web.archive.org/web/20241117230837/https://bugzilla.mozilla.org/show_bug.cgi?id=9307">(archived)</a></li>
     <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=18441">Bug 18441: Switch to turn off spawning of additional windows</a>, Mozilla, 1999</li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=29346">Bug 29346: Prevent repeating pop-up windows</a>, Jesse Ruderman and others, Mozilla, 2000</li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=33448">Bug 33448: disable 'new window' when close box clicked</a>, Warren Harris and others, Mozilla, 2000</li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=92955">Bug 92955: Disable window.open from onload and onunload</a>, Robert Ginda, Mitchell Stoltz and others, Mozilla, 2001</li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=102481">Bug 102481: Outlook Web Access - "reply" breaks after disabling pop-ups</a>, David Gerard and others, Mozilla, 2001</li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=126224">Bug 126224: (NY Times) Web sites can create pop-up windows using img onload even if unrequested window is blocked</a>, Mozilla, 2002</li>
-    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/jeffdav/xp-sp2-rc1">XP SP2 RC1</a>, jeffdav, Microsoft, 2004</li>
-    <li><a href="https://learn.microsoft.com/en-us/previous-versions/ms997645(v=msdn.10)">Fine-Tune Your Web Site for Windows XP Service Pack 2</a>, Microsoft, 2004</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">Window: open() method</a>, MDN</li>
-    <li><a href="https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/app/profile/firefox.js">firefox.js, the default preferences of the Firefox browser</a>, Mozilla</li>
-    <li><a href="https://en.wikipedia.org/wiki/Pop-up_ad">Pop-up ad</a>, Wikipedia</li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=29346">Bug 29346: Prevent repeating pop-up windows</a>, Jesse Ruderman and others, Mozilla, 2000 <a class="archived" href="https://web.archive.org/web/20260803164629/https://bugzilla.mozilla.org/show_bug.cgi?id=29346">(archived)</a></li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=33448">Bug 33448: disable 'new window' when close box clicked</a>, Warren Harris and others, Mozilla, 2000 <a class="archived" href="https://web.archive.org/web/20240806181715/https://bugzilla.mozilla.org/show_bug.cgi?id=33448">(archived)</a></li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=92955">Bug 92955: Disable window.open from onload and onunload</a>, Robert Ginda, Mitchell Stoltz and others, Mozilla, 2001 <a class="archived" href="https://web.archive.org/web/20240806204736/https://bugzilla.mozilla.org/show_bug.cgi?id=92955">(archived)</a></li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=102481">Bug 102481: Outlook Web Access - "reply" breaks after disabling pop-ups</a>, David Gerard and others, Mozilla, 2001 <a class="archived" href="https://web.archive.org/web/20241201011614/https://bugzilla.mozilla.org/show_bug.cgi?id=102481">(archived)</a></li>
+    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=126224">Bug 126224: (NY Times) Web sites can create pop-up windows using img onload even if unrequested window is blocked</a>, Mozilla, 2002 <a class="archived" href="https://web.archive.org/web/20261103104413/https://bugzilla.mozilla.org/show_bug.cgi?id=126224">(archived)</a></li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/jeffdav/xp-sp2-rc1">XP SP2 RC1</a>, jeffdav, Microsoft, 2004 <a class="archived" href="https://web.archive.org/web/20240610034641/https://learn.microsoft.com/en-us/archive/blogs/jeffdav/xp-sp2-rc1">(archived)</a></li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/ms997645(v=msdn.10)">Fine-Tune Your Web Site for Windows XP Service Pack 2</a>, Microsoft, 2004 <a class="archived" href="https://web.archive.org/web/20230813062810/https://learn.microsoft.com/en-us/previous-versions/ms997645(v=msdn.10)">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">Window: open() method</a>, MDN <a class="archived" href="https://web.archive.org/web/20261114144532/https://developer.mozilla.org/en-US/docs/Web/API/Window/open">(archived)</a></li>
+    <li><a href="https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/app/profile/firefox.js">firefox.js, the default preferences of the Firefox browser</a>, Mozilla <a class="archived" href="https://web.archive.org/web/20251217105127/https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/app/profile/firefox.js">(archived)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Pop-up_ad">Pop-up ad</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261105235419/https://en.wikipedia.org/wiki/Pop-up_ad">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>
@@ -640,18 +716,18 @@ YUI().use('dd-plugin', function(Y) {
   <h2 id="sources-h">Sources and further reading</h2>
   <ul>
     <li><a href="https://derek.io/yuiblog/">YUI Blog: A Historical Archive (2006-2014)</a>, and <a href="https://derek.io/yuiblog/stats/">YUI Blog Over the Years</a>, the archive's own counts</li>
-    <li><a href="https://clarle.github.io/yui3/">YUI Library home page</a> and <a href="https://clarle.github.io/yui3/yui/docs/yui/">YUI Global Object</a>, YUI documentation, version 3.18.1</li>
+    <li><a href="https://clarle.github.io/yui3/">YUI Library home page</a> and <a href="https://clarle.github.io/yui3/yui/docs/yui/">YUI Global Object</a>, YUI documentation, version 3.18.1 <a class="archived" href="https://web.archive.org/web/20261117091712/https://clarle.github.io/yui3/">(archived)</a></li>
     <li><a href="https://derek.io/yuiblog/2006/02/12/welcome-to-the-yahoo-user-interface-blog/">Welcome to the Yahoo! User Interface Blog</a>, Nate Koechley, Bill Scott and Eric Miraglia, YUI Blog, 2006</li>
     <li><a href="https://derek.io/yuiblog/2006/02/13/the-yahoo-user-interface-library/">The Yahoo! User Interface Library</a>, Thomas Sha, Nate Koechley and Eric Miraglia, YUI Blog, 2006</li>
     <li><a href="https://derek.io/yuiblog/2006/02/17/developing-a-javascript-library-for-yahoo/">Developing a JavaScript Library for Yahoo!</a>, Eric Miraglia, YUI Blog, 2006</li>
     <li><a href="https://derek.io/yuiblog/2006/08/18/browser-support-update-2006q3/">Graded Browser Support: Update, Roadmap, and FAQ</a>, YUI Blog, unsigned, 2006</li>
     <li><a href="https://derek.io/yuiblog/2006/06/01/global-domination/">Global Domination</a>, Douglas Crockford, YUI Blog, 2006</li>
     <li><a href="https://derek.io/yuiblog/2008/02/11/helping-the-yui-compressor/">Helping the YUI Compressor</a>, Nicholas Zakas, YUI Blog, 2008</li>
-    <li><a href="https://julienlecomte.net/blog/2007/08/11.html">Introducing the YUI Compressor</a>, Julien Lecomte, 2007</li>
+    <li><a href="https://julienlecomte.net/blog/2007/08/11.html">Introducing the YUI Compressor</a>, Julien Lecomte, 2007 <a class="archived" href="https://web.archive.org/web/20250426133010/https://www.julienlecomte.net/blog/2007/08/11.html">(archived)</a></li>
     <li><a href="https://raw.githubusercontent.com/yui/yuicompressor/master/doc/CHANGELOG">YUI Compressor changelog</a>, yui/yuicompressor on GitHub</li>
     <li><a href="https://raw.githubusercontent.com/yui/yui2/master/build/dom/dom.js">build/dom/dom.js</a> and <a href="https://raw.githubusercontent.com/yui/yui2/master/build/reset/reset.css">build/reset/reset.css</a>, yui/yui2 on GitHub, the final YUI 2 build</li>
     <li><a href="https://derek.io/yuiblog/2007/10/29/video-koechley/">YUI Theater: Nate Koechley, "The YUI CSS Foundation"</a>, YUI Blog, 2007</li>
-    <li><a href="https://24ways.org/2006/intricate-fluid-layouts/">Intricate Fluid Layouts in Three Easy Steps</a>, Nate Koechley, 24 ways, 2006</li>
+    <li><a href="https://24ways.org/2006/intricate-fluid-layouts/">Intricate Fluid Layouts in Three Easy Steps</a>, Nate Koechley, 24 ways, 2006 <a class="archived" href="https://web.archive.org/web/20260410235220/https://24ways.org/2006/intricate-fluid-layouts">(archived)</a></li>
     <li><a href="https://derek.io/yuiblog/2006/10/16/pageweight-yui0114/">YUI: Weighing in on Pageweights</a>, Eric Miraglia, YUI Blog, 2006</li>
     <li><a href="https://derek.io/yuiblog/2006/05/30/hewitt-firebug/">Video: Joe Hewitt Talks About FireBug</a>, Eric Miraglia, YUI Blog, 2006</li>
     <li><a href="https://derek.io/yuiblog/2006/11/28/performance-research-part-1/">Performance Research, Part 1</a>, Tenni Theurer, YUI Blog, 2006</li>
@@ -670,13 +746,13 @@ YUI().use('dd-plugin', function(Y) {
     <li><a href="https://liferay.dev/b/the-future-of-ui-development-and-alloyui-in-liferay-7">The future of UI Development and AlloyUI in Liferay 7</a>, Nate Cavanaugh, Liferay, 2014</li>
     <li><a href="https://liferay.dev/b/alloyui-3-released-bye-bye-yui">AlloyUI 3 Released: Bye Bye YUI</a>, Zeno Rocha, Liferay, 2014</li>
     <li><a href="https://liferay.dev/b/the-status-and-direction-of-the-frontend-infrastructure-in-liferay-7-dxp">The status and direction of the frontend infrastructure in Liferay 7 &amp; DXP</a>, Nate Cavanaugh, Liferay, 2016</li>
-    <li><a href="https://izs.me/resume">Résumé</a>, Isaac Z. Schlueter</li>
-    <li><a href="https://increment.com/development/interview-with-isaac-z-schlueter-ceo-of-npm/">Interview with Isaac Z. Schlueter, CEO of npm</a>, Glenn Fleishman, Increment</li>
-    <li><a href="https://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/">Reset Reloaded</a>, Eric Meyer, 2007, with Meyer's reply in the comments</li>
+    <li><a href="https://izs.me/resume">Résumé</a>, Isaac Z. Schlueter <a class="archived" href="https://web.archive.org/web/20261024004934/https://izs.me/resume">(archived)</a></li>
+    <li><a href="https://increment.com/development/interview-with-isaac-z-schlueter-ceo-of-npm/">Interview with Isaac Z. Schlueter, CEO of npm</a>, Glenn Fleishman, Increment <a class="archived" href="https://web.archive.org/web/20261113024703/https://increment.com/development/interview-with-isaac-z-schlueter-ceo-of-npm/">(archived)</a></li>
+    <li><a href="https://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/">Reset Reloaded</a>, Eric Meyer, 2007, with Meyer's reply in the comments <a class="archived" href="https://web.archive.org/web/20261116035539/https://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/">(archived)</a></li>
     <li><a href="https://derek.io/yuiblog/2006/10/10/ten-questions-slocum/">Ten Questions with YAHOO.ext Author Jack Slocum</a>, YUI Blog, 2006</li>
-    <li><a href="https://hackernoon.com/the-rise-and-fall-of-ext-js-c9d727131991">The rise and fall of Ext JS</a>, Jay Garcia, Hackernoon, 2017</li>
-    <li><a href="https://www.sencha.com/blog/a-fond-farewell-to-yui/">A Fond Farewell to YUI</a>, Sencha, 2014</li>
-    <li><a href="https://en.wikipedia.org/wiki/YUI_Library">YUI Library</a>, Wikipedia</li>
+    <li><a href="https://hackernoon.com/the-rise-and-fall-of-ext-js-c9d727131991">The rise and fall of Ext JS</a>, Jay Garcia, Hackernoon, 2017 <a class="archived" href="https://web.archive.org/web/20251113182646/https://hackernoon.com/the-rise-and-fall-of-ext-js-c9d727131991">(archived)</a></li>
+    <li><a href="https://www.sencha.com/blog/a-fond-farewell-to-yui/">A Fond Farewell to YUI</a>, Sencha, 2014 <a class="archived" href="https://web.archive.org/web/20260713192121/https://www.sencha.com/blog/a-fond-farewell-to-yui/">(archived)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/YUI_Library">YUI Library</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261013051351/https://en.wikipedia.org/wiki/YUI_Library">(archived)</a></li>
     <li><a href="https://derek.io/yuiblog/2012/01/30/video-yuiconf2011-dgathright/">YUI Theater: Derek Gathright, "Why YUI?"</a>, YUI Blog, 2012</li>
     <li><a href="https://derek.io/yuiblog/2012/12/19/yuiconf-2012-talk-scrollview-deep-dive-with-derek-gathright/">YUIConf 2012 Talk: Scrollview Deep Dive with Derek Gathright</a>, YUI Blog, 2012</li>
     <li>Further listening: <a href="https://twit.tv/shows/floss-weekly/episodes/23">FLOSS Weekly 23: The Yahoo User Interface Library</a>, with Nate Koechley, TWiT, 2008</li>

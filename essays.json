@@ -581,6 +581,31 @@
         "Several connections are my reading: that the poll decided only where work already months old would continue, that the wording of Hickson's question was a compromise that pleased neither side, and that the 2017 appeals path answers Wilson's 2007 objection."
       ],
       "published": "2026-11-20T13:41:34Z"
+    },
+    {
+      "slug": "samy-worm",
+      "title": "The Samy worm: a million friends in 20 hours",
+      "description": "In October 2005 a 19-year-old got JavaScript past MySpace's filter that sent him a friend request, named him the viewer's hero and copied itself to each viewer's profile; his counter passed a million in a day, the site went down, and he pleaded guilty and gave his next conference talk with someone else working the computer.",
+      "topic": "people",
+      "era": [
+        2005,
+        null
+      ],
+      "related": [
+        "xmlhttprequest",
+        "cookies",
+        "popup"
+      ],
+      "unverified": [
+        "The million is Kamkar's own count of friend requests on his profile, from the log he posted, and not a number MySpace published. The later reports I read give about the same figure and none shows a source of its own.",
+        "The release time of a little after midnight follows Motherboard and the gaps in Kamkar's log, whose first entry says \"pm\" in what looks like a typo. The length of the outage is from that log alone; the fact check found a report in The Register of 17 October 2005, which I have not read, that describes a weekend outage instead.",
+        "Kamkar's accounts disagree with each other: about a week of work in the 2005 interview and \"a few days\" in 2007, and the hero step first in his 2005 account but the friend step first in 2007. The anonymous warning to MySpace appears only in what he told Motherboard in 2015, not in the log.",
+        "The plea is dated January 2007 by McMillan; I could not open a court record or MySpace's statement, and I left out the word \"felony\", which I found only second-hand. Sources disagree on the terms: computers for work only, or one registered machine with no internet, and community service given as three months, 90 days or 720 hours. That the probation was lifted in 2008 is Motherboard's report alone.",
+        "That the search came about six months after the worm, by the Secret Service and an LAPD task force, comes only from Motherboard's 2015 article, as does Kamkar's statement that he was never arrested; McMillan's questions in 2007 speak of an arrest and an indictment.",
+        "That AntiSamy was named for the worm rests on Motherboard; the OWASP page I link describes the library and does not explain the name. The remark about a filter having to guess what every browser will run is my own reading of Kamkar's write-up.",
+        "Grossman's quotation about the worm rests on a single source, the Motherboard retrospective."
+      ],
+      "published": "2026-11-20T21:54:12Z"
     }
   ]
 }
