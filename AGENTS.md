@@ -235,7 +235,7 @@ If a named model or effort level cannot be set, use what is available, do not sk
 
 ### 1. Pick the topic (coordinator)
 
-Take the first item under "Up next" in `TOPICS.md` if that list has any, otherwise choose from the lists, favouring variety against the existing essays. Never pick from "Parked". Choose the slug and create `work/<slug>/`.
+Take the first item under "Up next" in `TOPICS.md` if that list has any, otherwise choose from the lists, favouring variety against the existing essays. Never pick from "On hold" or "Parked". Choose the slug and create `work/<slug>/`.
 
 ### 2. Scout (Sonnet)
 
