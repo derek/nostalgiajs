@@ -31,6 +31,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # The site is served as committed, so the committed pages must be what the
+      # build produces. A page edited by hand would be lost at the next build.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check generated files match their sources
+        run: |
+          node scripts/build.mjs
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --short
+            git diff --stat
+            echo "::error::Generated pages differ from a fresh build. Edit the source (content/<slug>.html, content/_about.html, essays.json, scripts/build.mjs), run 'npm run build' and commit both. See AGENTS.md, hard rule 3."
+            exit 1
+          fi
+      - name: Report style notes
+        run: node scripts/lint.mjs
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

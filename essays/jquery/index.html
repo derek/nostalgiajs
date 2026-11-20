@@ -59,9 +59,9 @@
   <p id="toc-h">Contents</p>
   <ol>
           <li><a href="#before-the-utility-belt">Before: the utility belt</a></li>
-          <li><a href="#what-happened">What happened</a></li>
+          <li><a href="#from-a-mock-up-to-1-0">From a mock-up to 1.0</a></li>
           <li><a href="#why-this-one-won">Why this one won</a></li>
-          <li><a href="#living-with-it">Living with it</a></li>
+          <li><a href="#living-with-jquery">Living with jQuery</a></li>
           <li><a href="#the-dollar-sign-after-jquery">The dollar sign after jQuery</a></li>
           <li><a href="#the-takeaway">The takeaway</a></li>
           <li><a href="#sources-h">Sources and further reading</a></li>
@@ -108,7 +108,7 @@ var $ = jQuery;</code></pre>
 
 <p>Two other pieces of the belt matter here. In March 2003 Simon Willison had published <a href="https://simonwillison.net/2003/Mar/25/getElementsBySelector/"><code>document.getElementsBySelector</code></a>, "a javascript function which takes a standard CSS style selector and returns an array of elements objects." His example was <code>document.getElementsBySelector('div#main p a.external')</code>. And Sam Stephenson's Prototype library had a function called <code>$</code>. Its documentation still calls it <a href="http://api.prototypejs.org/dom/dollar/">"the cornerstone of Prototype"</a> and "a handy alias for <code>document.getElementById</code>." In Prototype, <code>$('nav')</code> hands you one element, by ID.</p>
 
-<h2 id="what-happened">What happened</h2>
+<h2 id="from-a-mock-up-to-1-0">From a mock-up to 1.0</h2>
 
 <p>On August 22, 2005, two and a half weeks before the contest opened, Resig posted <a href="https://johnresig.com/blog/selectors-in-javascript/">"Selectors in Javascript"</a>. It was a reaction to a library called Behaviour, which let you attach functions to elements using CSS selectors. He liked the premise and disliked the typing. Behaviour, he wrote, "simply seems too tedious and verbose for everyday use." Here is its way of making list items delete themselves when clicked, quoted from the post:</p>
 
@@ -181,7 +181,7 @@ if ( jQuery.browser.mozilla || jQuery.browser.opera ) {
 
 <p><strong>A platform vendor blessed it without taking it over.</strong> Guthrie's post is unusually clear about why Microsoft did not build its own. The team looked at adding selectors and animation to ASP.NET AJAX and "quickly realized that the jQuery support for these scenarios is already excellent." So: "We will distribute the jQuery JavaScript library as-is, and will not be forking or changing the source." The ASP.NET MVC download would "add the jQuery library by default to all new projects." For a large population of corporate developers, that sentence moved jQuery from something you had to justify to something that was simply there.</p>
 
-<h2 id="living-with-it">Living with it</h2>
+<h2 id="living-with-jquery">Living with jQuery</h2>
 
 <p>Success produced its own set of chores. The first was the dollar sign itself. With two libraries on a page, whoever loaded last owned <code>$</code>. The idiom that solved it is on the same documentation page, and it became the standard way to open a jQuery plugin:</p>
 
