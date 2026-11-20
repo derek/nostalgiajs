@@ -49,7 +49,7 @@ const run = (label, ...args) => {
 run('build', 'scripts/build.mjs');
 try {
   const out = execFileSync('node', ['scripts/archive.mjs'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-  console.log('ship: archive, ' + out.trim().split('\n').pop());
+  console.log('ship: ' + (out.split('\n').find((l) => l.startsWith('archive:')) || 'archive done'));
 } catch { console.log('ship: archive lookup failed (network?); continuing without new archive links'); }
 run('preview card', 'scripts/og.mjs', slug);
 run('build', 'scripts/build.mjs');

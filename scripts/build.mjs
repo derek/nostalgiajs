@@ -124,7 +124,7 @@ function gtmSnippet() {
 `;
 }
 
-function page({ path, title, description, up, ogImage, ogType = 'website', main }) {
+function page({ path, title, description, up, ogImage, ogType = 'website', main, noindex = false }) {
   const canonical = SITE + path;
   return `<!doctype html>
 <html lang="en">
@@ -134,7 +134,7 @@ function page({ path, title, description, up, ogImage, ogType = 'website', main 
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
-<meta property="og:site_name" content="${NAME}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ''}<meta property="og:site_name" content="${NAME}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:title" content="${esc(title.replace(` · ${NAME}`, ''))}">
 <meta property="og:description" content="${esc(description)}">
@@ -336,6 +336,18 @@ ${read('content/_about.html').trim()}
     </article>`,
 }));
 
+// ---------- technical overview ----------
+// Not linked from any page yet, and kept out of search engines until it is.
+write('overview/index.html', page({
+  path: 'overview/', title: `Technical overview · ${NAME}`,
+  description: `How a ${NAME} essay is researched, written, checked and published, stage by stage.`,
+  up: '../', ogImage: 'default.png', noindex: true,
+  main: `    <article>
+      <h1>Technical overview</h1>
+${read('content/_overview.html').trim()}
+    </article>`,
+}));
+
 // ---------- feed (full text) ----------
 const absolute = (html) => html.replace(/href="\.\.\/([^"]*)"/g, `href="${SITE}essays/$1"`);
 const newest = [...essays].sort((a, b) => Date.parse(b.published) - Date.parse(a.published)).slice(0, 30);
@@ -361,4 +373,4 @@ ${newest.map((e) => `  <item>
 </rss>
 `);
 
-console.log(`built ${essays.length} essays, landing page, about page and feed`);
+console.log(`built ${essays.length} essays, landing page, about page, overview page and feed`);
