@@ -53,6 +53,12 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 - npm and its rivals (2010): the package manager Isaac Schlueter built, Kiwi and its “seed” files, and the nested node_modules choice that made the ecosystem big
 - CoffeeScript (2009): square = (x) -> x * x, the compiler that Rails made a default and whose syntax came back through ES2015
 - Palm webOS (2009 to 2012): apps written in HTML and JavaScript, Mojo and Enyo, and Node.js services on a phone
+- The February 1996 cull of HTTP/1.1 methods: Larry Masinter proposes cutting PATCH, COPY, MOVE, LINK, UNLINK and WRAPPED, Roy Fielding, who wrote them, argues back, and PATCH returns as RFC 5789 in 2010 while COPY and MOVE come back in WebDAV. Research notes in `research/2026-11-20/http-dom.md`
+- Web Forms 2.0 repetition templates (2004 to 2012): Aaron Swartz asks the WHATWG list in September 2008 why a feature Open Library uses is being cut, Ian Hickson answers that it "solves about 5% of the use cases", and the parser problem behind Hickson's 2004 refusal of a `<template>` element meets the 2011 `<template>` proposal. Research notes in `research/2026-11-20/whatwg.md`
+- The edition that never was (2008): Lars Hansen and Jeff Dyer cut packages from ECMAScript 4 in April, Brendan Eich's "ECMAScript Harmony" message cuts the rest in August, and ES3.1 is renumbered ES5. Decimal and version opt-in are the side stories. Research notes in `research/2026-11-20/es-discuss.md`
+- The first CSS, October 1994: Håkon Lie's proposal averaged two designers' style sheets by percentage and tested a document's age, Bert Bos objected the next day, and Rob Raisch's 1993 style sheets (`@H1 fo(si=32,we=bo)`) had come first. Research notes in `research/2026-11-20/www-talk.md`
+- The parent selector (1999 to 2022): `:subject` is in the first CSS3 Selectors draft, is removed in 2003 for performance, and ships as `:has()` 23 years later. Research notes in `research/2026-11-20/www-style.md`
+- Behaviour in CSS (1998 to 2014): Netscape's Action Sheets and Microsoft's HTC become one draft with `onclick` as a CSS property, Håkon Lie objects to executable code in `text/css`, and Ian Hickson, who defended the idea in 1999, edits the 2014 Note that closes it. Research notes in `research/2026-11-20/www-style.md`
 
 
 ### People and culture

@@ -534,6 +534,29 @@
         "The ad prices are one Adweek editor's estimate in a Fox News piece whose year I take from its contents, and the description of the present-day pop-under rests on Wikipedia alone. That the nsnull line is why a blocked call returned null in Mozilla is my reading of the code. The connections I draw between the porn-site bug and the car company, between Microsoft's rule and the Mozilla comment, and between the 2001 argument over the word \"privacy\" and Zuckerman's essay are my own."
       ],
       "published": "2026-11-19T22:08:31Z"
+    },
+    {
+      "slug": "css-potential",
+      "title": "The 1998 CSS wish list: item 28 and the fifteen-year wait",
+      "description": "In December 1998 the CSS working group published a numbered list of 67 features people kept asking for; the list's own editor wanted item 28, symbolic constants, left to outside tools and said so at length in 2008, and it shipped in 2014 as custom properties, a design neither side had proposed.",
+      "topic": "browsers",
+      "era": [
+        1998,
+        2016
+      ],
+      "related": [
+        "view-source",
+        "xmlhttprequest",
+        "ie8-targeting"
+      ],
+      "unverified": [
+        "The count of what shipped is my own rough tally and not a W3C figure. The 28 items rest on the specifications' publication histories and on MDN's browser compatibility data, which is a secondary source; the 21 I believe never arrived have no source behind them, and 11 I did not check. Matching later features to 1998 items (the typed attr() to item 45, View Transitions to item 18, clamp() to the 1997 syntax) is my reading.",
+        "That Firefox 31 was the first release with custom properties rests on MDN's compatibility data; Firefox's own notes for that release record only the prefix changing to --, and for Chrome I read a beta announcement and not a stable release note. Microsoft's page says filters and transitions came with Internet Explorer 4.0 and above, and I did not establish which release first had the Page-Enter tag or whether it was out before the Note.",
+        "The Note is dated 10 December 1998, but Bos's announcement of 24 December says it was published \"last weekend\", and I could not tell which is the day it went public. I found no published results of the feedback form, and I could not open the working group's newer, members-only list, so I do not know what it added.",
+        "Sass's changelog carries no dates and I could not open a dated record of the first LESS release, so the essay does not say when either tool gained variables, only that Sass was popular by February 2011. That the August 2012 meeting was in San Diego on the 14th comes from Glazman's and Atkins's own write-ups and not from the minutes, and I found no source for how the grammar objection to the double dash was settled.",
+        "Several connections are my interpretation: that Bos's reply of 31 December 1998, which is about macros, already holds the reasons Bos gave against plain constants in 2008; that Bos was defending an author who works in a graphical editor; that Hyatt's withdrawal, for which I have only the reason Hyatt gave, was the refusal that counted; and that inheritance put the feature beyond a preprocessor. That Bos said nothing about custom properties rests on a search of mailing-list subject lines, and the line on Bos's home page calling constants a bad idea has no date."
+      ],
+      "published": "2026-11-20T12:26:47Z"
     }
   ]
 }

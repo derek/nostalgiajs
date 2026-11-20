@@ -1,0 +1,181 @@
+<p class="lede">In December 1998 the working group behind CSS published a numbered list of the features people kept asking it for, so that nobody would have to ask twice, and people went on asking for item 28 for another fifteen years.</p>
+
+<pre tabindex="0"><code>@define orange = #faa;
+
+H1 {color: orange}
+H2 {color: orange}
+H3 {color: orange}</code></pre>
+
+<p>That is item 28, Symbolic constants, in the <a href="https://www.w3.org/TR/1998/NOTE-CSS-potential-19981210"><em>List of suggested extensions to CSS</em></a>, a W3C Note dated 10 December 1998 and edited by Bert Bos. You have typed its descendant many times, as <code>--orange: #faa</code> near the top of a style sheet and <code>var(--orange)</code> below. (The value <code>#faa</code> works out to <code>rgb(255, 170, 170)</code>, which is pink. Whether that is a point for named constants or against them, I leave to you.)</p>
+
+<p>I knew CSS variables had arrived late. What I hadn't understood until I read the Note and the mailing list around it was how early they were written down, beside columns, gradients and <code>rgba()</code>. Nor had I known that the Note's own editor, who had worked on CSS since its first draft, was pointing people who wanted macros toward outside tools a week after announcing the list, and said the same of plain constants ten years later, or that the feature shipped in a form neither side had proposed.</p>
+
+<h2>A list to stop the asking</h2>
+
+<p>Bos had been part of CSS almost from its first draft. <a href="https://www.w3.org/Style/LieBos2e/history/">The history chapter</a> of the book Bos wrote with Håkon Wium Lie says Bos was among those who responded to that draft. Bos's <a href="https://www.w3.org/People/Bos/">W3C home page</a> adds a thesis about graphical user interfaces, which matters later.</p>
+
+<p>CSS2 became a Recommendation in May 1998, and requests for what it lacked kept arriving on the public mailing list, www-style. One Note about them already existed. <a href="https://www.w3.org/TR/NOTE-css-potential-19970819.html"><em>CSS: Potential Enhancements</em></a>, edited in August 1997 by Mike Wexler of Adobe, proposed constants and environment variables: <code>2em &lt;&lt; $WIDTH/10 &gt;&gt; 20em</code> meant a tenth of the window's width, kept between 2em and 20em. I read that as <code>clamp(2em, 10vw, 20em)</code> in an earlier spelling.</p>
+
+<p>The 1998 Note names that document as its previous version, but it is a catalogue: every suggestion that was not in CSS2. Its abstract gives the reason in one sentence.</p>
+
+<blockquote>
+<p>The purpose of the list is to make sure suggestions are neither forgotten nor suggested over and over again.</p>
+</blockquote>
+
+<p>There are 67 numbered sections. The acknowledgements thank one person, Ian Hickson, "for suggesting this document, and maintaining one independently".</p>
+
+<p>Reading the Note as a list of refusals would be a mistake. The abstract warns that being listed promises nothing, and many items appear without comment. I searched the text for a suggestion marked as rejected and found none. The firmest language is the status paragraph's, which asks that nothing be implemented except as a labelled experiment, and adds that an implementation "will by itself not be an argument to adopt the feature in CSS". That sentence comes back in 2008.</p>
+
+<p>The Note also asked for votes. Every item ends with a row of options from 1, strongly opposed, to 5, strongly in favor, open until 5 February 1999. Bos <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0078.html">announced it on www-style</a> on Christmas Eve. The form submitted by <code>mailto:</code>, and that evening George Lund <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0080.html">reported</a> filling it in and being unable to send it, called this extremely annoying, and wished the list a merry Christmas. I could not find the results anywhere.</p>
+
+<h2>What the 1998 Note asked for</h2>
+
+<p>Read now, the Note is like a changelog that leaked a decade or two early. Item 1 is columns. Item 26 wants transparency in colours and writes <code>rgba(40%, 40%, 100%,70%)</code>, "for a 70% opaque light blue". Item 27 asks for <code>line-height: max(10pt, width/12)</code>. Item 24 wonders whether a gradient might be a primitive in CSS, item 43 suggests rounded corners, and item 55 is <code>display: inline-block</code>. Here are three lines from items 12, 18 and 23:</p>
+
+<pre tabindex="0"><code>:target { color: red }
+A.local {transition-style: fade}
+IMG {float: left contour}</code></pre>
+
+<p>The first is the <code>:target</code> pseudo-class. The second is a page transition. The third wraps text around the outline of a floated image, and the Note traces it to <a href="https://www.w3.org/TR/WD-css1-960726">a July 1996 working draft of CSS1</a>, where the line can still be read. CSS got there in the end with <code>shape-outside</code>.</p>
+
+<h2>Item 28 in its first week</h2>
+
+<p>The argument over symbolic constants started two days after the announcement, with <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0081.html">a question from Jelks Cabaniss</a>. Chris Lilley of the W3C <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0084.html">explained</a> what <code>@define</code> was for: change a colour in one place and be sure of hitting every use. Cabaniss <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0085.html">came back</a> with a bigger idea: a constant holding a whole bundle of declarations, a theme.</p>
+
+<p><a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0092.html">Bos answered on New Year's Eve</a>. The language could do that, and could even take parameters; the reply sketches <code>@define myTheme(x,y) = "color: $x; background: $y;"</code> on the spot. Then it doubts that this would help: many people would be bewildered, and those able to use such a thing had other options.</p>
+
+<blockquote>
+<p>My preference is make CSS powerful in its stylistic capabilities, but simple in its language. Separate tools for separate tasks: people that would know how to use macros like those above are probably also knowledgeable enough to apply external tools, such as cpp, m4, editor macros, databases, server-side includes or scripts/programs of their own making to maintain complex style sheets.</p>
+</blockquote>
+
+<p>That was a week after the announcement. It answers Cabaniss's macros and not the plain constant in the Note, but its two reasons, bewildered readers and outside tools, are the ones Bos would turn on plain constants in 2008. Even Cabaniss <a href="https://lists.w3.org/Archives/Public/www-style/1999Jan/0002.html">drew a line</a>: "Making CSS a programming language raises the hair on the back of my neck." One who wanted more was Daniel Glazman, who <a href="https://lists.w3.org/Archives/Public/www-style/1999Jan/0004.html">asked for</a> named bundles of declarations, with an example called <code>edf-style</code>.</p>
+
+<p>The list did not stop the asking. In December 2001 Christoph Päper <a href="https://lists.w3.org/Archives/Public/www-style/2001Dec/0008.html">proposed</a> an <code>@var</code> block with names like <code>$fore</code>, and added a postscript that is the reason the Note existed: being new to the list, "maybe this has been discussed here before". Glazman, by then at Netscape, replied with one line, a link into a newer copy of the list, which turned out to be for working group members only. <a href="https://lists.w3.org/Archives/Public/www-style/2001Dec/0012.html">Bos said</a> there was no objection to updating the public Note. The request <a href="https://lists.w3.org/Archives/Public/www-style/2005Apr/0263.html">came again in 2005</a> and <a href="https://lists.w3.org/Archives/Public/www-style/2007Aug/0167.html">in 2007</a>.</p>
+
+<h2>April 2008: a proposal and a refusal</h2>
+
+<p>On 8 April 2008 Glazman and David Hyatt of Apple <a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0178.html">posted a proposal to www-style</a> called CSS Variables. The working group had given Glazman the job at its last meeting, and the message called variables "an oooooold request from the web authors' community". The first example in <a href="http://disruptive-innovations.com/zoo/cssvariables/">the specification</a>:</p>
+
+<pre tabindex="0"><code>@variables {
+  CorporateLogoBGColor: #fe8d12;
+}
+
+div.logoContainer {
+  background-color: var(CorporateLogoBGColor);
+}</code></pre>
+
+<p>That is <code>var()</code> arriving, and it never left. The proposal also said script should be able to change a variable's value, which as I read it already went beyond what a tool run ahead of time can do.</p>
+
+<p>Bos <a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0187.html">replied</a> a little over three and a half hours later. The reply sets out three principles: a smaller CSS is better, what can be done outside CSS should be, and every indirection loses readers. Then the verdict.</p>
+
+<blockquote>
+<p>Variables in CSS are wrong for the above three reasons. They make the language bigger and more difficult to learn, they make other people's style sheets more difficult to understand and re-use. They can instead be done with a generic macro processor and would then be useful for other languages, too (HTML, SVG, Javascript, Atom, etc.). They introduce extra indirections.</p>
+</blockquote>
+
+<p><a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0196.html">Glazman answered about twelve hours after that</a>, and not gently. CSS 2.1 ran to 405 pages, the reply pointed out, and an author still couldn't add 10px to 50%. Then: "Bert, you have to accept that (1) you are not a web designer that fights on a daily basis with site management or corporate image". Bos had written that normal people don't program their video recorders. Glazman reported programming a set-top box all the time and finding it trivial.</p>
+
+<p>On 23 June <a href="https://lists.w3.org/Archives/Public/www-style/2008Jun/0230.html">Hyatt announced</a> an experimental implementation in WebKit's nightly builds. One week later Bos gave the refusal a page of its own, <a href="https://www.w3.org/People/Bos/CSS-variables"><em>Why "variables" in CSS are harmful</em></a>. On 25 July <a href="https://lists.w3.org/Archives/Public/www-style/2008Jul/0545.html">Hyatt added</a> the rival spellings people had proposed, so that for a while WebKit accepted <code>-webkit-var(foo)</code>, <code>=foo=</code> and <code>$foo</code> side by side. And on 24 September <a href="https://lists.w3.org/Archives/Public/www-style/2008Sep/0180.html">Hyatt wrote</a>: "WebKit no longer supports CSS variables. I disabled the feature."</p>
+
+<h2>Why Bos refused and Hyatt backed out</h2>
+
+<p>The essay is a better argument than its title suggests. It concedes that constants can be built, since WebKit had just built them. Its subject is who CSS is for: it welcomes extensions that add typography and refuses ones that move CSS toward a programming language.</p>
+
+<p>The first reason is the reader. People learn CSS by opening someone else's style sheet, the habit this collection has <a href="../view-source/">an essay about</a>. A style sheet full of names its author made up has to be read in two places at once, and a beginner may give up. Bos is candid about the evidence for this: "Of course, this is a conjecture."</p>
+
+<p>The second is size. The essay reports a count of the style sheets on the W3C's own site: 25,725 of them, the non-empty ones averaging 54 lines, too short, the essay says, to need named abstractions. It allows that the people writing more than a hundred lines seemed to be professional designers. I'd argue that is where the case was weakest, because the professionals were the ones asking. Simon Willison <a href="https://simonwillison.net/2008/Aug/6/cssvariables/">made the objection</a> that August: "I personally think that the problem with CSS isn't the learning curve, it's how difficult it is to maintain later".</p>
+
+<p>The third is modularity. Substituting constants is a job a separate tool can do before the browser sees the file, and the essay links six recipes for doing it with PHP or server-side includes. Bos's thesis was on graphical interfaces. The Note's remark on item 27 worries that an expression is hard to specify in a direct-manipulation editor, and the 2008 email says normal people use such interfaces where programmers use text editors. My reading is that Bos spent those ten years defending an author who never opens a text editor.</p>
+
+<p>None of that is what stopped WebKit. Hyatt gave a different reason <a href="https://lists.w3.org/Archives/Public/www-style/2008Sep/0194.html">the day the feature was switched off</a>: "The problem with leaving CSS variables turned on in WebKit is that if the feature ships, it is going to be hugely popular." Whatever shipped would have to be supported forever, and the design was still moving. <a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0179.html">L. David Baron had asked</a> on day one what a browser should do when a variable holding a colour is used as a font size. Glazman's <a href="http://www.glazman.org/weblog/dotclear/index.php?post/2012/08/17/CSS-Variables%2C-why-we-drop-the-%24foo-notation">summary four years later</a> was that the group could not reach an agreement. Hyatt had built a labelled experiment, as the Note's status paragraph asked, and declined to treat its existence as a reason to ship. As I read the record, the refusal that counted in 2008 came from the implementer who liked the idea.</p>
+
+<h2>Sass, LESS and a line of PHP</h2>
+
+<p>Authors, meanwhile, did what Bos had been telling them to do since 1998 and used a separate tool. Some generated style sheets from PHP, and others adopted preprocessors. <a href="https://raw.githubusercontent.com/sass/ruby-sass/stable/doc-src/SASS_CHANGELOG.md">Sass's changelog</a> shows the same drift in vocabulary: the notes for version 2.2.0 rename constants to variables, and those for 3.0.0 change the prefix from <code>!</code> to <code>$</code>, as in <code>$width: 13px</code>. <a href="https://lesscss.org/">LESS</a> spelled the same thing <code>@width: 10px;</code>.</p>
+
+<p>The essay had offered the PHP approach as a way for authors to find out for themselves whether constants were useful. They found out. By February 2011 Tab Atkins Jr., writing from the Chrome team, was <a href="https://lists.w3.org/Archives/Public/www-style/2011Feb/0091.html">telling www-style</a> that the failure to agree "sucks for authors, particularly as the rise of preprocessing frameworks like SASS have shown just how popular and useful variables are". My reading is that Bos's modular answer worked as designed, and in working it measured the demand.</p>
+
+<h2>How constants became custom properties</h2>
+
+<p>Atkins's proposal that month, <code>@var $foo red;</code>, was one more run at the old design: global names, substituted into values. The change that mattered came on 24 October 2011, when <a href="https://lists.w3.org/Archives/Public/www-style/2011Oct/0699.html">Atkins proposed replacing that draft</a> with an idea credited to Roland Steiner. Add no construct for variables at all. Let authors make up properties, and let those cascade and inherit like any others:</p>
+
+<pre tabindex="0"><code>:root {
+  data-main-color: #06c;
+  data-accent-color: #006;
+}
+h1 {
+  color: data(main-color);
+  border-left: thick solid data(accent-color);
+}</code></pre>
+
+<p>"As far as I can tell, there's not a single downside", Atkins wrote. A value set this way could differ from one part of a page to another. By my reading that finished off one of Bos's three reasons, which the scripting in the 2008 proposal had only strained. A macro processor runs before there is a document, so it cannot know which element inherits what. The feature that could be done outside CSS had turned into one that couldn't.</p>
+
+<p>What remained was the name. The earliest Working Draft in the W3C's history of the module <a href="https://www.w3.org/standards/history/css-variables-1">is dated 10 April 2012</a>. That August the working group <a href="https://lists.w3.org/Archives/Public/www-style/2012Aug/0891.html">resolved</a> on <code>var-foo</code> and <code>var(foo)</code>, and gave three members the job of <a href="http://www.xanthir.com/blog/b4KT0">explaining why not the dollar sign</a>.</p>
+
+<p>Then, in March 2014, with Firefox about to ship <code>var-</code>, <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0261.html">Atkins reopened the question</a>. People saw the prefix and thought only of variables, and tying the name to <code>var()</code> had been Atkins's own argument: "I'm very aware of how much I've hoisted myself by my own petard." The suggested replacement was an underscore.</p>
+
+<p>Within a day <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0269.html">Brian Kardell offered</a> another. A dash and a vendor's name already marked a browser's own properties, so two dashes could mean custom, with no vendor. That evening <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0287.html">Zack Weinberg pointed out</a> that the CSS grammar did not allow an identifier to start with two dashes, and <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0288.html">Atkins conceded</a>: "Well, -- is ruled out then." Six days after Kardell's message, <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0467.html">the working group resolved to use it</a>. The announcement doesn't say how the grammar objection was settled.</p>
+
+<p>MDN's compatibility data gives Firefox 31 as the first release with custom properties. <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/31">Its release notes</a> record the prefix changing from <code>var-</code> to <code>--</code> and date the release 22 July 2014: six years and three months after the 2008 proposal, and more than fifteen years after the Note. WebKit <a href="https://www.webkit.org/blog/5989/css-variables-in-webkit">followed in the autumn of 2015</a>, and Chrome's <a href="https://blog.chromium.org/2016/02/chrome-49-beta-css-custom-properties.html">arrived in a beta</a> in February 2016. Glazman <a href="https://lists.w3.org/Archives/Public/www-style/2015Nov/0002.html">approved of custom properties</a> and called the double dash "our ugliest syntactic decision in 20 years". From Bos I found no message about custom properties. The essay is still at its address, and Bos's home page still says, in a line with no date, that symbolic constants in CSS are a bad idea.</p>
+
+<h2>Where the other sixty-six went</h2>
+
+<p>About two in five of the 67 items have shipped in browsers in some form. That is my count and not the W3C's, and it is rough. From the specifications' publication histories and MDN's compatibility data I can document 28 that arrived in a recognisable form, item 28 among them. Four print items and one about constraints went to other software, as described below. Two, scripted behaviours and <code>//</code> comments, stayed out of CSS as far as I can tell. Another 21 I believe never arrived but cannot prove it, and 11 I did not check. Some moved fast. Hickson quoted item 24 on the list in January 1999, and by 17 February had <a href="https://lists.w3.org/Archives/Public/www-style/1999Feb/0039.html">posted a definition of <code>background-size</code></a>, crediting the idea to Sjoerd Visscher.</p>
+
+<p>The page transitions shipped twice. Item 18 imagines the change from one page to the next dressed up with slide-show effects, "wipes, fades, checkerboards". <a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms532847(v=vs.85)">Microsoft's documentation of filters and transitions</a>, which it says came with Internet Explorer 4.0 and above, describes just that, switched on by a <code>Page-Enter</code> meta tag. The standard version is the View Transitions API, which <a href="https://developer.chrome.com/blog/new-in-chrome-111">Chrome 111 shipped in March 2023</a>, more than 24 years after the Note.</p>
+
+<p>The print items and the constraint solver went to other software. Running headers, cross-references, footnotes and leaders have been specified since 2006 in <a href="https://www.w3.org/TR/css-gcpm-3/">a module</a> that <a href="https://www.w3.org/standards/history/css-gcpm-3">is still a working draft</a>, and where I found them documented as working is in print formatters like <a href="https://doc.courtbouillon.org/weasyprint/stable/api_reference.html">WeasyPrint</a> and <a href="https://www.princexml.com/doc/paged/">Prince</a>. Item 32 wanted a constraint solver to work out property values. <a href="https://constraints.cs.washington.edu/web/ccss-uwtr.pdf">A 1999 paper</a> describes a prototype in the W3C's Amaya browser, built on a solver called Cassowary, and <a href="https://constraints.cs.washington.edu/cassowary/">Cassowary's project page</a> records where the solver went: in July 2011, into the layout engine of Apple's Lion release of the Mac operating system.</p>
+
+<p>The list itself was never updated. The Note's header gives <a href="https://www.w3.org/TR/NOTE-CSS-potential">a "latest version" address</a>, and what it serves is the 1998 text, byte for byte. The newer copy Glazman linked by accident in 2001 sits behind the W3C's member login. The document meant to keep suggestions from being forgotten stopped recording them after one edition.</p>
+
+<h2>The takeaway</h2>
+
+<p>The list kept the first promise in its abstract better than the second. Parts of it were remembered for a very long time: Chrome shipped what I read as a version of item 45 in <a href="https://developer.chrome.com/blog/new-in-chrome-133">February 2025</a>. But the asking never stopped, and item 28 shows why. A refusal from a standards group lasts as long as its reasons do. Bos gave real reasons and held them for ten years, and constants as the Note wrote them, fixed values swapped in before the browser sees the file, really could be done by an outside tool. Then the workaround became the evidence. Once people were writing <code>$width</code> in Sass it was hard to say authors had no use for names, and once the design turned into properties that inherit, no preprocessor could do the job. The worry about the person reading a stranger's style sheet was never answered. I'd say it was outvoted.</p>
+
+<p>What shipped was the thing neither camp had asked for. Custom properties are neither the macro Bos refused nor the global variable Glazman and Hyatt proposed, and they wear a prefix one of those proposers called the group's ugliest syntax in twenty years. Item 28 is still on the W3C's server, with its row of options from 1 to 5 and a form that closed on 5 February 1999. In a style sheet it now reads <code>--orange: #faa</code>. It is still pink.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.w3.org/TR/1998/NOTE-CSS-potential-19981210">List of suggested extensions to CSS</a>, W3C Note, Bert Bos (editor), 1998</li>
+    <li><a href="https://www.w3.org/TR/NOTE-CSS-potential">The Note's "latest version" address</a>, W3C, which serves the same 1998 text</li>
+    <li><a href="https://www.w3.org/TR/NOTE-css-potential-19970819.html">CSS: Potential Enhancements</a>, W3C Note, Mike Wexler (editor), 1997</li>
+    <li><a href="https://www.w3.org/TR/WD-css1-960726">Cascading Style Sheets, level 1, working draft of 26 July 1996</a>, W3C</li>
+    <li><a href="https://www.w3.org/Style/LieBos2e/history/">The CSS saga</a>, chapter 20 of <em>Cascading Style Sheets, designing for the Web</em>, Håkon Wium Lie and Bert Bos, second edition, 1999</li>
+    <li><a href="https://www.w3.org/People/Bos/">Bert Bos's W3C home page</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0078.html">Announcement of the Note on www-style</a>, Bert Bos, 1998</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0080.html">Message on the form's mailto action</a>, George Lund, 1998</li>
+    <li>The <code>@define</code> thread on www-style: <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0081.html">Jelks Cabaniss</a>, <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0084.html">Chris Lilley</a>, <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0085.html">Cabaniss again</a> and <a href="https://lists.w3.org/Archives/Public/www-style/1998Dec/0092.html">Bert Bos</a>, 1998; <a href="https://lists.w3.org/Archives/Public/www-style/1999Jan/0002.html">Cabaniss</a> and <a href="https://lists.w3.org/Archives/Public/www-style/1999Jan/0004.html">Daniel Glazman</a>, 1999</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/1999Feb/0039.html">Proposal for background-size</a>, Ian Hickson, www-style, 1999</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2001Dec/0008.html">Proposal for @var</a>, Christoph Päper, www-style, 2001, and <a href="https://lists.w3.org/Archives/Public/www-style/2001Dec/0012.html">Bert Bos on updating the Note</a>, 2001</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2005Apr/0263.html">Request for constants and variables</a>, www-style, 2005</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2007Aug/0167.html">css constants</a>, Daniel Brumbaugh Keeney, www-style, 2007</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0178.html">CSS Variables, announcement on www-style</a>, Daniel Glazman and David Hyatt, 2008</li>
+    <li><a href="http://disruptive-innovations.com/zoo/cssvariables/">CSS Variables</a>, proposed specification, Daniel Glazman and David Hyatt, 2008</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0179.html">Reply on variables holding the wrong type of value</a>, L. David Baron, www-style, 2008</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0187.html">Reply to the CSS Variables proposal</a>, Bert Bos, www-style, 2008</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2008Apr/0196.html">Reply to Bert Bos</a>, Daniel Glazman, www-style, 2008</li>
+    <li><a href="https://www.w3.org/People/Bos/CSS-variables">Why "variables" in CSS are harmful</a>, Bert Bos, 2008</li>
+    <li><a href="https://simonwillison.net/2008/Aug/6/cssvariables/">Why "variables" in CSS are harmful, link and comment</a>, Simon Willison, 2008</li>
+    <li>WebKit's experiment, on www-style: <a href="https://lists.w3.org/Archives/Public/www-style/2008Jun/0230.html">the announcement</a>, <a href="https://lists.w3.org/Archives/Public/www-style/2008Jul/0545.html">the several syntaxes</a>, <a href="https://lists.w3.org/Archives/Public/www-style/2008Sep/0180.html">the removal</a> and <a href="https://lists.w3.org/Archives/Public/www-style/2008Sep/0194.html">the reason</a>, David Hyatt, 2008</li>
+    <li><a href="https://raw.githubusercontent.com/sass/ruby-sass/stable/doc-src/SASS_CHANGELOG.md">Sass changelog</a>, the Ruby Sass project</li>
+    <li><a href="https://lesscss.org/">Less</a>, project site</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2011Feb/0091.html">CSS Variables proposal</a>, Tab Atkins Jr., www-style, 2011</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2011Oct/0699.html">Custom properties in place of @var</a>, Tab Atkins Jr., www-style, 2011</li>
+    <li><a href="https://www.w3.org/standards/history/css-variables-1">CSS Custom Properties for Cascading Variables Module Level 1, publication history</a>, W3C</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2012Aug/0891.html">Minutes on CSS Variables from the working group's August 2012 meeting</a>, posted to www-style by fantasai, 29 August 2012</li>
+    <li><a href="http://www.xanthir.com/blog/b4KT0">Let's Talk about CSS Variables</a>, Tab Atkins-Bittner (Tab Atkins Jr. on the mailing list), 2012</li>
+    <li><a href="http://www.glazman.org/weblog/dotclear/index.php?post/2012/08/17/CSS-Variables%2C-why-we-drop-the-%24foo-notation">CSS Variables, why we drop the $foo notation</a>, Daniel Glazman, 2012</li>
+    <li>The 2014 syntax thread on www-style: <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0261.html">Tab Atkins Jr.</a>, <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0269.html">Brian Kardell</a>, <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0287.html">Zack Weinberg</a>, <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0288.html">Atkins's reply</a> and <a href="https://lists.w3.org/Archives/Public/www-style/2014Mar/0467.html">the resolution</a>, 2014</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/31">Firefox 31 for developers</a>, MDN</li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2015Nov/0002.html">Message on the -- syntax</a>, Daniel Glazman, www-style, 2015</li>
+    <li><a href="https://www.webkit.org/blog/5989/css-variables-in-webkit">CSS Variables in WebKit</a>, Jon Davis, WebKit blog, 2016</li>
+    <li><a href="https://blog.chromium.org/2016/02/chrome-49-beta-css-custom-properties.html">Chrome 49 Beta: CSS custom properties, background sync with service workers, and new ES2015 features</a>, Chromium Blog, 2016</li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms532847(v=vs.85)">Introduction to Filters and Transitions</a>, Microsoft, undated</li>
+    <li><a href="https://developer.chrome.com/blog/new-in-chrome-111">New in Chrome 111</a>, Chrome for Developers, 2023, and <a href="https://developer.chrome.com/blog/new-in-chrome-133">New in Chrome 133</a>, 2025</li>
+    <li><a href="https://www.w3.org/TR/css-gcpm-3/">CSS Generated Content for Paged Media Module</a> and <a href="https://www.w3.org/standards/history/css-gcpm-3">its publication history</a>, W3C</li>
+    <li><a href="https://doc.courtbouillon.org/weasyprint/stable/api_reference.html">WeasyPrint API reference</a>, CourtBouillon, and <a href="https://www.princexml.com/doc/paged/">Prince documentation on paged media</a></li>
+    <li><a href="https://constraints.cs.washington.edu/web/ccss-uwtr.pdf">Constraint Cascading Style Sheets for the Web</a>, Greg Badros, Alan Borning, Kim Marriott and Peter Stuckey, University of Washington technical report, 1999</li>
+    <li><a href="https://constraints.cs.washington.edu/cassowary/">The Cassowary constraint solving toolkit</a>, University of Washington</li>
+    <li>MDN browser-compat-data, used for which browser versions support which features, not linked</li>
+  </ul>
+</section>
