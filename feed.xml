@@ -486,7 +486,7 @@ YUI().use('dd-plugin', function(Y) {
 
 <p>One large outside user tried every exit. On the day of the notice Cavanaugh listed Liferay's options: take over stewardship of YUI, migrate off it, or fork a cleaned-up "YUI4". By mid-September <a href="https://liferay.dev/b/the-future-of-ui-development-and-alloyui-in-liferay-7">the plan</a> was AlloyUI 4, rebuilt as jQuery plugins, and in October <a href="https://liferay.dev/b/alloyui-3-released-bye-bye-yui">AlloyUI 3.0.0</a> shipped as the last release on YUI. Then, <a href="https://liferay.dev/b/the-status-and-direction-of-the-frontend-infrastructure-in-liferay-7-dxp">in 2016</a>, Cavanaugh reported that the jQuery version had been dropped, because putting a different API under the same name "would lead to a very confusing situation", and that AlloyUI itself was deprecated as of Liferay 7. The YUI4 fork does not come up again in those posts.</p>
 
-<p>The blog and the docs were kept. The "Moved to Tumblr" post promised that the blog would be archived, and <a href="https://derek.io/yuiblog/">an archive exists</a>, on the same domain as this collection. Derek Gathright, who edits these essays, appears in it as a speaker, with <a href="https://derek.io/yuiblog/2012/01/30/video-yuiconf2011-dgathright/">"Why YUI?"</a> from YUIConf 2011 and <a href="https://derek.io/yuiblog/2012/12/19/yuiconf-2012-talk-scrollview-deep-dive-with-derek-gathright/">a ScrollView deep dive</a> from 2012. The documentation stops at version 3.18.1, which <a href="https://en.wikipedia.org/wiki/YUI_Library">Wikipedia</a> dates to 22 October 2014, under two months after development officially ended.</p>
+<p>The blog and the docs were kept. The "Moved to Tumblr" post promised that the blog would be archived, and <a href="https://derek.io/yuiblog/">an archive exists</a>, on the same domain as this collection. The documentation stops at version 3.18.1, which <a href="https://en.wikipedia.org/wiki/YUI_Library">Wikipedia</a> dates to 22 October 2014, under two months after development officially ended.</p>
 
 <h2>The takeaway</h2>
 
@@ -1862,7 +1862,7 @@ var o = {} + []; o    <span class="c">// "[object Object]"</span>
 
 <p><strong>And some of it was an accident.</strong> <code>typeof null</code> is the honest example. Eich's recollection in the paper is that it leaked out of "the original Mocha implementation", where null carried the same internal tag as objects. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">MDN</a> records that "A fix was proposed for ECMAScript (via an opt-in), but was rejected."</p>
 
-<h2>Explaining the joke, and arguing about it</h2>
+<h2>Explaining the joke, and arguing with the joke</h2>
 
 <p>The first response to "Wat" was homework. The Stack Overflow question, <a href="https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the">"What is the explanation for these bizarre JavaScript behaviours mentioned in the 'Wat' talk for CodeMash 2012?"</a>, was posted on January 27, 2012 by someone who had tried the lines in a JSFiddle and got different answers. A user called Ventero replied within the hour, walking through each result by section number of the standard, block statement included. That answer has more than 1,500 votes. It set a pattern, and when Denys Dovhan started <a href="https://github.com/denysdovhan/wtfjs">a new wtfjs list</a> on GitHub in July 2017, crediting LeRoux for "the original idea", the entries came with explanations and, often, links to the clause responsible. One of them is the banana:</p>
 
@@ -2015,7 +2015,7 @@ f(false)  <span class="c">// "undefined"</span></code></pre>
 
 <p><code>RegExp.prototype.compile</code> came in the same way. It re-initialises an existing regular expression object in place, so <code>var r = /a/g; r.compile("b", "i")</code> leaves <code>r</code> as <code>/b/i</code>. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">MDN's note</a> on it is as dry as the spec: it "causes the otherwise immutable regex source and flags to become mutable, which may break user expectations."</p>
 
-<h2>Living with it: lint, aliases and smoosh</h2>
+<h2>Living with the annex: lint, aliases and smoosh</h2>
 
 <p>Developers coped the way <a href="https://derek.io/nostalgiajs/essays/jslint/">JSLint had taught them to</a>: agree not to use the bad parts, and have a tool enforce the agreement. Strict mode, from the fifth edition, made part of that official. Legacy octal literals are a syntax error in strict code, which you can check by evaluating <code>"use strict"; 010</code>. Documentation did the rest. MDN marks <code>escape</code>, <code>substr</code> and every HTML method as deprecated. It is also honest about how far that gets you. Its <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">page for <code>substr</code></a> admits "there is no trivial way to migrate" old calls to <code>slice</code> or <code>substring</code> "without essentially writing a polyfill," because the three disagree on negative arguments.</p>
 
@@ -2655,7 +2655,7 @@ $(document).keydown(function(e) {
 
 <p><strong>Fame was a real currency.</strong> Koch's prize of "eternal and undying fame" was a joke with a business model inside it. Nobody was paid per entry. What a good entry bought was a book contract, a conference invitation or a job. Koch's first book came out in 2007, and by 2008 "Ajaxians" were joining Mozilla. This is my reading of the incentives.</p>
 
-<h2>Why it stopped</h2>
+<h2>Why the blogs went quiet</h2>
 
 <p><strong>Google wanted a social network, and Reader was in the way.</strong> The Verge's account is that Reader was put into "maintenance mode" by early 2011 while its engineers were pulled into Google Plus. On October 20, 2011, the Reader team <a href="https://googlereader.blogspot.com/2011/10/upcoming-changes-to-reader-new-look-new.html">announced</a> that "we'll be retiring things like friending, following and shared link blogs inside of Reader," since those would "soon be available via Google+." On March 13, 2013, the end came as one paragraph in a list of housekeeping items <a href="https://blog.google/topics/inside-google/a-second-spring-of-cleaning/">signed by Urs Hölzle</a>: "While the product has a loyal following, over the years usage has declined. So, on July 1, 2013, we will retire Google Reader." The Verge points out that it went up on the day a new pope was elected, and Parparita, who had left Google by then, described the thinking inside the company as: "Okay, the Pope will be the big story of the day. It'll be fine." It was not fine. The Next Web <a href="https://thenextweb.com/news/feedly-an-alternative-to-google-reader-has-picked-up-500000-new-users-since-googles-decision-to-can-reader">reported</a> Feedly, a rival reader, announcing 500,000 new users in 48 hours.</p>
 
@@ -2780,7 +2780,7 @@ exports.increment = function(val) {
 
 <p>The group was renamed CommonJS, and the spec's page lists Node.js among its implementations. <code>require</code> and <code>exports</code> were on show in the side room of a 130-person conference, months before Node.js had its turn on a JSConf stage.</p>
 
-<h2>Why it worked</h2>
+<h2>Why JSConf worked</h2>
 
 <p>The honest answer includes luck, as the sold-out sign shows. But some of it was structural, and each of these is arguable.</p>
 
@@ -3117,7 +3117,7 @@ document.write('&lt;a href="mai' +
 
 <p>It is easy to read that as a defense of IE6. I read it as a description of a trap Microsoft had built for itself and was now, quite sincerely, standing in.</p>
 
-<h2>Why it would not die</h2>
+<h2>Why IE6 would not die</h2>
 
 <p><strong>The browser was a part of the operating system.</strong> This is Hachamovitch's point, and it is a matter of contract more than taste. IE6 shipped in Windows XP, so it was owed patches for as long as XP was. Microsoft's <a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-xp">lifecycle page</a> shows XP's extended support running to April 2014. A browser that in 2009 felt eight years stale had five years of guaranteed life left. Lawrence made the security half of the argument: if Microsoft dropped support, people "would still use it anyway, just without the benefit of security and reliability patches."</p>
 
@@ -3139,7 +3139,7 @@ document.write('&lt;a href="mai' +
 
 <p>Libraries absorbed the rest, quietly and for years. <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery</a> carried IE6 in every release until <a href="https://blog.jquery.com/2013/04/18/jquery-2-0-released/">version 2.0</a> in April 2013, and even then kept a 1.x branch "which does run on IE 6/7/8." A lot of developers stopped thinking about IE6 well before they stopped supporting it, because a dependency was doing the thinking.</p>
 
-<h2>The winter it turned</h2>
+<h2>January 2010: security, then Google</h2>
 
 <p>What actually set a date was security and Google, in that order. In January 2010 Google disclosed that it and other companies had been attacked, and a hole in Internet Explorer was soon named as the likely way in. On January 15, Germany's federal information security office, the BSI, <a href="https://grahamcluley.com/german-government-internet-explorer/">recommended</a> that people switch to another browser until a patch arrived. The flaw affected versions 6, 7 and 8, so it was not IE6's fault alone, but a government telling citizens to stop using Internet Explorer changed what an IT department could say out loud.</p>
 
@@ -3296,7 +3296,7 @@ req.send(null);</code></pre>
 
 <p>Other browsers had no ActiveX, so they couldn't copy the component. They copied its interface instead and exposed it as a plain constructor, <code>new XMLHttpRequest()</code>, with Microsoft's method names and a spelling that capitalizes half an acronym. (Microsoft's own component was XMLHTTP, all capitals.) <a href="https://en.wikipedia.org/wiki/XMLHttpRequest">Wikipedia's history</a> puts it in Mozilla's Gecko engine by 2002, in Safari 1.2 in 2004 and in Opera 8.0 in 2005. Aaron Swartz, looking back in <a href="http://www.aaronsw.com/weblog/ajaxhistory">A Brief History of Ajax</a>, summed up those years: "Mozilla quickly followed suit and, while nobody I know used it, the function stayed there, just waiting to be taken advantage of."</p>
 
-<h2>Why it sat unused</h2>
+<h2>Why XMLHttpRequest sat unused</h2>
 
 <p>Six years is a long time for a feature this useful to sit unused. I count four reasons, and I think they mattered in roughly this order.</p>
 
@@ -3475,7 +3475,7 @@ else
 
 <p><strong>Libraries and companies built on it.</strong> Hewitt told FOSDEM that "many of the popular JavaScript frameworks like Dojo, jQuery, YUI, and MochiKit use Firebug's logging feature for their built-in debugging facilities." In May 2007 Willison linked a YUI team announcement, headed "The YUI Team Is Hiring an Engineer To Work on Firebug," and quoted it: "we're opening a search for a full-time developer to work with Joe on advancing the Firebug roadmap." That July Yahoo's performance team released YSlow, which Willison described as "an extension on top of another extension." Once other people's tools assumed Firebug, it was infrastructure.</p>
 
-<h2>Living with it</h2>
+<h2>Living with Firebug</h2>
 
 <p>The first problem was the one in Skinner's brackets. <code>console.log</code> worked where Firebug was installed. Anywhere else, a logging call you forgot to delete reached for an object that did not exist, threw an error and took the rest of your script with it. Hewitt's answer was Firebug Lite, which Willison linked on the same day as the 1.0 beta: "Add Firebug to your site for non-Firefox browsers." In the same folder of the source tree sits a second, much smaller file, called <a href="https://www.askapache.com/s/s.askapache.net/javascript/firebug/lite/1.1/firebugx.js"><code>firebugx.js</code></a>. This is all of it:</p>
 
@@ -3574,7 +3574,7 @@ this.$$ = function(selector)
 
 <p>That is line 17 of the home page of the Space Jam website, which Warner Bros. <a href="https://www.spacejam.com/1996/">still serves at <code>spacejam.com/1996/</code></a>. I fetched it on November 12, 2026 and the comment was there, eight lines below another one that reads "Copyright 1996 Warner Bros. Online". No visitor to the site was ever shown it. Every visitor could read it anyway, by picking one item from a menu.</p>
 
-<p>The item was called View Source, or Document Source, or Page Source, depending on the browser and the year. It opened the file the server had sent, exactly as sent, comments and all. For a long stretch of the web's history that menu item was the nearest thing the trade had to a school. It had no teachers, no syllabus and no admissions office. This post is about how it got there, why it worked so well, who tried to switch it off, and what has replaced it.</p>
+<p>The item was called View Source, or Document Source, or Page Source, depending on the browser and the year. It opened the file the server had sent, exactly as sent, comments and all. For a long stretch of the web's history that menu item was the nearest thing the trade had to a school. It had no teachers, no syllabus and no admissions office. This essay is about how it got there, why it worked so well, who tried to switch it off, and what has replaced it.</p>
 
 <h2>Before: software arrived sealed</h2>
 
@@ -3632,7 +3632,7 @@ hypermedia&lt;/A&gt; information retrieval</code></pre>
 
 <p>He adds that when a page is worth copying, "the question 'How did they do that?' can be answered in seconds." And he notes how easily it could have gone the other way. The first browser makers could have treated the feature "as a kind of debugging option which could have been disabled in any public release". They left it in.</p>
 
-<h2>Why it worked</h2>
+<h2>Why View Source worked</h2>
 
 <p>Other platforms have let you read their source. Few of them trained a workforce by accident. Here are the forces I think made the difference. Reasonable people weigh them differently.</p>
 
@@ -3646,7 +3646,7 @@ hypermedia&lt;/A&gt; information retrieval</code></pre>
 
 <p><strong>There was not yet much to protect.</strong> Shirky describes the early web as having "no discernible financial incentive for the majority of its initial participants." A band page and a list of favourite links are not trade secrets. By the time there was real money in a page's markup, the habit of reading each other's work was already the culture, and the people who had learned that way were the ones being hired.</p>
 
-<h2>Living with it: the people who wanted it off</h2>
+<h2>The people who wanted View Source off</h2>
 
 <p>Not everyone enjoyed being the textbook. Photographers, designers and small businesses saw their pictures and layouts turn up on other people's sites, and wanted a lock. The lock they got was the no-right-click script. This one is from <a href="https://www.irt.org/script/969.htm">the irt.org JavaScript FAQ</a>, question 969, "How can I suppress a right mouse click?":</p>
 
@@ -3767,7 +3767,7 @@ var $ = jQuery;</code></pre>
 
 <p>Two other pieces of the belt matter here. In March 2003 Simon Willison had published <a href="https://simonwillison.net/2003/Mar/25/getElementsBySelector/"><code>document.getElementsBySelector</code></a>, "a javascript function which takes a standard CSS style selector and returns an array of elements objects." His example was <code>document.getElementsBySelector('div#main p a.external')</code>. And Sam Stephenson's Prototype library had a function called <code>$</code>. Its documentation still calls it <a href="http://api.prototypejs.org/dom/dollar/">"the cornerstone of Prototype"</a> and "a handy alias for <code>document.getElementById</code>." In Prototype, <code>$('nav')</code> hands you one element, by ID.</p>
 
-<h2>What happened</h2>
+<h2>From a mock-up to 1.0</h2>
 
 <p>On August 22, 2005, two and a half weeks before the contest opened, Resig posted <a href="https://johnresig.com/blog/selectors-in-javascript/">"Selectors in Javascript"</a>. It was a reaction to a library called Behaviour, which let you attach functions to elements using CSS selectors. He liked the premise and disliked the typing. Behaviour, he wrote, "simply seems too tedious and verbose for everyday use." Here is its way of making list items delete themselves when clicked, quoted from the post:</p>
 
@@ -3840,7 +3840,7 @@ if ( jQuery.browser.mozilla || jQuery.browser.opera ) {
 
 <p><strong>A platform vendor blessed it without taking it over.</strong> Guthrie's post is unusually clear about why Microsoft did not build its own. The team looked at adding selectors and animation to ASP.NET AJAX and "quickly realized that the jQuery support for these scenarios is already excellent." So: "We will distribute the jQuery JavaScript library as-is, and will not be forking or changing the source." The ASP.NET MVC download would "add the jQuery library by default to all new projects." For a large population of corporate developers, that sentence moved jQuery from something you had to justify to something that was simply there.</p>
 
-<h2>Living with it</h2>
+<h2>Living with jQuery</h2>
 
 <p>Success produced its own set of chores. The first was the dollar sign itself. With two libraries on a page, whoever loaded last owned <code>$</code>. The idiom that solved it is on the same documentation page, and it became the standard way to open a jQuery plugin:</p>
 
@@ -4304,7 +4304,7 @@ function show(id) {
 
 <p>Some people gave up and picked a side. "Best viewed with Netscape Navigator" and "Best viewed with Internet Explorer" buttons, usually 88 by 31 pixels, were the heraldry of the era. And in 1998, a group of developers formed the <a href="https://www.webstandards.org/">Web Standards Project</a> to lobby browser makers to support the W3C's specs. Developers organizing to pressure vendors was new, and it worked slowly, and then it worked.</p>
 
-<h2>How it ended</h2>
+<h2>How the fork ended</h2>
 
 <p>Internet Explorer 5, in March 1999, supported most of DOM Level 1, including <code>document.getElementById</code>. Netscape 6, built on Gecko, arrived in November 2000, supported the same call and dropped <code>document.layers</code> entirely. Netscape 4 faded slowly, and plenty of sites kept their three-way branch into the early 2000s because a customer on an old machine is still a customer.</p>
 

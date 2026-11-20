@@ -2,6 +2,7 @@
 // Run: `node scripts/ship.mjs <slug>`.
 // Expects content/<slug>.html, work/<slug>/entry.json (the essays.json entry
 // without `published`) and, usually, icons/<slug>.txt. It then:
+//   0. runs scripts/lint.mjs on the fragment and stops on any FAIL
 //   1. adds the entry to essays.json with the current UTC time as `published`
 //      (or, if the slug is already there, updates it and keeps `published`)
 //   2. builds, records archive copies, draws the preview card, builds again
@@ -20,6 +21,11 @@ if (!slug) fail('usage: npm run ship -- <slug>');
 const entryFile = join(ROOT, 'work', slug, 'entry.json');
 if (!existsSync(join(ROOT, 'content', `${slug}.html`))) fail(`content/${slug}.html is missing`);
 if (!existsSync(entryFile)) fail(`work/${slug}/entry.json is missing`);
+
+// Style rules first, so a draft that breaks one never reaches essays.json.
+try {
+  process.stdout.write(execFileSync('node', ['scripts/lint.mjs', slug], { cwd: ROOT, encoding: 'utf8' }));
+} catch (e) { process.stdout.write(e.stdout || ''); fail('lint failed; fix the FAIL lines and run again'); }
 
 const entry = JSON.parse(readFileSync(entryFile, 'utf8'));
 if (entry.slug !== slug) fail(`entry.json has slug "${entry.slug}", expected "${slug}"`);
@@ -43,7 +49,7 @@ const run = (label, ...args) => {
 run('build', 'scripts/build.mjs');
 try {
   const out = execFileSync('node', ['scripts/archive.mjs'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-  console.log('ship: archive, ' + out.trim().split('\n').pop());
+  console.log('ship: ' + (out.split('\n').find((l) => l.startsWith('archive:')) || 'archive done'));
 } catch { console.log('ship: archive lookup failed (network?); continuing without new archive links'); }
 run('preview card', 'scripts/og.mjs', slug);
 run('build', 'scripts/build.mjs');

@@ -67,7 +67,7 @@
 
 <p><strong>Libraries and companies built on it.</strong> Hewitt told FOSDEM that "many of the popular JavaScript frameworks like Dojo, jQuery, YUI, and MochiKit use Firebug's logging feature for their built-in debugging facilities." In May 2007 Willison linked a YUI team announcement, headed "The YUI Team Is Hiring an Engineer To Work on Firebug," and quoted it: "we're opening a search for a full-time developer to work with Joe on advancing the Firebug roadmap." That July Yahoo's performance team released YSlow, which Willison described as "an extension on top of another extension." Once other people's tools assumed Firebug, it was infrastructure.</p>
 
-<h2>Living with it</h2>
+<h2>Living with Firebug</h2>
 
 <p>The first problem was the one in Skinner's brackets. <code>console.log</code> worked where Firebug was installed. Anywhere else, a logging call you forgot to delete reached for an object that did not exist, threw an error and took the rest of your script with it. Hewitt's answer was Firebug Lite, which Willison linked on the same day as the 1.0 beta: "Add Firebug to your site for non-Firefox browsers." In the same folder of the source tree sits a second, much smaller file, called <a href="https://www.askapache.com/s/s.askapache.net/javascript/firebug/lite/1.1/firebugx.js"><code>firebugx.js</code></a>. This is all of it:</p>
 

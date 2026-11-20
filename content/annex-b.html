@@ -83,7 +83,7 @@ f(false)  <span class="c">// "undefined"</span></code></pre>
 
 <p><code>RegExp.prototype.compile</code> came in the same way. It re-initialises an existing regular expression object in place, so <code>var r = /a/g; r.compile("b", "i")</code> leaves <code>r</code> as <code>/b/i</code>. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile">MDN's note</a> on it is as dry as the spec: it "causes the otherwise immutable regex source and flags to become mutable, which may break user expectations."</p>
 
-<h2>Living with it: lint, aliases and smoosh</h2>
+<h2>Living with the annex: lint, aliases and smoosh</h2>
 
 <p>Developers coped the way <a href="../jslint/">JSLint had taught them to</a>: agree not to use the bad parts, and have a tool enforce the agreement. Strict mode, from the fifth edition, made part of that official. Legacy octal literals are a syntax error in strict code, which you can check by evaluating <code>"use strict"; 010</code>. Documentation did the rest. MDN marks <code>escape</code>, <code>substr</code> and every HTML method as deprecated. It is also honest about how far that gets you. Its <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">page for <code>substr</code></a> admits "there is no trivial way to migrate" old calls to <code>slice</code> or <code>substring</code> "without essentially writing a polyfill," because the three disagree on negative arguments.</p>
 

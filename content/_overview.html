@@ -1,0 +1,160 @@
+<p class="lede">How an essay gets from one line in a topics file to a page on this site, and what checks it on the way.</p>
+
+<p>The <a href="../about/">About page</a> says in plain terms how these essays are made. This page is the wiring diagram. It is written for people who have built things for the web for a long time, including people whose work, mailing-list posts or old pages are quoted in an essay and who would like to know what read them.</p>
+
+<h2>The short version</h2>
+
+<ul>
+  <li>Every essay is written by a large language model. No person drafts the text. Derek Gathright picks most of the topics, writes the house rules and edits the collection.</li>
+  <li>One model does not do the whole job. The work is split into nine stages, each run as a separate agent with its own instructions, and the stages pass files to each other, not conversation.</li>
+  <li>Two models are used, both from Anthropic's Claude family. The larger one writes and edits. The smaller one scouts, researches, checks facts and verifies fixes.</li>
+  <li>The agent that writes an essay never checks it. The agents that check it are not shown the writer's notes.</li>
+  <li>The site is static HTML built by one Node script with no packages. The published pages carry no JavaScript apart from two visit counters.</li>
+  <li>The rules, the scripts and every essay's edit history are <a href="https://github.com/derek/nostalgiajs">public</a>.</li>
+</ul>
+
+<h2>Nine stages</h2>
+
+<p>A session called the coordinator starts each stage, waits for it, and reads only the short verdict that comes back. It never reads the research or the draft, so it has no opinion to pass along. Each stage begins by reading the <a href="https://github.com/derek/nostalgiajs/blob/main/AGENTS.md">house rules</a>.</p>
+
+<ol class="pipeline" aria-label="The nine stages, in order">
+  <li style="--i:0"><span class="n">1</span><div><b>Pick</b> <i>coordinator</i><p>Takes the first topic from the queue in <code>TOPICS.md</code> and makes a working folder for it.</p></div></li>
+  <li style="--i:1"><span class="n">2</span><div><b>Scout</b> <i>smaller model</i><p>About ten page fetches to answer one question: is there a story here, with a person who wanted something and a turn on a date, and do its primary sources still load? Ends in <b>go</b> or <b>park</b>. A parked topic is filed with the reason and nothing is published.</p></div></li>
+  <li style="--i:2"><span class="n">3</span><div><b>Research</b> <i>smaller model</i><p>Opens the sources and saves the text of every page. Writes numbered claims, each with its URL and the exact words on the page that support it, then a timeline, the period code copied exactly, and a list of what would not open.</p></div></li>
+  <li style="--i:3"><span class="n">4</span><div><b>Write</b> <i>larger model</i><p>Works from the research file and the saved pages. Nothing goes into the essay that is not a numbered claim or labelled as the writer's own judgment. Then it cuts, compares its opening and ending with the last five essays, and runs the lint.</p></div></li>
+  <li style="--i:4"><span class="n">5</span><div><b>Fact check</b> <i>smaller model, new agent</i><p>Gets the draft and the saved pages, and is not given the research notes. Works every date, number, version, name and quotation out again from the source. Searches for a second source on the claims the story depends on. Compares the draft with the published essays.</p></div></li>
+  <li style="--i:4"><span class="n">6</span><div><b>Edit</b> <i>larger model, new agent</i><p>Reads as a reader, with no research in hand, at the same time as the fact check. Says what the story is in two sentences, lists everything that could be cut, and names the weakest sentences. It does not rewrite.</p></div></li>
+  <li style="--i:5"><span class="n">7</span><div><b>Fix</b> <i>the same writer</i><p>Answers both reviews one finding at a time. It may decline a factual finding only by citing a source. The fixed essay may not be longer than the draft.</p></div></li>
+  <li style="--i:6"><span class="n">8</span><div><b>Verify</b> <i>smaller model, new agent</i><p>Compares the fixed essay with the draft. Marks each finding closed or open by reading the essay, not the writer's reply, and checks every changed sentence against its source.</p></div></li>
+  <li style="--i:7"><span class="n">9</span><div><b>Publish</b> <i>coordinator</i><p>Runs one command, commits and pushes. Nothing is published while a finding is open.</p></div></li>
+</ol>
+
+<h2>Who reads what</h2>
+
+<p>The stages are kept apart on purpose. A checker that has read the researcher's notes tends to agree with the researcher. So the fact checker gets the essay and the raw pages and has to reach its own reading of them, and the editor gets only the essay, the way a reader does.</p>
+
+<div class="scroll">
+<table class="reads">
+  <caption>What each agent is given</caption>
+  <thead>
+    <tr><th scope="col">Agent</th><th scope="col">Notes</th><th scope="col">Pages</th><th scope="col">Essay</th><th scope="col">Reviews</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Researcher</th><td>writes</td><td>writes</td><td>–</td><td>–</td></tr>
+    <tr><th scope="row">Writer</th><td>reads</td><td>reads</td><td>writes</td><td>answers</td></tr>
+    <tr><th scope="row">Fact checker</th><td class="no">withheld</td><td>reads, adds</td><td>reads</td><td>writes</td></tr>
+    <tr><th scope="row">Editor</th><td class="no">withheld</td><td class="no">withheld</td><td>reads</td><td>writes</td></tr>
+    <tr><th scope="row">Verifier</th><td class="no">withheld</td><td>reads</td><td>reads both</td><td>reads both</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>The files live in a working folder that is never published: <code>scout.md</code>, <code>research.md</code>, a <code>sources/</code> folder with one text file per page opened, <code>review.md</code>, <code>edit.md</code> and <code>verify.md</code>. Saving the pages has a second use. Reading the web is the expensive part, so each page is fetched once and every later stage reads the copy.</p>
+
+<h2>The review loop</h2>
+
+<svg class="loop" viewBox="0 0 340 380" role="img" aria-labelledby="loop-t loop-d">
+  <title id="loop-t">The review loop</title>
+  <desc id="loop-d">The draft goes to the fact check and the edit at the same time. Both go to the fix, then to verify. If findings are open the essay goes back to the fix once. If nothing is open it is published. If findings are still open after the second pass, work stops.</desc>
+  <g class="wire">
+    <path d="M130 44 L65 84 M130 44 L195 84 M65 118 L130 160 M195 118 L130 160 M130 194 V236 M130 270 V330"/>
+    <path d="M180 253 H215 V177 H186"/>
+    <path d="M80 253 H38 V324"/>
+    <path class="head" d="M130 330 l-5 -9 h10 z M186 177 l9 -5 v10 z M38 330 l-5 -9 h10 z M130 236 l-5 -9 h10 z"/>
+  </g>
+  <g class="box">
+    <rect x="80" y="10" width="100" height="34"/><text x="130" y="32">Draft</text>
+    <rect x="10" y="84" width="110" height="34"/><text x="65" y="106">Fact check</text>
+    <rect x="140" y="84" width="110" height="34"/><text x="195" y="106">Edit</text>
+    <rect x="80" y="160" width="100" height="34"/><text x="130" y="182">Fix</text>
+    <rect x="80" y="236" width="100" height="34"/><text x="130" y="258">Verify</text>
+    <rect class="end" x="80" y="330" width="100" height="34"/><text class="end" x="130" y="352">Publish</text>
+    <rect class="stop" x="4" y="330" width="68" height="34"/><text x="38" y="352">Stop</text>
+  </g>
+  <g class="label">
+    <text x="223" y="210">findings open:</text>
+    <text x="223" y="225">one more pass</text>
+    <text x="138" y="305">nothing open</text>
+    <text x="46" y="292">still open</text>
+    <text x="46" y="306">twice</text>
+  </g>
+  <circle class="dot a" r="6"/>
+  <circle class="dot b" r="6"/>
+</svg>
+
+<p>The diagram shows an essay that needed a second pass. The writer gets its findings back at most twice. If something is still open after that, the pipeline stops and reports, and a person decides. An essay can also be cancelled at four points: by the scout, by the writer if the research holds no story, by the editor, and at the fix. Cancelling costs less than publishing something dull, and it is a normal result.</p>
+
+<h2>What a script checks</h2>
+
+<p>Some house rules can be tested by a program, so they are, and the agents are left with the ones that need judgment. <code>scripts/lint.mjs</code> fails a draft that:</p>
+
+<ul>
+  <li>runs over 3,000 words of prose, which is a limit and not a length to aim for</li>
+  <li>has a section heading that says "it", contains a link or copies the outline</li>
+  <li>puts two block quotations in one section</li>
+  <li>calls itself a post, dates itself, or claims a memory</li>
+  <li>ends on anything other than a statement in a paragraph</li>
+</ul>
+
+<p>It also prints notes that fail nothing: the share of the prose inside quotation marks, paragraphs carrying two full quotations, paragraphs that end on a short punchline, and five-word runs that already appear in three or more essays. The last one exists because a collection written by one model drifts toward the same few moves, and a reader of two essays notices before the model does.</p>
+
+<p>No script can tell whether a sentence is true. That is the fact checker's job, and the fact checker is also a model.</p>
+
+<h2>One command to publish</h2>
+
+<p>This is the output of the publish command, run on the essay about the pop-up ad.</p>
+
+<pre class="term" tabindex="0" style="--lines:16; --steps:steps(16)"><code>$ npm run ship -- popup
+popup: 3000 words (limit 3000), 11% quoted
+  note  the opening snippet is 62 characters wide; 35 fit on a phone
+ship: updated popup in essays.json
+ship: build
+ship: archive: 0 new, 533 total, 102 without a copy
+ship: preview card
+ship: build
+ok    index.html: width 375/375
+ok    index.html: 0 console errors
+ok    index.html: 0 broken local links
+ok    essays/popup/index.html: width 375/375
+ok    essays/popup/index.html: 0 console errors
+ok    essays/popup/index.html: 0 broken local links
+ok    feed.xml parses
+icon  work/popup/icon.png
+ship: ready. Commit message is in work/popup/commit.txt</code></pre>
+
+<p>The lint runs first. The build then writes every page, the landing page and the feed. The archive step asks the Internet Archive's Wayback Machine for a copy of each source link, and where one exists the essay prints an "(archived)" link beside the original, because pages from 1996 have a way of moving. A headless browser draws the link-preview card, then loads the built pages at 375 pixels wide and fails on sideways scroll, console errors or broken local links.</p>
+
+<p>The built pages are committed to the repository and served by GitHub Pages as they are. On every push the deploy workflow runs the build again and refuses to deploy if the committed pages differ from what the build produces. That check was added after two hand edits to built pages were silently overwritten by the next build.</p>
+
+<h2>The site</h2>
+
+<ul>
+  <li><strong>One build script.</strong> <a href="https://github.com/derek/nostalgiajs/blob/main/scripts/build.mjs"><code>scripts/build.mjs</code></a> is a few hundred lines of Node with no packages. It reads <code>essays.json</code> and one HTML fragment per essay and writes everything else, including the contents list at the top of each essay, which it makes from the headings.</li>
+  <li><strong>No framework and no web fonts.</strong> One stylesheet, Verdana and Georgia, web-safe colours.</li>
+  <li><strong>Icons are text files.</strong> Each essay's icon is 32 lines of 32 characters, one letter per pixel from a palette of 22 colours, and the build turns the grid into an SVG. <a href="https://github.com/derek/nostalgiajs/blob/main/icons/popup.txt">Here is one.</a></li>
+  <li><strong>The animations on this page are CSS.</strong> They stop if your system asks for reduced motion.</li>
+  <li><strong>A full-text RSS feed</strong>, written by the same script.</li>
+</ul>
+
+<h2>If an essay quotes you</h2>
+
+<p>Nobody was interviewed and nobody was contacted. What an essay says about you comes from pages that were public and that loaded when the researcher asked for them.</p>
+
+<ul>
+  <li><strong>Quotations are copied, not recalled.</strong> The researcher saves the page and copies the words. The fact checker finds them again in the saved copy. The page is linked where the quotation appears and again in the sources.</li>
+  <li><strong>Inference is labelled.</strong> Where an essay connects two facts or guesses at a motive, it says "I'd argue" or "my best guess", and the guess is listed again under "What I couldn't verify" near the end.</li>
+  <li><strong>The "I" is not a person.</strong> It is a voice with opinions. It claims no memories and was in no room.</li>
+  <li><strong>Pronouns are not assumed.</strong> An essay uses your name or "they" unless a source it opened states otherwise.</li>
+  <li><strong>The technology may be teased. The people may not.</strong></li>
+</ul>
+
+<p>A model can still misread a page, pick the wrong page, or join two true things into a false one. If an essay has you wrong, the "Spot a mistake?" link at the end of it opens a GitHub issue with the essay already named. A source helps, and so does your own account of how it went. A fix that changes what an essay says is recorded on the essay with a date.</p>
+
+<h2>What this does not do</h2>
+
+<ul>
+  <li><strong>It reads only what is online.</strong> Print, paywalled archives and pages that block automated readers are out of reach unless someone has archived them. Each essay lists the sources it could not open.</li>
+  <li><strong>Every checker is a model.</strong> Splitting the work and withholding notes lowers the chance that one misreading survives all the stages. It does not remove it.</li>
+  <li><strong>Older essays had less.</strong> The first twenty-seven essays were made with earlier versions of this process, which had one combined review and no verify stage. Twelve of them are over the length limit that now applies.</li>
+  <li><strong>This page was written by the model too</strong>, from the house rules and the scripts it describes.</li>
+</ul>

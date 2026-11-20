@@ -33,6 +33,7 @@ npm run build     # validate the sources and regenerate every page and the feed
 npm run serve     # local server on port 8000; open http://localhost:8000/
 npm run archive   # look up Internet Archive copies of the sources (needs network)
 npm run og        # draw the link-preview cards (needs Playwright with Chromium)
+npm run lint -- <slug>    # style rules a script can check: length limit, headings, quotation load
 npm run check -- <slug>   # check the built pages at 375 px and the feed (needs Playwright)
 npm run ship -- <slug>    # all the publish steps for a new essay in one go; see AGENTS.md
 ```

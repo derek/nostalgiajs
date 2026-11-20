@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { headingProblems, wordCount } from './lint.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://derek.io/nostalgiajs/';
@@ -78,8 +79,8 @@ for (const e of essays) {
     if (typeof u !== 'string' || !u.trim()) fail(`${e.slug}: each "unverified" entry must be a sentence`);
   }
   e.icon = existsSync(join(ROOT, 'icons', e.slug + '.txt')) ? e.slug : 'topic-' + e.topic;
-  const text = e.body.replace(/<pre[\s\S]*?<\/pre>/g, ' ').replace(/<section class="sources"[\s\S]*$/, ' ').replace(/<[^>]+>/g, ' ');
-  e.minutes = Math.max(1, Math.round(text.split(/\s+/).filter(Boolean).length / 220));
+  for (const h of headingProblems(e.body)) fail(`${e.slug}: ${h}`);
+  e.minutes = Math.max(1, Math.round(wordCount(e.body) / 220));
   e.eraText = e.era[1] === null ? `${e.era[0]} to today` : e.era[0] === e.era[1] ? String(e.era[0]) : `${e.era[0]} to ${e.era[1]}`;
   e.url = SITE + 'essays/' + e.slug + '/';
 }
@@ -123,7 +124,7 @@ function gtmSnippet() {
 `;
 }
 
-function page({ path, title, description, up, ogImage, ogType = 'website', main }) {
+function page({ path, title, description, up, ogImage, ogType = 'website', main, noindex = false }) {
   const canonical = SITE + path;
   return `<!doctype html>
 <html lang="en">
@@ -133,7 +134,7 @@ function page({ path, title, description, up, ogImage, ogType = 'website', main 
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
-<meta property="og:site_name" content="${NAME}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ''}<meta property="og:site_name" content="${NAME}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:title" content="${esc(title.replace(` · ${NAME}`, ''))}">
 <meta property="og:description" content="${esc(description)}">
@@ -335,6 +336,18 @@ ${read('content/_about.html').trim()}
     </article>`,
 }));
 
+// ---------- technical overview ----------
+// Not linked from any page yet, and kept out of search engines until it is.
+write('overview/index.html', page({
+  path: 'overview/', title: `Technical overview · ${NAME}`,
+  description: `How a ${NAME} essay is researched, written, checked and published, stage by stage.`,
+  up: '../', ogImage: 'default.png', noindex: true,
+  main: `    <article>
+      <h1>Technical overview</h1>
+${read('content/_overview.html').trim()}
+    </article>`,
+}));
+
 // ---------- feed (full text) ----------
 const absolute = (html) => html.replace(/href="\.\.\/([^"]*)"/g, `href="${SITE}essays/$1"`);
 const newest = [...essays].sort((a, b) => Date.parse(b.published) - Date.parse(a.published)).slice(0, 30);
@@ -360,4 +373,4 @@ ${newest.map((e) => `  <item>
 </rss>
 `);
 
-console.log(`built ${essays.length} essays, landing page, about page and feed`);
+console.log(`built ${essays.length} essays, landing page, about page, overview page and feed`);

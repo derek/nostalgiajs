@@ -16,7 +16,7 @@ The site was first called Boomer.js and then, briefly, View Source. `../boomerjs
 
 1. **Stay in this repository.** The site is the root of `derek/nostalgiajs`. Do not edit any other repository.
 2. **No dependencies.** One build script in plain Node, no npm packages, no frameworks, no CDN scripts, no web fonts. The published pages use no JavaScript, with two exceptions that the build writes into every page's `<head>`: the Google Tag Manager loader (`gtm.js` from `googletagmanager.com`) when `GTM_ID` is set in `scripts/build.mjs`, and the GoatCounter page-view counter (`count.js` from `gc.zgo.at`) when `GOATCOUNTER` is set there. The only tracking allowed is those two: what Derek configures in that GTM container, which is intended to be Google Analytics 4 only, and GoatCounter's page counts. Do not add any other script, tracker or pixel to the site or to the container.
-3. **Never edit generated files by hand.** A hand edit is silently lost at the next build. The landing page's intro sentence lives in `scripts/build.mjs`, and the About page's text lives in `content/_about.html`. `index.html`, `feed.xml`, `about/index.html` and every `essays/<slug>/index.html` are written by `scripts/build.mjs`. Change the sources (`essays.json`, `content/`, `style.css`, the script) and rebuild. Commit the generated files with the change, because GitHub Pages serves this folder as it is.
+3. **Never edit generated files by hand.** A hand edit is silently lost at the next build. The landing page's intro sentence lives in `scripts/build.mjs`, the About page's text lives in `content/_about.html`, and the technical overview's lives in `content/_overview.html`. `index.html`, `feed.xml`, `about/index.html`, `overview/index.html` and every `essays/<slug>/index.html` are written by `scripts/build.mjs`. Change the sources (`essays.json`, `content/`, `style.css`, the script) and rebuild. Commit the generated files with the change, because GitHub Pages serves this folder as it is. The deploy workflow rebuilds on every push to `main` and refuses to deploy if the committed pages differ from the build, so a hand edit shows up as a failed run instead of vanishing later.
 4. **No author name, and one quiet disclosure.** The essays have no byline and the author has no name. The tagline does not mention it, but the landing page's intro sentence and the About page say the essays are written by AI. Do not add disclaimers, apologies or "as an AI" asides to an essay.
 5. **Never invent facts.** No made-up quotes, statistics, version numbers, release dates, people or anecdotes. Open a real source for every date, version, quote and attribution before you write it. Quote people only in words you have seen on the page. If you cannot confirm a claim, drop it or state it less firmly ("around 2001", "by the early 2000s"). Label your own interpretations ("my best guess", "I'd argue"). Code samples must be real code from the period or code that runs as shown, not pseudo-code in disguise.
 6. **Never claim personal memories.** Do not write "I remember writing this" or invent a past. Do not dwell on the absence either: no "I wasn't there" or "the people who were there will know". Tell the story with the confidence of someone who did the reading. Use "you" for the developer's experience.
@@ -26,6 +26,18 @@ The site was first called Boomer.js and then, briefly, View Source. `../boomerjs
 ## Voice
 
 One consistent voice across every essay: first person, dry, warm, curious and a little self-deprecating, like the funniest person at a user group who also reads the spec. "I" is for opinions and judgments, never for memories. Contractions, plain words. One joke per section is plenty. Avoid corporate filler, listicle hype, emoji and the "It's not X, it's Y" pattern. Respect the reader's time: no padding. The essay should feel like a learning journey, of someone who only knew fragments of the history, but through the research, discovered new facts they found surprising. Curiosity and reverence for history is paramount.
+
+### Habits to break
+
+Each of these is fine once. Across a collection they become a template, and a reader of two essays notices. `npm run lint` reports the ones a script can see; the editor looks for the rest.
+
+- **The stock discovery paragraph.** "I knew X. What I had not understood until I read Y was Z" appears in seven essays. Do not write it again. Put the surprise where it happens in the story, and let the reader be surprised there.
+- **The trailer.** "That sentence comes back in 2008", "which matters later". Tell the reader now or tell them then, not both.
+- **The punchline closer.** A short quotable sentence at the end of a paragraph is a joke's rhythm. Used on every paragraph, it is a tic. Most paragraphs should end when the information does.
+- **The calendar paragraph.** Three sentences in a row that open with a date read as a timeline. Keep the dates that carry the turn and say what the others meant.
+- **The quotation relay.** A paragraph with two or more full quotations is usually a paragraph the writer has not yet written. Say it, then quote the one line worth hearing.
+- **The stock opener and the stock ending.** "That is..." after the opening snippet, and a last line built on "still". Look at how the last five essays open and close, and do something else.
+- **Hedging by habit.** "My best guess" and "I'd argue" label a real judgment. They are not seasoning, and two in a section is one too many.
 
 ## Is there a story?
 
@@ -57,11 +69,13 @@ An essay here tells a story. A collection of facts, dates and other people's opi
 - Publish nothing and commit only the `TOPICS.md` change.
 - Report what you found. The research is not wasted: say whether any of it belongs in another essay.
 
-The same applies later. If the finished draft or the reviewer shows that the essay is quotations strung together, cut it back to the story or cancel it. Derek's "Up next" picks can be parked too; he will see why and can overrule.
+The same applies later. If the finished draft or the editor shows that the essay is quotations strung together, cut it back to the story or cancel it. Derek's "Up next" picks can be parked too; he will see why and can overrule.
 
 ## Essay shape
 
-Target 2,200 to 3,000 words of prose (about 10 to 13 minutes, plus code). Readers are experienced developers, so go deep and skip the basics. Every essay has, in this order:
+**Length is a limit, not a target.** An essay is as long as its story needs. 3,000 words of prose is the most it may be, counted the way the build counts (code and the sources section left out); `npm run lint -- <slug>` reports the count and fails above the limit. There is no minimum and no length to aim for. A story told in 1,800 words is finished at 1,800, and nothing is added to bring it up to a size. Nineteen of the first twenty-seven essays landed within a hundred words of 3,000, which is what writing to a number looks like: material was added or kept to fill the space. So the writer drafts without watching the count, then cuts everything the two-sentence story does not need, and the editor proposes more cuts after that (see "Adding an essay"). When a draft is over the limit, the fix is to drop a thread, not to shave words from every paragraph.
+
+Readers are experienced developers, so go deep and skip the basics. Every essay has, in this order:
 
 1. **Lede and hook**: a one-sentence lede, then a concrete artifact (a line of code, a tag, an error message, a product name), not a generic intro.
 2. **Setup**: what the world looked like before, so the change makes sense.
@@ -91,6 +105,7 @@ The order can bend to fit the story. If the trouble is the best way in, start th
 | `essays.json` | The list of published essays. The single source of truth for titles, topics, eras and order. |
 | `content/<slug>.html` | The body of one essay, as an HTML fragment. |
 | `content/_about.html` | The body of the About page. |
+| `content/_overview.html` | The body of the technical overview at `/overview/`: the pipeline, the checks and the build, with CSS diagrams, written for experienced developers and for people the essays quote. No page links to it yet and it carries `noindex`; do not link it until Derek says so. If you change a stage, a script or a rule it describes, change it in the same commit. The command output it shows is real: rerun the command and paste, never edit it by hand. |
 | `archive.json` | Internet Archive copies of source links, filled in by `scripts/archive.mjs`. |
 | `og/*.png` | Link-preview cards, drawn by `scripts/og.mjs`. |
 | `style.css` | The one stylesheet. |
@@ -98,11 +113,13 @@ The order can bend to fit the story. If the trouble is the best way in, start th
 | `berry.gif`, `berry.png` | The animated mascot shown in the header, and its still frame. |
 | `buttons/*.png` | The three 88x31 footer buttons, drawn by `scripts/buttons.py` (needs Python with Pillow; run only to change them). |
 | `scripts/build.mjs` | Generates every page, the landing page and the feed. |
+| `scripts/lint.mjs` | The style rules a script can enforce. See "Commands". |
 | `scripts/ship.mjs`, `scripts/check.mjs` | The publish steps as one command, and the pre-publish checks. See "Commands". |
-| `work/<slug>/` | Working files for an essay in progress: scout report, research file, entry, review. Ignored by git and never published. |
+| `.github/workflows/static.yml` | Deploys the site, after checking that the committed pages match a fresh build. |
+| `work/<slug>/` | Working files for an essay in progress: scout report, research file, entry, reviews. Ignored by git and never published. |
 | `TOPICS.md` | Essay ideas, with Derek's "Up next" queue at the top. |
 | `research/<date>/` | Working research notes and reports, as Markdown. Not essays, and not checked like essays. `research/index.html` is a hand-written page that lists them; add a section to it when you add a dated folder. It is not linked from the site and not written by the build. |
-| `essays/<slug>/index.html`, `index.html`, `about/index.html`, `feed.xml`, `icons/*.svg` | Generated. Do not edit. |
+| `essays/<slug>/index.html`, `index.html`, `about/index.html`, `overview/index.html`, `feed.xml`, `icons/*.svg` | Generated. Do not edit. |
 
 ### An entry in `essays.json`
 
@@ -153,7 +170,7 @@ Every essay tells the reader plainly where its evidence is thin. Put these in th
 - dates or details where sources disagree
 - anything in the essay that is your own inference or guess
 
-Take them from the research file and the review. Three to five entries is typical. Do not list things you simply cut. If there is truly nothing, leave the field out.
+Take them from the research file and the fact check. Three to five entries is typical. Do not list things you simply cut. If there is truly nothing, leave the field out.
 
 ### Icons
 
@@ -178,16 +195,17 @@ Run from the repository root. Needs Node 22 or newer. There is nothing to instal
 
 | Command | What it does |
 | --- | --- |
-| `npm run build` | Validates `essays.json` and the fragments, then regenerates every page and the feed. |
+| `npm run build` | Validates `essays.json` and the fragments, then regenerates every page and the feed. Fails on a heading that says "it", contains a link or copies the outline. |
+| `npm run lint -- <slug>` | Checks one fragment against the rules a script can enforce. FAIL lines are broken rules: over 3,000 words, a bad heading, two block quotations in a section, "this post", a dated phrase, a memory claim, an ending that is not a statement in a paragraph. "note" lines are habits to look at: quotation load, paragraphs carrying two full quotations, punchline closers, repeated openers, and phrasing already used in three or more essays. Exits 1 on any FAIL. With no slug it reports on every essay and never fails, because some essays are older than some rules. |
 | `npm run archive` | Looks up an Internet Archive copy for each source link and records it in `archive.json`. Add `-- --save` to ask the archive to capture pages it does not have. Needs network access. |
 | `npm run og` | Draws the link-preview cards. Add `-- <slug>` to draw one. Needs Playwright with Chromium. |
 | `npm run check -- <slug>` | Checks the built landing page and that essay at 375 px wide (no sideways page scroll, no console errors, no broken local links) and that `feed.xml` parses. Saves the icon to `work/<slug>/icon.png` if that folder exists. Needs Playwright with Chromium. |
-| `npm run ship -- <slug>` | Every mechanical publish step in one command: adds `work/<slug>/entry.json` to `essays.json` with the current time as `published`, then build, archive, preview card, build and check, and writes the commit message to `work/<slug>/commit.txt`. Does not touch `TOPICS.md` or run git. |
+| `npm run ship -- <slug>` | Every mechanical publish step in one command: runs the lint and stops on a FAIL, adds `work/<slug>/entry.json` to `essays.json` with the current time as `published`, then build, archive, preview card, build and check, and writes the commit message to `work/<slug>/commit.txt`. Does not touch `TOPICS.md` or run git. |
 | `npm run serve` | Local server on port 8000. Open `/`. |
 
 ## Adding an essay
 
-One essay per session, started fresh, so nothing from an earlier essay is carried along. The work is split by model: **the strongest model (Fable) writes the essay, and a cheaper one (Sonnet) does everything else.** Web pages are the expensive thing to read, so they are read once, by the researcher, and saved.
+One essay per session, started fresh, so nothing from an earlier essay is carried along. The work is split by model: **the strongest model (Fable) writes and edits the essay, and a cheaper one (Sonnet) does everything else.** Web pages are the expensive thing to read, so they are read once, by the researcher, and saved.
 
 The session that runs this is the coordinator. It should be a Sonnet session. It starts each stage below as a subagent with the model named, one at a time, and waits for it. Stages hand off through files in `work/<slug>/`; the coordinator passes file paths and reads only the short verdict each stage returns, never the research or the draft. Each subagent reads this file first.
 
@@ -198,7 +216,9 @@ Start each stage with this model and effort level, set explicitly:
 | Scout | Sonnet | low | A quick go or park verdict. |
 | Research | Sonnet | medium | Mostly fetching pages and copying exact words. |
 | Write and fix | Fable | high | This is where the essay's quality is decided. |
-| Check | Sonnet | high | Working dates and numbers out again is where a careless pass misses things. |
+| Fact check | Sonnet | high | Working dates and numbers out again is where a careless pass misses things. |
+| Edit | Fable | high | Judging prose takes a reader at least as good as the writer. |
+| Verify | Sonnet | medium | A short pass over what changed. |
 
 If a named model or effort level cannot be set, use what is available, do not skip the stage, and say so in the report.
 
@@ -208,7 +228,10 @@ If a named model or effort level cannot be set, use what is available, do not sk
 | `research.md` | Researcher, added to by the writer | Numbered claims, each with its URL, the exact words from the page and the date opened; a timeline; open questions |
 | `sources/` | Researcher | The text of each page opened, one file per page, so nobody fetches it twice |
 | `entry.json` | Writer | The `essays.json` entry, without `published` |
-| `review.md` | Checker, answered by the writer | Numbered findings |
+| `review.md` | Fact checker, answered by the writer | Numbered findings on facts |
+| `edit.md` | Editor, answered by the writer | The story in two sentences, a cut list and numbered findings on the writing |
+| `draft.html` | Coordinator | A copy of the fragment as it stood before the fix, so the verifier can see what changed |
+| `verify.md` | Verifier | Each finding marked closed or open, and anything new the fix introduced |
 
 ### 1. Pick the topic (coordinator)
 
@@ -238,39 +261,83 @@ The writer reads this file, `content/rhino-book.html` as the standard to match, 
 
 It decides the story and the structure, and it makes the final story check: if the research does not hold a story, it says so and the coordinator parks the topic. Otherwise it writes `content/<slug>.html`, draws `icons/<slug>.txt` and writes `entry.json`. Nothing goes in the essay that is not a numbered claim in `research.md` or labelled as the writer's own judgment.
 
-### 5. Check (Sonnet)
+Before handing the draft on, the writer does three things, in this order:
 
-The checker is a new subagent that gets the fragment and `sources/`, but not `research.md` or `scout.md`, so it does not inherit the researcher's reading of the sources. It does two things and writes both to `review.md` as numbered findings.
+1. **Cut.** Reread the draft against the two-sentence story and remove every paragraph, aside and quotation the story does not need. Good research that does not serve this story goes back to `research.md` under "Left out", not into the essay.
+2. **Compare.** Read the first three paragraphs and the takeaway of the five most recent essays (the last five entries in `essays.json`). If this draft opens, turns or closes the same way as any of them, change it.
+3. **Lint.** Run `npm run lint -- <slug>`. Fix every FAIL. Read every note and either fix it or be ready to say why it stands.
 
-- **Fact check.** For every date, time, number, version, name and quotation in the essay, find it in the source the essay links (the saved copy, or the live page if there is none) and work the value out again from the source: read the timestamp, count the lines, do the sum. Report anything wrong, anything the source does not say, anything stated more firmly than the evidence allows, and any link that does not load. Run any code that claims to run. Give the sentence, what the source says and the URL.
-- **Story check.** As a reader: say in two sentences what the story is, name any section that could be cut without losing it, and flag any stretch that is quotations strung together, any heading that uses "it", and any breach of the voice rules.
+The coordinator does not tell the writer a length, and the writer does not report one.
+
+### 5. Fact check (Sonnet)
+
+The fact checker is a new subagent that gets the fragment and `sources/`, but not `research.md` or `scout.md`, so it does not inherit the researcher's reading of the sources. It writes numbered findings to `review.md`. It does not comment on the writing.
+
+- **Every specific.** For every date, time, number, version, name and quotation in the essay, find it in the source the essay links (the saved copy, or the live page if there is none) and work the value out again from the source: read the timestamp, count the lines, do the sum. Report anything wrong, anything the source does not say, anything stated more firmly than the evidence allows, and any link that does not load. Run any code that claims to run. Give the sentence, what the source says and the URL.
+- **A second source for what the story turns on.** Pick the three to five claims the essay cannot lose: the date of the turn, the surprise, and every "first", "only", "never" and "nobody". For each, search for a source the researcher did not use, save it to `sources/`, and report whether it agrees. The saved sources can show that the essay matches them. Only a fresh search can show that the researcher picked the wrong page or missed one that disagrees.
+- **Against the collection.** Search `content/` for the essay's main names, dates and versions. Report any place where this essay and a published one disagree (the published one may be the one that is wrong, and then it needs a correction), and any anecdote a published essay already tells, which this essay should link to instead of retelling.
 
 Do not skip this stage, and never let the writer check its own essay.
 
-### 6. Fix (Fable)
+### 6. Edit (Fable)
 
-Send `review.md` back to the same writer. It fixes or cuts everything found, and writes one line under each finding saying what it did. It may decline a finding only with a source, stated there. It then fills in `unverified` in `entry.json` from the research file's thin spots and the review. If the story check shows there is no story, cancel and park.
+The editor is a new subagent, and it reads as a reader would. It gets this file, the fragment, the output of `npm run lint -- <slug>`, and the first three paragraphs and takeaway of the five most recent essays. It does not get the research, the scout report or the fact check, and it can run at the same time as stage 5. It does not rewrite anything: the writer does that, so the essay keeps one voice. It writes `edit.md`:
 
-### 7. Publish (coordinator)
+- **The story**, in two sentences, as the draft tells it. If the editor cannot write them, that is the first finding.
+- **A cut list.** Every section, paragraph, aside and quotation that could go without the story losing anything, each with its first few words, a rough word count and what the essay would lose. Keep listing until nothing more could go. If the list comes to less than a tenth of the essay, say why this draft is that tight. The editor is the one person in the pipeline whose job is to make the essay shorter.
+- **Findings on the writing**, numbered, each quoting the words concerned:
+  - where the story stalls: a stretch with no person doing anything, a calendar paragraph, a section that could be moved without loss
+  - quotations strung together, and any quotation the essay would be better paraphrasing
+  - every habit from "Habits to break" and every lint note that is a real problem here
+  - anything the draft shares with the five recent essays: the same opening move, the same way of announcing the surprise, the same closing turn
+  - breaches of the voice rules, headings that do not name their subject, and jokes that do not land or come more than once a section
+  - the ten weakest sentences: vague, padded, showing off, or saying what the previous sentence said
+- **What is best in the draft**, in a line or two, so the fix does not sand it off.
 
-Nothing reaches `main` before stage 6 is done.
+If the story check fails, the editor says **park** and why.
+
+### 7. Fix (Fable)
+
+The coordinator copies `content/<slug>.html` to `work/<slug>/draft.html`, then sends `review.md` and `edit.md` back to the same writer.
+
+- **Facts.** Fix or cut everything in `review.md`, and write one line under each finding saying what was done. The writer may decline a finding only with a source, stated there.
+- **Cuts.** Take each item on the cut list, or write one line saying what the story loses without it. "It is interesting" is not a loss to the story.
+- **Writing.** Answer each finding in `edit.md` the same way. The writer may decline one with a reason, since taste is arguable, but not all of them.
+- **No refilling.** The fixed essay is not longer than the draft, unless a fact-check fix needed a sentence. Cuts are not replaced with new material.
+
+It then runs the lint again and fills in `unverified` in `entry.json` from the research file's thin spots and the fact check. If the editor said park, or the fix shows there is no story, cancel and park.
+
+### 8. Verify (Sonnet)
+
+A new subagent gets `draft.html`, the fixed fragment, `entry.json`, `review.md`, `edit.md` and `sources/`. It writes `verify.md`:
+
+- every finding in both reviews marked **closed**, **declined with a reason** or **open**, by looking at the fragment and not at the writer's note
+- every sentence that is new or changed since `draft.html` and carries a date, number, name or quotation, checked against its source the way stage 5 does
+- whether `unverified` covers the declined findings, the single-source claims and the places the second-source search disagreed
+- the lint result and the word count before and after
+
+If anything is open, the coordinator sends `verify.md` to the writer once more and runs this stage again. If something is still open after the second pass, stop and report it. Do not publish.
+
+### 9. Publish (coordinator)
+
+Nothing reaches `main` before stage 8 comes back with nothing open.
 
 1. Delete the topic's line from `TOPICS.md`. Add any good new ideas the stages turned up to the lists, never to "Up next".
 2. Run `npm run ship -- <slug>`. It must end with "ready". Look at `work/<slug>/icon.png`; if the icon is not clearly recognisable, delete `icons/<slug>.txt` and run it again.
 3. Commit everything, generated files included, using `work/<slug>/commit.txt` as the message.
 4. Push to `main` with a normal push. If `main` has moved, merge it, run `npm run ship -- <slug>` again instead of hand-merging generated files, and push again.
-5. Report: the title and its address on derek.io, the story in two sentences, how many findings the check raised and any the writer declined, and what could not be verified.
+5. Report: the title and its address on derek.io, the story in two sentences, how many findings the fact check and the edit each raised and any the writer declined, the word count before and after the edit, and what could not be verified.
 
 If something blocks a stage (no push access, the web unreachable, the build failing), stop and say exactly what failed. Do not publish an unchecked essay.
 
 ## Correcting an essay
 
-Readers report mistakes through the "Spot a mistake?" link, which opens a GitHub issue. Check the report against a source before changing anything. Fix the fragment, and if the fix changes what the essay says (a date, a name, a claim), add a `corrections` entry to `essays.json` with the date and a one-sentence note. Typos need no note. Rebuild and commit.
+Readers report mistakes through the "Spot a mistake?" link, which opens a GitHub issue. Check the report against a source before changing anything. Fix the fragment, and if the fix changes what the essay says (a date, a name, a claim), add a `corrections` entry to `essays.json` with the date and a one-sentence note. Typos need no note. Rebuild with `npm run build` and commit. Do not use `npm run ship` for a correction: its lint would fail an older essay for rules written after it.
 
 ## Site conventions
 
 - The look is a tidy late-1990s homepage: navy title bar with a gold rule, pale yellow link strip, navy section bars, Verdana body text, Georgia headings and yellow code boxes, in web-safe colours. Simple and old, never busy: no backgrounds, counters or marquees, and no badges beyond the three 88x31 buttons in the footer and the small orange feed icon beside the RSS link. It is light only, with no dark mode.
-- The animated berry in the top-right corner (`berry.gif`, with `berry.png` as the still shown to readers who ask for reduced motion) is the site's mascot. It is the only animation on the site. Its hover text is "'member when...? Yeah, I remember!".
+- The animated berry in the top-right corner (`berry.gif`, with `berry.png` as the still shown to readers who ask for reduced motion) is the site's mascot. It is the only animation on the site, apart from the three diagrams on the technical overview page. Those are CSS only, use the site's colours, and stop for readers who ask for reduced motion. Do not add animation anywhere else. Its hover text is "'member when...? Yeah, I remember!".
 - Colours are tokens in `:root`. Body text is 17px Verdana with at least 4.5:1 contrast. The audience reads with their glasses on, so do not make it small.
 - Semantic HTML, a visible focus style, `lang="en"`.
 - Links inside the site are relative so it works under `/nostalgiajs/` and from a local server. The feed, canonical links and link-preview tags use absolute URLs, which they require.
@@ -279,4 +346,4 @@ Readers report mistakes through the "Spot a mistake?" link, which opens a GitHub
 
 ## Branches and PRs
 
-New essays go straight to `main` once the review has been applied (see "Adding an essay"). Agents may push to `main` without asking for confirmation, for essays and for changes to `TOPICS.md` and this file, as long as it is a normal push. For any other change, develop on the branch you were given. Do not open a PR unless asked. When you open one, list anything you could not verify. Never force-push.
+New essays go straight to `main` once the verify stage has nothing open (see "Adding an essay"). Agents may push to `main` without asking for confirmation, for essays and for changes to `TOPICS.md` and this file, as long as it is a normal push. For any other change, develop on the branch you were given. Do not open a PR unless asked. When you open one, list anything you could not verify. Never force-push.
