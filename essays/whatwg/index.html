@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The WHATWG: eight for, eleven against · Nostalgia.js</title>
+<meta name="description" content="In June 2004 a straw poll at a W3C workshop declined to extend HTML, and two days later the people who had asked opened a mailing list and did it themselves.">
+<link rel="canonical" href="https://derek.io/nostalgiajs/essays/whatwg/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The WHATWG: eight for, eleven against">
+<meta property="og:description" content="In June 2004 a straw poll at a W3C workshop declined to extend HTML, and two days later the people who had asked opened a mailing list and did it themselves.">
+<meta property="og:url" content="https://derek.io/nostalgiajs/essays/whatwg/">
+<meta property="og:image" content="https://derek.io/nostalgiajs/og/whatwg.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../../feed.xml">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WX44MXWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<script data-goatcounter="https://derek-io-nostalgiajs.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../../">Nostalgia.js<span>Essays on the Early Web</span></a>
+    <picture>
+      <source srcset="../../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../../">Essays</a>
+    <a href="../../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">Browsers and the platform · 2004 to 2019 · 12 min read</p>
+      <div class="title">
+        <img src="../../icons/whatwg.svg" width="64" height="64" alt="">
+        <h1>The WHATWG: eight for, eleven against</h1>
+      </div>
+
+<p class="lede">The group that writes HTML announced itself in June 2004, two days after a workshop in San Jose was asked whether HTML should get any new features and mostly did not raise its hand.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#six-years-after-html-was-dead">Six years after HTML was dead</a></li>
+          <li><a href="#seven-principles-and-a-game-of-lemmings">Seven principles and a game of Lemmings</a></li>
+          <li><a href="#the-straw-poll-on-extending-html">The straw poll on extending HTML</a></li>
+          <li><a href="#the-whatwg-announcement">The WHATWG announcement</a></li>
+          <li><a href="#why-the-workshop-said-no">Why the workshop said no</a></li>
+          <li><a href="#the-w3c-adopts-the-whatwg-draft">The W3C adopts the WHATWG draft</a></li>
+          <li><a href="#who-ended-up-writing-html">Who ended up writing HTML</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<blockquote>
+<p>Dean Jackson (W3C): For 8, against 11.</p>
+</blockquote>
+
+<p>Jackson was co-chairing the W3C's <a href="https://www.w3.org/2004/04/webapps-cdf-ws/">Workshop on Web Applications and Compound Documents</a>, held at Adobe's offices on 1 and 2 June 2004, and the line is how <a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040602.html">the minutes of the second day</a> record the count. The question had been put by an engineer from Opera Software whom the minutes call Ian Hixson. Ian Hickson <a href="https://ian.hixie.ch/career/resume.html">went on to edit HTML for more than a decade</a>, and the minute-taker, who had a full room to keep up with, can be forgiven the spelling.</p>
+
+<h2 id="six-years-after-html-was-dead">Six years after HTML was dead</h2>
+
+<p>By 2004 the W3C had spent about six years treating HTML as finished. What came after it was a family of XML languages, XHTML for documents, XForms for forms, SVG for graphics and SMIL for timing, and much of the two days in San Jose went on how to combine them.</p>
+
+<p>The difficulty was the browser most people had. Alex Hopmann of Microsoft <a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040601.html">told the workshop on its first day</a> that the <a href="../ie6-funeral/">Internet Explorer</a> team "has been very focused on security work", and that the coming service pack would not bring new features. Hickson's notes from that day add that the Internet Explorer due with Longhorn, the next Windows, would not support XHTML or SVG.</p>
+
+<p>Hickson had been circling this for a while. In January 2004 a post on their blog, <a href="http://ln.hixie.ch/?start=1074466808&amp;count=1">"Void filling: Web Applications Language"</a>, said that the web had no language for writing things like Bugzilla or eBay's auctions, and that the only party doing anything about it was Microsoft, with proprietary technology that looked designed for lock-in. The post ends with a promise and a hedge: "I intend to do something about this (hopefully within a W3C context, although that will depend on the politics of the situation)."</p>
+
+<p>The something was a forms draft begun at Opera in 2003, which by that summer was called Web Forms 2.0 and extended the forms chapter of HTML 4.01 instead of replacing it.</p>
+
+<h2 id="seven-principles-and-a-game-of-lemmings">Seven principles and a game of Lemmings</h2>
+
+<p>Opera and the Mozilla Foundation sent the workshop <a href="https://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html">a joint position paper</a>. It warned of "a rising threat of single-vendor solutions" and then listed seven principles. New features should be usable in IE6 through scripting, so that authors had a way across. Every feature had to be justified by a use case, preferably from real sites that had worked around the gap badly. Development should happen on public lists with public drafts. And error handling had to be specified down to the last case:</p>
+
+<blockquote>
+<p>Error handling should for the most part be defined in terms of graceful error recovery (as in CSS), rather than obvious and catastrophic failure (as in XML).</p>
+</blockquote>
+
+<p>On the afternoon of the first day Håkon Lie of Opera opened the joint presentation with a game of Lemmings written in HTML and JavaScript. Lie conceded, by the minutes, that it was scary inside. Hickson followed with the case for building on what browsers already ran: Flash ships and people use it, SVG ships and people don't. The day had opened with <a href="../css-potential/">Bert Bos</a> of the W3C telling the audience that "JavaScript is the worst invention ever."</p>
+
+<p>Hickson wrote the day up that night, a Tuesday, in <a href="http://ln.hixie.ch/?start=1086158925&amp;count=1">a post on the same blog</a>. The only sustained, spontaneous applause of the day, it says, came when someone answered Hickson's case for backwards compatibility by suggesting it was time to drop HTML and Windows IE6 from the roadmap. Then the post asks what Opera and Mozilla should do, and lists three options: work in public and submit the result to the W3C or another standards body once there were implementations; work alone and forget about standards; or join whatever group the W3C set up and implement its output years later, knowing few would use it. Hickson was leaning towards the first, with the poll not yet taken.</p>
+
+<h2 id="the-straw-poll-on-extending-html">The straw poll on extending HTML</h2>
+
+<p>The second day ended with straw polls. The first two went through without trouble. Should the W3C write a specification combining profiles of its newer languages, aimed at mobile phones? Nineteen to none. Should it charter a group to work out the use cases for web applications and a roadmap? Twenty-three to two. Then Jackson put up Hickson's question:</p>
+
+<blockquote>
+<p>Develop declarative extension to HTML and CSS and imperative extensions to DOM, to address medium level Web Application requirements, as opposed to sophisticated, fully-fledged OS-level application APIs.</p>
+</blockquote>
+
+<p>It went badly before anyone counted. Jackson remarked that it sounded like a matter for the use-case group the room had just voted for. Tantek Çelik of Microsoft said the questions were not good enough for half the room. Hopmann did some arithmetic on the polls so far: about 46 people in the room, about half of them not voting, which was "not an overwhelming interest". Hopmann then leaves, by the minutes, and Jackson reads the question again and announces the count this essay opened with.</p>
+
+<p>Only then did somebody ask what it meant. Kelvin Lawrence of IBM said one word, "Example?", and Hickson pointed to Web Forms 2: "One example would be to add a required attribute to the input element."</p>
+
+<pre tabindex="0"><code>&lt;input name="email" required&gt;</code></pre>
+
+<p>The tag is my illustration, not a line from the minutes, but it is the size of the thing the room had just declined. Çelik objected that the proposal mixed things people wanted with things they didn't, and the question came back without its clause about the DOM. Before the hands went up T. V. Raman of IBM reminded the room that six years earlier a hundred people had agreed HTML was dead and started XHTML. If the question was being put again now, Raman asked, "what will we be asking six years from now?" The second count was 8 for, 14 against. Taking the scripting out had won no new supporters and found three more opponents.</p>
+
+<p>The minutes do not say who voted which way. <a href="http://ln.hixie.ch/?start=1086387609&amp;count=1">Hickson's account</a>, written two days later, is that every browser vendor present favoured some variant of the idea and that they "were easily out-numbered by the non-browser members". It also records their reply to the six-years-ago point, which was that six years ago they were in school.</p>
+
+<p><a href="https://www.w3.org/2004/04/webapps-cdf-ws/summary.html">The W3C's summary of the workshop</a> is careful to say that the polls only indicated what participants felt and bound nobody. It also says the W3C would probably charter work on the two topics that passed, and that it "does not intend to put any resources into the third", beyond what its existing working groups were already chartered to do.</p>
+
+<h2 id="the-whatwg-announcement">The WHATWG announcement</h2>
+
+<p>Hickson flew back to Europe and posted again on Friday 4 June. The post argues with the workshop for a while and then stops arguing. "The issues have been discussed, the positions have been given, everyone knows where everyone else stands, now it's time to get down and actually start doing work." Its last line, with the first three words in italics, is "What working group is going to work on extending HTML..."</p>
+
+<p>About two hours later, at 17:28 Pacific time, <a href="https://lists.whatwg.org/pipermail/whatwg-whatwg.org/2004-June/042278.html">the first message arrived on a new public mailing list</a>. It announced the Web Hypertext Applications Technology Working Group, "a loose, unofficial, and open collaboration of Web browser manufacturers and interested parties", writing specifications for mass-market browsers, of which it named Safari, Mozilla and Opera. There would be three documents to begin with: Web Forms 2.0, Web Apps 1.0 and Web Controls 1.0. The results were to be submitted to a standards organisation in due course, as in the first of Tuesday night's three options.</p>
+
+<p>One sentence in the announcement matters more than the rest. The forum, it says, "follows from several months of work by private e-mail". The poll did not cause the WHATWG, then. My reading is that it decided only where work already months old would continue, and Tuesday's post suggests even that was mostly decided.</p>
+
+<p>Mozilla said so the same day. <a href="https://brendaneich.com/2004/06/the-non-world-non-wide-non-web/">Brendan Eich's post</a> of that Friday regretted having "missed the chance to hear JavaScript praised as the worst invention of all time" and announced that Mozilla was joining Opera to work on incremental improvements to HTML.</p>
+
+<p>By 29 June the list had carried some 600 messages, by Hickson's count, and the first call for comments on Web Forms 2.0 was out. <a href="http://ln.hixie.ch/?count=1&amp;start=1088526392">Hickson's report of that day</a> explains how the group worked. The members, who were Mozilla and Opera employees and a couple of people from Apple's Safari team, were an oversight committee, and "the specs are actually edited by me". The same post claims the first public demonstration of a Web Forms 2.0 control, in front of an audience that had no idea: a small slider at the top right of Safari's RSS view, shown during Steve Jobs's keynote at Apple's developer conference, which Hickson says was an <code>&lt;input type="range"&gt;</code>.</p>
+
+<h2 id="why-the-workshop-said-no">Why the workshop said no</h2>
+
+<p>The membership is Hickson's explanation. The W3C had many more server-side people than client-side people, "and most of the client-side people are plug-in vendors, not browser vendors." <a href="https://dbaron.org/log/2004-06">David Baron of Mozilla</a>, who had presented alongside Hickson, said the same thing less kindly a week later: a consortium does what its members want, and its members were mostly building for intranets, phones and other places where one company controls both ends.</p>
+
+<p>Microsoft made the browser that mattered and did not want it extended this way. Hopmann's presentation on the first day said that "Standards for APIs and Object Models are not going to be successful," because they make a fragile platform, and urged the W3C to stay with declarative formats. Hickson agreed about the large case, writing that night that standardising an API for sophisticated applications was a non-starter, and the question's "medium level" marks the difference. As I read it, the compromise pleased neither side: too little for the people who wanted a new platform, too much script for Microsoft.</p>
+
+<p>The opponents also had an argument. Robin Berjon of Expway, who had been at the workshop, made it in the comments under Eich's post: "people don't switch for small incremental improvements, they switch for stuff that is an order of magnitude better". Nobody could show that was wrong in June 2004. The WHATWG was betting the other way, that authors would use whatever worked in the browser their visitors already had.</p>
+
+<h2 id="the-w3c-adopts-the-whatwg-draft">The W3C adopts the WHATWG draft</h2>
+
+<p>The reversal came from the top. In late October 2006 Tim Berners-Lee published a post called "Reinventing HTML", quoted that week by <a href="https://lemire.me/blog/2006/10/30/reinventing-html-or-yes-we-admit-it-xhtml-failed/">Daniel Lemire</a> and <a href="https://annevankesteren.nl/2006/10/html-wg">Anne van Kesteren</a>: "It is necessary to evolve HTML incrementally." The attempt to move the world to XML all at once, it said, had not worked. A new HTML Working Group would be chartered, and <a href="https://www.w3.org/2007/03/HTML-WG-charter.html">its charter</a> names the WHATWG and promises to "actively pursue convergence" with it.</p>
+
+<p>Convergence turned out to mean taking the document. On 9 April 2007 Maciej Stachowiak of Apple posted <a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/0429.html">a "Proposal to Adopt HTML5"</a> signed by two people each from Apple, Mozilla and Opera, with Baron, Eich and Lie among them. It asked for three things: that the group start from the WHATWG's text, that the result be called "HTML 5", and that Hickson be its editor.</p>
+
+<p>Chris Wilson was both a co-chair of the group and Microsoft's representative on it. <a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1240.html">Wilson wrote</a> of having no problem with taking the WHATWG's specification as the basis, provided the intellectual property was in order and the working group owned the text from then on, and gave the response to the name as "well, duh." The objection was to a single editor, which "sets up a dictatorship, benevolent though it might seem".</p>
+
+<p><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1241.html">Hickson answered within the hour</a>, and stated terms. Editing the WHATWG specification was a full-time job that would continue, so the offer stood only if the two groups' specifications were "the same actual document". Nor would Hickson work as an editor who waits for a formal decision before each change, a model the message estimates would move the finish from fifteen years away to fifty.</p>
+
+<p>The chairs put the three questions to a survey, and 102 people answered. On 9 May 2007 <a href="https://lists.w3.org/Archives/Public/public-html/2007May/0909.html">Dan Connolly reported</a> "a critical mass of support for all 3 parts of the proposal, though not quite consensus", and resolved the matter anyway: the name would be HTML 5, the review would start from the WHATWG's text, and the editors would be Hickson and Dave Hyatt of Apple. <a href="https://lists.w3.org/Archives/Public/public-html/2007May/0911.html">Within hours</a> Hickson checked revision 785 into the W3C's repository and brought it up to revision 800. Web Forms 2.0 was already there. Opera and Mozilla had <a href="https://www.w3.org/Submission/web-forms2/">submitted it to the W3C in April 2005</a>, and another working group had <a href="https://www.w3.org/TR/2006/WD-web-forms-2-20060821">published it as a draft in August 2006</a>. Three years after the workshop, the W3C had the rest of the extension in its own version control, written by the person who had asked.</p>
+
+<h2 id="who-ended-up-writing-html">Who ended up writing HTML</h2>
+
+<p>From 2011 to 2019 there were two HTMLs. In January 2011 Hickson announced that <a href="https://blog.whatwg.org/html-is-the-new-html5">the WHATWG's copy would drop its version number</a> and keep changing as a "living standard", while the W3C worked towards a finished one and <a href="https://www.w3.org/2014/10/html5-rec.html.en">published HTML5 as a Recommendation on 28 October 2014</a>.</p>
+
+<p>Microsoft joined, and the editor got an appeals court. <a href="https://blog.whatwg.org/2017/12">In December 2017</a> the WHATWG announced a patent policy and a Steering Group drawn from Apple, Google, Microsoft and Mozilla, admitting that without every browser engine's maker it "was only partially meeting its goals". The post says there is now a formal path of appeal when a participant disagrees with an editor's judgment of what browsers will support, which I take to be Wilson's objection of 2007 answered ten years late. Opera, where the first draft was written, is not one of the four.</p>
+
+<p>The W3C stopped publishing its own HTML. On 28 May 2019 its chief executive, Jeff Jaffe, <a href="https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/">announced an agreement</a> to that effect, on the grounds that two documents each claiming to be the normative one did the community harm. <a href="https://www.w3.org/2019/04/WHATWG-W3C-MOU.html">The memorandum</a> says where the work happens: "HTML and DOM shall be developed principally in the WHATWG".</p>
+
+<p>The winners wrote the history, and tidied it. <a href="https://html.spec.whatwg.org/multipage/introduction.html">The history section of the HTML Standard</a> says of the 2004 workshop that "the W3C staff and membership voted to continue developing XML-based replacements instead." The outcome was as it says. What the minutes show is narrower: a non-binding straw poll in which twenty-two people raised a hand.</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>A lost vote did not start the WHATWG. The work was months old, its editor had weighed leaving the night before, and the count settled only the venue, which mattered less than having three browsers willing to ship what the list agreed on. The objection from those years that has aged best is Wilson's: a specification edited by one person with opinions is a kind of dictatorship, and the WHATWG took thirteen years to build a way to appeal.</p>
+
+<p>The minutes that record "For 8, against 11" spell the proposer's name Hixson throughout. The example Hickson gave when someone finally asked for one is section 4.10.5.3.4 of <a href="https://html.spec.whatwg.org/multipage/input.html">the HTML Standard</a>: "The required attribute is a boolean attribute. When specified, the element is required."</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>I could not open Tim Berners-Lee's 2006 post &quot;Reinventing HTML&quot; at its original address, so its words and its late-October date come from Daniel Lemire's and Anne van Kesteren's posts quoting it that week, and it is not linked.</li>
+    <li>The minutes do not record who voted which way. That every browser vendor present favoured some version of the idea is Hickson's account alone, and I cannot tell how Microsoft's two representatives voted, only that both criticised the question and one is minuted as leaving before the count. The minutes give the six-years remark to T. V. Raman, while Hickson's account credits Steven Pemberton. The sources put the room at about 60, about 46 and &quot;40 or so&quot;.</li>
+    <li>The W3C's summary, dated seven weeks after the workshop, excepts work already chartered from its refusal to fund HTML extensions, and Web Forms 2.0 later reached the W3C as a Member Submission in 2005 and a working draft in 2006. I have not traced how the first led to the second. That the forms draft was first published under another title in December 2003 and renamed in February 2004 comes only from a W3C wiki page.</li>
+    <li>That the Safari slider in Apple's 2004 keynote was a Web Forms 2.0 control is Hickson's word; I did not look at the keynote. The 600 messages are Hickson's count on 29 June, and the list's archive shows 809 for the whole month. Hickson's career dates are from their own résumé.</li>
+    <li>The 2007 survey's results page needs a W3C login, so I have only the chairs' summary of it, not the count of yes and no. The proposal is dated 9 April by its sender's clock and 10 April in UTC. That the charter dates from March 2007 rests on its address and a W3C wiki page, and the page as it stands lists later chairs.</li>
+    <li>Several connections are my reading: that the poll decided only where work already months old would continue, that the wording of Hickson's question was a compromise that pleased neither side, and that the 2017 appeals path answers Wilson's 2007 objection.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/">W3C Workshop on Web Applications and Compound Documents</a>, W3C, 2004</li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040601.html">Workshop minutes, day 1</a>, Leigh Klotz for the W3C, 2004</li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/minutes-20040602.html">Workshop minutes, day 2</a>, Leigh Klotz for the W3C, 2004</li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/summary.html">Workshop summary</a>, Dean Jackson, W3C, 2004</li>
+    <li><a href="https://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html">Position Paper for the W3C Workshop on Web Applications and Compound Documents</a>, the Mozilla Foundation and Opera Software, 2004</li>
+    <li><a href="http://ln.hixie.ch/?start=1074466808&amp;count=1">Void filling: Web Applications Language</a>, Ian Hickson, 2004</li>
+    <li><a href="http://ln.hixie.ch/?start=1086158925&amp;count=1">Spring 2004 Travelog: Part 8 (First Day of the Workshop)</a>, Ian Hickson, 2004</li>
+    <li><a href="http://ln.hixie.ch/?start=1086387609&amp;count=1">Spring 2004 Travelog: Part 9 (Return to Europe)</a>, Ian Hickson, 2004</li>
+    <li><a href="http://ln.hixie.ch/?count=1&amp;start=1088526392">State of the WHAT</a>, Ian Hickson, 2004</li>
+    <li><a href="https://ian.hixie.ch/career/resume.html">Résumé</a>, Ian Hickson</li>
+    <li><a href="https://lists.whatwg.org/pipermail/whatwg-whatwg.org/2004-June/042278.html">WHAT open mailing list announcement</a>, Ian Hickson, WHATWG mailing list, 2004</li>
+    <li><a href="https://whatwg.org/specs/web-forms/2004-06-27-call-for-comments/">Web Forms 2.0, call for comments</a>, Ian Hickson, editor, WHATWG, 2004</li>
+    <li><a href="https://brendaneich.com/2004/06/the-non-world-non-wide-non-web/">The non-world non-wide non-web</a>, Brendan Eich, 2004, with Robin Berjon's comment</li>
+    <li><a href="https://dbaron.org/log/2004-06">Weblog, June 2004</a>, David Baron, 2004</li>
+    <li>"Reinventing HTML", Tim Berners-Lee, 2006: not linked, because the original would not load for me</li>
+    <li><a href="https://lemire.me/blog/2006/10/30/reinventing-html-or-yes-we-admit-it-xhtml-failed/">Reinventing HTML or, yes we admit it, XHTML failed</a>, Daniel Lemire, 2006</li>
+    <li><a href="https://annevankesteren.nl/2006/10/html-wg">Victory: new HTML WG</a>, Anne van Kesteren, 2006</li>
+    <li><a href="https://www.w3.org/Submission/web-forms2/">Web Forms 2.0, W3C Member Submission</a>, Opera Software and the Mozilla Foundation, 2005</li>
+    <li><a href="https://www.w3.org/TR/2006/WD-web-forms-2-20060821">Web Forms 2.0, W3C Working Draft</a>, Ian Hickson, editor, 2006</li>
+    <li><a href="https://www.w3.org/2007/03/HTML-WG-charter.html">HTML Working Group charter</a>, W3C, 2007</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/0429.html">Proposal to Adopt HTML5</a>, Maciej Stachowiak and five others, public-html, 2007</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1240.html">HTML5 proposal response</a>, Chris Wilson, public-html, 2007</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007Apr/1241.html">Re: HTML5 proposal response</a>, Ian Hickson, public-html, 2007</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007May/0909.html">Results of HTML 5 text, editor, name questions</a>, Dan Connolly, public-html, 2007</li>
+    <li><a href="https://lists.w3.org/Archives/Public/public-html/2007May/0911.html">Re: results of HTML 5 text, editor, name questions</a>, Ian Hickson, public-html, 2007</li>
+    <li><a href="https://blog.whatwg.org/html-is-the-new-html5">HTML is the new HTML5</a>, Ian Hickson, WHATWG blog, 2011</li>
+    <li><a href="https://www.w3.org/2014/10/html5-rec.html.en">Open Web Platform Milestone Achieved with HTML5 Recommendation</a>, W3C press release, 2014</li>
+    <li><a href="https://blog.whatwg.org/2017/12">Further working mode changes</a>, WHATWG blog, 2017</li>
+    <li><a href="https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/">W3C and WHATWG to work together to advance the open Web platform</a>, Jeff Jaffe, W3C, 2019</li>
+    <li><a href="https://www.w3.org/2019/04/WHATWG-W3C-MOU.html">Memorandum of Understanding between W3C and WHATWG</a>, 2019</li>
+    <li><a href="https://html.spec.whatwg.org/multipage/introduction.html">HTML Standard, introduction and history</a>, WHATWG</li>
+    <li><a href="https://html.spec.whatwg.org/multipage/input.html">HTML Standard, the input element</a>, WHATWG</li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+The+WHATWG%3A+eight+for%2C+eleven+against&amp;body=Essay%3A+https%3A%2F%2Fderek.io%2Fnostalgiajs%2Fessays%2Fwhatwg%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/whatwg.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/whatwg.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../ie6-funeral/">The IE6 funeral: campaigning to kill a browser</a> <span>People and culture · 2008 to 2016</span></li>
+        <li><a href="../css-potential/">The 1998 CSS wish list: item 28 and the fifteen-year wait</a> <span>Browsers and the platform · 1998 to 2016</span></li>
+        <li><a href="../ie8-targeting/">X-UA-Compatible: the default that lasted 42 days</a> <span>Browsers and the platform · 2008 to 2014</span></li>
+      </ul>
+      <p><a href="../../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../../"><img src="../../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · Essays on the Early Web · <a href="../../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>

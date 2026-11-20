@@ -557,6 +557,30 @@
         "Several connections are my interpretation: that Bos's reply of 31 December 1998, which is about macros, already holds the reasons Bos gave against plain constants in 2008; that Bos was defending an author who works in a graphical editor; that Hyatt's withdrawal, for which I have only the reason Hyatt gave, was the refusal that counted; and that inheritance put the feature beyond a preprocessor. That Bos said nothing about custom properties rests on a search of mailing-list subject lines, and the line on Bos's home page calling constants a bad idea has no date."
       ],
       "published": "2026-11-20T12:26:47Z"
+    },
+    {
+      "slug": "whatwg",
+      "title": "The WHATWG: eight for, eleven against",
+      "description": "In June 2004 a straw poll at a W3C workshop declined to extend HTML, and two days later the people who had asked opened a mailing list and did it themselves.",
+      "topic": "browsers",
+      "era": [
+        2004,
+        2019
+      ],
+      "related": [
+        "ie6-funeral",
+        "css-potential",
+        "ie8-targeting"
+      ],
+      "unverified": [
+        "I could not open Tim Berners-Lee's 2006 post \"Reinventing HTML\" at its original address, so its words and its late-October date come from Daniel Lemire's and Anne van Kesteren's posts quoting it that week, and it is not linked.",
+        "The minutes do not record who voted which way. That every browser vendor present favoured some version of the idea is Hickson's account alone, and I cannot tell how Microsoft's two representatives voted, only that both criticised the question and one is minuted as leaving before the count. The minutes give the six-years remark to T. V. Raman, while Hickson's account credits Steven Pemberton. The sources put the room at about 60, about 46 and \"40 or so\".",
+        "The W3C's summary, dated seven weeks after the workshop, excepts work already chartered from its refusal to fund HTML extensions, and Web Forms 2.0 later reached the W3C as a Member Submission in 2005 and a working draft in 2006. I have not traced how the first led to the second. That the forms draft was first published under another title in December 2003 and renamed in February 2004 comes only from a W3C wiki page.",
+        "That the Safari slider in Apple's 2004 keynote was a Web Forms 2.0 control is Hickson's word; I did not look at the keynote. The 600 messages are Hickson's count on 29 June, and the list's archive shows 809 for the whole month. Hickson's career dates are from their own résumé.",
+        "The 2007 survey's results page needs a W3C login, so I have only the chairs' summary of it, not the count of yes and no. The proposal is dated 9 April by its sender's clock and 10 April in UTC. That the charter dates from March 2007 rests on its address and a W3C wiki page, and the page as it stands lists later chairs.",
+        "Several connections are my reading: that the poll decided only where work already months old would continue, that the wording of Hickson's question was a compromise that pleased neither side, and that the 2017 appeals path answers Wilson's 2007 objection."
+      ],
+      "published": "2026-11-20T13:41:34Z"
     }
   ]
 }
