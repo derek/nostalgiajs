@@ -1,0 +1,98 @@
+<p class="lede">The Bork edition of Opera 7 was a web browser that behaved normally on every site but MSN, where it translated the page into the language of a Muppet.</p>
+
+<pre tabindex="0"><code>Veekend mufeee-a gooeede-a
+Luukeeng fur a noo cer?</code></pre>
+
+<p>In English the two headlines were "Weekend movie guide" and "Looking for a new car?". <a href="https://www.ciol.com/opera-browser-alters-msn-text-puppet-lingo/">Reuters reported</a> them from MSN as the browser rendered them on the day Opera released it, Friday 14 February 2003. The build was named for the Swedish Chef's "Bork, Bork, Bork!".</p>
+
+<p>The joke came nine days into an argument about one CSS value. The argument was made by Opera's chief technology officer, Håkon Wium Lie, who in October 1994 had posted <a href="https://www.w3.org/People/howcome/p/cascade.html">"Cascading HTML style sheets -- a proposal"</a>, the document CSS grew from.</p>
+
+<h2>MSN shuts Opera out in 2001</h2>
+
+<p>This was the second round. On the day Windows XP launched in October 2001, Microsoft also relaunched MSN.com, and <a href="https://mail-archive.com/sambar@skyweb.se/msg00188.html">CNET News.com reported</a> that some Opera and Mozilla users who went there were offered a download of Internet Explorer instead of the page. MSN's director of marketing, Bob Visse, called standards support "a two-way street": the better Opera and Mozilla did at it, the better their users would fare on MSN. Microsoft said within a day that the site was open again.</p>
+
+<p>Lie's answer was to measure. On 31 October he downloaded MSN's home page and the 62 pages it linked to, and ran all 63 through the W3C's validator. Four claimed to be XHTML, the standard Microsoft had first said Opera failed to support. None of the 63 was valid. He <a href="https://alistapart.com/article/msn/">published the count in A List Apart</a> the following week.</p>
+
+<p>The lockout left two habits behind. MSN's servers read the User-Agent header and sorted browsers by the names in it; <a href="https://www.theregister.com/2001/11/02/the_browser_wars_are_back/">The Register reported</a> that Microsoft had conceded its programmers looked for Opera's identification strings and blocked them. And Opera's users gave those servers a false name. Opera could be set to identify itself as Internet Explorer, and <a href="https://press.opera.com/2001/11/01/microsoft-exposed/">an Opera press release that November</a> explained that this was the way into the parts of MSN that stayed closed, such as the Carpoint car site. By Opera 7 the disguise was the default setting.</p>
+
+<h2>Opera 7 and a file called site.css</h2>
+
+<p>Opera 7 for Windows came out on 28 January 2003 with, in <a href="https://press.opera.com/2003/01/28/faster-smaller-smarter/">the release's words</a>, "code rewritten from the rendering engine and up". By the first week of February its users were looking at an MSN front page with the left edge of many lines sliced off. A week-old release and a clipped page on Microsoft's portal: you would blame the browser, and Lie knew it.</p>
+
+<p>On 5 February Opera fetched MSN's home page three times with <code>wget</code>, sending a different browser's User-Agent string each time, and Lie <a href="https://www.wiumlie.no/2003/2/msn/">posted what came back</a> under the title "Why doesn't MSN work with Opera?". Three different HTML files had arrived, each pointing at a different style sheet: <code>site-win-ie6.css</code>, 2,036 bytes, for Internet Explorer 6; <code>site-all-nav6.css</code> for Netscape 7.01; and for Opera 7 a 521-byte file called <code>site.css</code>. Inside it was this:</p>
+
+<pre tabindex="0"><code>ul {
+  margin: -2px 0px 0px -30px;
+}</code></pre>
+
+<p>The fourth value is the left margin. Minus thirty pixels drags every list on the page out through the left side of its container, which is the side the words start on. <a href="https://www.wiumlie.no/2003/2/msn/site.css">The file as saved</a> and <a href="https://www.wiumlie.no/2003/2/msn/site-win-ie6.css">the sheet sent to Internet Explorer 6</a> carry the same <code>ul</code> rule except for that value: Internet Explorer got <code>8px</code>, 38 pixels further right.</p>
+
+<h2>A browser called Oprah</h2>
+
+<p>A different style sheet proved nothing on its own, since MSN had sent each of the three browsers a different one. What mattered was how the server chose. So the Opera request went out again with the browser's name misspelled:</p>
+
+<pre tabindex="0"><code>wget --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; MSIE 5.5; Windows NT 5.1) Oprah 7.0 [en]" --output-document oprah7.html http://www.msn.com</code></pre>
+
+<p>The reasoning on Lie's page is that nobody at MSN could have written a special case for a browser that didn't exist. Oprah 7.0 got a page that linked the Internet Explorer 6 style sheet, all 2,036 bytes of it. The rest of the string was Opera 7's to the character, so the server was looking for the word. Near its top the page asks three questions (had Opera's programmers blundered, was something wrong at MSN, was Opera being targeted) and answers them in a parenthesis: "Executive summary: no, yes, yes". It also reports two cross-checks: the Opera version of the page clipped its lists in Internet Explorer 6 too, and Opera 6 and Opera 7 drew the Internet Explorer version correctly.</p>
+
+<p>CNET, The Register and Slashdot linked to the page, and on 7 February MSN changed its setup so that Opera 7 received the Internet Explorer 6 sheet. Lie's <a href="https://www.wiumlie.no/2003/2/msn/07/index.html">follow-up</a> that night says "Thank you, MSN." and then keeps going, because the test had been widened to seven browsers. Opera 6 was still being sent <code>site.css</code>. So was Internet Explorer 3.</p>
+
+<p>That changes what the file was. I compared the copies Lie kept from the two days, and the sheet that clipped Opera 7 on the 5th is byte for byte the one Internet Explorer 3 got on the 7th. It looks less like something written to sabotage Opera than like the sheet MSN kept for browsers it had stopped designing for, with anything named Opera filed there beside a browser from 1996. Lie called the classification an insult. That the file was a leftover is my reading of his two pages; neither says so.</p>
+
+<h2>Why MSN matched on the name</h2>
+
+<p><a href="../document-layers/">Sniffing</a> was how MSN was built. The follow-up page shows a style sheet for each generation of Internet Explorer, <code>site-win-ie4.css</code>, <code>site-win-ie5.css</code> and <code>site-win-ie6.css</code>, plus one for Netscape, with the plain <code>site.css</code> going to Internet Explorer 3 and Opera 6. <a href="https://www.theregister.com/2003/02/06/msn_deliberately_breaks_operas_browser/">The Register's John Lettice</a>, writing up Lie's first page, allowed that the problem might be "some strangely coincidental finger trouble".</p>
+
+<p>Opera's disguise made the name matter. Opera 7 introduced itself as <code>Mozilla/4.0 (compatible; MSIE 6.0; MSIE 5.5; Windows NT 5.1) Opera 7.0 [en]</code>: Internet Explorer 6 first, its own name last. Any server that wanted to tell the real Internet Explorer from the impersonator had to search for "Opera" explicitly, and that is the test Oprah slipped past. I'd argue each side's workaround was the other side's reason: Opera wore the mask because sites like Carpoint turned it away without one, and a server had to look behind the mask because Opera wore it.</p>
+
+<h2>The Swedish Chef build</h2>
+
+<p>The Bork edition came out a week after MSN's fix, and <a href="https://press.opera.com/2003/02/14/opera-releases-bork-edition/">the release announcing it</a> concedes as much: MSN "now allows access to users of Opera 7", it says, while still sending earlier versions a broken page. <a href="https://ale.org/pipermail/ale/2003-February/045675.html">A copy forwarded to a mailing list</a> that morning says the download was Opera 7.01. So the protest was a build of the one version whose users no longer had the problem, made on behalf of Opera 6 and of the principle.</p>
+
+<p>Mary Lambert, Opera's desktop product manager, is quoted in the release first in Chef ("Hergee berger snooger bork") and then in English, calling the build a joke with a serious point: browsers could distort content too. Opera had put into a browser the same move it objected to in a server, a special case for one named party, so that people could see how it looked from the receiving end. Asked by <a href="https://www.computerworld.com/article/1344766/opera-unleashes-swedish-chef-on-msn.html">IDG News Service</a> why the Chef, Lie said the Chef was probably the most famous Scandinavian of the generation and, like the pages MSN sent Opera users, very hard to understand. Lie also told IDG why Opera had gone for a laugh: "It's better to try to solve it this way than through a lawsuit."</p>
+
+<h2>A settlement for 12.75 million dollars</h2>
+
+<p>Fifteen months later Opera announced, in a release that <a href="https://news.slashdot.org/story/04/05/18/132256/opera-settles-1275m-lawsuit-but-with-whom">a Slashdot reader summarised</a>, that it had settled legal claims with an international corporation for a net payment of 12.75 million US dollars. It did not name the corporation. On 24 May 2004 <a href="https://www.cnet.com/tech/services-and-software/microsoft-behind-12-million-payment-to-opera/">CNET's Evan Hansen reported</a>, on the word of an unnamed source, that the payer was Microsoft and the subject was MSN. About the payment Microsoft would say only that it didn't comment on rumours. Lie, with Opera citing a confidentiality agreement, got as close as he could: "We forwarded a few facts to a big international corporation and settled before we took legal action."</p>
+
+<p>About 2003 Microsoft said more. Hansen's article has the company admitting that year to detecting browsers on MSN and sending them different layouts, in order to promote standards compliance and not to hurt competitors, and saying it had since stopped. Its statement to CNET adds that MSN had tested Opera's latest browser and "made adjustments to ensure all Opera 7 users had a quality experience". Neither company said in public who had paid, or for what. If CNET's source was right, though, the joke that was meant to be better than a lawsuit ended the way lawsuits do, with a sum and a confidentiality clause.</p>
+
+<h2>Where the word Opera went</h2>
+
+<p>The disguise broke pages on a site that meant Opera no harm. Six weeks after the Bork edition, <a href="https://www.theregister.com/2003/03/26/opera_breaks_register_shock/">Lettice reported</a> that ads on The Register's own pages kept wrecking the layout in Opera 7, though only when Opera was claiming to be Internet Explorer. The sniffing script behind the latest ads, by Lettice's account, found two browsers in one string and served two ads. On whether to blame the browser that fibbed or the script that asked, the article says "All of the above, no doubt", and tells Opera users to press Ctrl+Alt+O, which made Opera own up to being Opera.</p>
+
+<p>The number after the word then stuck at 9.80. When the Opera 10 alpha announced itself as <code>Opera/10.00</code>, sites broke, because their sniffing scripts read one digit of the version and saw Opera 1. Opera's Andreas Bovens <a href="https://raw.githack.com/operasoftware/devopera-static-backup/master/http/dev.opera.com/articles/view/opera-ua-string-changes/index.html">explained in May 2009</a> that the string would be frozen at <code>Opera/9.80</code>, with the true version added at the end as <code>Version/10.00</code>, and that the team had considered <code>9.99</code>.</p>
+
+<p>The word is gone now. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/User-Agent">MDN's reference page for the User-Agent header</a> shows the current Opera sending Chrome's string with <code>OPR/</code> and a version number on the end, and the five letters MSN's server searched for appear nowhere in it.</p>
+
+<h2>The takeaway</h2>
+
+<p>A server rule that matches a browser by name is a judgment made once about a product that keeps changing, and MSN's rule put a week-old release in with Internet Explorer 3 because of a word in a header. What cut through was the method on Lie's page: ask for the same URL under two names, one of them made up, and compare the bytes. It needed no access to MSN and no theory about Microsoft's motives.</p>
+
+<p>The motives stayed private, behind a quick fix and a payment Opera was not free to describe. Of what the Bork edition put on a screen, the only lines I could find preserved are the two Reuters reported that Friday, a movie guide and a car ad.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www.wiumlie.no/2003/2/msn/">Why doesn't MSN work with Opera?</a>, Håkon Wium Lie (signed "howcome"), 2003</li>
+    <li><a href="https://www.wiumlie.no/2003/2/msn/07/index.html">Why MSN still doesn't work with Opera</a>, Håkon Wium Lie (signed "howcome"), 2003</li>
+    <li><a href="https://www.wiumlie.no/2003/2/msn/site.css">site.css as MSN served it to Opera 7 on 5 February 2003</a>, saved by Håkon Wium Lie, 2003</li>
+    <li><a href="https://www.wiumlie.no/2003/2/msn/site-win-ie6.css">site-win-ie6.css as MSN served it to Internet Explorer 6 on 5 February 2003</a>, saved by Håkon Wium Lie, 2003</li>
+    <li><a href="https://press.opera.com/2003/02/14/opera-releases-bork-edition/">Opera releases "Bork" edition</a>, Opera Software press release, 2003</li>
+    <li><a href="https://ale.org/pipermail/ale/2003-February/045675.html">OPERA Bork edition</a>, the same release as forwarded to the Atlanta Linux Enthusiasts mailing list by Russell E. Hogg, 2003</li>
+    <li><a href="https://www.ciol.com/opera-browser-alters-msn-text-puppet-lingo/">Opera browser alters MSN text into puppet lingo</a>, Reuters, as carried by CIOL, 2003</li>
+    <li><a href="https://www.computerworld.com/article/1344766/opera-unleashes-swedish-chef-on-msn.html">Opera unleashes Swedish Chef on MSN</a>, Scarlet Pruitt, IDG News Service, in Computerworld, 2003</li>
+    <li><a href="https://www.theregister.com/2003/02/06/msn_deliberately_breaks_operas_browser/">MSN deliberately breaks Opera's browser, claims company</a>, John Lettice, The Register, 2003</li>
+    <li><a href="https://www.theregister.com/2003/03/26/opera_breaks_register_shock/">Opera breaks Register shock</a>, John Lettice, The Register, 2003</li>
+    <li><a href="https://press.opera.com/2003/01/28/faster-smaller-smarter/">Faster, smaller, smarter: Opera 7 Ready to Rock the Web</a>, Opera Software press release, 2003</li>
+    <li><a href="https://www.w3.org/People/howcome/p/cascade.html">Cascading HTML style sheets -- a proposal</a>, Håkon W Lie, 1994</li>
+    <li><a href="https://mail-archive.com/sambar@skyweb.se/msg00188.html">MSN lockout stirs antitrust rumblings</a>, Sandeep Junnarkar and Joe Wilcox, CNET News.com, 2001, as pasted to the Sambar mailing list the same day</li>
+    <li><a href="https://press.opera.com/2001/11/01/microsoft-exposed/">Microsoft Exposed</a>, Opera Software press release, 2001</li>
+    <li><a href="https://alistapart.com/article/msn/">MSN, Opera, and Web Standards</a>, Håkon Wium Lie, A List Apart, 2001</li>
+    <li><a href="https://www.theregister.com/2001/11/02/the_browser_wars_are_back/">The Browser Wars are back: Opera smacks MSN</a>, Andrew Orlowski, The Register, 2001</li>
+    <li><a href="https://news.slashdot.org/story/04/05/18/132256/opera-settles-1275m-lawsuit-but-with-whom">Opera Settles $12.75m Lawsuit, But with Whom?</a>, Slashdot, 2004</li>
+    <li><a href="https://www.cnet.com/tech/services-and-software/microsoft-behind-12-million-payment-to-opera/">Microsoft behind $12 million payment to Opera</a>, Evan Hansen, CNET News.com, 2004</li>
+    <li><a href="https://raw.githack.com/operasoftware/devopera-static-backup/master/http/dev.opera.com/articles/view/opera-ua-string-changes/index.html">Changes in Opera's user agent string format</a>, Andreas Bovens, Dev.Opera, 2009, in Opera's static backup of the site</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/User-Agent">User-Agent header</a>, MDN Web Docs</li>
+  </ul>
+</section>

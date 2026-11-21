@@ -606,6 +606,32 @@
         "Grossman's quotation about the worm rests on a single source, the Motherboard retrospective."
       ],
       "published": "2026-11-20T21:54:12Z"
+    },
+    {
+      "slug": "opera-bork",
+      "title": "The Bork edition: Opera, MSN and a browser called Oprah",
+      "description": "In February 2003 Opera's CTO caught MSN sending his new browser a broken style sheet by asking for the page again under a misspelled name, and Opera answered with a build that turned MSN into Swedish Chef.",
+      "topic": "browsers",
+      "era": [
+        2001,
+        2004
+      ],
+      "related": [
+        "document-layers",
+        "whatwg",
+        "css-potential"
+      ],
+      "unverified": [
+        "The technical account rests on Håkon Wium Lie's own two pages and the files saved beside them. I could not open an independent copy of MSN's pages from February 2003. The pages do not say who ran the wget commands, so I have Opera fetching and Lie publishing; that Lie wrote them rests on the signature \"howcome\", the name in the address on the 1994 CSS proposal.",
+        "That the style sheet sent to Opera 7 was a leftover for old browsers is my inference: the file saved on 5 February is byte for byte the one recorded as going to Internet Explorer 3 and Opera 6 on 7 February. Internet Explorer 3 was not tested on the 5th, and I found nothing on why MSN wrote a 30-pixel negative margin or what it did in the browsers the sheet was kept for.",
+        "Microsoft's side in 2003 comes from CNET's summary a year later, which gives the aim as promoting standards compliance; CNET's report from that week, which Lie's page cites, is a dead link. Out-Law, on 17 February 2003, reports the company's reason differently, as to \"optimise the experience of our users\".",
+        "The two Swedish Chef headlines come from a single Reuters story, which I read in a copy carried by CIOL. I found no screenshot or surviving copy of the build and nothing on how it recognised MSN or did the translating. The version number 7.01 appears only in a mailing-list copy of the press release, and that 7.01 displayed MSN correctly is my inference from Opera's statement that MSN now let Opera 7 in.",
+        "That Microsoft made the 12.75 million dollar payment rests on one unnamed source in one CNET article, and neither company confirmed it. I could not find Opera's announcement; the wording I give is a Slashdot reader's summary of it, not a quotation.",
+        "For the 2001 lockout I read CNET's story in a copy pasted to a mailing list the same day. CNET puts the lockout on the Thursday Windows XP launched, 25 October; Lie's own article says 24 October, so I give no day. That the Internet Explorer disguise was Opera 7's default setting rests on one line in The Register.",
+        "Opera's press release says the MSN problem was revealed \"two weeks ago\"; I went by the date on Lie's page, 5 February, which is nine days before the release.",
+        "Why Opera's user-agent string no longer contains the word Opera is not sourced here: MDN shows the current string, and Opera's own post on the change no longer loads. I read the 2009 article about Opera/9.80 in Opera's backup of its developer site, not on the site itself."
+      ],
+      "published": "2026-11-21T22:03:44Z"
     }
   ]
 }
