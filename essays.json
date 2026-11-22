@@ -632,6 +632,31 @@
         "Why Opera's user-agent string no longer contains the word Opera is not sourced here: MDN shows the current string, and Opera's own post on the change no longer loads. I read the 2009 article about Opera/9.80 in Opera's backup of its developer site, not on the site itself."
       ],
       "published": "2026-11-21T22:03:44Z"
+    },
+    {
+      "slug": "box-model-hack",
+      "title": "The Box Model Hack: two Internet Explorers, one width",
+      "description": "In March 2001 the engineer who had led the engine team for Internet Explorer 5 on the Mac finished a hack that gave Internet Explorer 5 for Windows a different width from every other browser, on the third try and with a string from the W3C's own test suite.",
+      "topic": "browsers",
+      "era": [
+        1999,
+        2006
+      ],
+      "related": [
+        "ie8-targeting",
+        "ie6-funeral",
+        "css-potential"
+      ],
+      "unverified": [
+        "The hack's three versions, their dates and the 11pm timestamp come from Tantek Çelik's own log entries of 2005 and 2006, written from an email archive. I found no independent record, and no copy of the hack page from 2001 that I could open. The log does not say which parsing bug the second version used.",
+        "Zeldman's article is dated 16 February 2001 but survives only as the rewrite of 7 April, so the percentages, the 14 hours and the credit to \"Anonymous Donor A\" are as the page reads now, not necessarily as it read that day. The article never names the donor; that the child-selector suggestion was Çelik's is Çelik's own later statement.",
+        "I could not open Lance Silver's MSDN article on Microsoft's site. I read a third-party copy posted in 2025, have not linked it, and could not check its wording against the original. That the Internet Explorer 6 preview came out in March 2001 rests on that article's date and on Wikipedia's release table; the fact check found a news address dated 22 March 2001 that would not open for me.",
+        "I found no statement from Microsoft on who chose the Windows box model or why. The suggestion that it followed HTML's WIDTH and HEIGHT attributes is my inference from Çelik's 1999 message.",
+        "Çelik's titles and dates at Microsoft, and the claim that Tasman was the first engine to pass the CSS1 test suite, come from Çelik's own résumé. That Çelik built the doctype switch in Internet Explorer 5 for the Mac rests on Çelik's notes and a W3C wiki page, and the same wiki page is my only source for Todd Fahrner's suggestion; I could not find the mailing-list post.",
+        "The style sheet comment on how Internet Explorer 5 misreads the string, the test page and the CSS1 text are today's copies (the style sheet is marked 2001 to 2006, the specification is the 2008 revision). I did not run the rule in Internet Explorer 5.",
+        "Peter-Paul Koch's QuirksMode page says Internet Explorer 6 was meant to fall back to quirks mode after an XML prolog, so that a valid page could stay there; I followed Microsoft's 2006 article, which calls it a bug. The copy of that article I read is the September 2006 update, so I cannot say whether its guideline on filters was in the January text."
+      ],
+      "published": "2026-11-22T22:08:02Z"
     }
   ]
 }

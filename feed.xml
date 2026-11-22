@@ -6,7 +6,121 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Sat, 21 Nov 2026 22:03:44 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 22 Nov 2026 22:08:02 GMT</lastBuildDate>
+  <item>
+    <title>The Box Model Hack: two Internet Explorers, one width</title>
+    <link>https://derek.io/nostalgiajs/essays/box-model-hack/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/box-model-hack/</guid>
+    <pubDate>Sun, 22 Nov 2026 22:08:02 GMT</pubDate>
+    <description>In March 2001 the engineer who had led the engine team for Internet Explorer 5 on the Mac finished a hack that gave Internet Explorer 5 for Windows a different width from every other browser, on the third try and with a string from the W3C's own test suite.</description>
+    <content:encoded><![CDATA[<p class="lede">Two of the four declarations in the Box Model Hack are about the voice of a speech synthesiser, and the person who wrote them had been development lead on Microsoft's own browser engine for the Mac.</p>
+
+<pre tabindex="0"><code>div.content {
+  width:400px;
+  voice-family: "\"}\"";
+  voice-family:inherit;
+  width:300px;
+}</code></pre>
+
+<p>The rule is the working part of <a href="https://tantek.com/CSS/Examples/boxmodelhack.html">a page</a> on Tantek Çelik's site, finished in March 2001. A browser that parses CSS properly sets a width of 400 pixels, gives <code>voice-family</code> (a property <a href="https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">CSS2 defined</a> for aural style sheets) a peculiar string, sets it back to <code>inherit</code>, and then replaces the width with 300. Internet Explorer 5 and 5.5 for Windows take the brace inside the string for the end of the rule and never see the last line, so they keep 400. The two numbers produce the same box. The box on the page has 20 pixels of border and 30 of padding on each side, and the Windows browser counted those as part of the width where every other browser added them on.</p>
+
+<p>Çelik was development lead for Tasman, the engine inside Internet Explorer 5 for the Macintosh, from 1998 to 2000, and in March 2001 was still at Microsoft, leading work on a later Tasman for its TV products group; the titles are from <a href="https://tantek.com/projects/resume.html">Çelik's own résumé</a>. Internet Explorer on the Mac already measured a box the way the specification said. The hack was for the other Internet Explorer.</p>
+
+<h2>One company, two box models</h2>
+
+<p><a href="https://www.w3.org/TR/CSS1/">CSS1</a>, a W3C Recommendation since December 1996, defines the width of an element as "the width of the content", with padding, border and margin added around it. Declare a box 300 pixels wide with the hack page's border and padding and it occupies 400. Internet Explorer 5 for Windows drew it 300 across and took the border and padding out of the inside, leaving 200 for the content. Add up your column widths for one kind of browser and the layout was a hundred pixels out in the other.</p>
+
+<p>The plainest statement of the difference came from inside Microsoft. In October 1999 a poster on the W3C's www-style list supposed that <code>box-sizing</code>, a property in the CSS3 drafts, had been invented because of Internet Explorer. Çelik <a href="https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">answered</a> that it hadn't: it came from the user-interface draft, for buttons and other controls whose borders belong to the operating system, and the credit was Peter Linss's. One of its values, <code>border-box</code>, did happen to describe how Internet Explorer for Windows treated width and height by default. Internet Explorer for the Mac, Çelik went on, followed CSS1, and then came a stage direction:</p>
+
+<blockquote>
+<p>(ducks while angry web authors throw overripe fruit at the implementor for being inconsistent from WinIE)</p>
+</blockquote>
+
+<p>The message is signed from Tasman Development, Microsoft Corporation. Microsoft was shipping both box models at once, one per operating system, and the implementor of the conforming one was the one bracing for fruit. Who decided that the Windows browser should measure that way, and why, I could not find anyone at Microsoft saying. The same message notes that <code>border-box</code> also describes how HTML's own <code>WIDTH</code> and <code>HEIGHT</code> attributes were popularly implemented, which may be the reason; that is my inference, not Microsoft's account.</p>
+
+<h2>The doctype switch in the Mac browser</h2>
+
+<p>A browser maker that corrects its box model breaks every page whose numbers were chosen to suit the old one. The way out came from Todd Fahrner, whose suggestion to Mozilla's layout list is preserved in <a href="https://www.w3.org/html/wg/wiki/DoctypeSwitching">the W3C's history of the idea</a>: ship two rendering systems, keep the old one for old content, and "Pay attention to the DOCTYPE."</p>
+
+<p>Çelik built that switch into Internet Explorer 5 for the Mac, which shipped in March 2000. With no doctype, or an old one, it imitated Internet Explorer for Windows, box model included; with a strict one it followed CSS1. <a href="https://tantek.com/notes/doctypeswitching.html">Çelik's notes</a> from August 1999 say the imitation's rules "are not for the sake of authors. The quirky behaviors are there for the sake of users", whose old pages should go on looking as their authors meant.</p>
+
+<h2>Three versions of one hack</h2>
+
+<p>In February 2001 Jeffrey Zeldman was rebuilding A List Apart without layout tables and <a href="https://alistapart.com/article/journey/">writing up the experience</a>, in an article dated 16 February that now reads as Zeldman rewrote it on 7 April. The first attempt looked right in Internet Explorer 5 for Windows and grew scrollbars in Internet Explorer 5 for the Mac, Netscape 6 and Opera 5. Zeldman's diagnosis was that those three were correct and the fault was shared: "I didn't understand the CSS box model correctly (and neither did IE5/Win)." A deliberately wrong width of 67% made the Windows browser draw the column at roughly the 52% it should have been, which took 14 hours to work out. Then a second rule gave the true figure to better browsers through a CSS2 child selector, which the Windows browser did not understand and skipped:</p>
+
+<pre tabindex="0"><code>body&gt;#content {
+ width: 52%;
+    padding: 35px 5% 100px 10%;
+ }</code></pre>
+
+<p>The article credits the trick to "Anonymous Donor A", one of two unnamed CSS experts. Çelik's <a href="https://tantek.com/log/2006/03.html">log entry of March 2006</a>, written from an email archive, says the suggestion was Çelik's. In print it lasted a day. On 17 February Anil Dash pointed out what A List Apart's home page looked like in a browser that had the box model right but had never heard of the child selector: it read the deliberately wrong width, believed it and went no further. The entry adds that Internet Explorer 4.5 for the Mac, "a browser I had worked on", was another such browser, and then one word: "Oops."</p>
+
+<p>The second version swapped the selector for a parsing bug in Internet Explorer 5.0 for Windows, and held for two weeks. On Saturday 3 March Fahrner found that Internet Explorer 5.5 had fixed the bug. The third version was done before midnight.</p>
+
+<p>Çelik went looking where parsing bugs were already laid out in rows: section 7.1 of the W3C's CSS1 test suite, a page of deliberately strange style rules that checks whether a browser throws away what it doesn't understand and carries on. The résumé says Tasman was the first engine to pass that suite. With Fahrner's help Çelik found one test that upset both Windows versions:</p>
+
+<pre tabindex="0"><code>P.twentyb {rotation-code: "\"}\""; color: green;}</code></pre>
+
+<p>There is no property called <code>rotation-code</code>. <a href="https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">The test page</a> says the paragraph "should be green, because only the first declaration is invalid": a correct parser discards the nonsense, string and all, and reads on to the colour. Internet Explorer 5, in the words of a comment in <a href="https://tantek.com/CSS/Examples/boxmodelhack.css">the hack's style sheet</a>, "prematurely closes the rule".</p>
+
+<p>Çelik also wanted the hack to be valid CSS, so the invented property gave way to "an abandoned CSS2 property which accepted arbitrary string values", as <a href="https://tantek.com/log/2005/11.html">a later entry</a> puts it. At 11pm Pacific time, having tested in five browsers and expecting Internet Explorer 6 to fix both the parsing bug and the box model, Çelik mailed the result to Fahrner and Zeldman. The page adds one more rule after the hack, <code>html&gt;body .content {width:300px;}</code>, for browsers that understand CSS2 selectors but share the Windows parsing bug: the "be nice to Opera 5" rule. The child selector that failed as the hack came back as its safety net.</p>
+
+<h2>Internet Explorer 6 fixes the box, if asked</h2>
+
+<p>Later that month Microsoft released a public preview of Internet Explorer 6, and with it an MSDN article by Lance Silver with a section headed "Fix the Box Instead of Thinking Outside It". Earlier versions, Silver wrote, did not comply with the CSS1 box model. The new one measured width the CSS1 way on one condition: the page had to begin with a <code>!DOCTYPE</code> that switched on what Silver called standards-compliant mode. Every other page got the old arithmetic, and the article offers that as the good news: "you're unlikely to experience any significant compatibility problems with applications you developed for earlier versions of Internet Explorer."</p>
+
+<p>Silver's table of which doctypes flip the switch is close to the rules Çelik had written down for the Mac. No doctype: off. HTML 4.0 Strict: on. An unrecognised doctype: on. HTML 4.0 Transitional: on if the declaration includes the DTD's URL, off if it doesn't. Çelik <a href="https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">wrote in 2003</a> that Internet Explorer 6 "largely adopted" the Mac switch. Çelik was not a neutral witness, but the rules bear that out.</p>
+
+<p>Silver was writing for people with applications to keep running. The article tells anyone who built one for an earlier version to make sure its doctype does not switch the new mode on, and warns against the new mode for "content that is fixed in nature, such as content that is stored on a CD", since rendering there might change in later versions. The mode named for the standard came without a guarantee, and the advice for anything meant to last was to stay out of it.</p>
+
+<h2>The Box Model Hack spreads</h2>
+
+<p>The hack travelled further than a page of test boxes had any right to. By February 2004 Anne van Kesteren could <a href="https://annevankesteren.nl/2004/02/box-model">write</a> that "(almost) every commercial site has at least one CSS hack, a box model hack". The same piece carries the catch: the hack's numbers only came out right if Internet Explorer 6 was in standards mode.</p>
+
+<p>That made the doctype a trap. An addendum to Çelik's page dated 4 April 2002 records that Prerit Bhakta had noticed a page beginning with <code>&lt;?xml version="1.0"?&gt;</code> put Internet Explorer 6 back on the old box model, and advises leaving the line out. In Çelik's Mac browser the same line had meant strict. An <a href="https://learn.microsoft.com/en-us/previous-versions/aa980987(v=msdn.10)">MSDN article on Internet Explorer 7</a> by Markus Mielke and Dave Massy later called the behaviour a bug, introduced it with "Sadly", and said version 7 had fixed it.</p>
+
+<p>Çelik was uneasy about what the hack started. In November 2005 an entry titled "Pandora's Box (Model) of CSS Hacks And Other Good Intentions" traced a line from it to a generalised version that hid whole style sheets from Internet Explorer 5, and from there to hacks for nearly every browser, many of them breaking rules Çelik had kept in mind in 2001 and never written down. One rule was that a hack should be valid. Another was that it should be ugly, the ugliness serving as "a reminder to dispose of them when no longer necessary". By that standard the line with the string in it is a complete success.</p>
+
+<h2>Where the two box models went</h2>
+
+<p>The Windows model became a CSS property. <code>box-sizing</code>, the property from the 1999 thread, lets an author ask for either arithmetic one element at a time. Zeldman had conceded the appeal in 2001: "The way IE5/Win works seems preferable in many ways, but it's wrong." In 2012 Paul Irish <a href="https://www.paulirish.com/2012/box-sizing-border-box-ftw/">recommended</a> applying <code>border-box</code> to every element on a page, on the grounds that a box declared 200 pixels wide ought to be 200 pixels wide. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing">MDN's page on the property</a> now says browsers apply it by default to tables, buttons and several form controls. The initial value is <code>content-box</code>, so CSS1 kept the default and the Windows arithmetic got the recommendation.</p>
+
+<p>The switch outlived the browsers it was built for. Henri Sivonen's <a href="https://hsivonen.fi/doctype/">reference on doctypes and browser modes</a> describes the quirks mode of Internet Explorer 6 to 9 as "effectively frozen IE 5.5", and says versions 10 and 11 kept that imitation beside a newer quirks mode built to match other browsers. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">MDN</a> says that the only purpose of <code>&lt;!doctype html&gt;</code> today is to switch quirks mode off, and that no browser ever used a doctype for anything except choosing a rendering mode.</p>
+
+<p>Microsoft's advice and Çelik's ended up nearly word for word the same. Internet Explorer 7 changed strict mode and fixed parser bugs that later hacks depended on, pages broke, and the Mielke and Massy article is the guide to the damage. Its first guideline for anyone who must use a filter reads: "Target ONLY 'older than current' (frozen or abandoned) versions of browsers." Çelik's entry of November 2005 has "Target ONLY older/frozen/abandoned versions". The article adds that filters aimed only at Internet Explorer 5.5 and earlier are relatively safe, which is a fair description of the Box Model Hack. The hacks that broke were aimed at the browser of the day, and what Microsoft did about that in Internet Explorer 8 is <a href="https://derek.io/nostalgiajs/essays/ie8-targeting/">the story of a meta tag</a>.</p>
+
+<h2>The takeaway</h2>
+
+<p>The Box Model Hack was a Microsoft engineer's patch for a Microsoft browser: the former lead of the Mac browser's engine making the Windows browser's boxes come out like the Mac's, with a bug the W3C's test suite had been written to catch. I read it as a colleague's fix, and a careful one: valid, tested in five browsers and aimed at browsers that were about to be replaced. Microsoft's own fix is the part that lasted. Internet Explorer 6 put a correct box beside the old one and let the first line of the page choose between them, so that nothing old broke and nothing old had to be fixed. The web kept both: every browser has a quirks mode, and the measurement Zeldman called preferable but wrong is one declaration away.</p>
+
+<p>Under the test box on Çelik's page are two bars for comparison, a red one 300 pixels long and a blue one 400. The text says the box should be as wide as the blue bar.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://tantek.com/CSS/Examples/boxmodelhack.html">Box Model Hack</a>, Tantek Çelik, 2001, with addenda to 2005 <a class="archived" href="https://web.archive.org/web/20261106011507/http://tantek.com/CSS/Examples/boxmodelhack.html">(archived)</a></li>
+    <li><a href="https://tantek.com/CSS/Examples/boxmodelhack.css">boxmodelhack.css, the page's style sheet and its comments</a>, Tantek Çelik, 2001 to 2006 <a class="archived" href="https://web.archive.org/web/20261106160427/http://tantek.com/CSS/Examples/boxmodelhack.css">(archived)</a></li>
+    <li><a href="https://tantek.com/log/2006/03.html">Five Year Hackiversaries</a>, Tantek Çelik, 2006 <a class="archived" href="https://web.archive.org/web/20250419051448/http://tantek.com/log/2006/03.html">(archived)</a></li>
+    <li><a href="https://tantek.com/log/2005/11.html">Pandora's Box (Model) of CSS Hacks And Other Good Intentions</a>, Tantek Çelik, 2005 <a class="archived" href="https://web.archive.org/web/20260923084153/http://tantek.com/log/2005/11.html">(archived)</a></li>
+    <li><a href="https://tantek.com/notes/doctypeswitching.html">Quirk/Compat vs. Strict: notes on doctype switching in Internet Explorer 5 for the Macintosh</a>, Tantek Çelik, 1999 to 2000 <a class="archived" href="https://web.archive.org/web/20200204085629/https://tantek.com/notes/doctypeswitching.html">(archived)</a></li>
+    <li><a href="https://tantek.com/projects/resume.html">Résumé</a>, Tantek Çelik, 2010 <a class="archived" href="https://web.archive.org/web/20261023185518/https://tantek.com/projects/resume.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">Re: Unlogical width with percentages</a>, Tantek Çelik, www-style mailing list, 1999 <a class="archived" href="https://web.archive.org/web/20251008133250/https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">Re: CSS and Standards-Compliance mode in IE6</a>, Tantek Çelik, www-style mailing list, 2003 <a class="archived" href="https://web.archive.org/web/20250709135740/https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">(archived)</a></li>
+    <li><a href="https://alistapart.com/article/journey/">From Table Hacks to CSS Layout: A Web Designer's Journey</a>, Jeffrey Zeldman, A List Apart, 2001</li>
+    <li><a href="https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">CSS1 Test Suite: 7.1 Forward-Compatible Parsing</a>, W3C <a class="archived" href="https://web.archive.org/web/20250516004455/https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">(archived)</a></li>
+    <li><a href="https://www.w3.org/TR/CSS1/">Cascading Style Sheets, level 1</a>, W3C, 1996, revised 2008 <a class="archived" href="https://web.archive.org/web/20261105224747/https://www.w3.org/TR/CSS1/">(archived)</a></li>
+    <li><a href="https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">CSS2, section 19: Aural style sheets</a>, W3C, 1998 <a class="archived" href="https://web.archive.org/web/20261029223438/https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">(archived)</a></li>
+    <li><a href="https://www.w3.org/html/wg/wiki/DoctypeSwitching">DoctypeSwitching</a>, W3C HTML Working Group wiki, 2010 <a class="archived" href="https://web.archive.org/web/20250617083504/https://www.w3.org/html/wg/wiki/DoctypeSwitching">(archived)</a></li>
+    <li>"CSS Enhancements in Internet Explorer 6 Public Preview", Lance Silver, Microsoft, MSDN, March 2001, read in a third-party copy and not linked</li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/aa980987(v=msdn.10)">Cascading Style Sheet Compatibility in Internet Explorer 7</a>, Markus Mielke and Dave Massy, Microsoft, 2006</li>
+    <li><a href="https://annevankesteren.nl/2004/02/box-model">Box Model</a>, Anne van Kesteren, 2004 <a class="archived" href="https://web.archive.org/web/20251207020900/https://annevankesteren.nl/2004/02/box-model">(archived)</a></li>
+    <li><a href="https://hsivonen.fi/doctype/">Activating Browser Modes with Doctype</a>, Henri Sivonen, 2000, updated to 2020 <a class="archived" href="https://web.archive.org/web/20261117103646/https://hsivonen.fi/doctype/">(archived)</a></li>
+    <li><a href="https://www.paulirish.com/2012/box-sizing-border-box-ftw/">* { Box-sizing: Border-box } FTW</a>, Paul Irish, 2012 <a class="archived" href="https://web.archive.org/web/20261117212312/https://www.paulirish.com/2012/box-sizing-border-box-ftw/">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing">box-sizing</a>, MDN <a class="archived" href="https://web.archive.org/web/20261117181123/https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">Understanding quirks and standards modes</a>, MDN <a class="archived" href="https://web.archive.org/web/20261105114457/https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">(archived)</a></li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>The Bork edition: Opera, MSN and a browser called Oprah</title>
     <link>https://derek.io/nostalgiajs/essays/opera-bork/</link>
@@ -4492,194 +4606,6 @@ year - jsBorn;  <span class="c">// 13</span></code></pre>
     <li><a href="https://docs.iza.org/dp18723.pdf">Generative AI and the Redefinition of Entry-Level Software Work</a>, Westby, Modestino and Cheng, IZA, 2026 <a class="archived" href="https://web.archive.org/web/20261025071612/https://docs.iza.org/dp18723.pdf">(archived)</a></li>
     <li><a href="https://builtin.com/articles/senior-hiring-software-engineering">AI Makes Code Cheap, and Engineers More Expensive</a>, Built In, 2026 <a class="archived" href="https://web.archive.org/web/20261002135423/https://builtin.com/articles/senior-hiring-software-engineering">(archived)</a></li>
     <li><a href="https://pulse2.com/octopus-deploy-ai-pulse-report/">Octopus Deploy: AI Pulse Report Warns Of Senior Developer Shortage</a>, Pulse 2.0, 2026 <a class="archived" href="https://web.archive.org/web/20260610101250/https://pulse2.com/octopus-deploy-ai-pulse-report/">(archived)</a></li>
-  </ul>
-</section>]]></content:encoded>
-  </item>
-  <item>
-    <title>if (document.layers): the web forks in two</title>
-    <link>https://derek.io/nostalgiajs/essays/document-layers/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/document-layers/</guid>
-    <pubDate>Thu, 12 Nov 2026 00:53:51 GMT</pubDate>
-    <description>In 1997 Netscape and Microsoft each invented their own model of a web page. Everyone wrote every effect twice, and the way it ended explains a lot about how the web still works.</description>
-    <content:encoded><![CDATA[<p class="lede">Two lines of code you typed more often than your own phone number, and the fork in the web they stood for.</p>
-
-<pre tabindex="0"><code>var ns4 = document.layers ? 1 : 0;
-var ie4 = document.all ? 1 : 0;</code></pre>
-
-<p>If you wrote JavaScript between 1997 and 2001, those two lines were probably the first thing in your script file, the way <code>#include &lt;stdio.h&gt;</code> opens a C program. Everything after them was a fork. Every menu, ticker and sliding panel got written once per browser, and then you crossed your fingers for the browsers you hadn't tested.</p>
-
-<p>The odd part is that both lines were true of the same web. The same HTML, served from the same server, gave Netscape Navigator 4 one model of a page and Internet Explorer 4 another. Neither was a bug or a hack. Each was a serious answer to the same question, <em>what if a page could change after it loaded?</em>, and the answers were incompatible. Following how that happened explains more about how the web platform works than most specs do.</p>
-
-<h2>Before the fork: a frozen page</h2>
-
-<p>Brendan Eich wrote JavaScript at Netscape in about ten days in May 1995. It was code-named Mocha, appeared in the Navigator 2 betas as LiveScript, and became JavaScript in December 1995, when Netscape and Sun jointly announced it. The name was a marketing decision, which is why a language with almost nothing in common with Java has been explaining itself for three decades. Microsoft answered with its own implementation, JScript, in Internet Explorer 3 in 1996.</p>
-
-<p>What the language could touch was small: the <code>window</code>, the <code>document</code>, forms and their fields, links, and from Navigator 3 in 1996, images. That last item mattered more than it sounds. Once <code>document.images</code> let you swap an image's <code>src</code>, you had the rollover, and the rollover was the first proof that a page could respond to a mouse. This vocabulary is sometimes called DOM Level 0. It was never a standard of its own. It was whatever Netscape shipped first and everyone else copied. (For a short while Microsoft was the one reverse-engineering Netscape, which is worth remembering when the story turns.)</p>
-
-<p>Everything on that list shared one limit: the page itself was frozen. You could validate a form, open a window, swap a picture, and write text into the document <em>while it was loading</em> with <code>document.write</code>. Once loading finished, the layout was set. If you wanted different content, you asked the server for a different page.</p>
-
-<h2>What Dynamic HTML promised</h2>
-
-<p>In 1997 both vendors broke that rule. Netscape Communicator 4 arrived mid-year and Internet Explorer 4 that fall, each carrying a bundle the marketing departments called Dynamic HTML. The pitch was three technologies stacked: HTML for content, CSS for style, and JavaScript to change either one while the visitor watched.</p>
-
-<p>The piece that made it feel like a different medium was CSS positioning. You could write <code>position: absolute; left: 120px; top: 40px</code> and put a box exactly where you wanted it, on top of other boxes, with a <code>z-index</code>. A positioned box could be hidden, shown, moved or restacked, and doing that on a timer gave you animation. Menus that flew out. Panels that slid. Text that followed the cursor around, which was, to be fair, an entire genre for about two years.</p>
-
-<p>Both browsers could do all of it. They disagreed, completely, about what the page <em>was</em>.</p>
-
-<h2>Two models of a page</h2>
-
-<p>Here is the core difference, stated as plainly as I can, because the rest of the mess follows from it.</p>
-
-<p>Internet Explorer 4 made the entire document a live object. Every element, whether heading, paragraph, list item or table cell, was reachable through <code>document.all</code>, and you could change almost any of them after load: style, text, contents. The page reflowed around the change. Microsoft even added <code>innerHTML</code>, so you could replace an element's contents with a string of markup. (Hold that thought. It comes back at the end.)</p>
-
-<p>Netscape 4 made a handful of special rectangles live. Only elements you had positioned, with CSS or with Netscape's own <code>&lt;layer&gt;</code> tag, showed up in <code>document.layers</code>. Everything else was, as far as script was concerned, set in concrete. You could move a layer, but you couldn't make the paragraph below it reflow, and you couldn't change a font size on the fly.</p>
-
-<p>One browser exposed the whole page. The other exposed a few windows cut into it. That gap shows up in the smallest everyday jobs. To replace the text in a news box, Internet Explorer needed one line:</p>
-
-<pre tabindex="0"><code>document.all["news"].innerHTML = "&lt;b&gt;Updated!&lt;/b&gt;";</code></pre>
-
-<p>In Netscape 4, every layer owned a whole separate document, so to change a layer's contents you reopened that document and rewrote it:</p>
-
-<pre tabindex="0"><code>var lyr = document.layers["news"];
-lyr.document.open();
-lyr.document.write("&lt;b&gt;Updated!&lt;/b&gt;");
-lyr.document.close();</code></pre>
-
-<p>Because each layer had its own <code>document</code>, reaching anything inside one meant walking down through it. An arrow image inside a menu layer was this in Netscape:</p>
-
-<pre tabindex="0"><code>document.layers["menu"].document.images["arrow"].src
-  = "down.gif";</code></pre>
-
-<p>and in Internet Explorer was simply <code>document.images["arrow"].src</code>. This is why Dreamweaver's generated <code>MM_findObj</code> helper is a recursive function that digs through each layer's document looking for a name. It was a way to find an image when the answer depended on where in the layer tree it happened to live.</p>
-
-<p>My best guess at the root cause is the engine underneath. Navigator 4's layout engine formatted a page once, as the HTML streamed in, and wasn't built to go back and re-lay-out. Layers were a clever way to get movable regions without that, because each layer was laid out on its own. Internet Explorer 4 shipped with a new engine designed to re-lay-out the document when something changed, so it could expose everything. Same goal, different foundations, and the foundations decided what was possible.</p>
-
-<h2>Events ran in opposite directions</h2>
-
-<p>Then there were events. Click a link inside a div inside the body: who hears about it first? Internet Explorer said the link, then the div, then the body, with the event bubbling outward. Netscape 4 said the reverse. The event was captured at the window, document or layer on its way down, and you had to ask for it explicitly with <code>captureEvents</code>. The event also reached your code differently: Netscape passed it to your handler as an argument, while Internet Explorer kept it in a global, <code>window.event</code>. And the coordinates were measured from different places.</p>
-
-<pre tabindex="0"><code><span class="c">// Netscape 4</span>
-document.captureEvents(Event.MOUSEDOWN);
-document.onmousedown = function (e) {
-  x = e.pageX;
-};
-
-<span class="c">// Internet Explorer 4</span>
-document.onmousedown = function () {
-  x = event.clientX;
-};</code></pre>
-
-<p><code>pageX</code> counted from the top-left of the document. <code>clientX</code> counted from the top-left of the visible window. Scroll the page and your drag-and-drop code was off by exactly the scroll distance, in one browser only, which is the kind of bug that survives three rounds of testing.</p>
-
-<p>The eventual standard, <a href="https://www.w3.org/TR/DOM-Level-2-Events/">DOM Level 2 Events</a> in 2000, did something I find a little beautiful: it gave both camps their way. An event travels down in a capture phase, reaches its target, then bubbles back up, and you choose which phase you listen in. That is the third argument to <code>addEventListener</code> that most people leave at its default without ever knowing what it was for.</p>
-
-<h2>Why they diverged</h2>
-
-<p>Three forces pulled the models apart, and the third is the one people forget.</p>
-
-<p><strong>The market.</strong> The browser war was a fight for the desktop, and a proprietary feature was a weapon. Microsoft built Internet Explorer into Windows 98 in mid-1998, and the US Justice Department sued that same year with the bundling at the center of the case. Netscape, which had owned the market in 1995 and 1996, was losing share and shipping on a schedule its rival set. Nobody in that position waits for a committee.</p>
-
-<p><strong>The standard lagged the products.</strong> The W3C's <a href="https://www.w3.org/TR/REC-DOM-Level-1/">DOM Level 1</a> became a Recommendation in October 1998, a full year after DHTML shipped, and it covered documents and elements but said nothing about events. The W3C had also gone with CSS positioning, so Netscape's <code>&lt;layer&gt;</code> tag never became a standard at all. For most of 1997 to 2000 there was no standard to follow even if you wanted to.</p>
-
-<p><strong>Netscape lost its footing.</strong> In 1998 Netscape released its source code, and that October the Mozilla project scrapped the old Communicator code to rebuild the browser around a new layout engine, Gecko. Rewrites take time, and Netscape 6 did not ship until late 2000. For roughly three years Netscape 4 and its point releases were the current Netscape. Joel Spolsky's 2000 essay <a href="https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/">Things You Should Never Do, Part I</a> became famous for arguing that starting over is the worst strategic mistake a software company can make. Whether it was a mistake is still argued. What isn't in dispute is what it did to developers: it froze Netscape 4 as the version you had to support.</p>
-
-<p>That last point is the one I'd underline. A bad browser that's about to be replaced is a short-lived problem. A bad browser that stays the newest version of its line for three years turns into a design constraint, and design constraints get built into everything.</p>
-
-<h2>How everyone coped</h2>
-
-<p>The first draft of everyone's code looked like the naive version: test for each browser, write the effect three times.</p>
-
-<pre tabindex="0"><code>function showMenu(id) {
-  if (document.getElementById) {
-    document.getElementById(id)
-      .style.visibility = "visible";
-  } else if (document.all) {
-    document.all[id]
-      .style.visibility = "visible";
-  } else if (document.layers) {
-    document.layers[id].visibility = "show";
-  }
-}</code></pre>
-
-<p>Notice <code>"show"</code> against <code>"visible"</code>. Even the values disagreed. After typing that branch for the fortieth time, people did the obvious thing and wrote it once:</p>
-
-<pre tabindex="0"><code>function getObj(id) {
-  if (document.getElementById)
-    return document.getElementById(id);
-  if (document.all) return document.all[id];
-  if (document.layers) return document.layers[id];
-  return null;
-}
-
-function getStyle(id) {
-  var o = getObj(id);
-  return o &amp;&amp; o.style ? o.style : o;
-}
-
-function show(id) {
-  getStyle(id).visibility =
-    document.layers ? "show" : "visible";
-}</code></pre>
-
-<p>That small trick, where a Netscape layer is its own style object and an Internet Explorer element has a <code>.style</code>, was in a thousand script files. It is also the seed of every JavaScript library you have used since. More on that in a moment.</p>
-
-<p>There was a whole supply chain around the problem. Macromedia released Dreamweaver in December 1997, and a big part of its appeal was Behaviors: pick one from a menu and it generated the cross-browser JavaScript for you, <code>MM_</code> prefix and all. Danny Goodman's <em>Dynamic HTML: The Definitive Reference</em> from O'Reilly in 1998 was the book on everyone's desk. Sites like Dynamic Drive handed out copy-and-paste menus and scrollers. CSS had its own trick: Netscape 4 didn't understand <code>@import</code>, so you put the good styles there and let it see only a plain stylesheet.</p>
-
-<p>Some people gave up and picked a side. "Best viewed with Netscape Navigator" and "Best viewed with Internet Explorer" buttons, usually 88 by 31 pixels, were the heraldry of the era. And in 1998, a group of developers formed the <a href="https://www.webstandards.org/">Web Standards Project</a> to lobby browser makers to support the W3C's specs. Developers organizing to pressure vendors was new, and it worked slowly, and then it worked.</p>
-
-<h2>How the fork ended</h2>
-
-<p>Internet Explorer 5, in March 1999, supported most of DOM Level 1, including <code>document.getElementById</code>. Netscape 6, built on Gecko, arrived in November 2000, supported the same call and dropped <code>document.layers</code> entirely. Netscape 4 faded slowly, and plenty of sites kept their three-way branch into the early 2000s because a customer on an old machine is still a customer.</p>
-
-<p>The habit of sniffing for a browser by name died less by decree than by arithmetic. Look at the user agent string Internet Explorer sent:</p>
-
-<pre tabindex="0"><code>Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)</code></pre>
-
-<p>It introduces itself as Mozilla, Netscape's code name, and <a href="https://webaim.org/blog/user-agent-string-history/">the usual telling</a> is that servers sent the good page only to Mozilla, so everyone else started claiming to be it. The disguise never came off: every major browser today still opens its user agent string with <code>Mozilla/5.0</code>. Then more browsers showed up: Opera, which let its users choose which browser it claimed to be, then Mozilla, Konqueror, and Safari in 2003. Every new identity broke every script that asked <em>who are you?</em>. The scripts that asked <em>can you do this?</em> kept working. Peter-Paul Koch's QuirksMode, which became the field guide to these differences, <a href="https://www.quirksmode.org/js/support.html">argued for exactly that</a>. The practice became known as object detection, and later as feature detection.</p>
-
-<p>How sticky was the old habit? jQuery shipped a browser-sniffing helper, <code>$.browser</code>, deprecated it in 2009, and still didn't remove it until <a href="https://jquery.com/upgrade-guide/1.9/">jQuery 1.9</a> in 2013.</p>
-
-<h2>What the fork handed down</h2>
-
-<p><strong>The winner wrote the standard.</strong> Remember <code>innerHTML</code>? It was a Microsoft invention in Internet Explorer 4. It was in no part of DOM Level 1, 2 or 3. It became part of a web standard only in the HTML5 era, when the specs finally wrote down what every browser already did, by which point it was how half the web updated itself. <code>XMLHttpRequest</code> took the same road, starting life as an Internet Explorer 5 ActiveX object. The lesson I take from both is that standards are often a record of what survived, and the fight over who gets to be the thing that survives happens in the wild, in production, on your client's site.</p>
-
-<p><strong>The wrapper is the seed of the library.</strong> Look back at <code>getObj</code>. By 2005 Prototype's <code>$()</code> was <code>getElementById</code> in a shorter coat, and a year later <a href="https://derek.io/nostalgiajs/essays/jquery/">jQuery generalized the idea</a> into a whole way of working. The pattern keeps recurring: when the platform diverges, somebody writes the adapter once, everyone borrows it, and the divergence quietly moves from your code into a dependency. That isn't a bad outcome, but it explains why the pain of this era produced the tools of the next one.</p>
-
-<p><strong>It repeats.</strong> Vendor prefixes, <code>-webkit-</code> and <code>-moz-</code> and <code>-ms-</code>, were the same fork in CSS about a decade later. Mobile sites that worked only in WebKit were the same fork again. Each time it looks like a failure of the process. I'd argue it is the process: someone ships first, developers build on it, and the standard catches up to whatever turned out to matter. The only thing you control is how much of your code depends on the guess.</p>
-
-<p><strong>The end of the war had a cost too.</strong> Once Internet Explorer had won, plenty of teams stopped testing anywhere else, and Internet Explorer 6 shipped in 2001 and stayed the current version for roughly five years. It took the web about a decade to fully climb out of what "just support Internet Explorer" turned into. A monoculture is simpler for the person writing the code and worse for the thing they're building on. Most browsers today, Microsoft's included, run on one engine family, so the question isn't only historical.</p>
-
-<h2>The line that never died</h2>
-
-<p>Go back to the two lines at the top. <code>ns4</code> and <code>ie4</code> carry a hidden assumption: that the web has two browsers. Every sniffing script was a prediction about the future of the platform, and each prediction expired the next time the market moved.</p>
-
-<p>One of the two lines got a strange afterlife. So many pages kept <code>if (document.all)</code> as their test for Internet Explorer that when other browsers later added <code>document.all</code> for compatibility, they had to <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection">make it lie</a>. Open a console today and try it:</p>
-
-<pre tabindex="0"><code>typeof document.all  <span class="c">// "undefined"</span>
-!!document.all       <span class="c">// false</span>
-document.all.length  <span class="c">// a number</span></code></pre>
-
-<p>The collection is there and it works, but it reports itself as undefined and tests as false, so that sniffing code written in 1998 takes the standards branch. The JavaScript specification carries a special case that exists for this one object. <code>document.layers</code> is simply gone.</p>
-
-
-
-<h2>The takeaway</h2>
-
-<p>If you keep one thing from the layers-versus-all years, I'd make it this: the web has never been designed first and built second. It gets built, argued over in production, and then written down. Netscape and Microsoft each shipped a guess in 1997. Developers paid for the disagreement for about four years, twice over in every script. What came out the other side was the DOM you use today, an events model that kept both designs, and a handful of Microsoft inventions that the standards adopted after the fact.</p>
-
-<p>The habit it left behind is the more useful inheritance. Asking a browser who it is turned out to be a bet on a market that kept changing. Asking what it can do, as in <code>if ('IntersectionObserver' in window)</code>, has held up for twenty-five years because it makes no prediction at all. The two lines at the top of this essay asked the wrong question millions of times, and the platform still carries a special case to keep them harmless. I can't think of a better argument for writing the check the other way.</p>
-
-<section class="sources" aria-labelledby="sources-h">
-  <h2 id="sources-h">Sources and further reading</h2>
-  <ul>
-    <li><a href="https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/">Things You Should Never Do, Part I</a>, Joel Spolsky, 2000 <a class="archived" href="https://web.archive.org/web/20261111012839/https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/">(archived)</a></li>
-    <li><a href="https://www.quirksmode.org/js/support.html">Object detection</a>, Peter-Paul Koch, QuirksMode <a class="archived" href="https://web.archive.org/web/20261023084440/https://www.quirksmode.org/js/support.html">(archived)</a></li>
-    <li><a href="https://webaim.org/blog/user-agent-string-history/">History of the browser user-agent string</a>, Aaron Andersen, WebAIM <a class="archived" href="https://web.archive.org/web/20261105071655/https://webaim.org/blog/user-agent-string-history/">(archived)</a></li>
-    <li><a href="https://www.w3.org/TR/REC-DOM-Level-1/">Document Object Model (DOM) Level 1 Specification</a>, W3C, 1998 <a class="archived" href="https://web.archive.org/web/20261105145157/https://www.w3.org/TR/REC-DOM-Level-1/">(archived)</a></li>
-    <li><a href="https://www.w3.org/TR/DOM-Level-2-Events/">Document Object Model (DOM) Level 2 Events Specification</a>, W3C, 2000 <a class="archived" href="https://web.archive.org/web/20261106021345/https://www.w3.org/TR/DOM-Level-2-Events/">(archived)</a></li>
-    <li><a href="https://www.webstandards.org/">The Web Standards Project</a> <a class="archived" href="https://web.archive.org/web/20261103002405/https://www.webstandards.org/">(archived)</a></li>
-    <li><a href="https://jquery.com/upgrade-guide/1.9/">jQuery Core 1.9 Upgrade Guide</a> <a class="archived" href="https://web.archive.org/web/20261011080555/https://jquery.com/upgrade-guide/1.9/">(archived)</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection">HTMLAllCollection</a>, MDN <a class="archived" href="https://web.archive.org/web/20260704210510/https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>

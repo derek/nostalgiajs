@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Box Model Hack: two Internet Explorers, one width · Nostalgia.js</title>
+<meta name="description" content="In March 2001 the engineer who had led the engine team for Internet Explorer 5 on the Mac finished a hack that gave Internet Explorer 5 for Windows a different width from every other browser, on the third try and with a string from the W3C's own test suite.">
+<link rel="canonical" href="https://derek.io/nostalgiajs/essays/box-model-hack/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Box Model Hack: two Internet Explorers, one width">
+<meta property="og:description" content="In March 2001 the engineer who had led the engine team for Internet Explorer 5 on the Mac finished a hack that gave Internet Explorer 5 for Windows a different width from every other browser, on the third try and with a string from the W3C's own test suite.">
+<meta property="og:url" content="https://derek.io/nostalgiajs/essays/box-model-hack/">
+<meta property="og:image" content="https://derek.io/nostalgiajs/og/box-model-hack.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../../feed.xml">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WX44MXWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<script data-goatcounter="https://derek-io-nostalgiajs.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../../">Nostalgia.js<span>Essays on the Early Web</span></a>
+    <picture>
+      <source srcset="../../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../../">Essays</a>
+    <a href="../../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">Browsers and the platform · 1999 to 2006 · 10 min read</p>
+      <div class="title">
+        <img src="../../icons/box-model-hack.svg" width="64" height="64" alt="">
+        <h1>The Box Model Hack: two Internet Explorers, one width</h1>
+      </div>
+
+<p class="lede">Two of the four declarations in the Box Model Hack are about the voice of a speech synthesiser, and the person who wrote them had been development lead on Microsoft's own browser engine for the Mac.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#one-company-two-box-models">One company, two box models</a></li>
+          <li><a href="#the-doctype-switch-in-the-mac-browser">The doctype switch in the Mac browser</a></li>
+          <li><a href="#three-versions-of-one-hack">Three versions of one hack</a></li>
+          <li><a href="#internet-explorer-6-fixes-the-box-if-asked">Internet Explorer 6 fixes the box, if asked</a></li>
+          <li><a href="#the-box-model-hack-spreads">The Box Model Hack spreads</a></li>
+          <li><a href="#where-the-two-box-models-went">Where the two box models went</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<pre tabindex="0"><code>div.content {
+  width:400px;
+  voice-family: "\"}\"";
+  voice-family:inherit;
+  width:300px;
+}</code></pre>
+
+<p>The rule is the working part of <a href="https://tantek.com/CSS/Examples/boxmodelhack.html">a page</a> on Tantek Çelik's site, finished in March 2001. A browser that parses CSS properly sets a width of 400 pixels, gives <code>voice-family</code> (a property <a href="https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">CSS2 defined</a> for aural style sheets) a peculiar string, sets it back to <code>inherit</code>, and then replaces the width with 300. Internet Explorer 5 and 5.5 for Windows take the brace inside the string for the end of the rule and never see the last line, so they keep 400. The two numbers produce the same box. The box on the page has 20 pixels of border and 30 of padding on each side, and the Windows browser counted those as part of the width where every other browser added them on.</p>
+
+<p>Çelik was development lead for Tasman, the engine inside Internet Explorer 5 for the Macintosh, from 1998 to 2000, and in March 2001 was still at Microsoft, leading work on a later Tasman for its TV products group; the titles are from <a href="https://tantek.com/projects/resume.html">Çelik's own résumé</a>. Internet Explorer on the Mac already measured a box the way the specification said. The hack was for the other Internet Explorer.</p>
+
+<h2 id="one-company-two-box-models">One company, two box models</h2>
+
+<p><a href="https://www.w3.org/TR/CSS1/">CSS1</a>, a W3C Recommendation since December 1996, defines the width of an element as "the width of the content", with padding, border and margin added around it. Declare a box 300 pixels wide with the hack page's border and padding and it occupies 400. Internet Explorer 5 for Windows drew it 300 across and took the border and padding out of the inside, leaving 200 for the content. Add up your column widths for one kind of browser and the layout was a hundred pixels out in the other.</p>
+
+<p>The plainest statement of the difference came from inside Microsoft. In October 1999 a poster on the W3C's www-style list supposed that <code>box-sizing</code>, a property in the CSS3 drafts, had been invented because of Internet Explorer. Çelik <a href="https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">answered</a> that it hadn't: it came from the user-interface draft, for buttons and other controls whose borders belong to the operating system, and the credit was Peter Linss's. One of its values, <code>border-box</code>, did happen to describe how Internet Explorer for Windows treated width and height by default. Internet Explorer for the Mac, Çelik went on, followed CSS1, and then came a stage direction:</p>
+
+<blockquote>
+<p>(ducks while angry web authors throw overripe fruit at the implementor for being inconsistent from WinIE)</p>
+</blockquote>
+
+<p>The message is signed from Tasman Development, Microsoft Corporation. Microsoft was shipping both box models at once, one per operating system, and the implementor of the conforming one was the one bracing for fruit. Who decided that the Windows browser should measure that way, and why, I could not find anyone at Microsoft saying. The same message notes that <code>border-box</code> also describes how HTML's own <code>WIDTH</code> and <code>HEIGHT</code> attributes were popularly implemented, which may be the reason; that is my inference, not Microsoft's account.</p>
+
+<h2 id="the-doctype-switch-in-the-mac-browser">The doctype switch in the Mac browser</h2>
+
+<p>A browser maker that corrects its box model breaks every page whose numbers were chosen to suit the old one. The way out came from Todd Fahrner, whose suggestion to Mozilla's layout list is preserved in <a href="https://www.w3.org/html/wg/wiki/DoctypeSwitching">the W3C's history of the idea</a>: ship two rendering systems, keep the old one for old content, and "Pay attention to the DOCTYPE."</p>
+
+<p>Çelik built that switch into Internet Explorer 5 for the Mac, which shipped in March 2000. With no doctype, or an old one, it imitated Internet Explorer for Windows, box model included; with a strict one it followed CSS1. <a href="https://tantek.com/notes/doctypeswitching.html">Çelik's notes</a> from August 1999 say the imitation's rules "are not for the sake of authors. The quirky behaviors are there for the sake of users", whose old pages should go on looking as their authors meant.</p>
+
+<h2 id="three-versions-of-one-hack">Three versions of one hack</h2>
+
+<p>In February 2001 Jeffrey Zeldman was rebuilding A List Apart without layout tables and <a href="https://alistapart.com/article/journey/">writing up the experience</a>, in an article dated 16 February that now reads as Zeldman rewrote it on 7 April. The first attempt looked right in Internet Explorer 5 for Windows and grew scrollbars in Internet Explorer 5 for the Mac, Netscape 6 and Opera 5. Zeldman's diagnosis was that those three were correct and the fault was shared: "I didn't understand the CSS box model correctly (and neither did IE5/Win)." A deliberately wrong width of 67% made the Windows browser draw the column at roughly the 52% it should have been, which took 14 hours to work out. Then a second rule gave the true figure to better browsers through a CSS2 child selector, which the Windows browser did not understand and skipped:</p>
+
+<pre tabindex="0"><code>body&gt;#content {
+ width: 52%;
+    padding: 35px 5% 100px 10%;
+ }</code></pre>
+
+<p>The article credits the trick to "Anonymous Donor A", one of two unnamed CSS experts. Çelik's <a href="https://tantek.com/log/2006/03.html">log entry of March 2006</a>, written from an email archive, says the suggestion was Çelik's. In print it lasted a day. On 17 February Anil Dash pointed out what A List Apart's home page looked like in a browser that had the box model right but had never heard of the child selector: it read the deliberately wrong width, believed it and went no further. The entry adds that Internet Explorer 4.5 for the Mac, "a browser I had worked on", was another such browser, and then one word: "Oops."</p>
+
+<p>The second version swapped the selector for a parsing bug in Internet Explorer 5.0 for Windows, and held for two weeks. On Saturday 3 March Fahrner found that Internet Explorer 5.5 had fixed the bug. The third version was done before midnight.</p>
+
+<p>Çelik went looking where parsing bugs were already laid out in rows: section 7.1 of the W3C's CSS1 test suite, a page of deliberately strange style rules that checks whether a browser throws away what it doesn't understand and carries on. The résumé says Tasman was the first engine to pass that suite. With Fahrner's help Çelik found one test that upset both Windows versions:</p>
+
+<pre tabindex="0"><code>P.twentyb {rotation-code: "\"}\""; color: green;}</code></pre>
+
+<p>There is no property called <code>rotation-code</code>. <a href="https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">The test page</a> says the paragraph "should be green, because only the first declaration is invalid": a correct parser discards the nonsense, string and all, and reads on to the colour. Internet Explorer 5, in the words of a comment in <a href="https://tantek.com/CSS/Examples/boxmodelhack.css">the hack's style sheet</a>, "prematurely closes the rule".</p>
+
+<p>Çelik also wanted the hack to be valid CSS, so the invented property gave way to "an abandoned CSS2 property which accepted arbitrary string values", as <a href="https://tantek.com/log/2005/11.html">a later entry</a> puts it. At 11pm Pacific time, having tested in five browsers and expecting Internet Explorer 6 to fix both the parsing bug and the box model, Çelik mailed the result to Fahrner and Zeldman. The page adds one more rule after the hack, <code>html&gt;body .content {width:300px;}</code>, for browsers that understand CSS2 selectors but share the Windows parsing bug: the "be nice to Opera 5" rule. The child selector that failed as the hack came back as its safety net.</p>
+
+<h2 id="internet-explorer-6-fixes-the-box-if-asked">Internet Explorer 6 fixes the box, if asked</h2>
+
+<p>Later that month Microsoft released a public preview of Internet Explorer 6, and with it an MSDN article by Lance Silver with a section headed "Fix the Box Instead of Thinking Outside It". Earlier versions, Silver wrote, did not comply with the CSS1 box model. The new one measured width the CSS1 way on one condition: the page had to begin with a <code>!DOCTYPE</code> that switched on what Silver called standards-compliant mode. Every other page got the old arithmetic, and the article offers that as the good news: "you're unlikely to experience any significant compatibility problems with applications you developed for earlier versions of Internet Explorer."</p>
+
+<p>Silver's table of which doctypes flip the switch is close to the rules Çelik had written down for the Mac. No doctype: off. HTML 4.0 Strict: on. An unrecognised doctype: on. HTML 4.0 Transitional: on if the declaration includes the DTD's URL, off if it doesn't. Çelik <a href="https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">wrote in 2003</a> that Internet Explorer 6 "largely adopted" the Mac switch. Çelik was not a neutral witness, but the rules bear that out.</p>
+
+<p>Silver was writing for people with applications to keep running. The article tells anyone who built one for an earlier version to make sure its doctype does not switch the new mode on, and warns against the new mode for "content that is fixed in nature, such as content that is stored on a CD", since rendering there might change in later versions. The mode named for the standard came without a guarantee, and the advice for anything meant to last was to stay out of it.</p>
+
+<h2 id="the-box-model-hack-spreads">The Box Model Hack spreads</h2>
+
+<p>The hack travelled further than a page of test boxes had any right to. By February 2004 Anne van Kesteren could <a href="https://annevankesteren.nl/2004/02/box-model">write</a> that "(almost) every commercial site has at least one CSS hack, a box model hack". The same piece carries the catch: the hack's numbers only came out right if Internet Explorer 6 was in standards mode.</p>
+
+<p>That made the doctype a trap. An addendum to Çelik's page dated 4 April 2002 records that Prerit Bhakta had noticed a page beginning with <code>&lt;?xml version="1.0"?&gt;</code> put Internet Explorer 6 back on the old box model, and advises leaving the line out. In Çelik's Mac browser the same line had meant strict. An <a href="https://learn.microsoft.com/en-us/previous-versions/aa980987(v=msdn.10)">MSDN article on Internet Explorer 7</a> by Markus Mielke and Dave Massy later called the behaviour a bug, introduced it with "Sadly", and said version 7 had fixed it.</p>
+
+<p>Çelik was uneasy about what the hack started. In November 2005 an entry titled "Pandora's Box (Model) of CSS Hacks And Other Good Intentions" traced a line from it to a generalised version that hid whole style sheets from Internet Explorer 5, and from there to hacks for nearly every browser, many of them breaking rules Çelik had kept in mind in 2001 and never written down. One rule was that a hack should be valid. Another was that it should be ugly, the ugliness serving as "a reminder to dispose of them when no longer necessary". By that standard the line with the string in it is a complete success.</p>
+
+<h2 id="where-the-two-box-models-went">Where the two box models went</h2>
+
+<p>The Windows model became a CSS property. <code>box-sizing</code>, the property from the 1999 thread, lets an author ask for either arithmetic one element at a time. Zeldman had conceded the appeal in 2001: "The way IE5/Win works seems preferable in many ways, but it's wrong." In 2012 Paul Irish <a href="https://www.paulirish.com/2012/box-sizing-border-box-ftw/">recommended</a> applying <code>border-box</code> to every element on a page, on the grounds that a box declared 200 pixels wide ought to be 200 pixels wide. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing">MDN's page on the property</a> now says browsers apply it by default to tables, buttons and several form controls. The initial value is <code>content-box</code>, so CSS1 kept the default and the Windows arithmetic got the recommendation.</p>
+
+<p>The switch outlived the browsers it was built for. Henri Sivonen's <a href="https://hsivonen.fi/doctype/">reference on doctypes and browser modes</a> describes the quirks mode of Internet Explorer 6 to 9 as "effectively frozen IE 5.5", and says versions 10 and 11 kept that imitation beside a newer quirks mode built to match other browsers. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">MDN</a> says that the only purpose of <code>&lt;!doctype html&gt;</code> today is to switch quirks mode off, and that no browser ever used a doctype for anything except choosing a rendering mode.</p>
+
+<p>Microsoft's advice and Çelik's ended up nearly word for word the same. Internet Explorer 7 changed strict mode and fixed parser bugs that later hacks depended on, pages broke, and the Mielke and Massy article is the guide to the damage. Its first guideline for anyone who must use a filter reads: "Target ONLY 'older than current' (frozen or abandoned) versions of browsers." Çelik's entry of November 2005 has "Target ONLY older/frozen/abandoned versions". The article adds that filters aimed only at Internet Explorer 5.5 and earlier are relatively safe, which is a fair description of the Box Model Hack. The hacks that broke were aimed at the browser of the day, and what Microsoft did about that in Internet Explorer 8 is <a href="../ie8-targeting/">the story of a meta tag</a>.</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>The Box Model Hack was a Microsoft engineer's patch for a Microsoft browser: the former lead of the Mac browser's engine making the Windows browser's boxes come out like the Mac's, with a bug the W3C's test suite had been written to catch. I read it as a colleague's fix, and a careful one: valid, tested in five browsers and aimed at browsers that were about to be replaced. Microsoft's own fix is the part that lasted. Internet Explorer 6 put a correct box beside the old one and let the first line of the page choose between them, so that nothing old broke and nothing old had to be fixed. The web kept both: every browser has a quirks mode, and the measurement Zeldman called preferable but wrong is one declaration away.</p>
+
+<p>Under the test box on Çelik's page are two bars for comparison, a red one 300 pixels long and a blue one 400. The text says the box should be as wide as the blue bar.</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>The hack's three versions, their dates and the 11pm timestamp come from Tantek Çelik's own log entries of 2005 and 2006, written from an email archive. I found no independent record, and no copy of the hack page from 2001 that I could open. The log does not say which parsing bug the second version used.</li>
+    <li>Zeldman's article is dated 16 February 2001 but survives only as the rewrite of 7 April, so the percentages, the 14 hours and the credit to &quot;Anonymous Donor A&quot; are as the page reads now, not necessarily as it read that day. The article never names the donor; that the child-selector suggestion was Çelik's is Çelik's own later statement.</li>
+    <li>I could not open Lance Silver's MSDN article on Microsoft's site. I read a third-party copy posted in 2025, have not linked it, and could not check its wording against the original. That the Internet Explorer 6 preview came out in March 2001 rests on that article's date and on Wikipedia's release table; the fact check found a news address dated 22 March 2001 that would not open for me.</li>
+    <li>I found no statement from Microsoft on who chose the Windows box model or why. The suggestion that it followed HTML's WIDTH and HEIGHT attributes is my inference from Çelik's 1999 message.</li>
+    <li>Çelik's titles and dates at Microsoft, and the claim that Tasman was the first engine to pass the CSS1 test suite, come from Çelik's own résumé. That Çelik built the doctype switch in Internet Explorer 5 for the Mac rests on Çelik's notes and a W3C wiki page, and the same wiki page is my only source for Todd Fahrner's suggestion; I could not find the mailing-list post.</li>
+    <li>The style sheet comment on how Internet Explorer 5 misreads the string, the test page and the CSS1 text are today's copies (the style sheet is marked 2001 to 2006, the specification is the 2008 revision). I did not run the rule in Internet Explorer 5.</li>
+    <li>Peter-Paul Koch's QuirksMode page says Internet Explorer 6 was meant to fall back to quirks mode after an XML prolog, so that a valid page could stay there; I followed Microsoft's 2006 article, which calls it a bug. The copy of that article I read is the September 2006 update, so I cannot say whether its guideline on filters was in the January text.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://tantek.com/CSS/Examples/boxmodelhack.html">Box Model Hack</a>, Tantek Çelik, 2001, with addenda to 2005 <a class="archived" href="https://web.archive.org/web/20261106011507/http://tantek.com/CSS/Examples/boxmodelhack.html">(archived)</a></li>
+    <li><a href="https://tantek.com/CSS/Examples/boxmodelhack.css">boxmodelhack.css, the page's style sheet and its comments</a>, Tantek Çelik, 2001 to 2006 <a class="archived" href="https://web.archive.org/web/20261106160427/http://tantek.com/CSS/Examples/boxmodelhack.css">(archived)</a></li>
+    <li><a href="https://tantek.com/log/2006/03.html">Five Year Hackiversaries</a>, Tantek Çelik, 2006 <a class="archived" href="https://web.archive.org/web/20250419051448/http://tantek.com/log/2006/03.html">(archived)</a></li>
+    <li><a href="https://tantek.com/log/2005/11.html">Pandora's Box (Model) of CSS Hacks And Other Good Intentions</a>, Tantek Çelik, 2005 <a class="archived" href="https://web.archive.org/web/20260923084153/http://tantek.com/log/2005/11.html">(archived)</a></li>
+    <li><a href="https://tantek.com/notes/doctypeswitching.html">Quirk/Compat vs. Strict: notes on doctype switching in Internet Explorer 5 for the Macintosh</a>, Tantek Çelik, 1999 to 2000 <a class="archived" href="https://web.archive.org/web/20200204085629/https://tantek.com/notes/doctypeswitching.html">(archived)</a></li>
+    <li><a href="https://tantek.com/projects/resume.html">Résumé</a>, Tantek Çelik, 2010 <a class="archived" href="https://web.archive.org/web/20261023185518/https://tantek.com/projects/resume.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">Re: Unlogical width with percentages</a>, Tantek Çelik, www-style mailing list, 1999 <a class="archived" href="https://web.archive.org/web/20251008133250/https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">(archived)</a></li>
+    <li><a href="https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">Re: CSS and Standards-Compliance mode in IE6</a>, Tantek Çelik, www-style mailing list, 2003 <a class="archived" href="https://web.archive.org/web/20250709135740/https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">(archived)</a></li>
+    <li><a href="https://alistapart.com/article/journey/">From Table Hacks to CSS Layout: A Web Designer's Journey</a>, Jeffrey Zeldman, A List Apart, 2001</li>
+    <li><a href="https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">CSS1 Test Suite: 7.1 Forward-Compatible Parsing</a>, W3C <a class="archived" href="https://web.archive.org/web/20250516004455/https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">(archived)</a></li>
+    <li><a href="https://www.w3.org/TR/CSS1/">Cascading Style Sheets, level 1</a>, W3C, 1996, revised 2008 <a class="archived" href="https://web.archive.org/web/20261105224747/https://www.w3.org/TR/CSS1/">(archived)</a></li>
+    <li><a href="https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">CSS2, section 19: Aural style sheets</a>, W3C, 1998 <a class="archived" href="https://web.archive.org/web/20261029223438/https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">(archived)</a></li>
+    <li><a href="https://www.w3.org/html/wg/wiki/DoctypeSwitching">DoctypeSwitching</a>, W3C HTML Working Group wiki, 2010 <a class="archived" href="https://web.archive.org/web/20250617083504/https://www.w3.org/html/wg/wiki/DoctypeSwitching">(archived)</a></li>
+    <li>"CSS Enhancements in Internet Explorer 6 Public Preview", Lance Silver, Microsoft, MSDN, March 2001, read in a third-party copy and not linked</li>
+    <li><a href="https://learn.microsoft.com/en-us/previous-versions/aa980987(v=msdn.10)">Cascading Style Sheet Compatibility in Internet Explorer 7</a>, Markus Mielke and Dave Massy, Microsoft, 2006</li>
+    <li><a href="https://annevankesteren.nl/2004/02/box-model">Box Model</a>, Anne van Kesteren, 2004 <a class="archived" href="https://web.archive.org/web/20251207020900/https://annevankesteren.nl/2004/02/box-model">(archived)</a></li>
+    <li><a href="https://hsivonen.fi/doctype/">Activating Browser Modes with Doctype</a>, Henri Sivonen, 2000, updated to 2020 <a class="archived" href="https://web.archive.org/web/20261117103646/https://hsivonen.fi/doctype/">(archived)</a></li>
+    <li><a href="https://www.paulirish.com/2012/box-sizing-border-box-ftw/">* { Box-sizing: Border-box } FTW</a>, Paul Irish, 2012 <a class="archived" href="https://web.archive.org/web/20261117212312/https://www.paulirish.com/2012/box-sizing-border-box-ftw/">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing">box-sizing</a>, MDN <a class="archived" href="https://web.archive.org/web/20261117181123/https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing">(archived)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">Understanding quirks and standards modes</a>, MDN <a class="archived" href="https://web.archive.org/web/20261105114457/https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">(archived)</a></li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+The+Box+Model+Hack%3A+two+Internet+Explorers%2C+one+width&amp;body=Essay%3A+https%3A%2F%2Fderek.io%2Fnostalgiajs%2Fessays%2Fbox-model-hack%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/box-model-hack.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/box-model-hack.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../ie8-targeting/">X-UA-Compatible: the default that lasted 42 days</a> <span>Browsers and the platform · 2008 to 2014</span></li>
+        <li><a href="../ie6-funeral/">The IE6 funeral: campaigning to kill a browser</a> <span>People and culture · 2008 to 2016</span></li>
+        <li><a href="../css-potential/">The 1998 CSS wish list: item 28 and the fifteen-year wait</a> <span>Browsers and the platform · 1998 to 2016</span></li>
+      </ul>
+      <p><a href="../../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../../"><img src="../../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · Essays on the Early Web · <a href="../../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>

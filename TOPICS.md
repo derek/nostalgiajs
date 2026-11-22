@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- IE6: the box model, `hasLayout` and conditional comments
 - CSS Zen Garden (2003) and the tables-versus-CSS argument
 - A List Apart, "To Hell with Bad Browsers" and the Web Standards Project: developers lobbying browser makers
 - The Firefox 1.0 New York Times ad (2004): users paying to advertise a browser
@@ -22,6 +21,7 @@ Aim for about one people-and-culture essay in every three, so the collection is 
 
 ### Technology
 
+- `hasLayout` and IE conditional comments: the other half of the IE6 CSS story, left out of the box-model-hack essay. Needs a protagonist (Holly Bergevin and John Gallant, "On Having Layout", or the IE team adding conditional comments in IE5)
 - ViolaWWW and the Eolas patent (1993 to 2013): Pei-Yuan Wei gives away a browser that runs embedded programs, tells Michael Doyle on www-talk in 1995 that the patent on that idea should not stick, and waits through a $520 million verdict and IE's "click to activate" for a 2012 Texas jury to agree; the 2001 W3C patent policy fight is the "why". Research notes in `research/2026-11-18/`; Wei's own account of the case has not been opened yet
 - robots.txt (1994): Martijn Koster posts a proposal to www-talk on 25 February 1994 after crawlers hammer servers; the file starts life as `/RobotsNotWanted.txt`, Roy Fielding pushes for `/spiders.txt` in a June vote because he needs a decision "within the next 24 hours" to finish a paper, and it becomes an IETF standard only in 2022, just as AI crawlers arrive. The surprise: Charlie Stross's famous "I necessitated it" story doesn't fit the dates, since Koster's earliest emails from Stross are 7 March 1994, ten days after the proposal, and Koster points to a September 1993 incident instead. Write it as memory against mail archive, not a debunking. *eBay v. Bidder's Edge* (2000) is the middle act. Research notes in `research/2026-11-18/` (opened: www-talk 1994, robotstxt.org, Koster's 2019 post, Stross, RFC 9309; not opened: the comp.infosystems.www thread and Koster's 1993 "Guidelines for Robot Writers"). The restored www-talk archive at `lists.w3.org/Archives/Public/www-talk/` (see the W3C post of 28 October 2026) now has Putz's 1993 "WWW robots should be identified" and Fielding's MOMspider RFC to open as primary sources
 - Image rollovers and `MM_swapImage`: Dreamweaver writes your JavaScript
