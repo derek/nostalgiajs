@@ -1,0 +1,113 @@
+<p class="lede">The CSS Zen Garden was one web page that anybody could redesign and nobody could edit, and where its sentences landed on your screen depended on which design you had picked.</p>
+
+<p>The rule for contributors was "You may modify the style sheet in any way you wish, but not the HTML." The Garden opened in May 2003 as a gallery with one exhibit: a single HTML document describing the project, a sidebar listing style sheets by name, and links that reloaded the same document wearing a different one.</p>
+
+<p>Dave Shea, the designer who built the site, <a href="https://meyerweb.com/eric/projects/zengarden/">pitched it to contributors</a> under the heading "Benefits". They would get recognition, inspiration and something to point at when making the case for CSS at work. The pitch ends with a forecast for the gallery itself: "One day this gallery will be a historical curiosity; that day is not today."</p>
+
+<h2>Wired, ESPN and the special cases</h2>
+
+<p>Making the case was the hard part of the job in 2003. The general view, in Shea's <a href="https://csszengarden.com/pages/about/">account of those years</a>, was that CSS could only produce "boxy and boring design". The people who understood it were rarely designers, designers had largely not taken it up, and the few who knew better could not talk their clients and teams into the risk.</p>
+
+<p>There were big sites to point at. Wired News relaunched late on 10 October 2002, Pacific time, with its pages made, as design director Douglas Bowman <a href="https://stopdesign.com/journal/2002/10/11/finally-were-live.html">wrote the next day</a>, to "rely entirely on CSS for every design, format, and presentation detail".</p>
+
+<p>The examples after that were less tidy. ESPN.com redesigned its home page in February 2003, and Adrian Holovaty's <a href="https://holovaty.com/writing/192/">report</a> is titled "ESPN home page now has tableless layout (almost)": the tableless version was the lite home page, and the full one kept a few layout tables that Holovaty put down to MSN's navigation and the ad system. In April Cingular Wireless dropped tables from nearly every page, and Bowman, a Cingular customer, <a href="https://stopdesign.com/journal/2003/04/18/wireless-and-tableless.html">reviewed the result</a>. It looked good, took "forever" to load, failed validation and crashed the reviewer's copy of Netscape 4.</p>
+
+<p>Eric Meyer, <a href="https://meyerweb.com/eric/thoughts/2013/05/08/resurrected-landmarks/">looking back ten years later</a>, put the mood in a parenthesis: "The Wired and ESPN designs were held to be special cases." A designer shown them in the spring of 2003 could fairly add that famous sites had resources an agency job did not, and that tables worked in every browser the client owned.</p>
+
+<h2>One rule, tried in February 2002</h2>
+
+<p>The Garden's rule was fifteen months old when Shea used it. In February 2002 Chris Casciano set out to restyle a site's index page every day for a month, under the name <a href="https://placenamehere.com/neuralustmirror/200202/">Daily CSS Fun</a> and a single rule: the style could change from day to day and the HTML underneath could not. An update on 27 February admits to being "pretty bored of looking at this same document over and over again" and caps the month at 20 layouts instead of 28.</p>
+
+<p>Shea's About page credits Daily CSS Fun, along with Jeffrey Zeldman's urging that people who wanted change stop describing what CSS could do and show it. What Shea added to Casciano's rule was other people, chosen by Shea. The Garden's page said the neat tricks so far had come from coders and that designers had yet to make their mark. It asked contributors not to send half-finished work and promised to host only the designs Shea picked, which in the end meant <a href="https://csszengarden.com/pages/alldesigns/">a numbered list</a> that stops at 221, out of the thousands Shea <a href="https://daveshea.com/projects/zen/">counts</a> as submitted from over 30 countries. Its instructions for taking part begin "Graphic artists only please."</p>
+
+<h2>Five designs by one gardener</h2>
+
+<p>Simon Willison, <a href="https://simonwillison.net/2003/May/8/cssZenGarden/">writing on the afternoon of 8 May</a>, counted "5 radically different designs all using exactly the same markup". The gallery was then at mezzoblue.com/zengarden/, on Shea's site, and its first five style sheets, numbered 001 to 005, are each stamped "Added: May 7th, 2003". All five are signed by Dave Shea: 'Tranquille', 'Salmon Cream Cheese', 'Stormweather', 'arch4.20' and 'Blood Lust'.</p>
+
+<p>The comments Shea left in those files read like notes from someone hanging a show alone. Tranquille, the default, "almost didn't make the cut". The kanji in its top left corner were put together from the characters for "beginning", "complete" and "skill", and <a href="https://csszengarden.com/001/001.css">the comment</a> concedes that anyone who can read them will probably say they make no sense, and signs off: "It's a stretch."</p>
+
+<p>Then the people Shea had been reading turned up. Bowman <a href="https://stopdesign.com/journal/2003/05/08/zen-inspiration.html">posted about the Garden</a> on 8 May, in a piece that ends by saying it "makes me want to contribute", and Zeldman's <a href="https://zeldman.com/daily/0503b.shtml">Daily Report</a> linked it the day after. Style sheet 006, 'Wicked Grove' by D. Keith Robinson, is the first with another name on it, and 010 is Dan Cederholm's. In the copy of the page kept on Eric Meyer's site, the newest design listed is 017, 'Golden Mean' by Douglas Bowman. The design director of the best-known special case had sent a style sheet to a stranger's gallery.</p>
+
+<p>Who the stranger was came out in June, when Tim Bray had lunch with Shea and <a href="https://www.tbray.org/ongoing/When/200x/2003/06/25/DaveShea">wrote it up</a>. Bray had assumed the Garden's author was "some distinguished veteran of the web design wars". Across the table was a designer from Kamloops, a couple of years into living in Vancouver, who had never taken a course in any of the technology and stayed up late working on such things for their own sake. Shea's employer, a small design firm, did not know the Garden existed.</p>
+
+<h2>What the markup admitted</h2>
+
+<p>The one file nobody could edit carried a caveat from its author. Above the <code>body</code> tag, in the source of Meyer's copy:</p>
+
+<pre tabindex="0"><code>&lt;!--
+
+
+	This xhtml document is marked up to provide the designer with the maximum possible flexibility.
+	There are more classes and extraneous tags than needed, and in a real world situation, it's more
+	likely that it would be much leaner.
+
+	However, I think we can all agree that even given that, we're still better off than if this had been
+	built with tables.
+
+
+--&gt;</code></pre>
+
+<p>The extraneous tags are easy to find. Every heading and every paragraph has its text wrapped in a <code>span</code> with no attributes. Paragraphs are numbered within each section, <code>class="p1"</code>, <code>class="p2"</code> and so on. And after the last of the content come six empty elements:</p>
+
+<pre tabindex="0"><code>&lt;!-- These extra divs/spans may be used as catch-alls to add extra imagery. --&gt;
+&lt;div id="extraDiv1"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv2"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv3"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div id="extraDiv4"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv5"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv6"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</code></pre>
+
+<p>The padding was the price of the rule. A designer who wanted one more picture on the page than the content had elements for could not add an element, so Shea supplied spares in advance. The spans, by my reading, were there so that a style sheet could hide a heading's words and show a picture of them instead, set in a typeface the visitor didn't have. The Garden's <a href="https://csszengarden.com/pages/faq/">FAQ</a> now gives that habit as a reason the site can't call itself fully accessible.</p>
+
+<p>The comment is the most disarming thing in the project. It concedes what a critic would say, in the place a critic would look, and keeps the one claim Shea needed.</p>
+
+<p>The style sheets made admissions too. Beyond the rule about the HTML, the page's one real requirement was that the CSS validate, and it warned that getting valid CSS to display alike everywhere "becomes maddening when a fix for one leads to breakage in another". That left room for the <a href="../box-model-hack/">Box Model Hack</a>, which was valid by design.</p>
+
+<p>Shea's <a href="https://csszengarden.com/003/003.css">Stormweather</a> uses the hack's two <code>voice-family</code> lines to give Internet Explorer 5 one height and other browsers another, Cederholm's design uses them for a width, and Bowman's for a font size. In design 012, by Josh Ambrutis, <a href="https://csszengarden.com/012/012.css">a comment</a> that begins "Stupid IE5, almost made it without a hack" sits above a shorter trick for the same browser.</p>
+
+<h2>The case the gallery made to designers</h2>
+
+<p>The Garden answered designers in pictures. Its designs lean hard on images, and Shea <a href="https://www.creativebloq.com/design/dave-shea-return-css-zen-garden-5135652">told .net magazine</a> in 2013 that this was one of the most persistent criticisms: the site "showed what CSS could do with images, but didn't necessarily show what CSS could do on its own". Shea's defence was that CSS at the time could not do much beyond simple layout and text formatting. I'd add that the complaint mistakes the audience. A graphic artist deciding whether to learn CSS wanted to know whether the work done in Photoshop would survive the trip to a browser, and five style sheets full of background images said it would.</p>
+
+<p>The fixed document made the comparison fair. Every design had the same words in the same order in the same tags, so whatever differed between two of them was the style sheet's doing, and nobody could say the handsome one had easier content.</p>
+
+<p>And the style sheets could be read. Contributors kept the copyright in their graphics and released their CSS under a Creative Commons licence, in the page's words "so that others may learn from your work", and the sidebar linked straight to the current design's CSS file. <a href="../view-source/">View Source</a> had always taught HTML this way, and the Garden did the same for layout.</p>
+
+<h2>What survives of the Garden</h2>
+
+<p>Shea let the Garden go quiet around 2008, on the view that the argument was over. Shea told .net that for a long time the site's reason for existing, convincing the world that web standards were a good thing, was also the reason a modern version wasn't necessary.</p>
+
+<p>For its tenth anniversary the Garden reopened, as a reference for people learning the trade. Shea gave .net two reasons for the change of mind: Jenn Lukas's mock indignation that nothing was planned for the birthday, and the thought that people entering the industry were using the Garden as a reference and finding XHTML and CSS2 there. In May 2013 Shea rewrote the one HTML file as HTML5, put the project on GitHub and took submissions again. <a href="https://csszengarden.com/">The current page</a> has a new comment above its <code>body</code> tag, which starts "View source is a feature, not a bug." and goes on to the submission guidelines.</p>
+
+<p>The extra divs survived the rewrite, with a note attached. The 2013 source tells designers to style with classes and not ids, to reach unclassed elements with <code>:first-child</code> and <code>:nth-child</code>, to hang extra imagery on <code>::before</code> and <code>::after</code> and to put several background images on one element. The spans around the text are gone. The six divs come last in the file under new names, <code>extra1</code> to <code>extra6</code>, below a comment that calls them superfluous and says they "only remain for historical design compatibility. They might go away one day." Read together, the two source files are an inventory of what CSS lacked in 2003.</p>
+
+<p>New designs are now turned away, politely. The FAQ's answer to whether the Garden is accepting submissions is "Probably not." <a href="https://csszengarden.com/pages/submit/">The submissions page</a> says that adding designs is no longer necessary, only fun.</p>
+
+<h2>The takeaway</h2>
+
+<p>The Zen Garden put its argument to designers in a form they could judge: finished designs, side by side on one document, with the style sheets open to read. What that showed was narrow and useful, that someone who drew for a living could get the drawing onto a web page without a table. The part I admire most is in the source. Shea padded the markup to make the trick possible and said so in a comment where any critic would find it, and the style sheets carried the browser hacks of the day in plain view.</p>
+
+<p>The sentence about the historical curiosity is not on the page any more. The Benefits paragraph now describes the site as inspiration, a learning tool and a "gallery of future techniques". The Garden said early on that it expected to become a curiosity, and by Shea's account that is how it went: the additions ended once nobody needed convincing, and the site reopened only when there was something different for it to teach.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://csszengarden.com/">CSS Zen Garden</a>, Dave Shea, 2003, as rebuilt in 2013</li>
+    <li><a href="https://meyerweb.com/eric/projects/zengarden/">css Zen Garden: The Beauty in CSS Design (local)</a>, a copy of the Garden page and its HTML source on Eric Meyer's site, undated</li>
+    <li><a href="https://csszengarden.com/pages/about/">CSS Zen Garden: About</a>, Dave Shea, 2023</li>
+    <li><a href="https://csszengarden.com/pages/faq/">CSS Zen Garden: FAQ</a>, Dave Shea</li>
+    <li><a href="https://csszengarden.com/pages/submit/">CSS Zen Garden: Submit a Design</a>, Dave Shea, 2023</li>
+    <li><a href="https://csszengarden.com/pages/alldesigns/">CSS Zen Garden: All Designs</a>, Dave Shea</li>
+    <li><a href="https://csszengarden.com/001/001.css">Style sheet 001, 'Tranquille'</a>, Dave Shea, 2003</li>
+    <li><a href="https://csszengarden.com/003/003.css">Style sheet 003, 'Stormweather'</a>, Dave Shea, 2003</li>
+    <li><a href="https://csszengarden.com/012/012.css">Style sheet 012, 'TechnOhm'</a>, Josh Ambrutis, 2003</li>
+    <li><a href="https://daveshea.com/projects/zen/">CSS Zen Garden</a>, project page, Dave Shea</li>
+    <li><a href="https://stopdesign.com/journal/2002/10/11/finally-were-live.html">Finally, we're live</a>, Douglas Bowman, 2002</li>
+    <li><a href="https://holovaty.com/writing/192/">ESPN home page now has tableless layout (almost)</a>, Adrian Holovaty, 2003</li>
+    <li><a href="https://stopdesign.com/journal/2003/04/18/wireless-and-tableless.html">Wireless AND tableless</a>, Douglas Bowman, 2003</li>
+    <li><a href="https://placenamehere.com/neuralustmirror/200202/">Daily CSS Fun</a>, Chris Casciano, 2002</li>
+    <li><a href="https://zeldman.com/daily/0503b.shtml">The Daily Report, 9 to 13 May 2003</a>, Jeffrey Zeldman, 2003</li>
+    <li><a href="https://simonwillison.net/2003/May/8/cssZenGarden/">The CSS Zen Garden</a>, Simon Willison, 2003</li>
+    <li><a href="https://stopdesign.com/journal/2003/05/08/zen-inspiration.html">Zen inspiration</a>, Douglas Bowman, 2003</li>
+    <li><a href="https://www.tbray.org/ongoing/When/200x/2003/06/25/DaveShea">Zen Gardener</a>, Tim Bray, 2003</li>
+    <li><a href="https://meyerweb.com/eric/thoughts/2013/05/08/resurrected-landmarks/">Resurrected Landmarks</a>, Eric Meyer, 2013</li>
+    <li><a href="https://www.creativebloq.com/design/dave-shea-return-css-zen-garden-5135652">Dave Shea on the return of CSS Zen Garden</a>, .net magazine, on Creative Bloq, 2013</li>
+    <li><a href="https://en.wikipedia.org/wiki/CSS_Zen_Garden">CSS Zen Garden</a>, Wikipedia</li>
+  </ul>
+</section>

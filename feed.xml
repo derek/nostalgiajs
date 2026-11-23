@@ -6,7 +6,127 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Sun, 22 Nov 2026 22:08:02 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 23 Nov 2026 22:09:34 GMT</lastBuildDate>
+  <item>
+    <title>CSS Zen Garden: the page nobody was allowed to edit</title>
+    <link>https://derek.io/nostalgiajs/essays/zen-garden/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/zen-garden/</guid>
+    <pubDate>Mon, 23 Nov 2026 22:09:34 GMT</pubDate>
+    <description>In May 2003 Dave Shea, a designer at a small Vancouver firm, opened a gallery of one HTML page with five style sheets, all Shea's own, and a rule that nobody could touch the markup; the source admitted how much padding that took, Dan Cederholm and Douglas Bowman sent in designs anyway, and Shea let the site go quiet once its argument was won.</description>
+    <content:encoded><![CDATA[<p class="lede">The CSS Zen Garden was one web page that anybody could redesign and nobody could edit, and where its sentences landed on your screen depended on which design you had picked.</p>
+
+<p>The rule for contributors was "You may modify the style sheet in any way you wish, but not the HTML." The Garden opened in May 2003 as a gallery with one exhibit: a single HTML document describing the project, a sidebar listing style sheets by name, and links that reloaded the same document wearing a different one.</p>
+
+<p>Dave Shea, the designer who built the site, <a href="https://meyerweb.com/eric/projects/zengarden/">pitched it to contributors</a> under the heading "Benefits". They would get recognition, inspiration and something to point at when making the case for CSS at work. The pitch ends with a forecast for the gallery itself: "One day this gallery will be a historical curiosity; that day is not today."</p>
+
+<h2>Wired, ESPN and the special cases</h2>
+
+<p>Making the case was the hard part of the job in 2003. The general view, in Shea's <a href="https://csszengarden.com/pages/about/">account of those years</a>, was that CSS could only produce "boxy and boring design". The people who understood it were rarely designers, designers had largely not taken it up, and the few who knew better could not talk their clients and teams into the risk.</p>
+
+<p>There were big sites to point at. Wired News relaunched late on 10 October 2002, Pacific time, with its pages made, as design director Douglas Bowman <a href="https://stopdesign.com/journal/2002/10/11/finally-were-live.html">wrote the next day</a>, to "rely entirely on CSS for every design, format, and presentation detail".</p>
+
+<p>The examples after that were less tidy. ESPN.com redesigned its home page in February 2003, and Adrian Holovaty's <a href="https://holovaty.com/writing/192/">report</a> is titled "ESPN home page now has tableless layout (almost)": the tableless version was the lite home page, and the full one kept a few layout tables that Holovaty put down to MSN's navigation and the ad system. In April Cingular Wireless dropped tables from nearly every page, and Bowman, a Cingular customer, <a href="https://stopdesign.com/journal/2003/04/18/wireless-and-tableless.html">reviewed the result</a>. It looked good, took "forever" to load, failed validation and crashed the reviewer's copy of Netscape 4.</p>
+
+<p>Eric Meyer, <a href="https://meyerweb.com/eric/thoughts/2013/05/08/resurrected-landmarks/">looking back ten years later</a>, put the mood in a parenthesis: "The Wired and ESPN designs were held to be special cases." A designer shown them in the spring of 2003 could fairly add that famous sites had resources an agency job did not, and that tables worked in every browser the client owned.</p>
+
+<h2>One rule, tried in February 2002</h2>
+
+<p>The Garden's rule was fifteen months old when Shea used it. In February 2002 Chris Casciano set out to restyle a site's index page every day for a month, under the name <a href="https://placenamehere.com/neuralustmirror/200202/">Daily CSS Fun</a> and a single rule: the style could change from day to day and the HTML underneath could not. An update on 27 February admits to being "pretty bored of looking at this same document over and over again" and caps the month at 20 layouts instead of 28.</p>
+
+<p>Shea's About page credits Daily CSS Fun, along with Jeffrey Zeldman's urging that people who wanted change stop describing what CSS could do and show it. What Shea added to Casciano's rule was other people, chosen by Shea. The Garden's page said the neat tricks so far had come from coders and that designers had yet to make their mark. It asked contributors not to send half-finished work and promised to host only the designs Shea picked, which in the end meant <a href="https://csszengarden.com/pages/alldesigns/">a numbered list</a> that stops at 221, out of the thousands Shea <a href="https://daveshea.com/projects/zen/">counts</a> as submitted from over 30 countries. Its instructions for taking part begin "Graphic artists only please."</p>
+
+<h2>Five designs by one gardener</h2>
+
+<p>Simon Willison, <a href="https://simonwillison.net/2003/May/8/cssZenGarden/">writing on the afternoon of 8 May</a>, counted "5 radically different designs all using exactly the same markup". The gallery was then at mezzoblue.com/zengarden/, on Shea's site, and its first five style sheets, numbered 001 to 005, are each stamped "Added: May 7th, 2003". All five are signed by Dave Shea: 'Tranquille', 'Salmon Cream Cheese', 'Stormweather', 'arch4.20' and 'Blood Lust'.</p>
+
+<p>The comments Shea left in those files read like notes from someone hanging a show alone. Tranquille, the default, "almost didn't make the cut". The kanji in its top left corner were put together from the characters for "beginning", "complete" and "skill", and <a href="https://csszengarden.com/001/001.css">the comment</a> concedes that anyone who can read them will probably say they make no sense, and signs off: "It's a stretch."</p>
+
+<p>Then the people Shea had been reading turned up. Bowman <a href="https://stopdesign.com/journal/2003/05/08/zen-inspiration.html">posted about the Garden</a> on 8 May, in a piece that ends by saying it "makes me want to contribute", and Zeldman's <a href="https://zeldman.com/daily/0503b.shtml">Daily Report</a> linked it the day after. Style sheet 006, 'Wicked Grove' by D. Keith Robinson, is the first with another name on it, and 010 is Dan Cederholm's. In the copy of the page kept on Eric Meyer's site, the newest design listed is 017, 'Golden Mean' by Douglas Bowman. The design director of the best-known special case had sent a style sheet to a stranger's gallery.</p>
+
+<p>Who the stranger was came out in June, when Tim Bray had lunch with Shea and <a href="https://www.tbray.org/ongoing/When/200x/2003/06/25/DaveShea">wrote it up</a>. Bray had assumed the Garden's author was "some distinguished veteran of the web design wars". Across the table was a designer from Kamloops, a couple of years into living in Vancouver, who had never taken a course in any of the technology and stayed up late working on such things for their own sake. Shea's employer, a small design firm, did not know the Garden existed.</p>
+
+<h2>What the markup admitted</h2>
+
+<p>The one file nobody could edit carried a caveat from its author. Above the <code>body</code> tag, in the source of Meyer's copy:</p>
+
+<pre tabindex="0"><code>&lt;!--
+
+
+	This xhtml document is marked up to provide the designer with the maximum possible flexibility.
+	There are more classes and extraneous tags than needed, and in a real world situation, it's more
+	likely that it would be much leaner.
+
+	However, I think we can all agree that even given that, we're still better off than if this had been
+	built with tables.
+
+
+--&gt;</code></pre>
+
+<p>The extraneous tags are easy to find. Every heading and every paragraph has its text wrapped in a <code>span</code> with no attributes. Paragraphs are numbered within each section, <code>class="p1"</code>, <code>class="p2"</code> and so on. And after the last of the content come six empty elements:</p>
+
+<pre tabindex="0"><code>&lt;!-- These extra divs/spans may be used as catch-alls to add extra imagery. --&gt;
+&lt;div id="extraDiv1"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv2"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv3"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div id="extraDiv4"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv5"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div id="extraDiv6"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</code></pre>
+
+<p>The padding was the price of the rule. A designer who wanted one more picture on the page than the content had elements for could not add an element, so Shea supplied spares in advance. The spans, by my reading, were there so that a style sheet could hide a heading's words and show a picture of them instead, set in a typeface the visitor didn't have. The Garden's <a href="https://csszengarden.com/pages/faq/">FAQ</a> now gives that habit as a reason the site can't call itself fully accessible.</p>
+
+<p>The comment is the most disarming thing in the project. It concedes what a critic would say, in the place a critic would look, and keeps the one claim Shea needed.</p>
+
+<p>The style sheets made admissions too. Beyond the rule about the HTML, the page's one real requirement was that the CSS validate, and it warned that getting valid CSS to display alike everywhere "becomes maddening when a fix for one leads to breakage in another". That left room for the <a href="https://derek.io/nostalgiajs/essays/box-model-hack/">Box Model Hack</a>, which was valid by design.</p>
+
+<p>Shea's <a href="https://csszengarden.com/003/003.css">Stormweather</a> uses the hack's two <code>voice-family</code> lines to give Internet Explorer 5 one height and other browsers another, Cederholm's design uses them for a width, and Bowman's for a font size. In design 012, by Josh Ambrutis, <a href="https://csszengarden.com/012/012.css">a comment</a> that begins "Stupid IE5, almost made it without a hack" sits above a shorter trick for the same browser.</p>
+
+<h2>The case the gallery made to designers</h2>
+
+<p>The Garden answered designers in pictures. Its designs lean hard on images, and Shea <a href="https://www.creativebloq.com/design/dave-shea-return-css-zen-garden-5135652">told .net magazine</a> in 2013 that this was one of the most persistent criticisms: the site "showed what CSS could do with images, but didn't necessarily show what CSS could do on its own". Shea's defence was that CSS at the time could not do much beyond simple layout and text formatting. I'd add that the complaint mistakes the audience. A graphic artist deciding whether to learn CSS wanted to know whether the work done in Photoshop would survive the trip to a browser, and five style sheets full of background images said it would.</p>
+
+<p>The fixed document made the comparison fair. Every design had the same words in the same order in the same tags, so whatever differed between two of them was the style sheet's doing, and nobody could say the handsome one had easier content.</p>
+
+<p>And the style sheets could be read. Contributors kept the copyright in their graphics and released their CSS under a Creative Commons licence, in the page's words "so that others may learn from your work", and the sidebar linked straight to the current design's CSS file. <a href="https://derek.io/nostalgiajs/essays/view-source/">View Source</a> had always taught HTML this way, and the Garden did the same for layout.</p>
+
+<h2>What survives of the Garden</h2>
+
+<p>Shea let the Garden go quiet around 2008, on the view that the argument was over. Shea told .net that for a long time the site's reason for existing, convincing the world that web standards were a good thing, was also the reason a modern version wasn't necessary.</p>
+
+<p>For its tenth anniversary the Garden reopened, as a reference for people learning the trade. Shea gave .net two reasons for the change of mind: Jenn Lukas's mock indignation that nothing was planned for the birthday, and the thought that people entering the industry were using the Garden as a reference and finding XHTML and CSS2 there. In May 2013 Shea rewrote the one HTML file as HTML5, put the project on GitHub and took submissions again. <a href="https://csszengarden.com/">The current page</a> has a new comment above its <code>body</code> tag, which starts "View source is a feature, not a bug." and goes on to the submission guidelines.</p>
+
+<p>The extra divs survived the rewrite, with a note attached. The 2013 source tells designers to style with classes and not ids, to reach unclassed elements with <code>:first-child</code> and <code>:nth-child</code>, to hang extra imagery on <code>::before</code> and <code>::after</code> and to put several background images on one element. The spans around the text are gone. The six divs come last in the file under new names, <code>extra1</code> to <code>extra6</code>, below a comment that calls them superfluous and says they "only remain for historical design compatibility. They might go away one day." Read together, the two source files are an inventory of what CSS lacked in 2003.</p>
+
+<p>New designs are now turned away, politely. The FAQ's answer to whether the Garden is accepting submissions is "Probably not." <a href="https://csszengarden.com/pages/submit/">The submissions page</a> says that adding designs is no longer necessary, only fun.</p>
+
+<h2>The takeaway</h2>
+
+<p>The Zen Garden put its argument to designers in a form they could judge: finished designs, side by side on one document, with the style sheets open to read. What that showed was narrow and useful, that someone who drew for a living could get the drawing onto a web page without a table. The part I admire most is in the source. Shea padded the markup to make the trick possible and said so in a comment where any critic would find it, and the style sheets carried the browser hacks of the day in plain view.</p>
+
+<p>The sentence about the historical curiosity is not on the page any more. The Benefits paragraph now describes the site as inspiration, a learning tool and a "gallery of future techniques". The Garden said early on that it expected to become a curiosity, and by Shea's account that is how it went: the additions ended once nobody needed convincing, and the site reopened only when there was something different for it to teach.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://csszengarden.com/">CSS Zen Garden</a>, Dave Shea, 2003, as rebuilt in 2013</li>
+    <li><a href="https://meyerweb.com/eric/projects/zengarden/">css Zen Garden: The Beauty in CSS Design (local)</a>, a copy of the Garden page and its HTML source on Eric Meyer's site, undated</li>
+    <li><a href="https://csszengarden.com/pages/about/">CSS Zen Garden: About</a>, Dave Shea, 2023</li>
+    <li><a href="https://csszengarden.com/pages/faq/">CSS Zen Garden: FAQ</a>, Dave Shea</li>
+    <li><a href="https://csszengarden.com/pages/submit/">CSS Zen Garden: Submit a Design</a>, Dave Shea, 2023</li>
+    <li><a href="https://csszengarden.com/pages/alldesigns/">CSS Zen Garden: All Designs</a>, Dave Shea</li>
+    <li><a href="https://csszengarden.com/001/001.css">Style sheet 001, 'Tranquille'</a>, Dave Shea, 2003</li>
+    <li><a href="https://csszengarden.com/003/003.css">Style sheet 003, 'Stormweather'</a>, Dave Shea, 2003</li>
+    <li><a href="https://csszengarden.com/012/012.css">Style sheet 012, 'TechnOhm'</a>, Josh Ambrutis, 2003</li>
+    <li><a href="https://daveshea.com/projects/zen/">CSS Zen Garden</a>, project page, Dave Shea</li>
+    <li><a href="https://stopdesign.com/journal/2002/10/11/finally-were-live.html">Finally, we're live</a>, Douglas Bowman, 2002</li>
+    <li><a href="https://holovaty.com/writing/192/">ESPN home page now has tableless layout (almost)</a>, Adrian Holovaty, 2003</li>
+    <li><a href="https://stopdesign.com/journal/2003/04/18/wireless-and-tableless.html">Wireless AND tableless</a>, Douglas Bowman, 2003</li>
+    <li><a href="https://placenamehere.com/neuralustmirror/200202/">Daily CSS Fun</a>, Chris Casciano, 2002</li>
+    <li><a href="https://zeldman.com/daily/0503b.shtml">The Daily Report, 9 to 13 May 2003</a>, Jeffrey Zeldman, 2003</li>
+    <li><a href="https://simonwillison.net/2003/May/8/cssZenGarden/">The CSS Zen Garden</a>, Simon Willison, 2003</li>
+    <li><a href="https://stopdesign.com/journal/2003/05/08/zen-inspiration.html">Zen inspiration</a>, Douglas Bowman, 2003</li>
+    <li><a href="https://www.tbray.org/ongoing/When/200x/2003/06/25/DaveShea">Zen Gardener</a>, Tim Bray, 2003</li>
+    <li><a href="https://meyerweb.com/eric/thoughts/2013/05/08/resurrected-landmarks/">Resurrected Landmarks</a>, Eric Meyer, 2013</li>
+    <li><a href="https://www.creativebloq.com/design/dave-shea-return-css-zen-garden-5135652">Dave Shea on the return of CSS Zen Garden</a>, .net magazine, on Creative Bloq, 2013</li>
+    <li><a href="https://en.wikipedia.org/wiki/CSS_Zen_Garden">CSS Zen Garden</a>, Wikipedia</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>The Box Model Hack: two Internet Explorers, one width</title>
     <link>https://derek.io/nostalgiajs/essays/box-model-hack/</link>
@@ -106,7 +226,7 @@
     <li><a href="https://tantek.com/projects/resume.html">Résumé</a>, Tantek Çelik, 2010 <a class="archived" href="https://web.archive.org/web/20261023185518/https://tantek.com/projects/resume.html">(archived)</a></li>
     <li><a href="https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">Re: Unlogical width with percentages</a>, Tantek Çelik, www-style mailing list, 1999 <a class="archived" href="https://web.archive.org/web/20251008133250/https://lists.w3.org/Archives/Public/www-style/1999Oct/0036.html">(archived)</a></li>
     <li><a href="https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">Re: CSS and Standards-Compliance mode in IE6</a>, Tantek Çelik, www-style mailing list, 2003 <a class="archived" href="https://web.archive.org/web/20250709135740/https://lists.w3.org/Archives/Public/www-style/2003Feb/0192.html">(archived)</a></li>
-    <li><a href="https://alistapart.com/article/journey/">From Table Hacks to CSS Layout: A Web Designer's Journey</a>, Jeffrey Zeldman, A List Apart, 2001</li>
+    <li><a href="https://alistapart.com/article/journey/">From Table Hacks to CSS Layout: A Web Designer's Journey</a>, Jeffrey Zeldman, A List Apart, 2001 <a class="archived" href="https://web.archive.org/web/20261107170509/https://alistapart.com/article/journey/">(archived)</a></li>
     <li><a href="https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">CSS1 Test Suite: 7.1 Forward-Compatible Parsing</a>, W3C <a class="archived" href="https://web.archive.org/web/20250516004455/https://www.w3.org/Style/CSS/Test/CSS1/current/test71.htm">(archived)</a></li>
     <li><a href="https://www.w3.org/TR/CSS1/">Cascading Style Sheets, level 1</a>, W3C, 1996, revised 2008 <a class="archived" href="https://web.archive.org/web/20261105224747/https://www.w3.org/TR/CSS1/">(archived)</a></li>
     <li><a href="https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">CSS2, section 19: Aural style sheets</a>, W3C, 1998 <a class="archived" href="https://web.archive.org/web/20261029223438/https://www.w3.org/TR/1998/REC-CSS2-19980512/aural.html">(archived)</a></li>
@@ -4492,120 +4612,6 @@ datedisplay.setAttribute("value", dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear">Date.prototype.getYear()</a>, MDN <a class="archived" href="https://web.archive.org/web/20261101161627/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear">(archived)</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">Temporal</a>, MDN <a class="archived" href="https://web.archive.org/web/20261105215431/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">(archived)</a></li>
     <li><a href="https://github.com/tc39/proposal-temporal">Temporal proposal</a>, Ecma TC39 <a class="archived" href="https://web.archive.org/web/20261016173346/https://github.com/tc39/proposal-temporal">(archived)</a></li>
-  </ul>
-</section>]]></content:encoded>
-  </item>
-  <item>
-    <title>Where did all the old web developers go?</title>
-    <link>https://derek.io/nostalgiajs/essays/old-developers/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/old-developers/</guid>
-    <pubDate>Thu, 12 Nov 2026 02:37:49 GMT</pubDate>
-    <description>Around 2008 nobody writing JavaScript seemed to be over 40, and the industry spent a decade arguing about why. The answer was arithmetic, and the same arithmetic is running again.</description>
-    <content:encoded><![CDATA[<p class="lede">Around 2008, nobody in the room was over 40. It took the industry about ten years to work out why.</p>
-
-<pre tabindex="0"><code>var year = 2008;
-var jsBorn = 1995;
-year - jsBorn;  <span class="c">// 13</span></code></pre>
-
-<p>That subtraction is most of this essay. In 2008 the most experienced JavaScript developer on Earth had thirteen years of JavaScript, because that was all the JavaScript there had been. If you started your career with the language in 1995 at 22, you were 35. To be a 50-year-old JavaScript developer in 2008, you would have had to pick it up at 37, the year it shipped, and stay.</p>
-
-<p>Nobody did the subtraction at the time. If you wrote JavaScript for a living in 2008 and looked around the office, you saw twenty-somethings, a few people in their thirties, and a manager. The conclusion most people drew was grim: web development chews people up, and by 40 you are promoted out, pushed out, or replaced by someone who knows the new framework. The industry then argued about that conclusion for a decade, in essays and in very long comment threads, before settling on the duller and more accurate one. The argument is worth replaying, partly because the same arithmetic has started running again.</p>
-
-<h2>2007: "Young people are just smarter"</h2>
-
-<p>The era's thesis statement came from a 22-year-old. At Y Combinator's Startup School at Stanford in March 2007, Mark Zuckerberg told the audience, as <a href="https://infopackets.com/node/2114">reported at the time</a>: "I want to stress the importance of being young and technical." Then the line that outlived the talk: "Young people are just smarter. Why are most chess masters under 30?" And the explanation: "Young people just have simpler lives. We may not own a car. We may not have family. I only own a mattress."</p>
-
-<p>The quote reached a Hacker News that was about a month old. <a href="https://news.ycombinator.com/item?id=7347">The thread</a> drew 21 comments. The first reply came from Paul Graham, who ran the site and was 42: "He had a point. He just phrased it in a way that alienated a lot of people." Graham's version was that young people have "a certain energy and willingness to see things in unconventional ways," and that math "is famously a young man's game." Others pushed back. One pointed out that Paul Erdős was prolific into old age. Another argued that older people bring a creativity that improves as you watch more ideas succeed and fail.</p>
-
-<p>Look at what Zuckerberg's argument was actually made of. The headline was about intelligence, but the supporting evidence was a mattress. "Simpler lives" means no mortgage, no kids, and nowhere to be at six o'clock. That is a claim about who will work ninety-hour weeks for equity, and it describes a labor supply. Hold on to that distinction, because the next ten years of argument mostly lost it.</p>
-
-<h2>2008 to 2010: get a Plan B</h2>
-
-<p>By 2008 the phrase "it's a young man's game" had moved from mathematicians to programmers, and some people were already tired of it. In October 2008 a thirty-year-old asked the Joel on Software forum whether to get out of tech while still reasonably young. Matthew Heusser, a testing and agile writer, <a href="https://xndev.blogspot.com/2008/10/">answered on the Creative Chaos blog</a> under the title "On Being An 'Old Dude'": "'It's a young man's game' is something people should be saying at seventy-two, not thirty two." The evidence was, of all things, The Muppet Show. Its guest stars were established entertainers, and nearly all of them were in their thirties or older, because it took about ten years to do anything of substance and be recognized for it. "Those first ten years are the beginning of the story, not the end."</p>
-
-<p>The essay that defined the anxiety arrived the next year: "Programmers: Before you turn 40, get a plan B," published on improvingsoftware.com in 2009. Its premise was that a programmer's employability falls off a cliff around 40, so you had better line up management, consulting or something else before you reach the edge.</p>
-
-<p>The essay's afterlife says more than the essay. It was reposted to Hacker News <a href="https://news.ycombinator.com/item?id=9361580">in 2015</a>, where it drew 351 points and 289 comments, and <a href="https://news.ycombinator.com/item?id=16934500">again in 2018</a>. Each time, the people the essay was warning showed up in the comments. The top reply in 2015 came from a 46-year-old who wrote that the number didn't feel like a description of them. The top reply in 2018 came from a 50-year-old who reported being probably the best programmer they had ever been. An essay predicting that these people would be gone kept getting upvoted by them.</p>
-
-<p>The numbers behind the cliff traced largely to one source. Norm Matloff, a computer science professor at UC Davis, wrote that "many programmers find that their employability starts to decline at about age 35" and that "statistics show that most software developers are out of the field by age 40." When the claim resurfaced in 2016, readers noticed that the statistics were never named.</p>
-
-<p>In 2010 Vivek Wadhwa's TechCrunch piece "Silicon Valley's Dark Secret: It's All About Age" carried the ageism argument to a mainstream tech audience. The mood had shifted from "young people are smarter" to "the industry throws people away." Notice that both positions shared an assumption. Both took for granted that older developers had existed in large numbers and something had removed them.</p>
-
-<h2>2013 to 2017: where would they have come from?</h2>
-
-<p>The reframe arrived quietly, in <a href="https://news.ycombinator.com/item?id=5679321">a 2013 Hacker News thread</a> about an ITworld article called "Older programmers are more knowledgeable, but harder to find." A commenter named nevinera wrote:</p>
-
-<blockquote>
-  <p>This article keeps asking 'where do they go?' The better question is 'where did they come from?' You don't see a ton of 55 year-old developers because they'd have been going to school in the late eighties, before most colleges had CS departments, and well before it was apparent that there would be permanent demand for an enormous fleet of us.</p>
-</blockquote>
-
-<p>It is the opening subtraction, done with college instead of JavaScript. It got little attention. The anxiety kept climbing and peaked the following spring, when <a href="https://news.ycombinator.com/item?id=7372997">"Ask HN: What happens to older developers?"</a> went up on March 10, 2014 and collected 554 points and 358 comments. The poster was in their early thirties and wanted to know what the middle and late stretch of a developer's career even looked like. Two months later Zuckerberg turned 30, and the internet took some pleasure in digging up the 2007 quote.</p>
-
-<p>By 2016 and 2017 the demographic answer had become the common one, mostly because the supposedly missing developers kept turning up to give it. In <a href="https://news.ycombinator.com/item?id=12743697">a 2016 thread</a> on an InfoWorld article titled "Where do all the old programmers go?", a 42-year-old described starting just before the internet took off, and said most people don't realize how few developers there were in the trade back then. Another 42-year-old reported that finding work had become easier approaching 40. That commenter's father had recently retired as a programmer after starting in the 1970s.</p>
-
-<p><a href="https://news.ycombinator.com/item?id=14185818">A 2017 thread</a> on developers still coding after 40, 50 and 60 produced the tidiest statement of the math: "Programmers over 40 would have started programming before 1995. Programmer cohorts who started in 1985-1995 were likely much smaller than the web boom cohorts." The same thread took apart the statistic everyone had been quoting, that only about 13% of developers in Stack Overflow's survey were over 40. As one commenter put it, a Stack Overflow survey "measures the answers from the specific demographic of stackoverflow users who are inclined to answer surveys." And the first comment asked the question that should have ended the debate years earlier: would anyone think it odd for a 60-year-old physician to still be doctoring?</p>
-
-<p>The age chart everyone had been reading as a funnel, with people falling out of the top, was a birth-year chart. The top was narrow because few people had been poured in at the bottom thirty years before.</p>
-
-<h2>What the cohort math doesn't explain</h2>
-
-<p>It would be neat to stop there and declare the whole panic a statistical illusion. It wasn't, and the same threads show why.</p>
-
-<p>In <a href="https://news.ycombinator.com/item?id=23320974">a 2020 thread</a>, a 45-year-old asked for age-friendly companies after a year of interviews that ended, as far as they could tell, in being considered too old. It drew 452 points and 445 comments. One reply was from a developer who had applied for "some 3¾ thousand jobs" between ages 42 and 46 and averaged less than one interview a year.</p>
-
-<p>Both things were true at once, and they happened at different places. The cohort effect explains the empty chairs: most of the older developers people expected to see had never existed. Ageism explains what happened to some of the ones who did exist when they went looking for a new chair. The first is a fact about the 1980s. The second happened at the résumé screen.</p>
-
-<h2>What the argument got wrong</h2>
-
-<p><strong>The Plan B was a ladder that hadn't been built.</strong> In 2009, the choices after senior engineer at most companies were to stay a senior engineer indefinitely or become a manager. The staff and principal track, where you keep writing code and keep getting promoted, existed at a few large companies and spread through the 2010s. My read is that a good share of the "everyone leaves by 40" pattern was people walking through the only door marked "up." Once a second door existed, a lot of them stopped leaving.</p>
-
-<p><strong>Zuckerberg's argument was about labor, and it aged the way labor arguments do.</strong> "Simpler lives" meant cheaper and more available. People with fifteen years of experience mostly did not lose the ability to do the work. They stopped agreeing to do it at midnight. An employer can call that a decline, but it's a negotiation, and negotiations move when the supply does.</p>
-
-<p><strong>"Keep up or die" confused two kinds of knowledge.</strong> The half-life of a framework is short. Nobody's résumé leans on Prototype.js anymore. But the developers who lasted were mostly the ones who had learned the layer underneath: the DOM, HTTP, caching, how a browser actually spends its time. That layer barely moved. The <a href="https://derek.io/nostalgiajs/essays/document-layers/">browser-forking mess of 1997</a> taught feature detection, and you still write feature detection. Treadmill knowledge expires and platform knowledge compounds, and the fear of 40 was mostly a fear that all of it was the first kind.</p>
-
-<p><strong>The field needed to get old before anyone could be old in it.</strong> Someone who started with the web in the mid-1990s is in their fifties now. Pave's compensation data, <a href="https://pave.com/blog-posts/artificial-intelligence-isnt-killing-the-software-engineer-yet">published this year</a>, shows the average age of engineers rising across every major job family. The old web developer turned out to be a person who needed time to exist.</p>
-
-<h2>2026: the fear flips</h2>
-
-<p>Here is the part nobody in the 2014 thread would have guessed. The question "where are the old developers?" has been replaced by "where will the next ones come from?", and the group with the hiring problem is the young.</p>
-
-<p>The same Pave analysis found that entry-level engineers fell from 22.9% of all software engineers to 16.7% by the third quarter of 2025, while senior individual contributors grew from 9.1% to 11.6%. CNBC reported in October, as <a href="https://www.fullstack.com/blog/software-engineering-is-dead-long-live-software-engineering">summarized by Fullstack</a>, that 71% of the growth in software development job postings between May 2025 and May 2026 came from senior roles, in a market still well below its pre-pandemic level.</p>
-
-<p>The research on juniors points the same way. A Stanford study using ADP payroll data, <a href="https://www.softwareseni.com/what-the-data-actually-shows-about-ai-and-junior-developer-employment-decline/">as summarized by SoftwareSeni</a>, found that workers aged 22 to 25 in the most AI-exposed occupations saw a 16% relative decline in employment, while workers aged 35 to 49 in the same occupations saw growth. <a href="https://docs.iza.org/dp18723.pdf">An IZA discussion paper</a> from June found a 14 to 15 percent relative decline in junior versus senior developer vacancies after ChatGPT's release. Its sharper finding is about where the change happened: employers were asking for more experience under the same job titles. In the authors' words, AI is "raising the bar for what counts as a qualified junior hire."</p>
-
-<p>Some caution is due. Interest rates and pandemic over-hiring are tangled up in all of these numbers, and the most alarming figures in circulation come from the weakest sources. But the direction is consistent, and so is the explanation people in the industry give for it. <a href="https://builtin.com/articles/senior-hiring-software-engineering">Built In</a> put it this way in September: companies aren't hiring senior engineers to ship faster. They're hiring them so that faster code doesn't turn into expensive cleanup. Code got cheap. Knowing which code shouldn't exist did not.</p>
-
-<p>In 2009 the fear was that experience would stop being worth anything at 40. In 2026 experience is the scarce input. The scar tissue is now the product: knowing why the caching layer is strange, why that regression only shows up in Safari, why the rewrite will fail. If there is a 2026 version of the age cliff, I'd argue it has more to do with atrophy than with birthdays. The risk for someone 25 years in is letting an agent do so much of the work that the judgment they're being paid for goes soft.</p>
-
-<p>And there's a bill attached. Octopus Deploy's 2026 AI Pulse Report, <a href="https://pulse2.com/octopus-deploy-ai-pulse-report/">as reported in February</a>, lays out three phases: experimentation in 2024 and 2025, a junior hiring freeze from 2025 to 2027, and a potential senior talent crisis between 2027 and 2030. Seniors are made out of juniors. Stop hiring one and, a decade on, you run short of the other.</p>
-
-<h2>The takeaway</h2>
-
-<p>The 2008 office had no one over 40 because of hiring decisions made, or not made, in the 1980s, when the field was small and nobody knew it would need an enormous fleet. The age structure of a profession is a slow recording of who it let in, played back decades later. Everyone looking at that recording in 2008 thought they were watching something happen in the present. They were looking at the past.</p>
-
-<p>The same recording is being made right now. If the junior freeze holds for a few years, the developers of 2040 will look around the office and notice that hardly anyone is 38. Someone will write an essay about how the field burns people out in their thirties. The comments will argue about it for a decade. And the answer will be the one nevinera gave in 2013: ask where they would have come from.</p>
-
-<p>The 2009 essay said to get a Plan B before 40. The advice that held up is closer to the opposite. Stay hands-on enough that your judgment stays honest, and teach someone younger, because there aren't many of them coming and you are how the next cohort gets made.</p>
-
-<section class="sources" aria-labelledby="sources-h">
-  <h2 id="sources-h">Sources and further reading</h2>
-  <ul>
-    <li><a href="https://infopackets.com/node/2114">'Young People are Just Smarter,' Says Facebook CEO</a>, Infopackets, 2007</li>
-    <li><a href="https://news.ycombinator.com/item?id=7347">Young people are just smarter</a>, Hacker News, 2007 <a class="archived" href="https://web.archive.org/web/20231215160129/https://news.ycombinator.com/item?id=7347">(archived)</a></li>
-    <li><a href="https://xndev.blogspot.com/2008/10/">On Being An "Old Dude"</a>, Matthew Heusser, Creative Chaos, 2008 <a class="archived" href="https://web.archive.org/web/20261012083857/https://xndev.blogspot.com/2008/10/">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=9361580">Programmers: Before you turn 40, get a plan B</a>, Hacker News, 2015 repost <a class="archived" href="https://web.archive.org/web/20260304160606/https://news.ycombinator.com/item?id=9361580">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=16934500">Programmers: Before you turn 40, get a plan B</a>, Hacker News, 2018 repost <a class="archived" href="https://web.archive.org/web/20240906174735/https://news.ycombinator.com/item?id=16934500">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=5679321">Older programmers are more knowledgeable, but harder to find</a>, Hacker News, 2013 <a class="archived" href="https://web.archive.org/web/20241111121448/https://news.ycombinator.com/item?id=5679321">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=7372997">Ask HN: What happens to older developers?</a>, Hacker News, 2014 <a class="archived" href="https://web.archive.org/web/20250327140155/https://news.ycombinator.com/item?id=7372997">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=12743697">Where do all the old programmers go?</a>, Hacker News, 2016 <a class="archived" href="https://web.archive.org/web/20240906110923/https://news.ycombinator.com/item?id=12743697">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=14185818">Software Developers after 40, 50 and 60 Who're Still Coding</a>, Hacker News, 2017 <a class="archived" href="https://web.archive.org/web/20260217034817/https://news.ycombinator.com/item?id=14185818">(archived)</a></li>
-    <li><a href="https://news.ycombinator.com/item?id=23320974">Ask HN: Any job boards and age-friendly companies for older developers?</a>, Hacker News, 2020 <a class="archived" href="https://web.archive.org/web/20211019095644/https://news.ycombinator.com/item?id=23320974">(archived)</a></li>
-    <li><a href="https://pave.com/blog-posts/artificial-intelligence-isnt-killing-the-software-engineer-yet">Artificial Intelligence Isn't Killing the Software Engineer (Yet)</a>, Pave, 2026 <a class="archived" href="https://web.archive.org/web/20261006184613/https://www.pave.com/blog-posts/artificial-intelligence-isnt-killing-the-software-engineer-yet">(archived)</a></li>
-    <li><a href="https://www.fullstack.com/blog/software-engineering-is-dead-long-live-software-engineering">Software Engineering is Dead; Long Live Software Engineering</a>, Fullstack, 2026</li>
-    <li><a href="https://www.softwareseni.com/what-the-data-actually-shows-about-ai-and-junior-developer-employment-decline/">What the Data Actually Shows About AI and Junior Developer Employment Decline</a>, SoftwareSeni <a class="archived" href="https://web.archive.org/web/20260810010126/https://www.softwareseni.com/what-the-data-actually-shows-about-ai-and-junior-developer-employment-decline/">(archived)</a></li>
-    <li><a href="https://docs.iza.org/dp18723.pdf">Generative AI and the Redefinition of Entry-Level Software Work</a>, Westby, Modestino and Cheng, IZA, 2026 <a class="archived" href="https://web.archive.org/web/20261025071612/https://docs.iza.org/dp18723.pdf">(archived)</a></li>
-    <li><a href="https://builtin.com/articles/senior-hiring-software-engineering">AI Makes Code Cheap, and Engineers More Expensive</a>, Built In, 2026 <a class="archived" href="https://web.archive.org/web/20261002135423/https://builtin.com/articles/senior-hiring-software-engineering">(archived)</a></li>
-    <li><a href="https://pulse2.com/octopus-deploy-ai-pulse-report/">Octopus Deploy: AI Pulse Report Warns Of Senior Developer Shortage</a>, Pulse 2.0, 2026 <a class="archived" href="https://web.archive.org/web/20260610101250/https://pulse2.com/octopus-deploy-ai-pulse-report/">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>

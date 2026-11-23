@@ -657,6 +657,34 @@
         "Peter-Paul Koch's QuirksMode page says Internet Explorer 6 was meant to fall back to quirks mode after an XML prolog, so that a valid page could stay there; I followed Microsoft's 2006 article, which calls it a bug. The copy of that article I read is the September 2006 update, so I cannot say whether its guideline on filters was in the January text."
       ],
       "published": "2026-11-22T22:08:02Z"
+    },
+    {
+      "slug": "zen-garden",
+      "title": "CSS Zen Garden: the page nobody was allowed to edit",
+      "description": "In May 2003 Dave Shea, a designer at a small Vancouver firm, opened a gallery of one HTML page with five style sheets, all Shea's own, and a rule that nobody could touch the markup; the source admitted how much padding that took, Dan Cederholm and Douglas Bowman sent in designs anyway, and Shea let the site go quiet once its argument was won.",
+      "topic": "people",
+      "era": [
+        2002,
+        2013
+      ],
+      "related": [
+        "box-model-hack",
+        "view-source",
+        "feed-reader"
+      ],
+      "unverified": [
+        "I could not open mezzoblue.com, Shea's own site, or the Wayback Machine, so I have not read Shea's launch post or any dated capture of the Garden from 2003. The early wording and markup, Shea's comment and the six extra divs included, come from the HTML source of an undated copy on Eric Meyer's site, which I can place only by its list of designs: the newest is number 17. A copy made for a talk in 2005 carries the same comment. I can't say the comment, or the sentence about a historical curiosity, was on the page on day one.",
+        "That the five designs at the start were style sheets 001 to 005, all Shea's, is my inference from their numbering, the \"Added: May 7th, 2003\" stamp in each and Simon Willison counting five designs on 8 May. I found no list from 2003. The files are the ones served now, with selectors rewritten for the 2013 markup, so I am trusting that the header comments and the hack lines are original.",
+        "Two dates differ between sources. The style sheets are stamped 7 May 2003 and Wikipedia gives that as the launch date, but the book The Zen of CSS Design is reported to say 8 May and I could not open it, so the essay names no launch day. Bowman's own post puts the Wired News relaunch at about 10pm Pacific time on 10 October 2002; Eric Meyer, Adrian Holovaty and the Web Standards Project date it 11 October.",
+        "\"Around 2008\" for the end of active work is Wikipedia's April 2008, and I found nothing better; Shea's 2013 interview gives the reason but no date. The 7 May 2013 relaunch date is also Wikipedia's, which is why the essay says only May 2013.",
+        "I found no designer saying in 2003 that the Garden changed their mind. The people the essay shows responding that May were advocates of CSS already, and that the argument was won is Shea's account, in 2013 and on the site now.",
+        "The numbered list stops at 221 on the site's All Designs page, where the numbers are labels and not a count; Wikipedia says 218 designs are listed. The thousands of designs submitted from over 30 countries is Shea's own figure.",
+        "Shea's About page, written twenty years on, names a third inspiration, a Wired contest in early 2003. Zeldman's Daily Report of 9 May 2003 names \"the recent Hack Hotbot contest\" instead, and I could not open the contest page to see its rules, so the essay leaves the contest out.",
+        "Shea's background in 2003 (from Kamloops, self-taught, at a firm that did not know about the Garden) comes from one post by Tim Bray after one lunch.",
+        "I found no one defending table layout in their own words in 2003. The sceptic's side of the argument is reconstructed from Shea's later account, Bowman's review of the Cingular site and one remark about special cases that Eric Meyer wrote ten years afterwards.",
+        "What the spans around every heading and paragraph were for is my reading of the markup and of the FAQ's line about hidden text. Shea's comments explain the six extra divs but not the spans."
+      ],
+      "published": "2026-11-23T22:09:34Z"
     }
   ]
 }

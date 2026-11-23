@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- CSS Zen Garden (2003) and the tables-versus-CSS argument
 - A List Apart, "To Hell with Bad Browsers" and the Web Standards Project: developers lobbying browser makers
 - The Firefox 1.0 New York Times ad (2004): users paying to advertise a browser
 - Web 2.0: the 2005 essay, glossy buttons, rounded corners and the permanent "beta" badge
