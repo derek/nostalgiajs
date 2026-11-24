@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- A List Apart, "To Hell with Bad Browsers" and the Web Standards Project: developers lobbying browser makers
 - The Firefox 1.0 New York Times ad (2004): users paying to advertise a browser
 - Web 2.0: the 2005 essay, glossy buttons, rounded corners and the permanent "beta" badge
 - "How it feels to learn JavaScript in 2016" and JavaScript fatigue
@@ -98,3 +97,4 @@ Topics that were researched and set aside because they did not make a story. Eac
 - JavaScript's first hundred days on Usenet (December 1995 to spring 1996). Why: many voices and no protagonist, and its one dramatic event, the first security report, is its own essay. Would change: threads from the 1995 to 2000 archive (Google Groups only) showing a running argument between named people.
 - comp.lang.javascript, its FAQ, and learning from strangers on Usenet Why: its 1990s posts are in an archive that could not be read from here, and no protagonist is known yet. Would change: access to the Google Groups archive, and a named FAQ maintainer or a running dispute to follow.
 - Hiding scripts in HTML comments (`<!--` ... `//-->`) for browsers that didn't exist anymore Why: the Annex B essay already tells this story. Would change: a new angle with its own protagonist.
+- A List Apart, "To Hell with Bad Browsers" (2001) and the Web Standards Project: developers lobbying browser makers. Why: the February 2001 rebuild and the Netscape 4 argument are already told in `box-model-hack` and `ie6-funeral`, and WaSP's founding in `document-layers`; the scout found no opened primary source for WaSP's lobbying of browser makers or the 2004-05 Browse Happy handover (only Wikipedia; webstandards.org/about/history/ gives 1998 context without dated events). Would change: a working Wayback route to the WaSP archives, or the 2004-05 WaSP posts on Browse Happy and its handover to Matt Mullenweg.
