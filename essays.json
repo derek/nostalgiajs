@@ -685,6 +685,61 @@
         "What the spans around every heading and paragraph were for is my reading of the markup and of the FAQ's line about hidden text. Shea's comments explain the six extra divs but not the spans."
       ],
       "published": "2026-11-23T22:09:34Z"
+    },
+    {
+      "slug": "firefox-ad",
+      "title": "The Firefox ad: a page of names in 4.5-point type",
+      "description": "In October 2004 a Minneapolis PR man asked Firefox's users for $30 each to put their names in a New York Times ad; they passed his ten-day target in 17 hours and gave $250,000, fitting the names became the job, and the ad ran five weeks after the launch as two pages, one of them 8,567 names in 4.5-point type.",
+      "topic": "people",
+      "era": [
+        2004,
+        2006
+      ],
+      "related": [
+        "ie6-funeral",
+        "whatwg",
+        "popup"
+      ],
+      "unverified": [
+        "The count of 8,567 names is my own, checked twice, and it is a count of the PDF Mozilla posted with its press release, a file made the day before the ad ran. I have not seen the newsprint, and nothing I read says why the page holds fewer names than there were donors.",
+        "Rob Davis's weekend with the hijacked PC comes from Wired, and the seventeen hours is Davis's own figure, given to ClickZ. I found no second source for either. ClickZ's short version of the weekend says a security hole wiped the hard drive where Wired says Davis reformatted it.",
+        "The cause of the delay rests on BetaNews, which names no source, and on one sentence in ZDNet UK. The staff-meeting agenda is known only from Gervase Markham's 2013 comment, which gives it no date. Any account by Christopher Messina was on the Spread Firefox site, which is gone, and I could not open an archived copy.",
+        "That Blake Ross started Spread Firefox is Wired's statement; Mozilla's own announcement of the site names nobody. Ross's verdict on the ad comes from one article, Bruce Byfield's in 2006.",
+        "Byfield's article says the drive was announced on 29 October 2004. The press release and the reports from that week say Tuesday 19 October, and I went with those.",
+        "I never found what the two pages cost. Markham believed Mozilla got a non-profit rate and said there was no evidence for it, so the essay gives no figure.",
+        "Three readings are mine: that the \"Mitchell\" in Markham's comment is Mitchell Baker, that the names printed ten times belong to Community Champions, and that the last entry in the list was added late. I also cannot show that the Rob Davis, Blake Ross, Jason Fried and John Battelle in the list are the people in the story.",
+        "That Davis's hijacked-PC weekend fell in the summer of 2004 is my inference; the Wired piece gives no date for it.",
+        "My reading of the \"$30 a line\" credits-file gloss on Byfield's account is my own inference, not something he states."
+      ],
+      "published": "2026-11-25T22:17:38Z"
+    },
+    {
+      "slug": "web20",
+      "title": "Web 2.0: the buzzword with a serial number",
+      "description": "In May 2006 the company that co-ran the Web 2.0 Conference sent a cease-and-desist to a non-profit in Cork for calling a €50 half-day event \"Web 2.0\", and O'Reilly apologised within two days; the mark had been applied for in 2003, before the first conference, and was registered anyway.",
+      "topic": "people",
+      "era": [
+        2003,
+        2017
+      ],
+      "related": [
+        "rhino-book",
+        "jsconf",
+        "firefox-ad"
+      ],
+      "unverified": [
+        "The trademark record (serial 78322306, filed 3 November 2003, registered 27 June 2006 as number 3110027, cancelled under Section 8 on 3 February 2017 for want of the ten-year renewal) I know only from search-engine summaries of Justia's listing. Justia and the trademark office's own database would not open, so the cancellation in particular rests on one database I never saw directly.",
+        "Wikipedia says the application was filed in November 2004. I went with 2003 because the record, Martin Schwimmer, IDG's report and Silicon Republic all say 2003. Tim O'Reilly's reply, which names MediaLive as the filer, I know only from search snippets.",
+        "Slashdot says the trademark office notified CMP on 16 May 2006; Wikipedia says the application passed final review on 10 May. These may be two events. I used Slashdot's date and could not check either against the file, and I cannot explain how an intent-to-use application reached registration six weeks later.",
+        "I could not open the O'Reilly Radar posts (the statement of 26 May 2006, Tim O'Reilly's reply, and the later post Chris Messina summarises) or Tom Raftery's own blog. Their words are quoted as the Register, Nick Carr and Chris Shiflett quoted them, and no source I could open gives the day Raftery posted the letter, so the essay does not date it. One Japanese library notice dates the letter itself to 25 May; I followed the Register's 24 May.",
+        "No source names the article that IT@Cork's page linked to. That it was \"What Is Web 2.0\" is my inference from the Register's description of a page asking \"what is Web 2.0?\" and linking to an article by Tim O'Reilly.",
+        "That the European application was refused on 23 May 2007 is Wikipedia's statement alone; I found no register entry for it. Darcy DiNucci's 1999 article is also taken from Wikipedia, whose own pages disagree on the month, and I did not open the article.",
+        "I read \"What Is Web 2.0\" in a 2007 journal reprint, because O'Reilly's site would not serve the original. The reprint adds at least one later figure, and I have assumed the passages I quote stood as they are in September 2005.",
+        "Most of the reports and blog posts reached me as a tool's summary with short quotations, not as full pages, so a quotation may have lost its context. The description of what the registration covers follows the Register and one search summary; another summary words it differently.",
+        "The €50 was the price for non-members; one notice says staff of member companies got in free. I found no account of the Cork conference itself, so the essay does not say whether it ran on 8 June or under what name, and I found no report of any other event being sent a letter.",
+        "Why the registration was allowed to lapse is not something any source told me."
+      ],
+      "published": "2026-11-26T21:57:13Z"
     }
   ]
 }

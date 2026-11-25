@@ -6,7 +6,209 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Mon, 23 Nov 2026 22:09:34 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 26 Nov 2026 21:57:13 GMT</lastBuildDate>
+  <item>
+    <title>Web 2.0: the buzzword with a serial number</title>
+    <link>https://derek.io/nostalgiajs/essays/web20/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/web20/</guid>
+    <pubDate>Thu, 26 Nov 2026 21:57:13 GMT</pubDate>
+    <description>In May 2006 the company that co-ran the Web 2.0 Conference sent a cease-and-desist to a non-profit in Cork for calling a €50 half-day event &quot;Web 2.0&quot;, and O'Reilly apologised within two days; the mark had been applied for in 2003, before the first conference, and was registered anyway.</description>
+    <content:encoded><![CDATA[<p class="lede">In May 2006 a lawyer's letter told a non-profit group in Cork to take "Web 2.0" out of the name of its €50 half-day conference, and listed among the group's offences a page that asked what Web 2.0 was and linked to Tim O'Reilly for the answer.</p>
+
+<blockquote>
+<p>CMP hereby demands that you immediately cease and desist from utilizing Web 2.0 as the title of your event</p>
+</blockquote>
+
+<p>IT@Cork had billed its event for 8 June as the "Web 2.0 half-day conference", with Microsoft as sponsor, <a href="https://www.irishtimes.com/business/publisher-allows-tech-event-use-web-2-0-in-title-1.1009726">according to the Irish Times</a>. <a href="https://ventureblog.com/the-web-20-trademark-controversy-take-note-and-take-care/">The demand</a> came in a letter <a href="https://www.theregister.com/2006/05/26/web_2point0_battle">dated 24 May</a> from a lawyer acting for CMP Media, the company that put on the Web 2.0 Conference in California with O'Reilly Media. CMP, it said, had applied to register "Web 2.0" as a service mark for live events. IT@Cork's use of the name was a "flagrant violation", made worse by promotional material that put the question and sent readers to an article by O'Reilly. That left IT@Cork fifteen days.</p>
+
+<h2>O'Reilly's essay, defined by example</h2>
+
+<p>The Register does not name the article IT@Cork linked to, but the question on the Cork page is its title: <a href="https://mpra.ub.uni-muenchen.de/4580/">"What Is Web 2.0"</a>, which O'Reilly put on the web in September 2005. It opens with the phrase's birth certificate. "Web 2.0", it says, began with a conference brainstorming session between O'Reilly and a company called MediaLive International, at which O'Reilly's Dale Dougherty observed that the web had not crashed with the dot-com shares and that the survivors seemed to have things in common. Perhaps the collapse was a turning point, "such that a call to action such as 'Web 2.0' might make sense". The first Web 2.0 Conference followed in October 2004.</p>
+
+<p>A year on, the essay set out to say what the call to action meant, and began the way the brainstorm had, with a list:</p>
+
+<pre tabindex="0"><code>Web 1.0               Web 2.0
+Ofoto             --> Flickr
+Britannica Online --> Wikipedia
+personal websites --> blogging
+screen scraping   --> web services
+publishing        --> participation
+stickiness        --> syndication</code></pre>
+
+<p>Those are six of its fourteen rows, with the spacing closed up. Nothing in the essay reads like a brand guideline. Web 2.0 has no hard boundary, it says, only a gravitational core, and anything that shows some of the principles can orbit at its own distance. The essay was pleased with how far the phrase had already travelled, counting more than 9.5 million citations in Google, and its one complaint was about the people adopting it: the "meme" had spread so widely "that companies are now pasting it on as a marketing buzzword, with no real understanding of just what it means."</p>
+
+<p>The phrase also had a file at the United States Patent and Trademark Office, opened before the essay and before the conference.</p>
+
+<h2>The service mark filed in 2003</h2>
+
+<p>MediaLive filed for the service mark on 3 November 2003. It was an intent-to-use application, the kind you file for a name you plan to trade under and have not yet used; Marty Schwimmer, a trademark lawyer who <a href="https://www.schwimmerlegal.com/2006/05/this-is-what-im-talking-about-re-web-2-0.html">blogged about the dispute</a>, wrote of "when the ITU was filed for WEB 2.0 in 2003". Wikipedia says November 2004, and is alone in that. Tim O'Reilly's own reply to the row dates the filing to the start of the partnership with MediaLive on the conference.</p>
+
+<p>So the paperwork came eleven months before anybody sat down at the first conference and nearly two years before the essay. "Web 2.0" was a product name with a pending registration first, and a description of the web second.</p>
+
+<p>The application reached CMP Media by acquisition. In <a href="https://ubmchannelnews.mediaroom.com/index.php?item=86305">a press release of 11 January 2006</a>, CMP announced it had bought MediaLive's Technology Media Group for $65 million, and the list of events that came with it includes "Web 2.0 (in partnership with O'Reilly Media.)". On 16 May, by <a href="https://yro.slashdot.org/story/06/05/26/1238245/oreilly-and-cmp-exercise-trademark-on-web-20">Slashdot's account</a>, the trademark office notified CMP that the mark was entitled to be registered. The lawyer wrote eight days later.</p>
+
+<h2>The letter reaches a blog</h2>
+
+<p>Tom Raftery sat on IT@Cork's committee and kept a blog, and he published the letter there. To the Register he argued that "Web 2.0" was a generic term and that Cork was outside American jurisdiction, and then he did some arithmetic. O'Reilly's conference charged a VIP fee of $2,795, the Cork event cost €50, and "I think it would be difficult to mix up these conferences: one is in California and the other is in Cork."</p>
+
+<p>Raftery also mentioned that he had invited Tim O'Reilly to speak at the Cork conference back in February. O'Reilly had been unavailable until October.</p>
+
+<p>By 26 May the story was on Slashdot under the headline "O'Reilly and CMP Exercise Trademark on 'Web 2.0'", with commenters offering Web 2.1 and Web 2.1 Service Pack 1. The letter was CMP's, but the name people knew was O'Reilly's, and Tim O'Reilly was <a href="https://blog.ericgoldman.org/archives/2006/05/oreilly_and_the.htm">on vacation and out of reach</a>.</p>
+
+<p>The company answered for him that same day. A statement from Sara Winge, O'Reilly's vice president of corporate communications, went up on its Radar blog. It wished they had talked to IT@Cork before sending legal correspondence, admitted that the conference team had not known about the speaking invitation, and apologised for how the matter had been handled. A follow-up letter, it said, had agreed that IT@Cork "can use the Web 2.0 name this year".</p>
+
+<p>Wikipedia records the demand as retracted, which is tidier than what happened. Winge's statement stood by the principle of protecting the mark. The Irish Times reported that the permission covered that year's conference only, and that O'Reilly would go on defending the name against other organisers. Raftery, by the Register's account, was not pleased to be granted permission for something he thought needed none.</p>
+
+<p>When Tim O'Reilly replied, it was the audience he went after. Chris Shiflett, who <a href="https://shiflett.org/blog/2006/mob-mentality-and-web-2.0">took O'Reilly's side</a>, quotes the reply: "The flap about the Web 2.0 Conference trademark has shaken my faith in the collective intelligence of the blogosphere." "Harnessing collective intelligence" is a section heading in "What Is Web 2.0". Raftery, Shiflett reports, later apologised for not emailing O'Reilly first.</p>
+
+<h2>Why the Web 2.0 mark was so thin</h2>
+
+<p>The owners had a real case. They had come up with the name for their own conference, filed for it before the phrase was in general use, and claimed it only for the titles of events; nobody was being told to stop saying Web 2.0. Nick Carr, in the comments under <a href="https://www.roughtype.com/?p=399">his own post on the row</a>, needed eight words: "It was their idea, and it's their property."</p>
+
+<p>The trouble was what the owners had done with the phrase after filing for it. They had spent two years persuading the industry that "Web 2.0" named a kind of web, and the essay's 9.5 million citations measured how well that had gone. Schwimmer's diagnosis was that the owner had worn out its own mark: "this may indeed be that rare trademark creature, genericide, but self-incurred genericide." Promote a brand as a buzzword, he wrote, and the protection left is razor-thin, with a backlash waiting when you assert it. The phrase was not even new: Wikipedia credits it to a 1999 magazine article by Darcy DiNucci.</p>
+
+<p>Raftery told <a href="https://www.macworld.com/article/180137/web2.html">a reporter from IDG</a>: "If this had happened three or four years ago, we would have just rolled over". IT@Cork was a non-profit with no money for a legal fight. What it had in 2006 was a committee member with a blog, readers with blogs of their own, and Slashdot. A letter dated 24 May and meant for one desk in Cork was in front of the whole trade by 26 May, and O'Reilly apologised that day. Blogging is in the right-hand column of O'Reilly's list.</p>
+
+<h2>Where the service mark went</h2>
+
+<p>The mark was registered anyway, on 27 June 2006, as number 3110027, for live events including trade shows, expositions and conferences in computing and information technology. That was nineteen days after the date of the Cork conference.</p>
+
+<p>O'Reilly asked for the mark to be enforced less. Chris Messina, <a href="https://factoryjoe.com/?p=658">writing that September</a> under the title "Web 2.0 Trademark Closure", reported that Tim O'Reilly "has asked CMP to take a more narrow view": to act only against events whose names could be confused with those of the two companies' own.</p>
+
+<p>Europe declined. CMP had filed a European application in March 2006, and it was open to objection while the row went on. Wikipedia says it was refused on 23 May 2007, almost exactly a year after the letter told an Irish organisation it was infringing.</p>
+
+<p>And the American registration has lapsed. The record shows it cancelled under <a href="https://www.uspto.gov/trademarks/maintain/keeping-your-registration-alive">Section 8</a> on 3 February 2017, for failure to file the ten-year renewal. I can't see the file, so I can't say whether somebody decided to let "Web 2.0" go or whether nobody was left who thought to keep it.</p>
+
+<h2>The takeaway</h2>
+
+<p>"Web 2.0" was filed as a conference brand in 2003 and then promoted, by the people who filed it, as a name for the whole direction of the web. Both jobs were done well, and the second undid the first. By May 2006 the phrase belonged to its users in every sense but the legal one, and the first attempt to use the legal one lasted two days against a blog post from Cork.</p>
+
+<p>The letter's oddest line is the one about the link. IT@Cork's promotional page did what the essay asks of its readers: it took up the idea, cited its author and passed it on. CMP's lawyer read that as aggravation. The mark behind the demand to stop "utilizing Web 2.0 as the title of your event" stayed on the register for ten more years, and since February 2017 there has been nothing behind it.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://mpra.ub.uni-muenchen.de/4580/">What Is Web 2.0: Design Patterns and Business Models for the Next Generation of Software</a>, Tim O'Reilly, 2005, as reprinted in Communications &amp; Strategies no. 65, 2007</li>
+    <li><a href="https://www.theregister.com/2006/05/26/web_2point0_battle">Web 2.0 opens can of worms for Cork</a>, Maxim Kelly, ElectricNews.net in The Register, 2006</li>
+    <li><a href="https://ventureblog.com/the-web-20-trademark-controversy-take-note-and-take-care/">The Web 2.0 Trademark Controversy: Take Note and Take Care</a>, David Hornik, VentureBlog, 2006</li>
+    <li><a href="https://www.irishtimes.com/business/publisher-allows-tech-event-use-web-2-0-in-title-1.1009726">Publisher allows tech event use 'Web 2.0' in title</a>, John Collins, The Irish Times, 2006</li>
+    <li><a href="https://yro.slashdot.org/story/06/05/26/1238245/oreilly-and-cmp-exercise-trademark-on-web-20">O'Reilly and CMP Exercise Trademark on 'Web 2.0'</a>, Slashdot, submitted by theodp, 2006</li>
+    <li><a href="https://www.roughtype.com/?p=399">Open-source trademarks</a>, Nick Carr, Rough Type, 2006</li>
+    <li><a href="https://www.macworld.com/article/180137/web2.html">Claim to 'Web 2.0' brand provokes blog uproar</a>, Nancy Gohring, IDG News Service, in Macworld, 2006</li>
+    <li><a href="https://blog.ericgoldman.org/archives/2006/05/oreilly_and_the.htm">O'Reilly and the "Web 2.0" Trademark</a>, Eric Goldman, Technology &amp; Marketing Law Blog, 2006</li>
+    <li><a href="https://www.schwimmerlegal.com/2006/05/this-is-what-im-talking-about-re-web-2-0.html">This is what I'm talking about re Web 2.0</a>, Martin Schwimmer, The Trademark Blog, 2006</li>
+    <li><a href="https://shiflett.org/blog/2006/mob-mentality-and-web-2.0">Mob Mentality and Web 2.0</a>, Chris Shiflett, 2006</li>
+    <li><a href="https://factoryjoe.com/?p=658">Web 2.0 Trademark Closure</a>, Chris Messina, 2006</li>
+    <li><a href="https://ubmchannelnews.mediaroom.com/index.php?item=86305">CMP Media Acquires MediaLive International's Technology Media Group</a>, CMP Media press release, 2006</li>
+    <li><a href="https://en.wikipedia.org/wiki/Web_2.0">Web 2.0</a>, Wikipedia, for the 2004 filing date, the registration date, the European refusal and Darcy DiNucci's 1999 article</li>
+    <li><a href="https://www.uspto.gov/trademarks/maintain/keeping-your-registration-alive">Keeping your registration alive</a>, United States Patent and Trademark Office</li>
+    <li>Trademark record for WEB 2.0, serial number 78322306, registration number 3110027, as listed by Justia Trademarks; not linked</li>
+    <li>The O'Reilly Radar statement of 26 May 2006 and Tim O'Reilly's reply; no longer online at their old addresses and not linked</li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
+  <item>
+    <title>The Firefox ad: a page of names in 4.5-point type</title>
+    <link>https://derek.io/nostalgiajs/essays/firefox-ad/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/firefox-ad/</guid>
+    <pubDate>Wed, 25 Nov 2026 22:17:38 GMT</pubDate>
+    <description>In October 2004 a Minneapolis PR man asked Firefox's users for $30 each to put their names in a New York Times ad; they passed his ten-day target in 17 hours and gave $250,000, fitting the names became the job, and the ad ran five weeks after the launch as two pages, one of them 8,567 names in 4.5-point type.</description>
+    <content:encoded><![CDATA[<p class="lede">Ten thousand users of a free web browser bought it two pages of the New York Times in December 2004, on the promise of their names in the advertisement, and it was the names that made it late.</p>
+
+<blockquote>
+<p>Are you fed up with your web browser? You're not alone.</p>
+</blockquote>
+
+<p>Rob Davis was fed up. Davis lived in Minneapolis and worked as an account director at a PR firm, Haberman &amp; Associates, and he had spent a weekend in the summer of 2004 indoors with a PC that had been taken over through Internet Explorer and put to work sending spam. Josh McHugh <a href="https://www.wired.com/2005/02/firefox/">told the story in Wired</a> early in 2005: Davis dropped out of a camping trip on Lake Superior, backed up his files, reformatted the drive, and drove to a programmer friend's house to copy a browser the friend had recommended. It was called Firefox, and it had not yet reached version 1.0. By December the question was the headline of an advertisement Davis had proposed, printed across the middle of a page of the names of the people who paid for it.</p>
+
+<h2>Spread Firefox</h2>
+
+<p>Firefox came from the Mozilla Foundation, a non-profit set up in July 2003 that called itself the heir to Netscape and that its chief engineer, Chris Hofmann, <a href="https://clickz.com/crazy-like-a-firefox/65847/">described in November 2004</a> as "a nonprofit foundation, a bunch of engineers". They decided to market the 1.0 release the way they wrote the code, by opening the door to anyone with an idea.</p>
+
+<p>The door was a site called Spread Firefox, launched in September 2004. Wired credits Blake Ross, one of the browser's original developers, with starting it. It ran on CivicSpace, software that had come out of Howard Dean's presidential campaign, and it had the campaign's habits: members proposed stunts, rated each other's proposals and earned points. A press release that October counted close to 25,000 registered users after four weeks.</p>
+
+<p>They had something to push against. Internet Explorer was the browser of about nine users in ten, by Wired's figure, and that year's malware had been arriving through it. Davis said he was no zealot about Microsoft. His complaint was that a company that made, by his reckoning, 98 percent of the world's operating systems had let this happen to people. "There's a lot of pain out there."</p>
+
+<h2>Thirty dollars for a name</h2>
+
+<p>Davis had gone to Ross in July, Wired says, two months before the site existed, with an idea: raise enough money from Firefox's fans to run an ad in the New York Times. None of the accounts says when the donors' names came into it, but by October they were the offer: a full page to mark the 1.0 release, with the names of the people who paid for it. Newspapers had carried donor-paid ads of that kind for decades, as <a href="https://www.linux.com/news/marketing-foss-donor-paid-ads/">Bruce Byfield's 2006 article on the tactic</a> points out, usually a stand on some public issue, and Davis wanted one for a download. He worked on grassroots campaigns for a living, and the model he cited for getting Firefox's users to make its marketing was MoveOn's nationwide contest to make a 30-second ad.</p>
+
+<p>The drive opened on Tuesday 19 October 2004. The press release called the effort "endorsed by the Mozilla Foundation" and was careful about whose work it was: the idea, the research and the design had all been done by volunteers. The terms survive, of all places, in <a href="https://learn.microsoft.com/en-us/archive/blogs/alexbarn/firefox-full-page-ad-to-appear-in-new-york-times">Microsoft's archive of its old blogs</a>, where a post from that day passes them along: $30 got your name into the ad, and students paid $10. The target, <a href="https://www.zdnet.com/article/firefox-smashes-funding-target/">ZDNet UK reported</a>, was 2,500 donors in ten days.</p>
+
+<p>Two bloggers picked the release up the same day. John Battelle <a href="https://battellemedia.com/archives/2004/10/how_do_you_celebrate_firefox_run_an_ad_in_the_new_york_times">reprinted it</a> under the remark that the word "irony" came to mind, without being able to say why. Jason Fried, on <a href="https://signalvnoise.com/archives/000899">Signal vs. Noise</a>, admired the hook of seeing your own name in the paper and then asked the obvious question: "Is putting money towards an ad in the Times the best way for a fledgling browser to spend precious money?" Davis, asked by ClickZ what the ad was for, said downloads were the secondary intent. Its first job was to thank the foundation and to speak for the people who had been spreading the browser.</p>
+
+<h2>A target passed on the first day</h2>
+
+<p>The target lasted seventeen hours, a figure Davis gave a few weeks later. By the Friday, Bart Decrem, Mozilla's marketing contact, put the fund at more than $100,000, which he reckoned would pay for a couple of ads in the Times. When the ten days were up it held <a href="https://fundraising.co.uk/2004/11/05/campaign-web-browser-raises-250000-online-10-days/">$250,000 from 10,000 people</a>, an average of $25 each.</p>
+
+<p>Success changed what kind of problem the ad was. A page with 2,500 names on it is an advertisement with a long credit line, and a page with four times as many is a telephone directory with a logo. Davis: "We went back to the drawing board to figure out how many [donor] names we could include in the space and still run the message." They settled on 10,000. That was a limit on names, set once the first target had gone. When the drive closed, 10,000 was also the reported number of donors, and no account says whether the drive stopped at the limit or happened to end there.</p>
+
+<h2>Fitting the names on a broadsheet page</h2>
+
+<p>The design was led by a volunteer, Christopher Messina, whom <a href="https://www-archive.mozilla.org/press/mozilla-2004-12-15.html">Mozilla's press release</a> describes as a San Francisco designer and a leader at Spread Firefox. <a href="https://blog.mozilla.org/press/2004/11/mozilla-foundation-releases-the-highly-anticipated-mozilla-firefox-1-0-web-browser/">Firefox 1.0 shipped</a> on 9 November, and the ad, expected within a few weeks of the launch, did not appear that month.</p>
+
+<p>What Mozilla's staff made of the problem survives in one place. Gervase Markham, commenting in 2013 under <a href="https://blog.mozilla.org/community/2013/06/10/milestone-ad-for-firefox-in-new-york-times/">a Mozilla history post</a>, said the only record they had of the ad was a staff-meeting agenda, and quoted it without a date:</p>
+
+<blockquote>
+<ul>
+<li>Challenge to fit all the names legibly on one page</li>
+<li>May end up taking out two ads in successive weeks</li>
+<li>A double-page ad is ridiculously expensive</li>
+<li>Ad may (co-incidentally) run around the time of 10M downloads</li>
+</ul>
+</blockquote>
+
+<p>The designers' side of it reached print once. <a href="https://betanews.com/article/firefox-s-ny-times-ad-a-reality/">BetaNews reported</a>, without saying who told it so, that a wrong setting in the layout program had left them waiting hours for the ad to render after adding a single name, that the fix took a weekend, and that the ad was two weeks later than hoped. <a href="https://www.zdnet.com/article/new-york-times-runs-firefox-ad/">ZDNet UK</a> said only that fitting every donor's name on a single broadsheet page had been a technical challenge.</p>
+
+<p>German fans got into print first. A separate drive raised over €48,000, the same ZDNet report says, and at the start of December it bought a full page in what <a href="https://www.computerwoche.de/article/2724906/mozilla-verkauft-firefox-als-poster.html">Computerwoche</a> names as the Frankfurter Allgemeine Zeitung. The Times ad ran on 16 December, five weeks after the launch. No account says who decided it, but the option the agenda had called ridiculously expensive was the one taken: two pages, in a single issue, with the name of every donor, in Wired's words, "in barely readable, 4.5-point type".</p>
+
+<h2>Counting the names in the PDF</h2>
+
+<p>Mozilla posted the ad as <a href="https://www-archive.mozilla.org/press/nytimes-firefox-final.pdf">a PDF</a> with its press release, and the file is on Mozilla's archive site now. Page one is the names, a block above the headline and a block below it, with the Firefox logo ghosted over them, set in Univers Condensed Bold at a size the file gives as 4.5 points. Page two is the advertisement you would expect, logo and testimonials, down to a footer of thanks to the employees of eight companies. The first of the eight is Haberman &amp; Associates, where Davis worked.</p>
+
+<p>Most of the reports I found said the page held 10,000 names. ZDNet's did, and so did <a href="https://ben.ramsey.dev/blog/2004/12/firefox-ad-runs-in-ny-times/">a donor, Ben Ramsey</a>, who had enlarged the PDF to find the family's entries. BetaNews said 8,000. So I counted. The names in the PDF are separated by bullets, alphabetical by surname from Oliver Aaltonen, and there are 8,566 bullets, which makes 8,567 entries. BetaNews was nearer. Ten thousand people gave, and the page holds 1,433 fewer names than that, at least in Mozilla's file, which is what I counted; I have not seen the newsprint. Nothing I read explains the gap, though donors who gave without asking for a name would account for some of it.</p>
+
+<p>Nor are the entries 8,567 separate people. Three names appear ten times each and two more appear five times. ZDNet had reported that anyone who signed up ten extra names would be made a "Community Champion", and my guess is that some champions supplied all ten themselves. At least 139 entries are families. Twenty are a single word, filed after the Zs, and after those comes the last entry of all, Eileen Veit, out of alphabetical order as if added late. Some donors got less than their $30 had promised: Byfield's article records complaints of misspelled names, and of not being told the date. One entry is a dog. Ramsey wrote that the list held three names from the Ramsey household, Ben, Liz and Ashley, and that Ashley was the dog, and all three are there under R.</p>
+
+<p>There is a Rob Davis under D, in the same type as everyone else, and I am taking it to be him. There is a Blake Ross. Markham says that quite a few core Mozillians are not in the list: Markham did not submit a name, having "thought it was a thing for Americans", and adds that Mitchell is not there either, by which I take them to mean Mitchell Baker, the foundation's president. The list has no Gervase Markham and no Mitchell Baker. It does hold a Jason Fried and a John Battelle. I can't show they are the same two, but I would like them to be.</p>
+
+<h2>Where the Times ad went</h2>
+
+<p>The ad became a poster. The Mozilla Store sold it at full size for just under seven dollars, Computerwoche reported the day after it ran: about 53 by 66 centimetres, which is the PDF's two 13-by-21-inch pages side by side. Paul Thurrott, whose name is in the list, <a href="https://www.thurrott.com/cloud/145733/time-name-appeared-firefox-ad">wrote in 2017</a> of buying a copy, framing it and keeping it on an office wall for many years.</p>
+
+<p>Mozilla planned no sequel. Its spokesperson said on the day that there were no plans for more ads, and in 2006 Ross gave Byfield the verdict Fried had asked for: "Contrary to popular belief, we found the ad itself to be less effective than the buzz surrounding it before and after it ran."</p>
+
+<p>The drive was copied without the names. Byfield's article describes a pledge-paid ad for OpenOffice.org, organised by a volunteer, that ran in the New York Metro on 31 July 2006 and listed no contributors. Henri Poole of CivicActions, in the same article, held that recognition was what donors to such an ad were after: "You're buying yourself karma." Byfield's comparison was with free software itself, whose contributors expect to be paid in credit. At $30 a line, the Times ad had extended the credits file to people who could not write code.</p>
+
+<h2>The takeaway</h2>
+
+<p>The names did three jobs: they raised the money, they delayed the ad, and they proved its headline. As advertising, Ross judged the two pages less effective than the talk around them, though I would add that the talk was about two pages somebody had to buy.</p>
+
+<p>What the donors bought was a line in a list. "You're not alone" is a claim, and the ad printed its evidence above and below the claim in 4.5-point type, which I think is why a page that had to be squinted at ended up framed on an office wall.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www-archive.mozilla.org/press/nytimes-firefox-final.pdf">The Firefox advertisement in the New York Times of 16 December 2004, as a PDF</a>, Spread Firefox and the Mozilla Foundation, 2004 <a class="archived" href="https://web.archive.org/web/20240727072659/https://www-archive.mozilla.org/press/nytimes-firefox-final.pdf">(archived)</a></li>
+    <li><a href="https://www-archive.mozilla.org/press/mozilla-2004-12-15.html">Mozilla Foundation Places Two-Page Advocacy Ad in the New York Times</a>, Mozilla Foundation press release, 2004 <a class="archived" href="https://web.archive.org/web/20261025103837/https://www-archive.mozilla.org/press/mozilla-2004-12-15.html">(archived)</a></li>
+    <li><a href="https://www.wired.com/2005/02/firefox/">The Firefox Explosion</a>, Josh McHugh, Wired, 2005 <a class="archived" href="https://web.archive.org/web/20261116101536/https://www.wired.com/2005/02/firefox/">(archived)</a></li>
+    <li><a href="https://clickz.com/crazy-like-a-firefox/65847/">Crazy Like a Firefox</a>, Rebecca Lieb, ClickZ, 2004 <a class="archived" href="https://web.archive.org/web/20260416202403/https://clickz.com/crazy-like-a-firefox/65847/">(archived)</a></li>
+    <li><a href="https://battellemedia.com/archives/2004/10/how_do_you_celebrate_firefox_run_an_ad_in_the_new_york_times">How Do You "Celebrate" Firefox? Run An Ad in The New York Times</a>, John Battelle, quoting the press release of 19 October, 2004 <a class="archived" href="https://web.archive.org/web/20231202221029/https://battellemedia.com/archives/2004/10/how_do_you_celebrate_firefox_run_an_ad_in_the_new_york_times">(archived)</a></li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/alexbarn/firefox-full-page-ad-to-appear-in-new-york-times">Firefox full-page ad to appear in New York Times</a>, a post in Microsoft's blog archive, quoting Steve Rubel, 2004</li>
+    <li><a href="https://signalvnoise.com/archives/000899">Spread Firefox: A novel approach to advertising</a>, Jason Fried, Signal vs. Noise, 2004 <a class="archived" href="https://web.archive.org/web/20250519114628/https://signalvnoise.com/archives/000899">(archived)</a></li>
+    <li><a href="https://www.zdnet.com/article/firefox-smashes-funding-target/">Firefox smashes funding target</a>, ZDNet UK, 2004 <a class="archived" href="https://web.archive.org/web/20240618033111/https://www.zdnet.com/article/firefox-smashes-funding-target/">(archived)</a></li>
+    <li><a href="https://fundraising.co.uk/2004/11/05/campaign-web-browser-raises-250000-online-10-days/">Campaign for Web browser raises $250,000 online in 10 days</a>, UK Fundraising, 2004 <a class="archived" href="https://web.archive.org/web/20251110103323/https://fundraising.co.uk/2004/11/05/campaign-web-browser-raises-250000-online-10-days/">(archived)</a></li>
+    <li><a href="https://blog.mozilla.org/press/2004/11/mozilla-foundation-releases-the-highly-anticipated-mozilla-firefox-1-0-web-browser/">Mozilla Foundation Releases the Highly Anticipated Mozilla Firefox 1.0 Web Browser</a>, Mozilla Foundation press release, 2004 <a class="archived" href="https://web.archive.org/web/20261026114756/https://blog.mozilla.org/press/2004/11/mozilla-foundation-releases-the-highly-anticipated-mozilla-firefox-1-0-web-browser/">(archived)</a></li>
+    <li><a href="https://www.zdnet.com/article/new-york-times-runs-firefox-ad/">New York Times runs Firefox ad</a>, Ingrid Marson, ZDNet UK, 2004 <a class="archived" href="https://web.archive.org/web/20210624231037/https://www.zdnet.com/article/new-york-times-runs-firefox-ad/">(archived)</a></li>
+    <li><a href="https://betanews.com/article/firefox-s-ny-times-ad-a-reality/">Firefox's NY Times Ad a Reality</a>, Ed Oswald, BetaNews, 2004</li>
+    <li><a href="https://ben.ramsey.dev/blog/2004/12/firefox-ad-runs-in-ny-times/">Firefox Ad Runs in NY Times</a>, Ben Ramsey, 2004 <a class="archived" href="https://web.archive.org/web/20261111215536/https://ben.ramsey.dev/blog/2004/12/firefox-ad-runs-in-ny-times">(archived)</a></li>
+    <li><a href="https://www.computerwoche.de/article/2724906/mozilla-verkauft-firefox-als-poster.html">Mozilla verkauft Firefox als Poster</a>, Computerwoche, 2004</li>
+    <li><a href="https://www.linux.com/news/marketing-foss-donor-paid-ads/">Marketing FOSS with donor-paid ads</a>, Bruce Byfield, Linux.com, 2006 <a class="archived" href="https://web.archive.org/web/20250710163030/https://www.linux.com/news/marketing-foss-donor-paid-ads/">(archived)</a></li>
+    <li><a href="https://blog.mozilla.org/community/2013/06/10/milestone-ad-for-firefox-in-new-york-times/">Milestone: Ad for Firefox in New York Times</a>, Mozilla community blog, with a comment by Gervase Markham, 2013 <a class="archived" href="https://web.archive.org/web/20250803144245/https://blog.mozilla.org/community/2013/06/10/milestone-ad-for-firefox-in-new-york-times/">(archived)</a></li>
+    <li><a href="https://www.thurrott.com/cloud/145733/time-name-appeared-firefox-ad">That Time My Name Appeared in a Firefox Ad</a>, Paul Thurrott, 2017 <a class="archived" href="https://web.archive.org/web/20240410050522/https://www.thurrott.com/cloud/145733/time-name-appeared-firefox-ad">(archived)</a></li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>CSS Zen Garden: the page nobody was allowed to edit</title>
     <link>https://derek.io/nostalgiajs/essays/zen-garden/</link>
@@ -4274,344 +4476,6 @@ window.onmousedown=right;
     <li><a href="https://www.iana.org/assignments/uri-schemes/prov/view-source">view-source URI scheme registration</a>, IANA, 2011 <a class="archived" href="https://web.archive.org/web/20260808124047/https://www.iana.org/assignments/uri-schemes/prov/view-source">(archived)</a></li>
     <li><a href="https://firefox-source-docs.mozilla.org/devtools-user/view_source/index.html">View Source</a>, Firefox DevTools user documentation <a class="archived" href="https://web.archive.org/web/20261105213941/https://firefox-source-docs.mozilla.org/devtools-user/view_source/index.html">(archived)</a></li>
     <li><a href="https://hacks.mozilla.org/2015/10/view-source-conference/">View Source Conference</a>, Mozilla Hacks, 2015 <a class="archived" href="https://web.archive.org/web/20260415062347/https://hacks.mozilla.org/2015/10/view-source-conference/">(archived)</a></li>
-  </ul>
-</section>]]></content:encoded>
-  </item>
-  <item>
-    <title>jQuery 1.0: what $ really replaced</title>
-    <link>https://derek.io/nostalgiajs/essays/jquery/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/jquery/</guid>
-    <pubDate>Thu, 12 Nov 2026 04:41:10 GMT</pubDate>
-    <description>jQuery 1.0 shipped in August 2006 with a dollar sign borrowed from another library, and replaced a folder of copy-pasted fixes that its own author had been winning contests with.</description>
-    <content:encoded><![CDATA[<p class="lede">The dollar sign was second-hand, the best ideas were credited to other people, and the browsers spent the next decade copying it anyway.</p>
-
-<pre tabindex="0"><code>if ( $ )
-  jQuery._$ = $;
-
-var $ = jQuery;</code></pre>
-
-<p>Those lines sit about sixty lines into <a href="https://code.jquery.com/jquery-1.0.js">the file jQuery's CDN still serves as <code>jquery-1.0.js</code></a>. The last one is the famous one. The first two are more interesting, and the comment above them in the source says what they are for: "Map over the $ in case of overwrite." Before jQuery takes the dollar sign, it checks whether somebody else is already using it, and puts theirs somewhere safe.</p>
-
-<p>Somebody else was. By 2006 <code>$</code> already meant something on a lot of pages, and it meant something different. So the question in the title has two answers. The dollar sign replaced another library's dollar sign. And jQuery, the thing behind it, replaced a folder of small functions that every working developer carried from job to job, a few of which the author of jQuery had personally written.</p>
-
-<p><a href="https://blog.jquery.com/2006/08/26/jquery-10/">jQuery 1.0 was announced</a> on August 26, 2006. To see what it changed, start a year earlier.</p>
-
-<h2>Before: the utility belt</h2>
-
-<p>In 2005 the DOM worked, more or less, in every browser that mattered. The trouble was that it worked differently in each, and the standard way of doing things was long-winded even where it worked. You fetched one element with <code>document.getElementById</code>, or a list with <code>getElementsByTagName</code>, and then you looped. Attaching a click handler meant <code>addEventListener</code> in Mozilla, Opera and Safari, and <code>attachEvent</code> in Internet Explorer, which also forgot which element the handler belonged to.</p>
-
-<p>Nobody wrote this out fresh each time. You had a file, often called something like <code>common.js</code>, with an <code>addEvent()</code>, a function to find elements by class name, something to run code when the page loaded, and a wrapper to create an <code>XMLHttpRequest</code>. Each function had an author and a URL in a comment, and each had known bugs.</p>
-
-<p>The state of the art is nicely preserved on QuirksMode. On September 8, 2005, Peter-Paul Koch <a href="https://www.quirksmode.org/blog/archives/2005/09/addevent_recodi.html">launched a contest</a> to rewrite <code>addEvent()</code>, because the version everyone had been pasting "doesn't quite cut the cake any more." The judges were Koch, Scott Andrew LePera and Dean Edwards. The prize was "eternal and undying fame," plus a promise to "spread the winning entry as the new standard." Entries had to work in "Explorer 5+ Windows, Mozilla, Opera, and Safari."</p>
-
-<p>That contest shows how the web platform got patched in 2005. There was no package manager and no committee. A respected blogger held a competition, and the winning snippet was distributed by copy and paste. <a href="https://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html">The winner was announced</a> on October 18, and here it is, as edited by the judges:</p>
-
-<pre tabindex="0"><code>function addEvent( obj, type, fn )
-{
-  if (obj.addEventListener)
-    obj.addEventListener( type, fn, false );
-  else if (obj.attachEvent)
-  {
-    obj["e"+type+fn] = fn;
-    obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
-    obj.attachEvent( "on"+type, obj[type+fn] );
-  }
-}</code></pre>
-
-<p>The three lines in the <code>attachEvent</code> branch exist to make <code>this</code> work. As <a href="https://johnresig.com/blog/flexible-javascript-events/">the author's own write-up</a> put it, in Internet Explorer "the 'this' reference refers to the worthless 'window', when, in fact, it should refer to the parent object." The trick is to store the handler as a property of the element, keyed by the event type plus the function's entire source text, and call it from there. Koch wrote that "by far the most important reason" for the choice was "its brevity."</p>
-
-<p>The winner was John Resig, born in 1984 and so 21 at the time. His entry is still linked from his site, at a path under <code>/apps/jselect/</code>. Remember that folder name.</p>
-
-<p>Two other pieces of the belt matter here. In March 2003 Simon Willison had published <a href="https://simonwillison.net/2003/Mar/25/getElementsBySelector/"><code>document.getElementsBySelector</code></a>, "a javascript function which takes a standard CSS style selector and returns an array of elements objects." His example was <code>document.getElementsBySelector('div#main p a.external')</code>. And Sam Stephenson's Prototype library had a function called <code>$</code>. Its documentation still calls it <a href="http://api.prototypejs.org/dom/dollar/">"the cornerstone of Prototype"</a> and "a handy alias for <code>document.getElementById</code>." In Prototype, <code>$('nav')</code> hands you one element, by ID.</p>
-
-<h2>From a mock-up to 1.0</h2>
-
-<p>On August 22, 2005, two and a half weeks before the contest opened, Resig posted <a href="https://johnresig.com/blog/selectors-in-javascript/">"Selectors in Javascript"</a>. It was a reaction to a library called Behaviour, which let you attach functions to elements using CSS selectors. He liked the premise and disliked the typing. Behaviour, he wrote, "simply seems too tedious and verbose for everyday use." Here is its way of making list items delete themselves when clicked, quoted from the post:</p>
-
-<pre tabindex="0"><code>Behaviour.register({
-  '#example li': function(e){
-    e.onclick = function(){
-      this.parentNode.removeChild(this);
-    }
-  }
-});</code></pre>
-
-<p>And here is what Resig called "the same as above, done in my code":</p>
-
-<pre tabindex="0"><code>$('#example li').bind('click',function(){
-  this.parentNode.removeChild(this);
-});</code></pre>
-
-<p>There was no code behind it yet. He called it "a syntactical mock-up." What the post did have was a measurement. Under the heading "Syntactic fluff comparision" he stripped both versions down to the characters that carry no meaning:</p>
-
-<pre tabindex="0"><code>A: Behaviour.register({'':function(e){e.on=}});
-B: $('').bind('',);</code></pre>
-
-<p>I think that is the most important artifact in the whole story. The API was designed by counting keystrokes that were not the selector, the event name or the function. Everything left over was a cost. A third sample in the same post chained calls together, with <code>.set()</code>, <code>.bind()</code> and <code>.style()</code> one after another on the same selection. The whole shape of jQuery is there in August 2005, a year before 1.0.</p>
-
-<p>The first release came at BarCamp NYC in January 2006. The jQuery project <a href="https://blog.jquery.com/2026/01/17/jquery-4-0-0/">dates it to January 14</a>, the Saturday. <a href="https://johnresig.com/blog/barcampnyc-wrap-up/">Resig's own wrap-up</a>, posted on the 16th, lists his demo slot as "11am, Sunday," so take your pick. It was the third thing he showed in that slot, after two web apps. He announced it as "jQuery: New Wave Javascript" and added, with the confidence of someone who has not yet had to maintain it, "this code revolutionizes the way you can get Javascript to interact with HTML."</p>
-
-<p>Three days later a commenter named Kris De Volder pointed out that he already ran a project called JQuery, a Java code browser. Resig's reply explains the folder name from the contest: "I was, originally, going to use JSelect, but all the domain names were taken already."</p>
-
-<p>In 2015 Resig dug up that January 2006 code and <a href="https://johnresig.com/files/Genius%20-%20jQuery%20Annotation.htm">put it online with annotations</a>. It opens like this:</p>
-
-<pre tabindex="0"><code>function $(a,c) {
-  if ( a == null ) return;
-
-  <span class="c">// Since we're using Prototype's $ function,</span>
-  <span class="c">// be nice and have backwards compatability</span>
-  if ( typeof Prototype != "undefined" &amp;&amp; a.constructor == String ) {</code></pre>
-
-<p>So the original jQuery had no <code>jQuery</code> function at all. The library was a function named <code>$</code>, and its comment says outright whose name that was. If Prototype was on the page and you passed a plain word, it tried <code>getElementById</code> first, so old Prototype code kept working. By 1.0 the real name had become <code>jQuery</code>, <code>$</code> was an alias, and the previous owner's <code>$</code> was parked in <code>jQuery._$</code>. That is the snippet at the top of this essay.</p>
-
-<p>The 1.0 announcement is modest. "A lot of bugs fixed, a ton of new features, and a complete overhaul of how the jQuery development process is run." There was a Subversion checkout, a bug tracker, a "(Partial) Test Suite," and an update noting that 1.0 arrived "nearly one year after it was first conceived as a post in my weblog." The file header reads "jQuery - New Wave Javascript" and says it is dual licensed under MIT and GPL. The slogan most people associate with the project is not in the file. In 2010 Wikipedia's editors recorded the home page title as "jQuery: The write less, do more, JavaScript library."</p>
-
-<p>Then it moved fast. <a href="https://blog.jquery.com/2007/01/14/jquery-birthday-11-new-site-new-docs/">jQuery 1.1</a> shipped on the first birthday, January 14, 2007, claiming selectors "10x-20x faster" than 1.0.4 and a simplified API, with a compatibility plugin for people who had already written 1.0 code. GitHub <a href="https://github.blog/engineering/engineering-principles/removing-jquery-from-github-frontend/">adopted jQuery 1.2.1</a> in late 2007. And on September 28, 2008, Scott Guthrie <a href="https://weblogs.asp.net/scottgu/jquery-and-microsoft">announced</a> that "Microsoft will be shipping jQuery with Visual Studio going forward." The jQuery blog <a href="https://blog.jquery.com/2008/09/28/jquery-microsoft-nokia/">added the same day</a> that Nokia would ship it on phones with its web run-time.</p>
-
-<h2>Why this one won</h2>
-
-<p>There were plenty of JavaScript libraries by 2006, several of them larger and better funded. Here are the forces I think decided it. Each is arguable.</p>
-
-<p><strong>It used a query language people already knew.</strong> Anyone who had written a stylesheet could read <code>'#example li'</code>. Prototype's <code>$</code> took an ID. Willison's function took a selector but handed back a bare array, and you were on your own from there. jQuery took the selector and gave back something you could act on. The people building pages in 2006 were often designers who had learned CSS first, and this was the first JavaScript API written in their language.</p>
-
-<p><strong>It made the set the unit of work.</strong> Every method ran on every matched element and returned the set again. That removed the <code>for</code> loop, and it also removed the null check, because a selector that matched nothing gave you an empty set whose methods did nothing. That second property is the one people later turned against it. Hold on to it.</p>
-
-<p><strong>It took the utility belt and hid it.</strong> The 1.0 source is a museum of the kind of snippet described in the previous section, sometimes with the author credited in a comment. Here is part of how it decides the document is ready, without waiting for every image as <code>window.onload</code> did:</p>
-
-<pre tabindex="0"><code><span class="c">// If Mozilla is used</span>
-if ( jQuery.browser.mozilla || jQuery.browser.opera ) {
-  <span class="c">// Use the handy event callback</span>
-  document.addEventListener( "DOMContentLoaded", jQuery.ready, false );
-
-<span class="c">// If IE is used, use the excellent hack by Matthias Miller</span>
-<span class="c">// http://www.outofhanwell.com/blog/index.php?title=the_window_onload_problem_revisited</span>
-} else if ( jQuery.browser.msie ) {
-
-  <span class="c">// Only works if you document.write() it</span>
-  document.write("&lt;scr" + "ipt id=__ie_init defer=true " +
-    "src=//:&gt;&lt;\/script&gt;");</code></pre>
-
-<p>A third branch, for Safari, polls <code>document.readyState</code> on a timer. Three browsers, three unrelated techniques, one of them involving writing a script tag with a nonsense URL into the page. You typed <code>$(document).ready(fn)</code> and never saw any of it. I'd argue this was the real product. The selector engine got the attention, and the hidden branches saved the hours.</p>
-
-<p><strong>It was polite.</strong> jQuery kept nearly everything under one global name plus an alias, and it left <code>Object.prototype</code> and <code>Array.prototype</code> alone. It could sit on a page beside another library, which mattered a great deal when the page already had one and you were not allowed to remove it. <a href="https://api.jquery.com/jQuery.noConflict/">The documentation for <code>noConflict()</code></a> still explains the arrangement: "Old references of $ are saved during jQuery initialization; noConflict() simply restores them."</p>
-
-<p><strong>A platform vendor blessed it without taking it over.</strong> Guthrie's post is unusually clear about why Microsoft did not build its own. The team looked at adding selectors and animation to ASP.NET AJAX and "quickly realized that the jQuery support for these scenarios is already excellent." So: "We will distribute the jQuery JavaScript library as-is, and will not be forking or changing the source." The ASP.NET MVC download would "add the jQuery library by default to all new projects." For a large population of corporate developers, that sentence moved jQuery from something you had to justify to something that was simply there.</p>
-
-<h2>Living with jQuery</h2>
-
-<p>Success produced its own set of chores. The first was the dollar sign itself. With two libraries on a page, whoever loaded last owned <code>$</code>. The idiom that solved it is on the same documentation page, and it became the standard way to open a jQuery plugin:</p>
-
-<pre tabindex="0"><code>jQuery.noConflict();
-(function( $ ) {
-  $(function() {
-    <span class="c">// More code using $ as alias to jQuery</span>
-  });
-})(jQuery);</code></pre>
-
-<p>Give the global <code>$</code> back, then take a private one as a function parameter. It is the same move as the lines at the top of this essay, made by the user instead of the library.</p>
-
-<p>The second chore was upgrades. The 1.1 release, less than five months after 1.0, already needed upgrade guides in three languages and a "jQuery 1.0 Compatibility Plugin." That set a pattern the project kept. Twenty years on, the 4.0 release still ships alongside an upgrade guide and a migration plugin.</p>
-
-<p>The third was the standards process, and here the library authors did something new. In April 2008, with browsers about to ship a native <code>querySelectorAll</code>, Resig <a href="https://johnresig.com/blog/thoughts-on-queryselectorall/">wrote to the W3C working group</a> with objections. The main one concerned queries that start from an element. Given this markup:</p>
-
-<pre tabindex="0"><code>&lt;div&gt;&lt;p id="foo"&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;</code></pre>
-
-<p>asking the <code>foo</code> paragraph for <code>'div span'</code> returns the span, although there is no <code>div</code> inside the paragraph. The whole document is searched and the results are filtered afterwards. Every library did the opposite. Resig called the native behaviour "completely unacceptable" and "borderline useless to libraries." He had canvassed the other authors, and quoted Andrew Dupont of Prototype: "it violates principle of least surprise and bears no resemblance to the APIs in the wild."</p>
-
-<p>They lost that one. I ran Resig's test case in a current Chromium while writing this, and <code>foo.querySelectorAll('div span')</code> still returns one element. You need to write <code>':scope div span'</code> to get zero.</p>
-
-<h2>The dollar sign after jQuery</h2>
-
-<p><strong>The platform copied the homework, slowly.</strong> When GitHub <a href="https://github.blog/engineering/engineering-principles/removing-jquery-from-github-frontend/">removed jQuery in 2018</a>, its engineers listed what had made that possible, and the list reads as jQuery's table of contents translated into standards: "The <code>$(selector)</code> pattern can easily be replaced with <code>querySelectorAll()</code>," class switching with <code>Element.classList</code>, animation in CSS, <code>$.ajax</code> with the Fetch Standard. The dates are worth a look. <a href="https://www.w3.org/TR/selectors-api/">Selectors API Level 1</a> became a W3C Recommendation on February 21, 2013, seven and a half years after a student's blog post about fluff. jQuery got <a href="https://api.jquery.com/closest/"><code>.closest()</code></a> in version 1.3, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>Element.closest()</code></a> is now a standard DOM method with the same name and the same job.</p>
-
-<p><strong>jQuery turned into a polyfill for its own imitation.</strong> This is the part I had not put together before reading the source. <a href="https://code.jquery.com/jquery-1.3.2.js">jQuery 1.3.2</a>, dated February 2009 in its header, already contains this:</p>
-
-<pre tabindex="0"><code>if ( !seed &amp;&amp; context.nodeType === 9 &amp;&amp; !isXML(context) ) {
-  try {
-    return makeArray( context.querySelectorAll(query), extra );
-  } catch(e){}
-}
-
-return oldSizzle(query, context, extra, seed);</code></pre>
-
-<p>Try the browser's version, and if it throws, fall back to your own. Notice <code>nodeType === 9</code>. The native path is used only when the query starts from the document, never from an element, which is the case Resig had told the working group was broken. I can't prove that was the motive, and the comments nearby mention a Safari bug as well, but the effect is the same. The library adopted the standard where the standard agreed with it and routed around it everywhere else. We now call this pattern a polyfill or progressive enhancement. In 2009 it was a library quietly making itself less necessary, one <code>try</code> block at a time.</p>
-
-<p><strong>The empty set became the argument against it.</strong> GitHub's post gives a three-line example, <code>$('.js-widget').addClass('is-loading').show()</code>, and then asks: "Did the author expect one or more js-widget elements on this page?" If the class name vanishes from the markup, nothing fails. "By default, jQuery silently skips the whole expresion when nothing matched the initial selector; but to us, such behavior was a bug rather than a feature." They also found that chaining "doesn't lend itself well to static analysis, since almost every result of a jQuery method call is of the same type." The feature that made jQuery pleasant for one person on one page was the same feature that made it hard for hundreds of engineers and a type checker. My own reading is that the language later settled on a compromise. Optional chaining, <code>el?.classList.add()</code>, is jQuery's silent no-op made opt-in, one question mark at a time.</p>
-
-<p><strong>The dollar sign outlived the dependency.</strong> Open the console in Chrome on a page with no libraries and type <code>$('img')</code>. It works. <a href="https://developer.chrome.com/docs/devtools/console/utilities">Chrome's documentation</a> lists <code>$(selector)</code> as "a shortcut for the <code>document.querySelector()</code> function," with a note that if the page uses "a library such as jQuery that uses $, this functionality will be overwritten." The tool yields the name to the library, the way the library once yielded it to Prototype.</p>
-
-<p><strong>It is still most of the web.</strong> <a href="https://w3techs.com/technologies/details/js-jquery">W3Techs</a>, on November 12, 2026, has jQuery on 63.9% of all websites, and 16.9% of those jQuery sites are still on version 1. The project is not a ruin either. jQuery 4.0.0 came out on January 17, 2026, "the first major version release in almost 10 years," dropping support for Internet Explorer 10 and older while keeping IE 11 for one more round. The retreat has mostly happened among people who write new code. <a href="https://blog.getbootstrap.com/2021/05/05/bootstrap-5/">Bootstrap 5</a> shipped in May 2021 under the heading "No more jQuery!" The site <a href="https://youmightnotneedjquery.com/">You Might Not Need jQuery</a> is careful about its own scope: "jQuery and its cousins are great, and by all means use them if it makes it easier to develop your application." Its plea is aimed at library authors who add a dependency for three function calls.</p>
-
-<p>One more thing in that 2015 look back deserves attention. Resig wrote that "jQuery would not have existed if it wasn't for Sam Stephenson creating Prototype, Simon Willison creating getElementsBySelector, Valerio Proietti creating moo.fx, and especially Dean Edwards creating so much: event binding, CSS selector libraries, DOM ready techniques and more." Take him at his word and jQuery contained very little that was new. Selectors in JavaScript existed. <code>$</code> existed. The event fix was a contest entry. What Resig added was the counting: the decision that the right API was the one with the least text between the thing you meant and the thing you had to type. Does that count as invention? I think it does, and I think it is the kind that standards bodies are worst at and individuals with a blog are best at.</p>
-
-<h2>The takeaway</h2>
-
-<p>The dollar sign replaced two things. On the page, it replaced the utility belt: the pasted <code>addEvent()</code>, the onload hack, the <code>ActiveXObject</code> wrapper, each with its author's name in a comment and its own set of bugs. jQuery gathered them behind one function and one query language that every CSS author already knew, and it was polite enough to coexist with whatever was on the page before it arrived. That combination, more than any single feature, is why it won.</p>
-
-<p>In the longer run it replaced the process by which the web platform got fixed. In 2005 that process was a blog contest. By 2008 it was a library author writing to a W3C list on behalf of his users, and by 2013 the selector function was a W3C Recommendation. jQuery's reward for being right was to become optional. It is hard to think of a better outcome for a library, or a rarer one, and it is still loading on roughly two pages out of three while you decide whether you need it.</p>
-
-<section class="sources" aria-labelledby="sources-h">
-  <h2 id="sources-h">Sources and further reading</h2>
-  <ul>
-    <li><a href="https://johnresig.com/blog/selectors-in-javascript/">Selectors in Javascript</a>, John Resig, 2005 <a class="archived" href="https://web.archive.org/web/20261025165330/https://johnresig.com/blog/selectors-in-javascript/">(archived)</a></li>
-    <li><a href="https://johnresig.com/blog/barcampnyc-wrap-up/">BarCampNYC Wrap-up</a>, John Resig, 2006, with the naming exchange in the comments <a class="archived" href="https://web.archive.org/web/20260922045923/https://johnresig.com/blog/barcampnyc-wrap-up/">(archived)</a></li>
-    <li><a href="https://blog.jquery.com/2006/08/26/jquery-10/">jQuery 1.0</a>, John Resig, jQuery blog, 2006 <a class="archived" href="https://web.archive.org/web/20261027143124/https://blog.jquery.com/2006/08/26/jquery-10/">(archived)</a></li>
-    <li><a href="https://code.jquery.com/jquery-1.0.js">jquery-1.0.js</a>, as served by the jQuery CDN (its header carries an October 2006 revision date) <a class="archived" href="https://web.archive.org/web/20260815151532/https://code.jquery.com/jquery-1.0.js">(archived)</a></li>
-    <li><a href="https://johnresig.com/files/Genius%20-%20jQuery%20Annotation.htm">The original jQuery source code, January 2006</a>, and <a href="https://johnresig.com/blog/annotated-version-of-the-original-jquery-release/">Annotated Version of the Original jQuery Release</a>, John Resig, 2015 <a class="archived" href="https://web.archive.org/web/20260511112506/https://johnresig.com/files/Genius%20-%20jQuery%20Annotation.htm">(archived)</a></li>
-    <li><a href="https://www.quirksmode.org/blog/archives/2005/09/addevent_recodi.html">addEvent() recoding contest</a> and <a href="https://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html">... and the winner is ...</a>, Peter-Paul Koch, QuirksBlog, 2005 <a class="archived" href="https://web.archive.org/web/20260615052939/https://www.quirksmode.org/blog/archives/2005/09/addevent_recodi.html">(archived)</a></li>
-    <li><a href="https://johnresig.com/blog/flexible-javascript-events/">Flexible Javascript Events</a>, John Resig, 2005 <a class="archived" href="https://web.archive.org/web/20261106154529/https://johnresig.com/blog/flexible-javascript-events/">(archived)</a></li>
-    <li><a href="https://simonwillison.net/2003/Mar/25/getElementsBySelector/">getElementsBySelector()</a>, Simon Willison, 2003 <a class="archived" href="https://web.archive.org/web/20260717150826/https://simonwillison.net/2003/Mar/25/getElementsBySelector/">(archived)</a></li>
-    <li><a href="http://api.prototypejs.org/dom/dollar/">$ utility</a>, Prototype API documentation <a class="archived" href="https://web.archive.org/web/20260826152923/http://api.prototypejs.org/dom/dollar/">(archived)</a></li>
-    <li><a href="https://blog.jquery.com/2007/01/14/jquery-birthday-11-new-site-new-docs/">jQuery Birthday: 1.1, New Site, New Docs</a>, John Resig, jQuery blog, 2007 <a class="archived" href="https://web.archive.org/web/20261024234519/https://blog.jquery.com/2007/01/14/jquery-birthday-11-new-site-new-docs/">(archived)</a></li>
-    <li><a href="https://weblogs.asp.net/scottgu/jquery-and-microsoft">jQuery and Microsoft</a>, Scott Guthrie, 2008 <a class="archived" href="https://web.archive.org/web/20241227205738/https://weblogs.asp.net/scottgu/jquery-and-microsoft">(archived)</a></li>
-    <li><a href="https://blog.jquery.com/2008/09/28/jquery-microsoft-nokia/">jQuery, Microsoft, and Nokia</a>, John Resig, jQuery blog, 2008 <a class="archived" href="https://web.archive.org/web/20261020124723/https://blog.jquery.com/2008/09/28/jquery-microsoft-nokia/">(archived)</a></li>
-    <li><a href="https://johnresig.com/blog/thoughts-on-queryselectorall/">Thoughts on querySelectorAll</a>, John Resig, 2008 <a class="archived" href="https://web.archive.org/web/20260905154559/https://johnresig.com/blog/thoughts-on-queryselectorall/">(archived)</a></li>
-    <li><a href="https://code.jquery.com/jquery-1.3.2.js">jquery-1.3.2.js</a>, jQuery CDN, 2009 <a class="archived" href="https://web.archive.org/web/20261027111419/https://code.jquery.com/jquery-1.3.2.js">(archived)</a></li>
-    <li><a href="https://www.w3.org/TR/selectors-api/">Selectors API Level 1</a>, W3C Recommendation, 2013 <a class="archived" href="https://web.archive.org/web/20261106042717/https://www.w3.org/TR/selectors-api/">(archived)</a></li>
-    <li><a href="https://api.jquery.com/jQuery.noConflict/">jQuery.noConflict()</a> and <a href="https://api.jquery.com/closest/">.closest()</a>, jQuery API documentation <a class="archived" href="https://web.archive.org/web/20261021030447/https://api.jquery.com/jQuery.noConflict/">(archived)</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest">Element: closest() method</a>, MDN <a class="archived" href="https://web.archive.org/web/20261106082007/https://developer.mozilla.org/en-US/docs/Web/API/Element/closest">(archived)</a></li>
-    <li><a href="https://github.blog/engineering/engineering-principles/removing-jquery-from-github-frontend/">Removing jQuery from GitHub.com frontend</a>, GitHub Engineering, 2018 <a class="archived" href="https://web.archive.org/web/20261101224116/https://github.blog/engineering/engineering-principles/removing-jquery-from-github-frontend/">(archived)</a></li>
-    <li><a href="https://blog.getbootstrap.com/2021/05/05/bootstrap-5/">Bootstrap 5</a>, Bootstrap blog, 2021 <a class="archived" href="https://web.archive.org/web/20260818220944/https://blog.getbootstrap.com/2021/05/05/bootstrap-5/">(archived)</a></li>
-    <li><a href="https://youmightnotneedjquery.com/">You Might Not Need jQuery</a> <a class="archived" href="https://web.archive.org/web/20261103115732/https://youmightnotneedjquery.com/">(archived)</a></li>
-    <li><a href="https://developer.chrome.com/docs/devtools/console/utilities">Console Utilities API reference</a>, Chrome DevTools documentation <a class="archived" href="https://web.archive.org/web/20261023234538/https://developer.chrome.com/docs/devtools/console/utilities">(archived)</a></li>
-    <li><a href="https://blog.jquery.com/2026/01/17/jquery-4-0-0/">jQuery 4.0.0</a>, Timmy Willison, jQuery blog, 2026 <a class="archived" href="https://web.archive.org/web/20261106055435/https://blog.jquery.com/2026/01/17/jquery-4-0-0/">(archived)</a></li>
-    <li><a href="https://w3techs.com/technologies/details/js-jquery">Usage statistics and market share of jQuery for websites</a>, W3Techs, read November 12, 2026</li>
-    <li><a href="https://en.wikipedia.org/wiki/JQuery">jQuery</a> and <a href="https://en.wikipedia.org/wiki/John_Resig">John Resig</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261106125635/https://en.wikipedia.org/wiki/JQuery">(archived)</a></li>
-  </ul>
-</section>]]></content:encoded>
-  </item>
-  <item>
-    <title>getYear() and the year 19100</title>
-    <link>https://derek.io/nostalgiajs/essays/getyear/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/getyear/</guid>
-    <pubDate>Thu, 12 Nov 2026 03:15:17 GMT</pubDate>
-    <description>One small Date method returned 100, 2000 or 100 again for the year 2000 depending on the browser, got fixed three different ways, and is still in every browser today.</description>
-    <content:encoded><![CDATA[<p class="lede">A method that was right, got fixed, got fixed back, and is still shipping in the browser you are reading this in.</p>
-
-<pre tabindex="0"><code>var now = new Date();
-"19" + now.getYear();  <span class="c">// "19100"</span></code></pre>
-
-<p>Through the late 1990s, lines like that one printed the year in page footers and "last updated" stamps, and they were correct every time anyone checked. In 1998 it said 1998. In 1999 it said 1999. On the first morning of 2000 it said 19100, unless the visitor's browser was one of the ones where it said 192000.</p>
-
-<p>The usual Y2K story is about two-digit years stored in old mainframe records to save space. This one is different, and I think more useful to a working developer. <code>getYear()</code> never stored two digits. It returned a perfectly unambiguous number, the documentation said what the number was, and the trouble came from three separate attempts to make it nicer. By January 2000 the same call gave different answers in browsers from the same vendor, and the standard had already given up on it.</p>
-
-<h2>Before: years since 1900</h2>
-
-<p>The convention is older than the web. C's <code>struct tm</code>, the structure that <code>localtime()</code> fills in, has a member called <code>tm_year</code>, and <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html">the POSIX definition of <code>&lt;time.h&gt;</code></a> describes it in three words: "Years since 1900." The neighbouring member, <code>tm_mon</code>, is the month of the year from 0 to 11. If both of those look familiar, it is because you have been living with them in JavaScript for thirty years.</p>
-
-<p>They got there by way of Java. Java 1.0 shipped a class called <code>java.util.Date</code> with a <code>getYear()</code> that returned the year minus 1900 and a <code>getMonth()</code> that counted from zero. JavaScript took the whole thing. Allen Wirfs-Brock and Brendan Eich, in their history paper <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>, put it bluntly: "JavaScript 1.0 Date was a direct transliteration, bugs and all, of the java.util.Date class of Java 1.0." The list of inherited details they give includes "externally numbering months from 0–11, and Year 2000 ambiguities that were present in the Java design." The reason, they write, was "Java interoperability requirements."</p>
-
-<p>Eich has been less formal about it elsewhere. In 2003 Eric Lippert, who worked on Microsoft's JScript, wrote <a href="https://ericlippert.com/2003/10/06/erics-blog-for-january-279th-2003/">a post about JavaScript's date oddities</a> and wondered aloud why months start at zero. The post preserves Eich's reply: "My answer: because that's how java.util.Date did it." JavaScript was under orders to be Java's little brother, and the team was "trying not to reinvent wheels to be any more or less round than Java's equivalent." Then the line that covers today's topic: "Unfortunately, java.util.Date had a pile of y2k and usability bugs."</p>
-
-<p>So Navigator 2 shipped a <code>getYear()</code> that returned the year minus 1900. For 1996 that is 96. It looks exactly like a two-digit year, which is the whole problem. A number that happens to look like "the last two digits" for the first few years of a language's life will be used as the last two digits, whatever the manual says.</p>
-
-<h2>Three fixes and a standard</h2>
-
-<p>Here is the sequence, as well as the surviving sources let me reconstruct it.</p>
-
-<p><strong>1996: Netscape fixes it.</strong> Navigator 3 changed the method. Danny Goodman, explaining in 1998 why the calendar examples in the JavaScript Bible were about to break, <a href="https://dannyg.com/support/calendarY2K.html">described the change</a>: "getYear() started its life returning the year value as the year minus 1900. But starting with Navigator 3, the method returned a four-digit year for years starting with 2000." The new rule was 96 for 1996, 99 for 1999, then 2000 for 2000. My best guess at the reasoning is that somebody looked at 100 and saw a Y2K bug waiting to be reported. That same year, Microsoft's first JScript shipped in Internet Explorer 3 with the original behaviour. Microsoft's <a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/x0a9sc10(v=vs.84)">archived JScript reference</a> still records it: for JScript 1.0, "the year 1899 is returned as -1 and the year 2000 is returned as 100."</p>
-
-<p><strong>1997: Microsoft fixes it the same way, and Java walks away.</strong> Internet Explorer 4 adopted the Navigator 3 rule. The same Microsoft page gives the examples: "1996 is returned as 96, but 1825 and 2025 are returned as-is." Lippert's version, from inside the building, is that the original IE implementation was the mistake: "Fortunately we corrected that incompatibility in the second version." Meanwhile the method's source had disowned it. JDK 1.1, in February 1997, deprecated <code>java.util.Date</code>'s year, month and day methods in favour of a new <code>Calendar</code> class. <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html">The Java 8 documentation</a> for <code>getYear()</code> still opens with the word "Deprecated."</p>
-
-<p><strong>June 1997: the standard writes down the original.</strong> The <a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">first edition of ECMA-262</a> had to say what <code>getYear</code> does, and with the browsers disagreeing, it picked the oldest answer. Section 15.9.5.5 ends in one step: "Return YearFromTime(LocalTime(t)) − 1900." It also carries an apology in advance: "This function is specified here for backwards compatibility only. The function getFullYear is much to be preferred for nearly all purposes, because it avoids the 'year 2000 problem.'" That sentence was published two and a half years before the year 2000.</p>
-
-<p><strong>August 1998: Netscape un-fixes it.</strong> Navigator 4.06 shipped JavaScript 1.3 with a claim of ECMA-262 compliance, and compliance meant going back to year minus 1900. Phil Schwartau, handling a bug report for Mozilla in July 2000, relayed the developers' account in <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=45764">a Bugzilla comment</a>: "Between JavaScript versions 1.2 and 1.3, we rewrote the Javascript Date object from the ground up." The new code followed the draft standard. The resulting behaviour "was different from many (but not all) JavaScript Date implementations, but we retained it to be compliant with the evolving standard."</p>
-
-<p><strong>December 1999: the standard gives up.</strong> The third edition of ECMA-262, approved on December 16, 1999, moved <code>getYear</code> out of the main text and into Annex B, the appendix for things implementations may keep for old pages' sake. Schwartau's account covers Netscape's dilemma at that point. They had just changed the method to match a standard that no longer required it. "Rather than revert to the old getYear behavior and force scriptwriters to be aware of yet another version difference, we decided to keep the year - 1900 behavior for getYear, and encourage the use of getFullYear." And then, with admirable restraint: "It's not an ideal situation, but that's the history."</p>
-
-<p>Put it all in one place and this is what a script could expect on New Year's Day:</p>
-
-<pre tabindex="0"><code><span class="c">// new Date(2000, 0, 1).getYear()</span>
-<span class="c">// Navigator 2, IE 3         100</span>
-<span class="c">// Navigator 3              2000</span>
-<span class="c">// IE 4 and IE 5            2000</span>
-<span class="c">// Navigator 4.06 and up     100</span>
-<span class="c">// ECMA-262                  100</span></code></pre>
-
-<p>Then the day came. The mainframes mostly held. The web got a rash of cosmetic damage, and not only from JavaScript, since Perl's <code>localtime</code> and Java's <code>getYear()</code> followed the same C convention. <a href="https://en.wikipedia.org/wiki/Year_2000_problem">Wikipedia's account of the day</a> lists the US Naval Observatory, keeper of the country's official time, giving the date on its website as 1 Jan 19100. Météo-France showed a forecast map dated 01/01/19100. Al Gore's presidential campaign site briefly announced that it was 3 January 19100.</p>
-
-<p>On that same January 3, two things were published. On irt.org, Martin Webb posted <a href="https://www.irt.org/articles/js199/">"JavaScript Y2K Issues"</a>, a careful field guide to the mess. And at 23:39 UTC someone opened <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=22964">Mozilla bug 22964</a>, "JavaScript: getYear returns '100' for 2000." Two hours and twenty minutes later John Morrison closed it as invalid: "this behaviour is as designed and documented."</p>
-
-<h2>Why a one-line method went so wrong</h2>
-
-<p>It would be easy to file this under carelessness. I don't think that's fair to anyone involved. Each decision had a defensible reason behind it, and the reasons pulled in different directions.</p>
-
-<p><strong>A marketing mandate picked the API.</strong> Nobody at Netscape sat down and designed a year accessor that returned 95. They were told the language had to sit alongside Java and script its applets, so the date object matched Java's method for method. Java had copied the shape of C's time structure. The convention arrived in your browser third-hand, and each hand assumed the previous one had thought about it.</p>
-
-<p><strong>The original design was correct, and that made it fragile.</strong> Raymond Chen made this point in the comments on Lippert's post. The C convention "was actually good and correct," he wrote: "if you paid close attention and always added 1900 to the year, you always got the right answer." The catch is "if you paid close attention." For five years the wrong mental model, that this was a two-digit year, produced right answers. An API that rewards the wrong model until a known future date is a trap, however accurate the documentation.</p>
-
-<p><strong>The fix destroyed information.</strong> Chen again, on the Navigator 3 and IE 4 rule: "if you called getYear and got 80 back, you could never be sure whether that was the year 80 or the year 1980." Year minus 1900 is reversible. The friendlier rule is a two-digit year with an escape hatch, and it broke the one thing the old method was good for, which was subtracting one year from another. A script that computed someone's age as this year minus birth year would get 2000 minus 65.</p>
-
-<p><strong>Following the standard was a moving target.</strong> Netscape did what developers always say they want vendors to do. It tracked the draft spec, even where that meant changing shipped behaviour. Then the committee demoted the method, and Netscape was left holding a behaviour change it had made for the sake of a requirement that no longer existed. Microsoft ignored the standard on this point and stayed compatible with its own previous release, which from the point of view of an intranet full of IE-only pages was the responsible choice.</p>
-
-<p><strong>Nobody could remove anything.</strong> By 1997 the method was known to be a hazard, a replacement existed, and the spec said so in writing. It stayed, because pages were already calling it and a browser that breaks existing pages loses to the browser that doesn't. Hold that thought for the last section.</p>
-
-<h2>How everyone coped</h2>
-
-<p>The obvious answer was <code>getFullYear()</code>, which the version 4 browsers and the standard had added for exactly this purpose. The obvious answer was not available. As Webb put it, "so long as there are people using Netscape Navigator 2 and 3 and Internet Explorer 3, there will always be a need to use getYear(), as these browsers obviously do not support getFullYear()." So the era's solution was to keep calling the broken method and launder the result.</p>
-
-<p>Webb's version is the tidiest:</p>
-
-<pre tabindex="0"><code>function y2k(number) { return (number &lt; 1000) ? number + 1900 : number; }</code></pre>
-
-<p>If the browser gave you a small number, it meant years since 1900. If it gave you a big one, it was already a year. Goodman's patch for the book's calendars, dated 16 September 1998 in its own comment, was the same idea with the threshold at 1900 and the name <code>get4DigitYear</code>. Both carry the cost Chen described. Webb's cannot represent a year before 1000 and Goodman's cannot represent one before 1900, because the function can no longer tell 80 from 1980. For a page footer, nobody minded.</p>
-
-<p>Peter-Paul Koch's QuirksMode <a href="https://quirksmode.org/js/introdate.html">went further</a>. The page introduced the problem with "Netscape devised a complex solution that even Netscape itself doesn't completely follow," noted that "Netscape 3 (and only 3) follows Explorer," and then recommended throwing away everything except the last two digits and rebuilding the century from scratch:</p>
-
-<pre tabindex="0"><code>function takeYear(theDate) {
-  x = theDate.getYear();
-  var y = x % 100;
-  y += (y &lt; 38) ? 2000 : 1900;
-  return y;
-}</code></pre>
-
-<p>Why 38? "Because Epoch Time will end in 2038." That is a Y2K workaround whose expiry date is the next date bug on the calendar, written down cheerfully and on purpose. I find it hard not to admire.</p>
-
-<p>My favourite coping strategy is in the report that opened <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=45764">that same Mozilla bug</a> in July 2000. The reporter's own code handled the year like this:</p>
-
-<pre tabindex="0"><code><span class="c">// javascript .getYear() isn't Y2K compliant</span>
-datedisplay.setAttribute("value", dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"/"+(2100-dateObj.getYear())+" "+hour+":"+minutes);</code></pre>
-
-<p>In 2000, <code>getYear()</code> returns 100, and 2100 minus 100 is 2000. In 2001 it returns 101, and the page announces that it is 1999. That fix was good for exactly twelve months, and to be fair, it was written in one of them.</p>
-
-<h2>What became of getYear()</h2>
-
-<p><strong>The bug report became the documentation.</strong> Bug 22964 was closed in two hours and then refused to stay quiet. It has 67 duplicates. The last was filed in July 2013. Of its 80 comments, 51 date from 2005, which I'd guess is what happens when a browser built on that engine starts taking real market share and meets a web tested only in Internet Explorer. The thread contains the entire standards-versus-reality argument in miniature. One commenter quotes Annex B and concludes: "Mozilla should behave as it behaves now, and IE is wrong." Another answers with the point that browser vendors eventually organised their whole philosophy around: "the Mozilla user who browses the Internet CANNOT use getFullYear instead of getYear because he is not the author of the page he is browsing!!!" Both were right. The author of the page and the person hurt by the page are different people, and only one of them can deploy a fix.</p>
-
-<p><strong>The standard won, more than a decade late.</strong> <a href="https://www.webplatform.org/docs/javascript/Date/getYear">The reference page on WebPlatform.org</a> records the end of the split: "In Internet Explorer 3.0, and then in Internet Explorer versions starting with Internet Explorer 9 standards mode, the value returned is the stored year minus 1900." So for the year 2000, Internet Explorer's answer went 100, then 2000 from IE 4 through IE 8, then 100 again. A page that had relied on the middle answer for a decade would break on upgrade, in the name of interoperability. And the change applied only in IE9's standards mode, so the older document modes went on giving the old answer. The fix for the fix for the fix came with a switch.</p>
-
-<p><strong>Annex B is a museum that charges no admission and never closes.</strong> Wirfs-Brock and Eich describe what the committee thought it was doing in 1999 by moving "the non-Y2K compliant Date methods" to an annex: the hope was that it "would signal that these were deprecated features, which should not be used and that implementations were empowered to eventually remove them." Their verdict: "This was a naïve expectation." Browser makers would not remove anything a page might use, because "some Web pages never go away." <a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">Today's Annex B</a> has stopped pretending. It says its contents "are required when the ECMAScript host is a web browser," and that every feature in it has "one or more undesirable characteristics and in the absence of legacy usage would be removed from this specification." The Y2K warning from 1997 is still there, nearly word for word. So is the method. I ran <code>new Date().getYear()</code> in a current Chromium build while writing this and got 126.</p>
-
-<p><strong>The replacement took thirty years.</strong> <a href="https://github.com/tc39/proposal-temporal">Temporal</a>, the new date and time API, is now at Stage 4 at TC39, and its README opens with a sentence nobody will dispute: "Date has been a long-standing pain point in ECMAScript." <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">MDN</a> describes it as "designed as a full replacement for the Date object," and is unsentimental about the original: "the Date API is based on the poorly designed java.util.Date class from Java." In Temporal a date's <code>year</code> is the year and January is month 1. MDN also still flags it as limited availability, not yet in every major browser. And notice the form the fix takes. Temporal is a new global object sitting beside <code>Date</code>. It replaces nothing, because nothing can be replaced. Java reached the same arrangement decades earlier: its <code>getYear()</code> was deprecated in 1997 and was still in the API documentation, deprecation notice attached, as of Java 8.</p>
-
-<p>There is a pattern in that list that I think goes beyond dates. Every change made to <code>getYear()</code> in place broke somebody's working page: Netscape's in 1996, Microsoft's in 1997, Netscape's again in 1998, Microsoft's again with IE9. The only move that helped was the one that left the old method alone and added <code>getFullYear()</code> next to it. Later this turned into a slogan: don't break the web. The people who wrote the 1997 standard were already learning it the hard way, from a function with one line of arithmetic in it.</p>
-
-<h2>The takeaway</h2>
-
-<p>The original <code>getYear()</code> was never wrong. It returned years since 1900, as documented, in Navigator 2, and it returns that today. What failed was everything around it: a borrowed design that looked like something it wasn't, two vendors fixing it in place at different times, and a standard that arrived after the fixes and sided with the original. The lesson I'd take is that once an API is on the web, changing what it returns is the most expensive thing you can do to it, and it stays expensive even when the change is an improvement. Add the new thing beside it, mark the old one as legacy, and accept that you will be shipping both for the rest of your career.</p>
-
-<p>Which, if you started in the 1990s, you have been. The line at the top of this essay still runs. It prints 19126 this year, in any browser that follows the specification. Somewhere there is probably a page where it does.</p>
-
-<section class="sources" aria-labelledby="sources-h">
-  <h2 id="sources-h">Sources and further reading</h2>
-  <ul>
-    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
-    <li><a href="https://ericlippert.com/2003/10/06/erics-blog-for-january-279th-2003/">Eric's Blog for January 279th, 2003</a>, Eric Lippert, 2003, with replies from Brendan Eich and Raymond Chen <a class="archived" href="https://web.archive.org/web/20240915103006/https://ericlippert.com/2003/10/06/erics-blog-for-january-279th-2003/">(archived)</a></li>
-    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">ECMA-262, 1st edition</a>, Ecma, June 1997 (PDF; see section 15.9.5.5) <a class="archived" href="https://web.archive.org/web/20261105185941/https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">(archived)</a></li>
-    <li><a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">ECMAScript Annex B: Additional ECMAScript Features for Web Browsers</a>, Ecma TC39, current draft <a class="archived" href="https://web.archive.org/web/20261105185938/https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">(archived)</a></li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=22964">Bug 22964: JavaScript: getYear returns "100" for 2000</a>, Mozilla Bugzilla, 2000 to 2013 <a class="archived" href="https://web.archive.org/web/20250615043950/https://bugzilla.mozilla.org/show_bug.cgi?id=22964">(archived)</a></li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=45764">Bug 45764: Y2K error in .getYear()</a>, Mozilla Bugzilla, 2000, with Phil Schwartau's history of the Netscape change <a class="archived" href="https://web.archive.org/web/20250421205506/https://bugzilla.mozilla.org/show_bug.cgi?id=45764">(archived)</a></li>
-    <li><a href="https://www.irt.org/articles/js199/">JavaScript Y2K Issues</a>, Martin Webb, irt.org, 2000 <a class="archived" href="https://web.archive.org/web/20240812122852/https://www.irt.org/articles/js199/">(archived)</a></li>
-    <li><a href="https://dannyg.com/support/calendarY2K.html">JSBible 2/3 Calendar Scripts and Y2K</a>, Danny Goodman, 1998 <a class="archived" href="https://web.archive.org/web/20260412192610/http://www.dannyg.com/support/calendarY2K.html">(archived)</a></li>
-    <li><a href="https://quirksmode.org/js/introdate.html">Introduction to Date and Time</a>, Peter-Paul Koch, QuirksMode <a class="archived" href="https://web.archive.org/web/20260528205207/https://www.quirksmode.org/js/introdate.html">(archived)</a></li>
-    <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/x0a9sc10(v=vs.84)">getYear Method (Windows Scripting - JScript)</a>, Microsoft, archived <a class="archived" href="https://web.archive.org/web/20240131135705/https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/x0a9sc10%28v=vs.84%29">(archived)</a></li>
-    <li><a href="https://www.webplatform.org/docs/javascript/Date/getYear">getYear</a>, WebPlatform.org <a class="archived" href="https://web.archive.org/web/20170306095912/https://www.webplatform.org/docs/javascript/Date/getYear/">(archived)</a></li>
-    <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html">java.util.Date</a>, Java SE 8 API documentation, Oracle <a class="archived" href="https://web.archive.org/web/20261027073259/https://docs.oracle.com/javase/8/docs/api/java/util/Date.html">(archived)</a></li>
-    <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html">&lt;time.h&gt;</a>, The Open Group Base Specifications <a class="archived" href="https://web.archive.org/web/20261101143519/https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html">(archived)</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Year_2000_problem">Year 2000 problem</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261106231109/https://en.wikipedia.org/wiki/Year_2000_problem">(archived)</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear">Date.prototype.getYear()</a>, MDN <a class="archived" href="https://web.archive.org/web/20261101161627/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear">(archived)</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">Temporal</a>, MDN <a class="archived" href="https://web.archive.org/web/20261105215431/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">(archived)</a></li>
-    <li><a href="https://github.com/tc39/proposal-temporal">Temporal proposal</a>, Ecma TC39 <a class="archived" href="https://web.archive.org/web/20261016173346/https://github.com/tc39/proposal-temporal">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>
