@@ -685,6 +685,33 @@
         "What the spans around every heading and paragraph were for is my reading of the markup and of the FAQ's line about hidden text. Shea's comments explain the six extra divs but not the spans."
       ],
       "published": "2026-11-23T22:09:34Z"
+    },
+    {
+      "slug": "firefox-ad",
+      "title": "The Firefox ad: a page of names in 4.5-point type",
+      "description": "In October 2004 a Minneapolis PR man asked Firefox's users for $30 each to put their names in a New York Times ad; they passed his ten-day target in 17 hours and gave $250,000, fitting the names became the job, and the ad ran five weeks after the launch as two pages, one of them 8,567 names in 4.5-point type.",
+      "topic": "people",
+      "era": [
+        2004,
+        2006
+      ],
+      "related": [
+        "ie6-funeral",
+        "whatwg",
+        "popup"
+      ],
+      "unverified": [
+        "The count of 8,567 names is my own, checked twice, and it is a count of the PDF Mozilla posted with its press release, a file made the day before the ad ran. I have not seen the newsprint, and nothing I read says why the page holds fewer names than there were donors.",
+        "Rob Davis's weekend with the hijacked PC comes from Wired, and the seventeen hours is Davis's own figure, given to ClickZ. I found no second source for either. ClickZ's short version of the weekend says a security hole wiped the hard drive where Wired says Davis reformatted it.",
+        "The cause of the delay rests on BetaNews, which names no source, and on one sentence in ZDNet UK. The staff-meeting agenda is known only from Gervase Markham's 2013 comment, which gives it no date. Any account by Christopher Messina was on the Spread Firefox site, which is gone, and I could not open an archived copy.",
+        "That Blake Ross started Spread Firefox is Wired's statement; Mozilla's own announcement of the site names nobody. Ross's verdict on the ad comes from one article, Bruce Byfield's in 2006.",
+        "Byfield's article says the drive was announced on 29 October 2004. The press release and the reports from that week say Tuesday 19 October, and I went with those.",
+        "I never found what the two pages cost. Markham believed Mozilla got a non-profit rate and said there was no evidence for it, so the essay gives no figure.",
+        "Three readings are mine: that the \"Mitchell\" in Markham's comment is Mitchell Baker, that the names printed ten times belong to Community Champions, and that the last entry in the list was added late. I also cannot show that the Rob Davis, Blake Ross, Jason Fried and John Battelle in the list are the people in the story.",
+        "That Davis's hijacked-PC weekend fell in the summer of 2004 is my inference; the Wired piece gives no date for it.",
+        "My reading of the \"$30 a line\" credits-file gloss on Byfield's account is my own inference, not something he states."
+      ],
+      "published": "2026-11-25T22:17:38Z"
     }
   ]
 }

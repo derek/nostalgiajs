@@ -6,7 +6,109 @@
   <atom:link href="https://derek.io/nostalgiajs/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Essays on the Early Web</description>
   <language>en</language>
-  <lastBuildDate>Mon, 23 Nov 2026 22:09:34 GMT</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 22:17:38 GMT</lastBuildDate>
+  <item>
+    <title>The Firefox ad: a page of names in 4.5-point type</title>
+    <link>https://derek.io/nostalgiajs/essays/firefox-ad/</link>
+    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/firefox-ad/</guid>
+    <pubDate>Wed, 25 Nov 2026 22:17:38 GMT</pubDate>
+    <description>In October 2004 a Minneapolis PR man asked Firefox's users for $30 each to put their names in a New York Times ad; they passed his ten-day target in 17 hours and gave $250,000, fitting the names became the job, and the ad ran five weeks after the launch as two pages, one of them 8,567 names in 4.5-point type.</description>
+    <content:encoded><![CDATA[<p class="lede">Ten thousand users of a free web browser bought it two pages of the New York Times in December 2004, on the promise of their names in the advertisement, and it was the names that made it late.</p>
+
+<blockquote>
+<p>Are you fed up with your web browser? You're not alone.</p>
+</blockquote>
+
+<p>Rob Davis was fed up. Davis lived in Minneapolis and worked as an account director at a PR firm, Haberman &amp; Associates, and he had spent a weekend in the summer of 2004 indoors with a PC that had been taken over through Internet Explorer and put to work sending spam. Josh McHugh <a href="https://www.wired.com/2005/02/firefox/">told the story in Wired</a> early in 2005: Davis dropped out of a camping trip on Lake Superior, backed up his files, reformatted the drive, and drove to a programmer friend's house to copy a browser the friend had recommended. It was called Firefox, and it had not yet reached version 1.0. By December the question was the headline of an advertisement Davis had proposed, printed across the middle of a page of the names of the people who paid for it.</p>
+
+<h2>Spread Firefox</h2>
+
+<p>Firefox came from the Mozilla Foundation, a non-profit set up in July 2003 that called itself the heir to Netscape and that its chief engineer, Chris Hofmann, <a href="https://clickz.com/crazy-like-a-firefox/65847/">described in November 2004</a> as "a nonprofit foundation, a bunch of engineers". They decided to market the 1.0 release the way they wrote the code, by opening the door to anyone with an idea.</p>
+
+<p>The door was a site called Spread Firefox, launched in September 2004. Wired credits Blake Ross, one of the browser's original developers, with starting it. It ran on CivicSpace, software that had come out of Howard Dean's presidential campaign, and it had the campaign's habits: members proposed stunts, rated each other's proposals and earned points. A press release that October counted close to 25,000 registered users after four weeks.</p>
+
+<p>They had something to push against. Internet Explorer was the browser of about nine users in ten, by Wired's figure, and that year's malware had been arriving through it. Davis said he was no zealot about Microsoft. His complaint was that a company that made, by his reckoning, 98 percent of the world's operating systems had let this happen to people. "There's a lot of pain out there."</p>
+
+<h2>Thirty dollars for a name</h2>
+
+<p>Davis had gone to Ross in July, Wired says, two months before the site existed, with an idea: raise enough money from Firefox's fans to run an ad in the New York Times. None of the accounts says when the donors' names came into it, but by October they were the offer: a full page to mark the 1.0 release, with the names of the people who paid for it. Newspapers had carried donor-paid ads of that kind for decades, as <a href="https://www.linux.com/news/marketing-foss-donor-paid-ads/">Bruce Byfield's 2006 article on the tactic</a> points out, usually a stand on some public issue, and Davis wanted one for a download. He worked on grassroots campaigns for a living, and the model he cited for getting Firefox's users to make its marketing was MoveOn's nationwide contest to make a 30-second ad.</p>
+
+<p>The drive opened on Tuesday 19 October 2004. The press release called the effort "endorsed by the Mozilla Foundation" and was careful about whose work it was: the idea, the research and the design had all been done by volunteers. The terms survive, of all places, in <a href="https://learn.microsoft.com/en-us/archive/blogs/alexbarn/firefox-full-page-ad-to-appear-in-new-york-times">Microsoft's archive of its old blogs</a>, where a post from that day passes them along: $30 got your name into the ad, and students paid $10. The target, <a href="https://www.zdnet.com/article/firefox-smashes-funding-target/">ZDNet UK reported</a>, was 2,500 donors in ten days.</p>
+
+<p>Two bloggers picked the release up the same day. John Battelle <a href="https://battellemedia.com/archives/2004/10/how_do_you_celebrate_firefox_run_an_ad_in_the_new_york_times">reprinted it</a> under the remark that the word "irony" came to mind, without being able to say why. Jason Fried, on <a href="https://signalvnoise.com/archives/000899">Signal vs. Noise</a>, admired the hook of seeing your own name in the paper and then asked the obvious question: "Is putting money towards an ad in the Times the best way for a fledgling browser to spend precious money?" Davis, asked by ClickZ what the ad was for, said downloads were the secondary intent. Its first job was to thank the foundation and to speak for the people who had been spreading the browser.</p>
+
+<h2>A target passed on the first day</h2>
+
+<p>The target lasted seventeen hours, a figure Davis gave a few weeks later. By the Friday, Bart Decrem, Mozilla's marketing contact, put the fund at more than $100,000, which he reckoned would pay for a couple of ads in the Times. When the ten days were up it held <a href="https://fundraising.co.uk/2004/11/05/campaign-web-browser-raises-250000-online-10-days/">$250,000 from 10,000 people</a>, an average of $25 each.</p>
+
+<p>Success changed what kind of problem the ad was. A page with 2,500 names on it is an advertisement with a long credit line, and a page with four times as many is a telephone directory with a logo. Davis: "We went back to the drawing board to figure out how many [donor] names we could include in the space and still run the message." They settled on 10,000. That was a limit on names, set once the first target had gone. When the drive closed, 10,000 was also the reported number of donors, and no account says whether the drive stopped at the limit or happened to end there.</p>
+
+<h2>Fitting the names on a broadsheet page</h2>
+
+<p>The design was led by a volunteer, Christopher Messina, whom <a href="https://www-archive.mozilla.org/press/mozilla-2004-12-15.html">Mozilla's press release</a> describes as a San Francisco designer and a leader at Spread Firefox. <a href="https://blog.mozilla.org/press/2004/11/mozilla-foundation-releases-the-highly-anticipated-mozilla-firefox-1-0-web-browser/">Firefox 1.0 shipped</a> on 9 November, and the ad, expected within a few weeks of the launch, did not appear that month.</p>
+
+<p>What Mozilla's staff made of the problem survives in one place. Gervase Markham, commenting in 2013 under <a href="https://blog.mozilla.org/community/2013/06/10/milestone-ad-for-firefox-in-new-york-times/">a Mozilla history post</a>, said the only record they had of the ad was a staff-meeting agenda, and quoted it without a date:</p>
+
+<blockquote>
+<ul>
+<li>Challenge to fit all the names legibly on one page</li>
+<li>May end up taking out two ads in successive weeks</li>
+<li>A double-page ad is ridiculously expensive</li>
+<li>Ad may (co-incidentally) run around the time of 10M downloads</li>
+</ul>
+</blockquote>
+
+<p>The designers' side of it reached print once. <a href="https://betanews.com/article/firefox-s-ny-times-ad-a-reality/">BetaNews reported</a>, without saying who told it so, that a wrong setting in the layout program had left them waiting hours for the ad to render after adding a single name, that the fix took a weekend, and that the ad was two weeks later than hoped. <a href="https://www.zdnet.com/article/new-york-times-runs-firefox-ad/">ZDNet UK</a> said only that fitting every donor's name on a single broadsheet page had been a technical challenge.</p>
+
+<p>German fans got into print first. A separate drive raised over €48,000, the same ZDNet report says, and at the start of December it bought a full page in what <a href="https://www.computerwoche.de/article/2724906/mozilla-verkauft-firefox-als-poster.html">Computerwoche</a> names as the Frankfurter Allgemeine Zeitung. The Times ad ran on 16 December, five weeks after the launch. No account says who decided it, but the option the agenda had called ridiculously expensive was the one taken: two pages, in a single issue, with the name of every donor, in Wired's words, "in barely readable, 4.5-point type".</p>
+
+<h2>Counting the names in the PDF</h2>
+
+<p>Mozilla posted the ad as <a href="https://www-archive.mozilla.org/press/nytimes-firefox-final.pdf">a PDF</a> with its press release, and the file is on Mozilla's archive site now. Page one is the names, a block above the headline and a block below it, with the Firefox logo ghosted over them, set in Univers Condensed Bold at a size the file gives as 4.5 points. Page two is the advertisement you would expect, logo and testimonials, down to a footer of thanks to the employees of eight companies. The first of the eight is Haberman &amp; Associates, where Davis worked.</p>
+
+<p>Most of the reports I found said the page held 10,000 names. ZDNet's did, and so did <a href="https://ben.ramsey.dev/blog/2004/12/firefox-ad-runs-in-ny-times/">a donor, Ben Ramsey</a>, who had enlarged the PDF to find the family's entries. BetaNews said 8,000. So I counted. The names in the PDF are separated by bullets, alphabetical by surname from Oliver Aaltonen, and there are 8,566 bullets, which makes 8,567 entries. BetaNews was nearer. Ten thousand people gave, and the page holds 1,433 fewer names than that, at least in Mozilla's file, which is what I counted; I have not seen the newsprint. Nothing I read explains the gap, though donors who gave without asking for a name would account for some of it.</p>
+
+<p>Nor are the entries 8,567 separate people. Three names appear ten times each and two more appear five times. ZDNet had reported that anyone who signed up ten extra names would be made a "Community Champion", and my guess is that some champions supplied all ten themselves. At least 139 entries are families. Twenty are a single word, filed after the Zs, and after those comes the last entry of all, Eileen Veit, out of alphabetical order as if added late. Some donors got less than their $30 had promised: Byfield's article records complaints of misspelled names, and of not being told the date. One entry is a dog. Ramsey wrote that the list held three names from the Ramsey household, Ben, Liz and Ashley, and that Ashley was the dog, and all three are there under R.</p>
+
+<p>There is a Rob Davis under D, in the same type as everyone else, and I am taking it to be him. There is a Blake Ross. Markham says that quite a few core Mozillians are not in the list: Markham did not submit a name, having "thought it was a thing for Americans", and adds that Mitchell is not there either, by which I take them to mean Mitchell Baker, the foundation's president. The list has no Gervase Markham and no Mitchell Baker. It does hold a Jason Fried and a John Battelle. I can't show they are the same two, but I would like them to be.</p>
+
+<h2>Where the Times ad went</h2>
+
+<p>The ad became a poster. The Mozilla Store sold it at full size for just under seven dollars, Computerwoche reported the day after it ran: about 53 by 66 centimetres, which is the PDF's two 13-by-21-inch pages side by side. Paul Thurrott, whose name is in the list, <a href="https://www.thurrott.com/cloud/145733/time-name-appeared-firefox-ad">wrote in 2017</a> of buying a copy, framing it and keeping it on an office wall for many years.</p>
+
+<p>Mozilla planned no sequel. Its spokesperson said on the day that there were no plans for more ads, and in 2006 Ross gave Byfield the verdict Fried had asked for: "Contrary to popular belief, we found the ad itself to be less effective than the buzz surrounding it before and after it ran."</p>
+
+<p>The drive was copied without the names. Byfield's article describes a pledge-paid ad for OpenOffice.org, organised by a volunteer, that ran in the New York Metro on 31 July 2006 and listed no contributors. Henri Poole of CivicActions, in the same article, held that recognition was what donors to such an ad were after: "You're buying yourself karma." Byfield's comparison was with free software itself, whose contributors expect to be paid in credit. At $30 a line, the Times ad had extended the credits file to people who could not write code.</p>
+
+<h2>The takeaway</h2>
+
+<p>The names did three jobs: they raised the money, they delayed the ad, and they proved its headline. As advertising, Ross judged the two pages less effective than the talk around them, though I would add that the talk was about two pages somebody had to buy.</p>
+
+<p>What the donors bought was a line in a list. "You're not alone" is a claim, and the ad printed its evidence above and below the claim in 4.5-point type, which I think is why a page that had to be squinted at ended up framed on an office wall.</p>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://www-archive.mozilla.org/press/nytimes-firefox-final.pdf">The Firefox advertisement in the New York Times of 16 December 2004, as a PDF</a>, Spread Firefox and the Mozilla Foundation, 2004 <a class="archived" href="https://web.archive.org/web/20240727072659/https://www-archive.mozilla.org/press/nytimes-firefox-final.pdf">(archived)</a></li>
+    <li><a href="https://www-archive.mozilla.org/press/mozilla-2004-12-15.html">Mozilla Foundation Places Two-Page Advocacy Ad in the New York Times</a>, Mozilla Foundation press release, 2004 <a class="archived" href="https://web.archive.org/web/20261025103837/https://www-archive.mozilla.org/press/mozilla-2004-12-15.html">(archived)</a></li>
+    <li><a href="https://www.wired.com/2005/02/firefox/">The Firefox Explosion</a>, Josh McHugh, Wired, 2005 <a class="archived" href="https://web.archive.org/web/20261116101536/https://www.wired.com/2005/02/firefox/">(archived)</a></li>
+    <li><a href="https://clickz.com/crazy-like-a-firefox/65847/">Crazy Like a Firefox</a>, Rebecca Lieb, ClickZ, 2004 <a class="archived" href="https://web.archive.org/web/20260416202403/https://clickz.com/crazy-like-a-firefox/65847/">(archived)</a></li>
+    <li><a href="https://battellemedia.com/archives/2004/10/how_do_you_celebrate_firefox_run_an_ad_in_the_new_york_times">How Do You "Celebrate" Firefox? Run An Ad in The New York Times</a>, John Battelle, quoting the press release of 19 October, 2004 <a class="archived" href="https://web.archive.org/web/20231202221029/https://battellemedia.com/archives/2004/10/how_do_you_celebrate_firefox_run_an_ad_in_the_new_york_times">(archived)</a></li>
+    <li><a href="https://learn.microsoft.com/en-us/archive/blogs/alexbarn/firefox-full-page-ad-to-appear-in-new-york-times">Firefox full-page ad to appear in New York Times</a>, a post in Microsoft's blog archive, quoting Steve Rubel, 2004</li>
+    <li><a href="https://signalvnoise.com/archives/000899">Spread Firefox: A novel approach to advertising</a>, Jason Fried, Signal vs. Noise, 2004 <a class="archived" href="https://web.archive.org/web/20250519114628/https://signalvnoise.com/archives/000899">(archived)</a></li>
+    <li><a href="https://www.zdnet.com/article/firefox-smashes-funding-target/">Firefox smashes funding target</a>, ZDNet UK, 2004 <a class="archived" href="https://web.archive.org/web/20240618033111/https://www.zdnet.com/article/firefox-smashes-funding-target/">(archived)</a></li>
+    <li><a href="https://fundraising.co.uk/2004/11/05/campaign-web-browser-raises-250000-online-10-days/">Campaign for Web browser raises $250,000 online in 10 days</a>, UK Fundraising, 2004 <a class="archived" href="https://web.archive.org/web/20251110103323/https://fundraising.co.uk/2004/11/05/campaign-web-browser-raises-250000-online-10-days/">(archived)</a></li>
+    <li><a href="https://blog.mozilla.org/press/2004/11/mozilla-foundation-releases-the-highly-anticipated-mozilla-firefox-1-0-web-browser/">Mozilla Foundation Releases the Highly Anticipated Mozilla Firefox 1.0 Web Browser</a>, Mozilla Foundation press release, 2004 <a class="archived" href="https://web.archive.org/web/20261026114756/https://blog.mozilla.org/press/2004/11/mozilla-foundation-releases-the-highly-anticipated-mozilla-firefox-1-0-web-browser/">(archived)</a></li>
+    <li><a href="https://www.zdnet.com/article/new-york-times-runs-firefox-ad/">New York Times runs Firefox ad</a>, Ingrid Marson, ZDNet UK, 2004 <a class="archived" href="https://web.archive.org/web/20210624231037/https://www.zdnet.com/article/new-york-times-runs-firefox-ad/">(archived)</a></li>
+    <li><a href="https://betanews.com/article/firefox-s-ny-times-ad-a-reality/">Firefox's NY Times Ad a Reality</a>, Ed Oswald, BetaNews, 2004</li>
+    <li><a href="https://ben.ramsey.dev/blog/2004/12/firefox-ad-runs-in-ny-times/">Firefox Ad Runs in NY Times</a>, Ben Ramsey, 2004 <a class="archived" href="https://web.archive.org/web/20261111215536/https://ben.ramsey.dev/blog/2004/12/firefox-ad-runs-in-ny-times">(archived)</a></li>
+    <li><a href="https://www.computerwoche.de/article/2724906/mozilla-verkauft-firefox-als-poster.html">Mozilla verkauft Firefox als Poster</a>, Computerwoche, 2004</li>
+    <li><a href="https://www.linux.com/news/marketing-foss-donor-paid-ads/">Marketing FOSS with donor-paid ads</a>, Bruce Byfield, Linux.com, 2006 <a class="archived" href="https://web.archive.org/web/20250710163030/https://www.linux.com/news/marketing-foss-donor-paid-ads/">(archived)</a></li>
+    <li><a href="https://blog.mozilla.org/community/2013/06/10/milestone-ad-for-firefox-in-new-york-times/">Milestone: Ad for Firefox in New York Times</a>, Mozilla community blog, with a comment by Gervase Markham, 2013 <a class="archived" href="https://web.archive.org/web/20250803144245/https://blog.mozilla.org/community/2013/06/10/milestone-ad-for-firefox-in-new-york-times/">(archived)</a></li>
+    <li><a href="https://www.thurrott.com/cloud/145733/time-name-appeared-firefox-ad">That Time My Name Appeared in a Firefox Ad</a>, Paul Thurrott, 2017 <a class="archived" href="https://web.archive.org/web/20240410050522/https://www.thurrott.com/cloud/145733/time-name-appeared-firefox-ad">(archived)</a></li>
+  </ul>
+</section>]]></content:encoded>
+  </item>
   <item>
     <title>CSS Zen Garden: the page nobody was allowed to edit</title>
     <link>https://derek.io/nostalgiajs/essays/zen-garden/</link>
@@ -4477,141 +4579,6 @@ return oldSizzle(query, context, extra, seed);</code></pre>
     <li><a href="https://blog.jquery.com/2026/01/17/jquery-4-0-0/">jQuery 4.0.0</a>, Timmy Willison, jQuery blog, 2026 <a class="archived" href="https://web.archive.org/web/20261106055435/https://blog.jquery.com/2026/01/17/jquery-4-0-0/">(archived)</a></li>
     <li><a href="https://w3techs.com/technologies/details/js-jquery">Usage statistics and market share of jQuery for websites</a>, W3Techs, read November 12, 2026</li>
     <li><a href="https://en.wikipedia.org/wiki/JQuery">jQuery</a> and <a href="https://en.wikipedia.org/wiki/John_Resig">John Resig</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261106125635/https://en.wikipedia.org/wiki/JQuery">(archived)</a></li>
-  </ul>
-</section>]]></content:encoded>
-  </item>
-  <item>
-    <title>getYear() and the year 19100</title>
-    <link>https://derek.io/nostalgiajs/essays/getyear/</link>
-    <guid isPermaLink="true">https://derek.io/nostalgiajs/essays/getyear/</guid>
-    <pubDate>Thu, 12 Nov 2026 03:15:17 GMT</pubDate>
-    <description>One small Date method returned 100, 2000 or 100 again for the year 2000 depending on the browser, got fixed three different ways, and is still in every browser today.</description>
-    <content:encoded><![CDATA[<p class="lede">A method that was right, got fixed, got fixed back, and is still shipping in the browser you are reading this in.</p>
-
-<pre tabindex="0"><code>var now = new Date();
-"19" + now.getYear();  <span class="c">// "19100"</span></code></pre>
-
-<p>Through the late 1990s, lines like that one printed the year in page footers and "last updated" stamps, and they were correct every time anyone checked. In 1998 it said 1998. In 1999 it said 1999. On the first morning of 2000 it said 19100, unless the visitor's browser was one of the ones where it said 192000.</p>
-
-<p>The usual Y2K story is about two-digit years stored in old mainframe records to save space. This one is different, and I think more useful to a working developer. <code>getYear()</code> never stored two digits. It returned a perfectly unambiguous number, the documentation said what the number was, and the trouble came from three separate attempts to make it nicer. By January 2000 the same call gave different answers in browsers from the same vendor, and the standard had already given up on it.</p>
-
-<h2>Before: years since 1900</h2>
-
-<p>The convention is older than the web. C's <code>struct tm</code>, the structure that <code>localtime()</code> fills in, has a member called <code>tm_year</code>, and <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html">the POSIX definition of <code>&lt;time.h&gt;</code></a> describes it in three words: "Years since 1900." The neighbouring member, <code>tm_mon</code>, is the month of the year from 0 to 11. If both of those look familiar, it is because you have been living with them in JavaScript for thirty years.</p>
-
-<p>They got there by way of Java. Java 1.0 shipped a class called <code>java.util.Date</code> with a <code>getYear()</code> that returned the year minus 1900 and a <code>getMonth()</code> that counted from zero. JavaScript took the whole thing. Allen Wirfs-Brock and Brendan Eich, in their history paper <a href="https://zenodo.org/records/4960086">"JavaScript: The First 20 Years"</a>, put it bluntly: "JavaScript 1.0 Date was a direct transliteration, bugs and all, of the java.util.Date class of Java 1.0." The list of inherited details they give includes "externally numbering months from 0–11, and Year 2000 ambiguities that were present in the Java design." The reason, they write, was "Java interoperability requirements."</p>
-
-<p>Eich has been less formal about it elsewhere. In 2003 Eric Lippert, who worked on Microsoft's JScript, wrote <a href="https://ericlippert.com/2003/10/06/erics-blog-for-january-279th-2003/">a post about JavaScript's date oddities</a> and wondered aloud why months start at zero. The post preserves Eich's reply: "My answer: because that's how java.util.Date did it." JavaScript was under orders to be Java's little brother, and the team was "trying not to reinvent wheels to be any more or less round than Java's equivalent." Then the line that covers today's topic: "Unfortunately, java.util.Date had a pile of y2k and usability bugs."</p>
-
-<p>So Navigator 2 shipped a <code>getYear()</code> that returned the year minus 1900. For 1996 that is 96. It looks exactly like a two-digit year, which is the whole problem. A number that happens to look like "the last two digits" for the first few years of a language's life will be used as the last two digits, whatever the manual says.</p>
-
-<h2>Three fixes and a standard</h2>
-
-<p>Here is the sequence, as well as the surviving sources let me reconstruct it.</p>
-
-<p><strong>1996: Netscape fixes it.</strong> Navigator 3 changed the method. Danny Goodman, explaining in 1998 why the calendar examples in the JavaScript Bible were about to break, <a href="https://dannyg.com/support/calendarY2K.html">described the change</a>: "getYear() started its life returning the year value as the year minus 1900. But starting with Navigator 3, the method returned a four-digit year for years starting with 2000." The new rule was 96 for 1996, 99 for 1999, then 2000 for 2000. My best guess at the reasoning is that somebody looked at 100 and saw a Y2K bug waiting to be reported. That same year, Microsoft's first JScript shipped in Internet Explorer 3 with the original behaviour. Microsoft's <a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/x0a9sc10(v=vs.84)">archived JScript reference</a> still records it: for JScript 1.0, "the year 1899 is returned as -1 and the year 2000 is returned as 100."</p>
-
-<p><strong>1997: Microsoft fixes it the same way, and Java walks away.</strong> Internet Explorer 4 adopted the Navigator 3 rule. The same Microsoft page gives the examples: "1996 is returned as 96, but 1825 and 2025 are returned as-is." Lippert's version, from inside the building, is that the original IE implementation was the mistake: "Fortunately we corrected that incompatibility in the second version." Meanwhile the method's source had disowned it. JDK 1.1, in February 1997, deprecated <code>java.util.Date</code>'s year, month and day methods in favour of a new <code>Calendar</code> class. <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html">The Java 8 documentation</a> for <code>getYear()</code> still opens with the word "Deprecated."</p>
-
-<p><strong>June 1997: the standard writes down the original.</strong> The <a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">first edition of ECMA-262</a> had to say what <code>getYear</code> does, and with the browsers disagreeing, it picked the oldest answer. Section 15.9.5.5 ends in one step: "Return YearFromTime(LocalTime(t)) − 1900." It also carries an apology in advance: "This function is specified here for backwards compatibility only. The function getFullYear is much to be preferred for nearly all purposes, because it avoids the 'year 2000 problem.'" That sentence was published two and a half years before the year 2000.</p>
-
-<p><strong>August 1998: Netscape un-fixes it.</strong> Navigator 4.06 shipped JavaScript 1.3 with a claim of ECMA-262 compliance, and compliance meant going back to year minus 1900. Phil Schwartau, handling a bug report for Mozilla in July 2000, relayed the developers' account in <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=45764">a Bugzilla comment</a>: "Between JavaScript versions 1.2 and 1.3, we rewrote the Javascript Date object from the ground up." The new code followed the draft standard. The resulting behaviour "was different from many (but not all) JavaScript Date implementations, but we retained it to be compliant with the evolving standard."</p>
-
-<p><strong>December 1999: the standard gives up.</strong> The third edition of ECMA-262, approved on December 16, 1999, moved <code>getYear</code> out of the main text and into Annex B, the appendix for things implementations may keep for old pages' sake. Schwartau's account covers Netscape's dilemma at that point. They had just changed the method to match a standard that no longer required it. "Rather than revert to the old getYear behavior and force scriptwriters to be aware of yet another version difference, we decided to keep the year - 1900 behavior for getYear, and encourage the use of getFullYear." And then, with admirable restraint: "It's not an ideal situation, but that's the history."</p>
-
-<p>Put it all in one place and this is what a script could expect on New Year's Day:</p>
-
-<pre tabindex="0"><code><span class="c">// new Date(2000, 0, 1).getYear()</span>
-<span class="c">// Navigator 2, IE 3         100</span>
-<span class="c">// Navigator 3              2000</span>
-<span class="c">// IE 4 and IE 5            2000</span>
-<span class="c">// Navigator 4.06 and up     100</span>
-<span class="c">// ECMA-262                  100</span></code></pre>
-
-<p>Then the day came. The mainframes mostly held. The web got a rash of cosmetic damage, and not only from JavaScript, since Perl's <code>localtime</code> and Java's <code>getYear()</code> followed the same C convention. <a href="https://en.wikipedia.org/wiki/Year_2000_problem">Wikipedia's account of the day</a> lists the US Naval Observatory, keeper of the country's official time, giving the date on its website as 1 Jan 19100. Météo-France showed a forecast map dated 01/01/19100. Al Gore's presidential campaign site briefly announced that it was 3 January 19100.</p>
-
-<p>On that same January 3, two things were published. On irt.org, Martin Webb posted <a href="https://www.irt.org/articles/js199/">"JavaScript Y2K Issues"</a>, a careful field guide to the mess. And at 23:39 UTC someone opened <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=22964">Mozilla bug 22964</a>, "JavaScript: getYear returns '100' for 2000." Two hours and twenty minutes later John Morrison closed it as invalid: "this behaviour is as designed and documented."</p>
-
-<h2>Why a one-line method went so wrong</h2>
-
-<p>It would be easy to file this under carelessness. I don't think that's fair to anyone involved. Each decision had a defensible reason behind it, and the reasons pulled in different directions.</p>
-
-<p><strong>A marketing mandate picked the API.</strong> Nobody at Netscape sat down and designed a year accessor that returned 95. They were told the language had to sit alongside Java and script its applets, so the date object matched Java's method for method. Java had copied the shape of C's time structure. The convention arrived in your browser third-hand, and each hand assumed the previous one had thought about it.</p>
-
-<p><strong>The original design was correct, and that made it fragile.</strong> Raymond Chen made this point in the comments on Lippert's post. The C convention "was actually good and correct," he wrote: "if you paid close attention and always added 1900 to the year, you always got the right answer." The catch is "if you paid close attention." For five years the wrong mental model, that this was a two-digit year, produced right answers. An API that rewards the wrong model until a known future date is a trap, however accurate the documentation.</p>
-
-<p><strong>The fix destroyed information.</strong> Chen again, on the Navigator 3 and IE 4 rule: "if you called getYear and got 80 back, you could never be sure whether that was the year 80 or the year 1980." Year minus 1900 is reversible. The friendlier rule is a two-digit year with an escape hatch, and it broke the one thing the old method was good for, which was subtracting one year from another. A script that computed someone's age as this year minus birth year would get 2000 minus 65.</p>
-
-<p><strong>Following the standard was a moving target.</strong> Netscape did what developers always say they want vendors to do. It tracked the draft spec, even where that meant changing shipped behaviour. Then the committee demoted the method, and Netscape was left holding a behaviour change it had made for the sake of a requirement that no longer existed. Microsoft ignored the standard on this point and stayed compatible with its own previous release, which from the point of view of an intranet full of IE-only pages was the responsible choice.</p>
-
-<p><strong>Nobody could remove anything.</strong> By 1997 the method was known to be a hazard, a replacement existed, and the spec said so in writing. It stayed, because pages were already calling it and a browser that breaks existing pages loses to the browser that doesn't. Hold that thought for the last section.</p>
-
-<h2>How everyone coped</h2>
-
-<p>The obvious answer was <code>getFullYear()</code>, which the version 4 browsers and the standard had added for exactly this purpose. The obvious answer was not available. As Webb put it, "so long as there are people using Netscape Navigator 2 and 3 and Internet Explorer 3, there will always be a need to use getYear(), as these browsers obviously do not support getFullYear()." So the era's solution was to keep calling the broken method and launder the result.</p>
-
-<p>Webb's version is the tidiest:</p>
-
-<pre tabindex="0"><code>function y2k(number) { return (number &lt; 1000) ? number + 1900 : number; }</code></pre>
-
-<p>If the browser gave you a small number, it meant years since 1900. If it gave you a big one, it was already a year. Goodman's patch for the book's calendars, dated 16 September 1998 in its own comment, was the same idea with the threshold at 1900 and the name <code>get4DigitYear</code>. Both carry the cost Chen described. Webb's cannot represent a year before 1000 and Goodman's cannot represent one before 1900, because the function can no longer tell 80 from 1980. For a page footer, nobody minded.</p>
-
-<p>Peter-Paul Koch's QuirksMode <a href="https://quirksmode.org/js/introdate.html">went further</a>. The page introduced the problem with "Netscape devised a complex solution that even Netscape itself doesn't completely follow," noted that "Netscape 3 (and only 3) follows Explorer," and then recommended throwing away everything except the last two digits and rebuilding the century from scratch:</p>
-
-<pre tabindex="0"><code>function takeYear(theDate) {
-  x = theDate.getYear();
-  var y = x % 100;
-  y += (y &lt; 38) ? 2000 : 1900;
-  return y;
-}</code></pre>
-
-<p>Why 38? "Because Epoch Time will end in 2038." That is a Y2K workaround whose expiry date is the next date bug on the calendar, written down cheerfully and on purpose. I find it hard not to admire.</p>
-
-<p>My favourite coping strategy is in the report that opened <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=45764">that same Mozilla bug</a> in July 2000. The reporter's own code handled the year like this:</p>
-
-<pre tabindex="0"><code><span class="c">// javascript .getYear() isn't Y2K compliant</span>
-datedisplay.setAttribute("value", dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"/"+(2100-dateObj.getYear())+" "+hour+":"+minutes);</code></pre>
-
-<p>In 2000, <code>getYear()</code> returns 100, and 2100 minus 100 is 2000. In 2001 it returns 101, and the page announces that it is 1999. That fix was good for exactly twelve months, and to be fair, it was written in one of them.</p>
-
-<h2>What became of getYear()</h2>
-
-<p><strong>The bug report became the documentation.</strong> Bug 22964 was closed in two hours and then refused to stay quiet. It has 67 duplicates. The last was filed in July 2013. Of its 80 comments, 51 date from 2005, which I'd guess is what happens when a browser built on that engine starts taking real market share and meets a web tested only in Internet Explorer. The thread contains the entire standards-versus-reality argument in miniature. One commenter quotes Annex B and concludes: "Mozilla should behave as it behaves now, and IE is wrong." Another answers with the point that browser vendors eventually organised their whole philosophy around: "the Mozilla user who browses the Internet CANNOT use getFullYear instead of getYear because he is not the author of the page he is browsing!!!" Both were right. The author of the page and the person hurt by the page are different people, and only one of them can deploy a fix.</p>
-
-<p><strong>The standard won, more than a decade late.</strong> <a href="https://www.webplatform.org/docs/javascript/Date/getYear">The reference page on WebPlatform.org</a> records the end of the split: "In Internet Explorer 3.0, and then in Internet Explorer versions starting with Internet Explorer 9 standards mode, the value returned is the stored year minus 1900." So for the year 2000, Internet Explorer's answer went 100, then 2000 from IE 4 through IE 8, then 100 again. A page that had relied on the middle answer for a decade would break on upgrade, in the name of interoperability. And the change applied only in IE9's standards mode, so the older document modes went on giving the old answer. The fix for the fix for the fix came with a switch.</p>
-
-<p><strong>Annex B is a museum that charges no admission and never closes.</strong> Wirfs-Brock and Eich describe what the committee thought it was doing in 1999 by moving "the non-Y2K compliant Date methods" to an annex: the hope was that it "would signal that these were deprecated features, which should not be used and that implementations were empowered to eventually remove them." Their verdict: "This was a naïve expectation." Browser makers would not remove anything a page might use, because "some Web pages never go away." <a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">Today's Annex B</a> has stopped pretending. It says its contents "are required when the ECMAScript host is a web browser," and that every feature in it has "one or more undesirable characteristics and in the absence of legacy usage would be removed from this specification." The Y2K warning from 1997 is still there, nearly word for word. So is the method. I ran <code>new Date().getYear()</code> in a current Chromium build while writing this and got 126.</p>
-
-<p><strong>The replacement took thirty years.</strong> <a href="https://github.com/tc39/proposal-temporal">Temporal</a>, the new date and time API, is now at Stage 4 at TC39, and its README opens with a sentence nobody will dispute: "Date has been a long-standing pain point in ECMAScript." <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">MDN</a> describes it as "designed as a full replacement for the Date object," and is unsentimental about the original: "the Date API is based on the poorly designed java.util.Date class from Java." In Temporal a date's <code>year</code> is the year and January is month 1. MDN also still flags it as limited availability, not yet in every major browser. And notice the form the fix takes. Temporal is a new global object sitting beside <code>Date</code>. It replaces nothing, because nothing can be replaced. Java reached the same arrangement decades earlier: its <code>getYear()</code> was deprecated in 1997 and was still in the API documentation, deprecation notice attached, as of Java 8.</p>
-
-<p>There is a pattern in that list that I think goes beyond dates. Every change made to <code>getYear()</code> in place broke somebody's working page: Netscape's in 1996, Microsoft's in 1997, Netscape's again in 1998, Microsoft's again with IE9. The only move that helped was the one that left the old method alone and added <code>getFullYear()</code> next to it. Later this turned into a slogan: don't break the web. The people who wrote the 1997 standard were already learning it the hard way, from a function with one line of arithmetic in it.</p>
-
-<h2>The takeaway</h2>
-
-<p>The original <code>getYear()</code> was never wrong. It returned years since 1900, as documented, in Navigator 2, and it returns that today. What failed was everything around it: a borrowed design that looked like something it wasn't, two vendors fixing it in place at different times, and a standard that arrived after the fixes and sided with the original. The lesson I'd take is that once an API is on the web, changing what it returns is the most expensive thing you can do to it, and it stays expensive even when the change is an improvement. Add the new thing beside it, mark the old one as legacy, and accept that you will be shipping both for the rest of your career.</p>
-
-<p>Which, if you started in the 1990s, you have been. The line at the top of this essay still runs. It prints 19126 this year, in any browser that follows the specification. Somewhere there is probably a page where it does.</p>
-
-<section class="sources" aria-labelledby="sources-h">
-  <h2 id="sources-h">Sources and further reading</h2>
-  <ul>
-    <li><a href="https://zenodo.org/records/4960086">JavaScript: The First 20 Years</a>, Allen Wirfs-Brock and Brendan Eich, 2020 (corrected 2021) <a class="archived" href="https://web.archive.org/web/20251229164813/https://zenodo.org/records/4960086">(archived)</a></li>
-    <li><a href="https://ericlippert.com/2003/10/06/erics-blog-for-january-279th-2003/">Eric's Blog for January 279th, 2003</a>, Eric Lippert, 2003, with replies from Brendan Eich and Raymond Chen <a class="archived" href="https://web.archive.org/web/20240915103006/https://ericlippert.com/2003/10/06/erics-blog-for-january-279th-2003/">(archived)</a></li>
-    <li><a href="https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">ECMA-262, 1st edition</a>, Ecma, June 1997 (PDF; see section 15.9.5.5) <a class="archived" href="https://web.archive.org/web/20261105185941/https://ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf">(archived)</a></li>
-    <li><a href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">ECMAScript Annex B: Additional ECMAScript Features for Web Browsers</a>, Ecma TC39, current draft <a class="archived" href="https://web.archive.org/web/20261105185938/https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html">(archived)</a></li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=22964">Bug 22964: JavaScript: getYear returns "100" for 2000</a>, Mozilla Bugzilla, 2000 to 2013 <a class="archived" href="https://web.archive.org/web/20250615043950/https://bugzilla.mozilla.org/show_bug.cgi?id=22964">(archived)</a></li>
-    <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=45764">Bug 45764: Y2K error in .getYear()</a>, Mozilla Bugzilla, 2000, with Phil Schwartau's history of the Netscape change <a class="archived" href="https://web.archive.org/web/20250421205506/https://bugzilla.mozilla.org/show_bug.cgi?id=45764">(archived)</a></li>
-    <li><a href="https://www.irt.org/articles/js199/">JavaScript Y2K Issues</a>, Martin Webb, irt.org, 2000 <a class="archived" href="https://web.archive.org/web/20240812122852/https://www.irt.org/articles/js199/">(archived)</a></li>
-    <li><a href="https://dannyg.com/support/calendarY2K.html">JSBible 2/3 Calendar Scripts and Y2K</a>, Danny Goodman, 1998 <a class="archived" href="https://web.archive.org/web/20260412192610/http://www.dannyg.com/support/calendarY2K.html">(archived)</a></li>
-    <li><a href="https://quirksmode.org/js/introdate.html">Introduction to Date and Time</a>, Peter-Paul Koch, QuirksMode <a class="archived" href="https://web.archive.org/web/20260528205207/https://www.quirksmode.org/js/introdate.html">(archived)</a></li>
-    <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/x0a9sc10(v=vs.84)">getYear Method (Windows Scripting - JScript)</a>, Microsoft, archived <a class="archived" href="https://web.archive.org/web/20240131135705/https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/x0a9sc10%28v=vs.84%29">(archived)</a></li>
-    <li><a href="https://www.webplatform.org/docs/javascript/Date/getYear">getYear</a>, WebPlatform.org <a class="archived" href="https://web.archive.org/web/20170306095912/https://www.webplatform.org/docs/javascript/Date/getYear/">(archived)</a></li>
-    <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html">java.util.Date</a>, Java SE 8 API documentation, Oracle <a class="archived" href="https://web.archive.org/web/20261027073259/https://docs.oracle.com/javase/8/docs/api/java/util/Date.html">(archived)</a></li>
-    <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html">&lt;time.h&gt;</a>, The Open Group Base Specifications <a class="archived" href="https://web.archive.org/web/20261101143519/https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html">(archived)</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Year_2000_problem">Year 2000 problem</a>, Wikipedia <a class="archived" href="https://web.archive.org/web/20261106231109/https://en.wikipedia.org/wiki/Year_2000_problem">(archived)</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear">Date.prototype.getYear()</a>, MDN <a class="archived" href="https://web.archive.org/web/20261101161627/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear">(archived)</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">Temporal</a>, MDN <a class="archived" href="https://web.archive.org/web/20261105215431/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">(archived)</a></li>
-    <li><a href="https://github.com/tc39/proposal-temporal">Temporal proposal</a>, Ecma TC39 <a class="archived" href="https://web.archive.org/web/20261016173346/https://github.com/tc39/proposal-temporal">(archived)</a></li>
   </ul>
 </section>]]></content:encoded>
   </item>
