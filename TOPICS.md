@@ -8,7 +8,6 @@ Pick the next essay from the first item under "Up next" if there is one, otherwi
 
 Derek's picks, in order. Always take the first item here. Only choose from the lists below when this list is empty.
 
-- "How it feels to learn JavaScript in 2016" and JavaScript fatigue
 - RSS 0.91, 1.0, 2.0 and Atom: the feed format war nobody won, and why every reader parses all of them
 
 ## Ideas

@@ -740,6 +740,33 @@
         "Why the registration was allowed to lapse is not something any source told me."
       ],
       "published": "2026-11-26T21:57:13Z"
+    },
+    {
+      "slug": "js-fatigue",
+      "title": "JavaScript fatigue: a feature request with a catchy title",
+      "description": "In December 2015 Eric Clemmons asked the React community for opinionated, updatable defaults under the title \"Javascript Fatigue\"; the phrase outgrew the post, and seven months later the React team shipped Create React App with Clemmons in the credits.",
+      "topic": "people",
+      "era": [
+        2015,
+        2025
+      ],
+      "related": [
+        "left-pad",
+        "web20",
+        "wat"
+      ],
+      "unverified": [
+        "I read \"Javascript Fatigue\" in the copy on Eric Clemmons's own site, because Medium would not serve the original. That copy is dated December 27, 2016. I took 2015 from the two Hacker News submissions of the Medium address, so the date rests on those timestamps, and the copy may differ from what Medium showed in 2015.",
+        "I found no use of the exact phrase \"JavaScript fatigue\" on Hacker News before Clemmons's post, but \"JavaScript framework fatigue\" was already in use that year, in the address of a February 2015 piece by Allen Pike and in a July 2015 title. So the post is where the two-word phrase took off, not necessarily where it was coined.",
+        "Calling the post a feature request is my reading. It is addressed to library and tool authors in general, and what it asks for is wider than Create React App, which covers the build tools and nothing about routers, Redux or naming conventions. Dan Abramov says the tool was meant to fix the problem Clemmons named, not that it answered the post.",
+        "Abramov's announcement calls the co-author only \"Christopher\". That this is Christopher Chedeau rests on the name's link to the @vjeux Twitter account and on \"vjeux\" among the maintainers in the npm registry. That the Jonny Buchanan thanked there is the author of nwb is a match of names between the announcement and the registry.",
+        "I did not open any tweets. I never saw what chantastic first said about the post, only the gist that followed, and \"the first objection I can find\" means the first in the pages I read. I use the handle because the gist gives no full name. That a Hacker News commenter in 2016 answered \"much as chantastic had\" is my reading of a gist written before Create React App existed.",
+        "No source I found dates the moment \"JavaScript fatigue\" came to mean the whole ecosystem. Ben Halpern in January 2016 warns that it might and still defines it by React. That the phrase now calls Jose Aguinaga's dialogue to mind is my own impression, and so is my account of why the phrase outran the post.",
+        "I could not open Paul Biggar's original \"It's the Future\"; the address now redirects to CircleCI's blog index. What it was about comes from Biggar's follow-up, and that it was a dialogue comes from a July 2015 repost the fact check found. June 9, 2015 is the date of the Hacker News submission, which may not be the day it was published.",
+        "The count of one use of \"fatigue\" in the two Hacker News threads on Aguinaga's piece is my own search of the comments, and the read count is the figure Hackernoon's page showed, 739,529, which will have changed.",
+        "That Clemmons was chief technology officer of HigherEducation.com in 2015 comes from the CV on Clemmons's own site, written later. The post on intercooler's blog is signed \"Carson\" with the handle @carson_gross, and the surname is read from the handle."
+      ],
+      "published": "2026-11-27T22:06:41Z"
     }
   ]
 }

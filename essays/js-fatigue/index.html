@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JavaScript fatigue: a feature request with a catchy title · Nostalgia.js</title>
+<meta name="description" content="In December 2015 Eric Clemmons asked the React community for opinionated, updatable defaults under the title &quot;Javascript Fatigue&quot;; the phrase outgrew the post, and seven months later the React team shipped Create React App with Clemmons in the credits.">
+<link rel="canonical" href="https://derek.io/nostalgiajs/essays/js-fatigue/">
+<meta property="og:site_name" content="Nostalgia.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript fatigue: a feature request with a catchy title">
+<meta property="og:description" content="In December 2015 Eric Clemmons asked the React community for opinionated, updatable defaults under the title &quot;Javascript Fatigue&quot;; the phrase outgrew the post, and seven months later the React team shipped Create React App with Clemmons in the credits.">
+<meta property="og:url" content="https://derek.io/nostalgiajs/essays/js-fatigue/">
+<meta property="og:image" content="https://derek.io/nostalgiajs/og/js-fatigue.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239a3412'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../style.css">
+<link rel="alternate" type="application/rss+xml" title="Nostalgia.js" href="../../feed.xml">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WX44MXWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<script data-goatcounter="https://derek-io-nostalgiajs.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="../../">Nostalgia.js<span>Essays on the Early Web</span></a>
+    <picture>
+      <source srcset="../../berry.png" media="(prefers-reduced-motion: reduce)">
+      <img src="../../berry.gif" width="48" height="48" alt="'member when...? Yeah, I remember!" title="'member when...? Yeah, I remember!">
+    </picture>
+  </div>
+</header>
+<nav class="strip" aria-label="Nostalgia.js">
+  <div class="in">
+    <a href="../../">Essays</a>
+    <a href="../../about/">About</a>
+    <a href="https://github.com/derek/nostalgiajs">GitHub</a>
+    <a class="rss" href="../../feed.xml">RSS<svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="2" fill="#ff6600"/><circle cx="3.6" cy="10.4" r="1.4" fill="#fff"/><path d="M2.2 6.4a5.4 5.4 0 0 1 5.4 5.4M2.2 3a8.8 8.8 0 0 1 8.8 8.8" fill="none" stroke="#fff" stroke-width="1.7"/></svg></a>
+  </div>
+</nav>
+<div class="wrap">
+  <main>
+    <article>
+      <p class="meta">People and culture · 2015 to 2025 · 10 min read</p>
+      <div class="title">
+        <img src="../../icons/js-fatigue.svg" width="64" height="64" alt="">
+        <h1>JavaScript fatigue: a feature request with a catchy title</h1>
+      </div>
+
+<p class="lede">The post that made "JavaScript fatigue" a catchphrase was mostly a list of fixes for React's tooling, and seven months later the React team shipped a tool that matched part of the list and thanked the post's author.</p>
+
+<nav class="toc" aria-labelledby="toc-h">
+  <p id="toc-h">Contents</p>
+  <ol>
+          <li><a href="#a-react-hello-world-in-late-2015">A React Hello World in late 2015</a></li>
+          <li><a href="#what-clemmons-asked-for">What Clemmons asked for</a></li>
+          <li><a href="#the-title-leaves-the-post-behind">The title leaves the post behind</a></li>
+          <li><a href="#create-react-app-version-0-1-0">Create React App, version 0.1.0</a></li>
+          <li><a href="#aguinaga-s-dialogue-october-2016">Aguinaga's dialogue, October 2016</a></li>
+          <li><a href="#after-create-react-app">After Create React App</a></li>
+          <li><a href="#the-takeaway">The takeaway</a></li>
+          <li><a href="#sources-h">Sources and further reading</a></li>
+  </ol>
+</nav>
+
+
+<pre tabindex="0"><code>Saul: "How's it going?"
+Me: "Fatigued."
+Saul: "Family?"
+Me: "No, JavaScript."</code></pre>
+
+<p>Eric Clemmons opened <a href="https://ericclemmons.com/blog/javascript-fatigue">a post called "Javascript Fatigue"</a> with that exchange, from a coffee with a friend a few days earlier, and it was <a href="https://news.ycombinator.com/item?id=10796567">on Hacker News</a> on December 27, 2015. The line after the exchange takes the title back: "More accurately, I meant React and the JavaScript ecosystem that comes with it."</p>
+
+<p>Clemmons was <a href="https://ericclemmons.com/">chief technology officer of HigherEducation.com</a> at the time, and the grievance was a working one. The team had started three new projects that quarter, and each had required its own decisions about tooling.</p>
+
+<h2 id="a-react-hello-world-in-late-2015">A React Hello World in late 2015</h2>
+
+<p>React asked for a build step sooner than most libraries did. Its components were written in JSX, which no browser runs, so in practice a React project started with a compiler, and the compiler was Babel. On October 29, 2015 <a href="https://babeljs.io/blog/2015/10/29/6.0.0">Babel 6 came out</a> under a note from James Kyle calling it "a very disruptive major". Babel had decided to be a platform for tools and no longer just a transpiler, so a fresh install now transformed nothing until you picked plugins or a preset such as <code>es2015</code> or <code>react</code>. Clemmons was writing two months into that.</p>
+
+<p>Babel was one tool of several. A project also wanted a bundler, a linter and a development server, and the description Dan Abramov gave <a href="https://legacy.reactjs.org/blog/2016/07/22/create-apps-with-no-configuration.html">on the React blog</a> the following July is fair to all of them: "Many of those tools are plugin platforms and don't directly acknowledge each other's existence. They leave it up to the users to wire them together."</p>
+
+<p>On December 26, 2015 Christopher Chedeau, who writes as Vjeux, published <a href="https://blog.vjeux.com/2015/javascript/challenge-best-javascript-setup-for-quick-prototyping.html">a challenge</a>, prompted by what it calls a big discussion on Twitter the day before about how hard it was to start a JavaScript project. Chedeau's best setup ever, the challenge says, dated from the age of 14: connect to a server with WinSCP, make a file called <code>test.php</code>, and type:</p>
+
+<pre tabindex="0"><code>&lt;?php echo 'Hello World';</code></pre>
+
+<p>Save, wait half a second for the upload, click the file in a browser. Chedeau wanted that for JavaScript and React: nothing to set up for a new project, and a single file ("No package.json, no .babelrc, no Procfile").</p>
+
+<h2 id="what-clemmons-asked-for">What Clemmons asked for</h2>
+
+<p>The diagnosis in Clemmons's post comes under the heading "Too Many Tools." and fits in a sentence:</p>
+
+<blockquote>
+<p>Ultimately, the problem is that by choosing React (and inherently JSX), you've unwittingly opted into a confusing nest of build tools, boilerplate, linters, &amp; time-sinks to deal with before you ever get to create anything.</p>
+</blockquote>
+
+<p>Then Clemmons turns down the usual remedy. Teams coped by copying a boilerplate project or running a generator such as Yeoman, and Clemmons, who had written a generator, argued that neither held up across many projects. Generated code is a copy. When the setup improves, the improvement has to be carried by hand into every project made from it, because the common code "is not abstracted into an independently updatable dependency."</p>
+
+<p>The rest is a list of things to build instead. Library authors should offer an opinionated, "author-endorsed" wrapper for the 90 percent of cases that Clemmons supposed were alike. Tools should ship presets, as Babel had just done. File and folder naming conventions should stand in for configuration. And there should be tooling that gets a prototype running first and leaves the decisions for later, which is where Clemmons cites Chedeau's challenge and names five projects already trying, nwb among them.</p>
+
+<p>The forecast is cheerful. Clemmons wrote that the pendulum had swung from restrictive frameworks to modular libraries buried in boilerplate, and would soon settle in between. The last line is "Here's to an exciting 2016! :)". Read from the second heading on, the post is a specification with a complaint on top.</p>
+
+<h2 id="the-title-leaves-the-post-behind">The title leaves the post behind</h2>
+
+<p>Hacker News took the post twice inside a day. The first submission used its title. Whoever made <a href="https://news.ycombinator.com/item?id=10799572">the second</a> put the missing word back, as "React/JavaScript fatigue", and that thread ran to 183 comments.</p>
+
+<p>The first objection I can find is to the name. A React developer who posts as chantastic reacted to the post, Clemmons asked what was meant, and on December 29 chantastic answered in <a href="https://gist.github.com/chantastic/60d4c39091752c5659d2">a gist</a>: "Articles titled like yours have a tendency to take a life of their own. The bulk of my reaction was to the title itself and the resulting conversation." The gist agrees that building React apps was painful and that abstractions could help newcomers. It disputes that this was the state of JavaScript at large, that it needed solving yet, and that React apps were alike enough for one wrapper to serve them.</p>
+
+<p>Clemmons replied underneath the same day, restating the post in a sentence. Two days after publishing, the author was explaining what it had said.</p>
+
+<p>By January 18, 2016 Ben Halpern was <a href="https://dev.to/ben/do-not-let-javascript-fatigue-become-a-buzzword">warning against letting the phrase become a buzzword</a>. Halpern's own definition was the narrow one: the setup that frameworks, "namely ReactJs", demanded before a first screen.</p>
+
+<p>I think the phrase was always going to get away, for plain reasons. A title is the one part of a post that circulates without a click, and this title said JavaScript where the body said React. It also arrived when anyone who had upgraded Babel, chosen a bundler or inherited somebody else's Gulp file had a fatigue of their own to file under it. Nothing in the two words told them that the author's was more specific, or that it came with a plan.</p>
+
+<h2 id="create-react-app-version-0-1-0">Create React App, version 0.1.0</h2>
+
+<p>On July 22, 2016 Abramov announced Create React App, a command-line tool that sets up a React project with no configuration. Abramov had written it with Christopher Chedeau, the author of the Christmas challenge. The two had agreed over Messenger to spend a hackathon week on it, after Abramov came back from EmberCamp impressed by the command-line tool that Ember had.</p>
+
+<p>The people who made React had been spared the problem, and I think that is one reason the problem lasted. The announcement says Facebook's practice was to release only code it used itself, and that inside Facebook the linting, transpiling and packaging were done by remote development servers that product engineers never had to configure. Chedeau had told Abramov that several "React CLI" projects had started inside Facebook and failed. Abramov called shipping this one an exception to the practice, and called the tool an experiment: "only time will tell if it becomes a popular way of creating and building React apps, or fades into obscurity."</p>
+
+<p>A new app's <code>package.json</code> looked like this:</p>
+
+<pre tabindex="0"><code>{
+  "name": "hello-world",
+  "dependencies": {
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  },
+  "devDependencies": {
+    "react-scripts": "0.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  }
+}</code></pre>
+
+<p>The project has no webpack config, no <code>.babelrc</code> and no lint file. All of that lives inside <code>react-scripts</code>, which is why Abramov can promise that "you can update a single dependency to get them all." Clemmons's objection to generators had its answer: the common code was now an independently updatable dependency. The price was in the same announcement. The build settings were fixed, testing was missing, and the way out was <code>eject</code>, which copies the whole configuration into your project and so turns it back into a boilerplate.</p>
+
+<p>The announcement's "Backstory" section says where the diagnosis came from. "Eric Clemmons called this phenomenon the 'JavaScript Fatigue'", Abramov wrote, and quoted the sentence about the confusing nest of build tools. The closing paragraph thanks six people for "early feedback, ideas, and contributions". One is Clemmons. Another is Jonny Buchanan, the name <a href="https://registry.npmjs.org/nwb">the npm registry</a> gives for the author of nwb. Abramov says the tool was meant to fix the problem Clemmons had named. Abramov does not say it was built in answer to Clemmons's post, and I won't either.</p>
+
+<h2 id="aguinaga-s-dialogue-october-2016">Aguinaga's dialogue, October 2016</h2>
+
+<p>On October 3, 2016, ten weeks after Create React App and six months after <a href="../left-pad/">left-pad vanished from npm for an afternoon</a>, Jose Aguinaga published <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">"How it feels to learn JavaScript in 2016"</a> and <a href="https://news.ycombinator.com/item?id=12628921">submitted it to Hacker News</a>.</p>
+
+<p>The piece is a conversation. Someone who has not built for the web in a few years needs a page that fetches user activity from a REST endpoint and shows it in a filterable table, and proposes jQuery. The other speaker, who prefers the title "Front End engineer", says no one uses jQuery anymore and prescribes React, which comes with React DOM and JSX, which call for Babel, which wants a bundler, and on through Browserify, Webpack, SystemJS, TypeScript, Flow, Fetch and a roll-call of template engines, before conceding that a page which only displays data never needed React. The newcomer gives up on the web altogether: "The JavaScript community is insane if it thinks anyone can keep up with this." Hackernoon's copy has been read more than 700,000 times, by its own counter.</p>
+
+<p>Set beside Clemmons's post, the complaint has changed shape. Clemmons objected to the decisions a React project demanded before work could start, which a good default can remove. Aguinaga's newcomer objects to how much there is to know and how fast it is replaced, across the whole language, which no default removes. The word "fatigue" appears nowhere in the dialogue, and in the two Hacker News threads about it, some 420 comments, I count it once, from a commenter claiming "JavaScript Fatigue Fatigue". That the dialogue is what the phrase now calls to mind is my own reading of how it is remembered.</p>
+
+<p>Create React App appears nowhere in the dialogue either. It came up in the comments, where one reader said there was no need to know the toolchains "if you just use create-react-app" and another answered much as chantastic had in December: "Yes, you DO need to know the toolchain."</p>
+
+<p>The form was second-hand, and said so. A note at the top credits "It's the future" from CircleCI's blog, Paul Biggar's parody of the container ecosystem, which <a href="https://news.ycombinator.com/item?id=9688383">Hacker News picked up</a> on June 9, 2015. Ten days later Biggar published <a href="https://blog.paulbiggar.com/it-really-is-the-future/">"It really is the future"</a>. Many of those who reacted had taken the parody as accurate and not as satire, Biggar wrote, and they were wrong: containers were how applications were going to be built. Readers had also compared it to the state of front-end development, six months before Clemmons's coffee with Saul.</p>
+
+<h2 id="after-create-react-app">After Create React App</h2>
+
+<p>Create React App became a category of tool and then was retired. On February 14, 2025 the React blog published <a href="https://react.dev/blog/2025/02/14/sunsetting-create-react-app">"Sunsetting Create React App"</a>, by Matt Carroll and Ricky Hanlon, deprecating it for new apps. Their history of 2016 is Clemmons's argument in the past tense: people had wired the tools together by hand, the community's boilerplates "were difficult to update", and a single recommended configuration had solved that, in a model they say a whole category of tools now follows. The tool was being retired because it had no active maintainers (the latest <a href="https://registry.npmjs.org/react-scripts"><code>react-scripts</code></a>, 5.0.1, dates from April 2022) and because frameworks now covered the same ground. Abramov had offered two outcomes, popular or obscure, and the experiment delivered both, in that order.</p>
+
+<p>A short reply to the satire came from <a href="https://intercoolerjs.org/">the library that became htmx</a>. Two days after Aguinaga's piece, Carson Gross posted <a href="https://intercoolerjs.org/2016/10/05/how-it-feels-to-learn-intercooler-in-2016.html">a version of the dialogue</a> on the blog of intercooler.js, a library built on jQuery that makes AJAX requests from HTML attributes. It reuses Aguinaga's opening lines and changes the expert, who answers "Nope. I'm just an old web dev guy" and recommends returning bits of HTML from the server. The whole conversation is over in eleven exchanges.</p>
+
+<h2 id="the-takeaway">The takeaway</h2>
+
+<p>"JavaScript fatigue" began as a specific complaint with a remedy attached. A React project made you assemble a build before you could write a line, and copies of that build could not be upgraded. For the build tools, the remedy Clemmons asked for, an opinionated default endorsed by the library's authors and updated as one dependency, is what Create React App turned out to be. The phrase did not stay with React. As I read it, it became the name for something no package can fix: the sense that there is more of the ecosystem than one person can follow. The piece that best expresses that sense never uses the word.</p>
+
+<p>Clemmons's post is on the author's own site, with the coffee at the top and "Here's to an exciting 2016! :)" at the bottom. By the post's own measure the year delivered, since a default of the kind it asked for shipped in July. What people kept was Clemmons's first word to Saul.</p>
+
+<section class="unverified" aria-labelledby="unverified-h">
+  <h2 id="unverified-h">What I couldn't verify</h2>
+  <ul>
+    <li>I read &quot;Javascript Fatigue&quot; in the copy on Eric Clemmons's own site, because Medium would not serve the original. That copy is dated December 27, 2016. I took 2015 from the two Hacker News submissions of the Medium address, so the date rests on those timestamps, and the copy may differ from what Medium showed in 2015.</li>
+    <li>I found no use of the exact phrase &quot;JavaScript fatigue&quot; on Hacker News before Clemmons's post, but &quot;JavaScript framework fatigue&quot; was already in use that year, in the address of a February 2015 piece by Allen Pike and in a July 2015 title. So the post is where the two-word phrase took off, not necessarily where it was coined.</li>
+    <li>Calling the post a feature request is my reading. It is addressed to library and tool authors in general, and what it asks for is wider than Create React App, which covers the build tools and nothing about routers, Redux or naming conventions. Dan Abramov says the tool was meant to fix the problem Clemmons named, not that it answered the post.</li>
+    <li>Abramov's announcement calls the co-author only &quot;Christopher&quot;. That this is Christopher Chedeau rests on the name's link to the @vjeux Twitter account and on &quot;vjeux&quot; among the maintainers in the npm registry. That the Jonny Buchanan thanked there is the author of nwb is a match of names between the announcement and the registry.</li>
+    <li>I did not open any tweets. I never saw what chantastic first said about the post, only the gist that followed, and &quot;the first objection I can find&quot; means the first in the pages I read. I use the handle because the gist gives no full name. That a Hacker News commenter in 2016 answered &quot;much as chantastic had&quot; is my reading of a gist written before Create React App existed.</li>
+    <li>No source I found dates the moment &quot;JavaScript fatigue&quot; came to mean the whole ecosystem. Ben Halpern in January 2016 warns that it might and still defines it by React. That the phrase now calls Jose Aguinaga's dialogue to mind is my own impression, and so is my account of why the phrase outran the post.</li>
+    <li>I could not open Paul Biggar's original &quot;It's the Future&quot;; the address now redirects to CircleCI's blog index. What it was about comes from Biggar's follow-up, and that it was a dialogue comes from a July 2015 repost the fact check found. June 9, 2015 is the date of the Hacker News submission, which may not be the day it was published.</li>
+    <li>The count of one use of &quot;fatigue&quot; in the two Hacker News threads on Aguinaga's piece is my own search of the comments, and the read count is the figure Hackernoon's page showed, 739,529, which will have changed.</li>
+    <li>That Clemmons was chief technology officer of HigherEducation.com in 2015 comes from the CV on Clemmons's own site, written later. The post on intercooler's blog is signed &quot;Carson&quot; with the handle @carson_gross, and the surname is read from the handle.</li>
+  </ul>
+</section>
+
+<section class="sources" aria-labelledby="sources-h">
+  <h2 id="sources-h">Sources and further reading</h2>
+  <ul>
+    <li><a href="https://ericclemmons.com/blog/javascript-fatigue">Javascript Fatigue</a>, Eric Clemmons, 2015 (the copy on the author's own site, which dates it 2016)</li>
+    <li><a href="https://ericclemmons.com/">Eric Clemmons's home page and CV</a></li>
+    <li><a href="https://news.ycombinator.com/item?id=10796567">JavaScript Fatigue</a> and <a href="https://news.ycombinator.com/item?id=10799572">React/JavaScript fatigue</a>, Hacker News threads, 2015</li>
+    <li><a href="https://blog.vjeux.com/2015/javascript/challenge-best-javascript-setup-for-quick-prototyping.html">Challenge: Best JavaScript Setup for Quick Prototyping</a>, Christopher Chedeau, 2015</li>
+    <li><a href="https://babeljs.io/blog/2015/10/29/6.0.0">6.0.0 Released</a>, James Kyle, Babel blog, 2015</li>
+    <li><a href="https://gist.github.com/chantastic/60d4c39091752c5659d2">JavaScript Fatigue Reply</a>, a gist by chantastic with Eric Clemmons's answer, 2015</li>
+    <li><a href="https://dev.to/ben/do-not-let-javascript-fatigue-become-a-buzzword">Do Not Let JavaScript Fatigue Become A Buzzword</a>, Ben Halpern, DEV, 2016</li>
+    <li><a href="https://legacy.reactjs.org/blog/2016/07/22/create-apps-with-no-configuration.html">Create Apps with No Configuration</a>, Dan Abramov, React blog, 2016</li>
+    <li><a href="https://registry.npmjs.org/create-react-app">npm registry record for create-react-app</a>, <a href="https://registry.npmjs.org/react-scripts">for react-scripts</a> and <a href="https://registry.npmjs.org/nwb">for nwb</a> (publish times, maintainers and authors)</li>
+    <li><a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">How it feels to learn JavaScript in 2016</a>, Jose Aguinaga, Hackernoon, 2016</li>
+    <li>How it feels to learn JavaScript in 2016, Hacker News threads <a href="https://news.ycombinator.com/item?id=12628921">on the Medium copy</a> and <a href="https://news.ycombinator.com/item?id=12634577">on the Hackernoon copy</a>, 2016</li>
+    <li><a href="https://blog.paulbiggar.com/it-really-is-the-future/">It really is the future</a>, Paul Biggar, 2015</li>
+    <li><a href="https://news.ycombinator.com/item?id=9688383">It's the Future</a>, Hacker News thread, 2015</li>
+    <li><a href="https://react.dev/blog/2025/02/14/sunsetting-create-react-app">Sunsetting Create React App</a>, Matt Carroll and Ricky Hanlon, React blog, 2025</li>
+    <li><a href="https://intercoolerjs.org/2016/10/05/how-it-feels-to-learn-intercooler-in-2016.html">How It Feels To Learn Intercooler In 2016</a>, Carson Gross, 2016</li>
+    <li><a href="https://intercoolerjs.org/">intercooler.js home page</a>, with the htmx announcement</li>
+  </ul>
+</section>
+
+      <p class="mistake">Spot a mistake? <a href="https://github.com/derek/nostalgiajs/issues/new?title=Correction%3A+JavaScript+fatigue%3A+a+feature+request+with+a+catchy+title&amp;body=Essay%3A+https%3A%2F%2Fderek.io%2Fnostalgiajs%2Fessays%2Fjs-fatigue%2F%0A%0AWhat+is+wrong%3A%0A%0AWhat+it+should+say%2C+with+a+source+if+you+have+one%3A%0A">Open an issue</a> and it will be checked and corrected.<br>
+      <a href="https://github.com/derek/nostalgiajs/blob/main/content/js-fatigue.html">View source</a> · <a href="https://github.com/derek/nostalgiajs/commits/main/content/js-fatigue.html">Edit history</a></p>
+    </article>
+
+    <nav class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related essays</h2>
+      <ul>
+        <li><a href="../left-pad/">left-pad: the eleven lines npm had to un-unpublish</a> <span>Libraries and tools · 2016 to today</span></li>
+        <li><a href="../web20/">Web 2.0: the buzzword with a serial number</a> <span>People and culture · 2003 to 2017</span></li>
+        <li><a href="../wat/">Wat: the jokes about [] + {}</a> <span>People and culture · 2010 to today</span></li>
+      </ul>
+      <p><a href="../../">All essays</a></p>
+    </nav>
+  </main>
+
+  <footer>
+    <p class="buttons">
+      <a href="../../"><img src="../../buttons/nostalgiajs.png" width="88" height="31" alt="Nostalgia.js"></a>
+      <img src="../../buttons/any-browser.png" width="88" height="31" alt="Best viewed with any browser">
+      <img src="../../buttons/notepad.png" width="88" height="31" alt="Made with Notepad">
+    </p>
+    <p>Nostalgia.js · Essays on the Early Web · <a href="../../about/">How these essays are made</a></p>
+  </footer>
+</div>
+</body>
+</html>
